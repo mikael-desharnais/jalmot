@@ -1,0 +1,13 @@
+<hook>
+	<name>admin.head</name>
+	<modules>
+		<module>
+			<name>JSRessource</name>
+			<instance>normal</instance>
+		</module>
+		<module>
+			<name>ReloadManager</name>
+			<instance>normal</instance>
+		</module>
+	</modules>
+</hook>

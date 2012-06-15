@@ -1,0 +1,2 @@
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/','admin.css',false)),0); ?>
+<?php echo Hook::getHook('admin.body')->toHTML(); ?>

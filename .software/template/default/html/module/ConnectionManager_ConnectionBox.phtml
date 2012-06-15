@@ -1,0 +1,21 @@
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ConnectionBox.js',false)),2); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','lightbox.js',false)),1); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ConnectionBox.css',false)),0); ?>
+<?php  Ressource::getCurrentLanguage()->init('module/ConnectionBox'); ?>
+
+<div class="blackAlphaDiv " id="blackAlphaDiv">&nbsp;
+
+</div>
+	<div class="contentBlackAlphaDiv" id="contentBlackAlphaDiv">
+		<div class="connectionDiv well" id="connectionDiv">
+			<div class="closeButton"><a href="#" id="closeLogin" class="icon-remove"></a></div>
+				<form action="" style="margin : 0px;" method="post">
+					<h2 class="connectionTopDiv"><?php echo Ressource::getCurrentLanguage()->getTranslation("Connection") ?></h2>
+					<div class="connectionTitreDiv"> <?php echo Ressource::getCurrentLanguage()->getTranslation("username") ?> : </div><div class="connectionInputDiv"><input type="text" name="userInput" class="connectionInput"></div>
+					<div class="connectionTitreDiv"> <?php echo Ressource::getCurrentLanguage()->getTranslation("password") ?>: </div><div class="connectionInputDiv"><input type="password" name="passwordInput" class="connectionInput"></div>
+					<div class="connectionTopDiv"><input type="submit" value="<?php echo Ressource::getCurrentLanguage()->getTranslation("Login") ?>" class="btn connectionInput" id="connectionSubmit"></div><br class="clearer"/>
+				</form>
+			</div>
+		</div>
+	</div>

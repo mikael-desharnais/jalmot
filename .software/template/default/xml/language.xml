@@ -1,0 +1,15 @@
+<languages>
+	<language>
+		<id>1</id>
+		<code>fr</code>
+		<default>1</default>
+	</language>
+	<language>
+		<id>2</id>
+		<code>en</code>
+	</language>
+	<language>
+		<id>3</id>
+		<code>de</code>
+	</language>
+</languages>

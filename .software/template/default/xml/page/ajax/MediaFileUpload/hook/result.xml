@@ -1,0 +1,9 @@
+<hook>
+	<name>MediaFileUpload.result</name>
+	<modules>
+		<module>
+			<name>MediaFileUploader</name>
+			<instance>result</instance>
+		</module>
+	</modules>
+</hook>

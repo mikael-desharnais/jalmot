@@ -1,0 +1,33 @@
+<desktop>
+	<icons>
+		<icon>
+			<class>ModelEditorDesktopIcon</class>
+			<image>media/image/icon/user.png</image>
+			<text>User Management</text>
+			<instance></instance>
+			<params>
+				<param name="modelListing" type="simple">UserAdmin</param>
+				<param name="modelEditor" type="simple">UserAdmin</param>
+			</params>
+		</icon>
+		<icon>
+			<class>ModelEditorDesktopIcon</class>
+			<image>media/image/icon/test.png</image>
+			<text>Test</text>
+			<instance></instance>
+			<params>
+				<param name="modelListing" type="simple">test2</param>
+				<param name="modelEditor" type="simple">test3</param>
+			</params>
+		</icon>
+		<icon>
+			<class>ModelEditorDesktopIcon</class>
+			<image>media/image/icon/media.png</image>
+			<text>Media Management</text>
+			<instance></instance>
+			<params>
+				<param name="modelListing" type="simple">MediaManager</param>
+			</params>
+		</icon>
+	</icons>
+</desktop>

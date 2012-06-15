@@ -1,0 +1,25 @@
+<modelInDS>
+	<name>test</name>
+	<dbname>test</dbname>
+	<fields>
+		<field>
+			<name>idTest</name>
+			<dbname>id_test</dbname>
+			<params>
+				<param type="simple" name="autoincrement">1</param>
+			</params>
+		</field>
+		<field>
+			<name>valeur1</name>
+			<dbname>valeur1</dbname>
+		</field>
+		<field>
+			<name>valeur2</name>
+			<dbname>valeur2</dbname>
+		</field>
+		<field>
+			<name>code</name>
+			<dbname>code</dbname>
+		</field>
+	</fields>
+</modelInDS>

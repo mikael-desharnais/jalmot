@@ -1,0 +1,27 @@
+<model>
+	<name>testLang</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idTest</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idLang</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>name</name>
+			<type>string</type>
+		</field>
+		<field>
+			<name>description</name>
+			<type>string</type>
+		</field>
+		<field>
+			<name>shortDescription</name>
+			<type>string</type>
+		</field>
+	</fields>
+</model>

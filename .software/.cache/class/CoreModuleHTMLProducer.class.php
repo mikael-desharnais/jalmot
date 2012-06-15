@@ -1,0 +1,1 @@
+<?php class ModuleHTMLProducer extends CoreModuleHTMLProducer {} ?>

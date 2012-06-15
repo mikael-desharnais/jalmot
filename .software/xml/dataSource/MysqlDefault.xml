@@ -1,0 +1,6 @@
+<db>
+	<server>localhost</server>
+	<username>root</username>
+	<password>rootpassword</password>
+	<database>jalmot</database>
+</db>

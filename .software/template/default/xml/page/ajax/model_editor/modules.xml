@@ -1,0 +1,28 @@
+<modules>
+	<module>
+		<instancename>modelEditor</instancename>
+		<class>ModelEditor</class>
+		<params>
+			<param type="simple" name="mode">1</param>
+			<param type="simple" name="editorModelDescriptor">ModelEditorDescriptor</param>
+		</params>
+	</module>
+	<module>
+		<instancename>LanguageChooser</instancename>
+		<class>LanguageChooser</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ReloadManager</instancename>
+		<class>ReloadManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>FieldValidator</instancename>
+		<class>FieldValidator</class>
+	</module>
+	<module>
+		<instancename>MediaFileUploaderField</instancename>
+		<class>MediaFileUploaderField</class>
+	</module>
+</modules>

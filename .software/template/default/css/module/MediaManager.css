@@ -1,0 +1,14 @@
+.media-manager-listing .icon {
+	float : left;
+	width : 100px;
+	height : 135px;
+	margin : 10px;
+}
+.media-manager-listing .text {
+	margin-top : 5px;
+	font-weight : bold;
+	height : 40px;
+	width : 100%;
+	text-align : center;
+	overflow : hidden;
+}

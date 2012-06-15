@@ -1,0 +1,27 @@
+<modules>
+	<module>
+		<instancename>AdminLoginManager</instancename>
+		<class>AdminLoginManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ConnectionManager</instancename>
+		<class>ConnectionManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>JSRessource</instancename>
+		<class>JSRessource</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ReloadManager</instancename>
+		<class>ReloadManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>Bootstrap</instancename>
+		<class>Bootstrap</class>
+		<params></params>
+	</module>
+</modules>

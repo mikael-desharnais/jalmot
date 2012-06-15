@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<root>
+  <filetype>
+    <extension>jpg</extension>
+    <content_type>image/jpeg</content_type>
+  </filetype>
+  <filetype>
+    <extension>png</extension>
+    <content_type>image/png</content_type>
+  </filetype>
+  <filetype>
+    <extension>gif</extension>
+    <content_type>image/gif</content_type>
+  </filetype>
+  <filetype>
+    <extension>pdf</extension>
+    <content_type>application/pdf</content_type>
+  </filetype>
+  <filetype>
+    <extension>zip</extension>
+    <content_type>application/zip</content_type>
+  </filetype>
+  
+</root>

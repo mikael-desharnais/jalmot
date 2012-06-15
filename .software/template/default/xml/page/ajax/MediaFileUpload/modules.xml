@@ -1,0 +1,17 @@
+<modules>
+	<module>
+		<instancename>MediaFileManager</instancename>
+		<class>MediaFileManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>MediaFileUploader</instancename>
+		<class>MediaFileUploader</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>MediaManagerFileUploader</instancename>
+		<class>MediaManagerFileUploader</class>
+		<params></params>
+	</module>
+</modules>

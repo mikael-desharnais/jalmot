@@ -1,0 +1,1 @@
+<?php class ModelType extends CoreModelType {} ?>

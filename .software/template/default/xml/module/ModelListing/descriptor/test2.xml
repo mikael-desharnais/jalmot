@@ -1,0 +1,78 @@
+<listing>
+	<type>simple</type>
+	<model>test</model>
+	<title>test List</title>
+	<class>ModelListingDescriptor</class>
+	<hooks>
+	</hooks>
+	<params>
+		<param name="modelEditor" type="simple">test3</param>
+	</params>
+	<columns>
+		<column>
+			<head>
+				<title>ID</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>idTest</key>
+				<class>SimpleCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title>Valeur 1</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>valeur1</key>
+				<class>SimpleCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title>Code</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>code</key>
+				<class>SimpleCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title>name</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>name</key>
+				<model>testLang</model>
+				<class>LanguageCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>EditCellML</class>
+				<params>
+					<param name="modelEditor" type="simple">test3</param>
+				</params>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>DeleteCellML</class>
+				<params>
+					<param name="modelEditor" type="simple">test3</param>
+				</params>
+			</body>
+		</column>
+	</columns>
+</listing>

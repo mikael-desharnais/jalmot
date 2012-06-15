@@ -1,0 +1,1 @@
+<?php class Language extends CoreLanguage {} ?>

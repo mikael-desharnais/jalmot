@@ -1,0 +1,1 @@
+<?php class SimpleEncryptor extends CoreSimpleEncryptor {} ?>

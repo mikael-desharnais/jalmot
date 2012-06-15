@@ -1,0 +1,1 @@
+<?php class Page extends CorePage {} ?>

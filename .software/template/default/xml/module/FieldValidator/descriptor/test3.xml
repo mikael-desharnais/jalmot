@@ -1,0 +1,61 @@
+<validator>
+	<class>FieldValidatorDescriptor</class>
+	<name>test3</name>
+	<rules>
+		<rule>
+			<class>SimpleWordRuleFV</class>
+			<target>code</target>
+		</rule>
+		<rule>
+			<class>SimpleCheckedValueSwitcherFV</class>
+			<target>valeur1</target>
+			<cases>
+				<case>
+					<class>EqualTesterFV</class>
+					<params>
+						<param type="simple" name="value">0</param>
+					</params>
+					<rules>
+						<rule type="normal">
+							<class>SimpleLengthRuleFV</class>
+							<target>code</target>
+							<params>
+								<param type="simple" name="maxLength">10</param>
+							</params>
+						</rule>
+					</rules>
+				</case>
+				<case>
+					<class>EqualTesterFV</class>
+					<params>
+						<param type="simple" name="value">1</param>
+					</params>
+					<rules>
+						<rule type="normal">
+							<class>SimpleLengthRuleFV</class>
+							<target>code</target>
+							<params>
+								<param type="simple" name="maxLength">6</param>
+							</params>
+						</rule>
+					</rules>
+				</case>
+				<case>
+					<class>EqualTesterFV</class>
+					<params>
+						<param type="simple" name="value">2</param>
+					</params>
+					<rules>
+						<rule type="normal">
+							<class>SimpleLengthRuleFV</class>
+							<target>code</target>
+							<params>
+								<param type="simple" name="maxLength">3</param>
+							</params>
+						</rule>
+					</rules>
+				</case>
+			</cases>
+		</rule>
+	</rules>
+</validator>

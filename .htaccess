@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteCond 	%{ENV:REDIRECT_STATUS} 	200
+RewriteRule 	.* 						- 							[L]
+
+RewriteBase							/test/jalmot/
+
+RewriteRule	^\.software.*$						-					[NE,L]
+RewriteRule	^$						.software/index.php?currentDirectory=					[L]
+
+RewriteRule	^(admin/)$						.software/index.php?page=admin					[L]
+
+RewriteRule	MediaManager/upload/$						.software/index.php?page=MediaFileUpload&&pageMode=ajax				[L]
+
+RewriteRule	^model_listing/([^/]*)/$			.software/index.php?page=model_listing&&pageMode=ajax&&descriptor=$1						[L]
+
+RewriteRule	^model_editor/([^/]*)/$				.software/index.php?page=model_editor&&pageMode=ajax&&descriptor=$1			[L,QSA]
+RewriteRule	^model_editor/(.*)/save/$			.software/index.php?page=model_editor&&pageMode=ajax&&descriptor=$1&&action=save			[L,QSA]
+RewriteRule	^model_editor/(.*)/delete/$			.software/index.php?page=model_editor&&pageMode=ajax&&descriptor=$1&&action=delete			[L,QSA]
+
+RewriteRule	^connection/[(.*)/(.*)]|connection/()(.*)|connection/$						.software/index.php?page=connection [L]
+
+RewriteRule	MediaManager/download/([0-9]*)$			.software/index.php?page=MediaFileDownload&&id=$1			[L,QSA]

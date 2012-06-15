@@ -1,0 +1,39 @@
+<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
+<script> 
+AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/','model=<?php echo $this->model; ?>&source=create'),function(htmlContent){
+
+	var window = new Window();
+	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelListing-'.$this->getModel())); ?>);
+	window.setContent(htmlContent);
+	window.setURL(this.url);
+	window.display();
+}); 
+</script>
+<form class="well reload-on-model-editor-<?php echo $this->model; ?>-change">
+<h1><?php echo Ressource::getCurrentLanguage()->getTranslation($this->getTitle()); ?></h1>
+<table class="modelListing table table-striped">
+	<thead>
+		<tr>
+			<?php foreach($this->columns as $column){ ?>
+				<?php echo $column['head']->toHTML(); ?>
+			<?php } ?>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach($this->list as $line){ ?>
+			<tr>
+				<?php foreach($this->columns as $column){ ?>
+					<?php echo $column['body']->toHTML($line); ?>
+				<?php } ?>
+			</tr>
+		<?php } ?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="100%" align="right">
+					<a href="#"  class="AjaxHTMLFetcher btn btn-primary" id="new_<?php echo $this->model; ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('New') ?></a>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+</form>

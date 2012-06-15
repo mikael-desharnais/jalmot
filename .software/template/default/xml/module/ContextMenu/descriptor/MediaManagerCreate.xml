@@ -1,0 +1,19 @@
+<contextmenu>
+	<class>ContextMenuDescriptor</class>
+	<elements>
+		<element>
+			<title>Create File</title>
+			<class>SourceParamsModelEditorElementCM</class>
+			<model>MediaFile</model>
+			<modelEditor>MediaFile</modelEditor>
+			<mode>create</mode>
+		</element>
+		<element>
+			<title>Create Directory</title>
+			<class>SourceParamsModelEditorElementCM</class>
+			<model>MediaDirectory</model>
+			<modelEditor>MediaDirectory</modelEditor>
+			<mode>create</mode>
+		</element>
+	</elements>
+</contextmenu>

@@ -1,0 +1,1 @@
+<?php class Hook extends CoreHook {} ?>

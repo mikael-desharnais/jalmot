@@ -1,0 +1,21 @@
+<hook>
+	<name>admin.body</name>
+	<modules>
+		<module>
+			<name>DesktopManager</name>
+			<instance>admin</instance>
+		</module>
+		<module>
+			<name>AjaxHTMLFetcher</name>
+			<instance>normal</instance>
+		</module>
+		<module>
+			<name>Bootstrap</name>
+			<instance>normal</instance>
+		</module>
+		<module>
+			<name>WindowManager</name>
+			<instance>normal</instance>
+		</module>
+	</modules>
+</hook>

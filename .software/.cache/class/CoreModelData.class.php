@@ -1,0 +1,1 @@
+<?php class ModelData extends CoreModelData {} ?>

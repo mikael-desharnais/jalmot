@@ -1,0 +1,22 @@
+<?php 
+class CoreMysqlConditionContainer extends CoreModelDataRequestConditionContainer{
+	public function getSQL(){
+		$toReturn="";
+		$conditions=$this->getConditions();
+		$containers=$this->getContainers();
+		foreach($containers as $containerElement){
+			$toReturn.=($toReturn==""?"":" ".$containerElement->getSeparator()." ")."(".$containerElement->getSQL().")";
+		}
+		foreach($conditions as $condition){
+        	$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ").$condition->getSQL();
+		}
+		return $toReturn;
+	}
+	public function getSeparator(){
+		if ($this->getType()==self::$MODEL_DATA_REQUEST_CONDITION_CONTAINER_AND){
+			return " AND ";
+		}else {
+			return " OR ";
+		}
+	}
+}

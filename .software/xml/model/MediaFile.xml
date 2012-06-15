@@ -1,0 +1,32 @@
+<model>
+	<name>MediaFile</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idMediaFile</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>idMediaDirectory</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>file</name>
+			<type>string</type>
+		</field>
+		<field>
+			<name>name</name>
+			<type>string</type>
+		</field>
+	</fields>
+	<relations>
+		<relation>
+			<name>directory</name>
+			<source>idMediaDirectory</source>
+			<destination>
+				<model>MediaDirectory</model>
+				<field>idMediaDirectory</field>
+			</destination>
+		</relation>
+	</relations>
+</model>

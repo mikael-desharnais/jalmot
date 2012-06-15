@@ -1,0 +1,1 @@
+<?php class Template extends CoreTemplate {} ?>

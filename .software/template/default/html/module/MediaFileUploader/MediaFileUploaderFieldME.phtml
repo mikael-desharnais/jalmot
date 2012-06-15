@@ -1,0 +1,36 @@
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/MediaFileUploader','MediaFileUploaderFieldME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/html5uploader','html5uploader.js',false)),2); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','MediaFileUploader.js',false)),3); ?>
+<tr>
+<td colspan="2">
+	<div class="file-uploader">
+		<div class="download"><a href="MediaManager/download/<?php echo $element->getIdMediaFile(); ?>"><img src="<?php echo Ressource::getCurrentTemplate()->getFile(new File("media/image/module/FileUploader","download.png",false))->toFullURL(); ?>"></a></div>
+		<input type="hidden" name="<?php echo $this->getName(); ?>[tempFilename]" class="tempFilename"/>
+		<input type="text" name="<?php echo $this->getName(); ?>[filename]" class="filename" readonly value="<?php echo $this->getValue($element); ?>"/>
+	</div>
+</td>	
+</tr>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('.file-uploader').each(function(){
+			if (typeof(jQuery(this).data('object'))=='undefined'){
+				var parent=jQuery(this);
+				jQuery(this).data('object',parent);
+				jQuery(this).html5Uploader({
+					postUrl : 'MediaManager/upload/',
+					onSuccess : function(event,file,html){
+						parent.removeClass('loaded').removeClass('started').removeClass('error').addClass('loaded');
+						var htmlElement = jQuery.parseJSON(html);
+						FileUploader.propagateFileUploaded(parent,file,jQuery.parseJSON(htmlElement.html));
+					},
+					onServerLoadStart : function(){
+						parent.removeClass('started').removeClass('error').addClass('started');
+					},
+					onServerError : function(){
+						parent.removeClass('started').removeClass('error').addClass('error');
+					}
+				});
+			}
+		});
+	});
+</script>

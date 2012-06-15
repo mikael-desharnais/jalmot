@@ -1,0 +1,30 @@
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/html5uploader','html5uploader.js',false)),2); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','MediaFileUploader.js',false)),3); ?>
+<script>
+	jQuery(document).ready(function(){
+		setTimeout(function(){
+			jQuery('.files-uploader').each(function(){
+				if (typeof(jQuery(this).data('object'))=='undefined'){
+					var parent=jQuery(this);
+					jQuery(this).data('object',parent);
+					var explodeParams=parent.closest('.window_panel').data('object').url.params.split('=');
+					var sendParams = { action : 'create_file'};
+					sendParams[explodeParams[0]]= explodeParams[1];
+					jQuery(this).html5Uploader({
+						postUrl : 'MediaManager/upload/',
+						params : sendParams,
+						onSuccess : function(event,file,html){
+							parent.closest('.reload-change-listener').data('ReloadManager').reload();
+						},
+						onServerLoadStart : function(){
+							parent.removeClass('started').removeClass('error').addClass('started');
+						},
+						onServerError : function(){
+							parent.removeClass('started').removeClass('error').addClass('error');
+						}
+					});
+				}
+			});
+		},200);
+	});
+</script>

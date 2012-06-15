@@ -1,0 +1,9 @@
+<th>
+	<h1>
+		<?php if (!$hasTitle) {?>
+			Création d'un nouveau élément
+		<?php }else {?>
+			Edition de <?php $getName="get".ucfirst($this->title_field); echo $element->$getName() ?>
+		<?php }?>
+	</h1>
+</th>

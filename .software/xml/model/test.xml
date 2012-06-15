@@ -1,0 +1,33 @@
+<model>
+	<name>test</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idTest</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>valeur1</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>valeur2</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>code</name>
+			<type>string</type>
+		</field>
+	</fields>
+	<relations>
+		<relation>
+			<name>lang</name>
+			<source>idTest</source>
+			<type>CascadeOnDelete</type>
+			<destination>
+				<model>testLang</model>
+				<field>idTest</field>
+			</destination>
+		</relation>
+	</relations>
+</model>

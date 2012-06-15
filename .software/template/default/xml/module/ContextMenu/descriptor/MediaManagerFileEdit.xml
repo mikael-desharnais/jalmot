@@ -1,0 +1,12 @@
+<contextmenu>
+	<class>ContextMenuDescriptor</class>
+	<elements>
+		<element>
+			<title>Delete File</title>
+			<class>SourceParamsModelEditorElementCM</class>
+			<model>MediaFile</model>
+			<modelEditor>MediaFile</modelEditor>
+			<mode>delete</mode>
+		</element>
+	</elements>
+</contextmenu>

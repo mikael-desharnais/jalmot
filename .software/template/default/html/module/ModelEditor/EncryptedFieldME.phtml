@@ -1,0 +1,9 @@
+<tr>
+<td>
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td class="control-group" width="75%">
+	<input type="password" name="<?php echo $this->getName(); ?>" class="span3" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>">
+</td>	
+</tr>
+

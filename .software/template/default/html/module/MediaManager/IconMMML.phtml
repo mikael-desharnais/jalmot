@@ -1,0 +1,36 @@
+<?php if ($this->isDirectory($line)){ ?>
+	<?php $isDirectory = true; ?>
+    <?php $icon = "directory"; ?>
+    <?php $model = $this->getConfParam('modelEditor')."Directory"; ?>
+    <?php $class = "icn-media-manager icn-media-manager-directory  context-menu-actionner reload-change-propagator"; ?>
+<?php } else { ?>
+	<?php $isDirectory = false; ?>
+	<?php $icon = File::getExtensionStatic($line->getFile()); ?>
+    <?php $model = $this->getConfParam('modelEditor')."File";?>
+    <?php $class = "AjaxHTMLFetcher  icn-media-manager-file context-menu-actionner reload-change-propagator"; ?>
+<?php } ?>
+<script> 
+AjaxHTMLFetcher.setFetcher('edit_<?php print($this->getId($line)); ?>',new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/MediaFile/','<?php print($this->getParams($line)); ?>'),function(htmlContent){
+
+	var window = new Window();
+	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelEditor-MediaFile')); ?>);
+	window.setContent(htmlContent);
+	window.setURL(this.url);
+	window.display();
+}); 
+</script>
+<div class="icon btn">
+	<a href="#" class=" <?php echo $class ?>"  <?php if ($isDirectory&&$this->isEditable($line)){ ?> data-context-menu="MediaManagerDirectoryEdit" <?php } elseif($isDirectory) { ?>  data-context-menu="NoContextMenu"  <?php } else { ?> data-context-menu="MediaManagerFileEdit"<?php }?> <?php if ($isDirectory) { ?>  id="change_<?php print($this->getId($line)); ?>" <?php } else { ?> id="edit_<?php print($this->getId($line)); ?>" <?php }?> data-reload-change-type="model-editor-<?php echo $line->getParentModel()->getName(); ?>" data-url-params="<?php print($this->getParams($line)); ?>">
+		<div class="image">
+			<?php $file= Ressource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-".$icon.".png",false),true);?>
+			<?php if (!$file->exists()){ ?>
+				<?php $file=Ressource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-default.png",false));?>
+			<?php } ?>
+			<img src="<?php echo $file->toFullURL(); ?>">
+		</div>
+		<div class="text">
+			<?php print_r($line->getName()); ?>
+		</div>
+	</a>
+</div>
+

@@ -1,0 +1,1 @@
+<?php class ImageJPG extends CoreImageJPG {} ?>

@@ -1,0 +1,47 @@
+<?php 
+ob_start();
+include(Ressource::getCurrentTemplate()->getURL("html/".$this->name.".phtml")); 
+$bodyCore = ob_get_clean();
+
+ob_start();
+echo Hook::getHook($this->name.".head")->toHTML();
+$headCore = ob_get_clean();
+
+?>
+<html>
+	<head>
+		<title><?php echo Ressource::getCurrentPage()->getTitle() ?></title>
+		<?php $newCSSListe = $this->CSSFilterFlow->filterAndCompress($this->cssListe); ?>
+		<?php 	foreach($newCSSListe as $arrayOfFiles){ ?>
+		<?php 		for ($x=0;$x<count($arrayOfFiles);$x++){  ?>
+		<?php 			echo '<link rel="stylesheet" href="'.$arrayOfFiles[$x]->toFullURL().'" type="text/css">'; ?>
+		<?php 		} ?>
+		<?php 	} ?>
+		<?php 		$newJSListe = $this->JSFilterFlow->filterAndCompress($this->jsListe); ?>
+		<?php 		foreach($newJSListe as $arrayOfFiles){ ?>
+		<?php 			for ($x=0;$x<count($arrayOfFiles);$x++){ ?>
+		<?php 				echo '<script src="'.$arrayOfFiles[$x]->toFullURL().'" language="javascript"></script>'; ?>
+		<?php 			} ?>
+		<?php 		} ?>
+		<script>
+			<?php $newCSSListe = $this->CSSFilterFlow->filter($this->cssListe); ?>
+			<?php 	foreach($newCSSListe as $arrayOfFiles){ ?>
+			<?php 		for ($x=0;$x<count($arrayOfFiles);$x++){  ?>
+			<?php 			$cssFiles[]=$arrayOfFiles[$x]->toFullURL(); ?>
+			<?php 		} ?>
+			<?php 	} ?>
+			<?php 		$newJSListe = $this->JSFilterFlow->filter($this->jsListe); ?>
+			<?php 		foreach($newJSListe as $arrayOfFiles){ ?>
+			<?php 			for ($x=0;$x<count($arrayOfFiles);$x++){ ?>
+			<?php 				$jsFiles[]=$arrayOfFiles[$x]->toFullURL(); ?>
+			<?php 			} ?>
+			<?php 		} ?>
+			var CSSLoadedFiles=<?php echo json_encode($cssFiles); ?>;
+			var JSLoadedFiles=<?php echo json_encode($jsFiles); ?>;
+		</script>
+		<?php echo $headCore; ?>
+	</head>
+	<body>
+		<?php echo $bodyCore ?>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<hook>
+	<name>connection.head</name>
+	<modules>
+		<module>
+			<name>JSRessource</name>
+			<instance>normal</instance>
+		</module>
+		<module>
+			<name>ReloadManager</name>
+			<instance>normal</instance>
+		</module>
+		<module>
+			<name>Bootstrap</name>
+			<instance>normal</instance>
+		</module>
+	</modules>
+</hook>

@@ -1,0 +1,7 @@
+<modules>
+	<module>
+		<instancename>MediaFileUploader</instancename>
+		<class>MediaFileUploader</class>
+		<params></params>
+	</module>
+</modules>

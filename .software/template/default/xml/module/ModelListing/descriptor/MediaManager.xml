@@ -1,0 +1,44 @@
+<listing>
+	<type>simple</type>
+	<model>MediaDirectory</model>
+	<title>Media Manager</title>
+	<class>DirectoryModelListingDescriptor</class>
+	<hooks>
+		<hook>
+			<name>ModelEditor.form</name>
+			<modules>
+				<module>
+					<name>ContextMenu</name>
+					<instance>normal</instance>
+					<params>
+						<param type="array" name="descriptors">
+							<element key="0">MediaManagerCreate</element>
+							<element key="1">MediaManagerDirectoryEdit</element>
+							<element key="2">MediaManagerFileEdit</element>
+						</param>
+					</params>
+				</module>
+				<module>
+					<name>MediaManagerListingFileUploader</name>
+					<instance>form</instance>
+				</module>
+			</modules>
+		</hook>
+	</hooks>
+	<params>
+		<param name="modelEditor" type="simple">MediaDirectory</param>
+	</params>
+	<columns>
+		<column>
+			<head>
+				<class>IconMMML</class>
+			</head>
+			<body>
+				<class>IconMMML</class>
+				<params>
+					<param name="modelEditor" type="simple">Media</param>
+				</params>
+			</body>
+		</column>
+	</columns>
+</listing>

@@ -1,0 +1,32 @@
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs','redactor.js',false)),2); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/css','redactor.css',false)),2); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','LanguageFieldME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','TextareaLanguageFieldME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','HTMLLanguageFieldME.css',false)),0); ?>
+<tr>
+<td colspan="2">
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+</tr>
+<tr>
+<td colspan="2" height="350">
+	<div  class="LanguageFieldME-container">
+		<?php $languages=Language::getAvailableLanguages() ; ?>
+		<?php foreach($languages as $language){ ?>
+			<textarea class="LanguageFieldME HTMLLanguageFieldME TextareaLanguageFieldME HTMLLanguageFieldMEToWYSIWYG LanguageFieldME-lng<?php echo $language->getId(); ?> <?php echo $this->getConfParam('class') ?>" data-idLang="<?php echo $language->getId(); ?>" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>"><?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?></textarea>
+		<?php } ?>
+	</div>
+	<script>
+		jQuery('.HTMLLanguageFieldMEToWYSIWYG').each(function(){
+			jQuery(this).removeClass('HTMLLanguageFieldMEToWYSIWYG');
+			var parent=this;
+			var element = jQuery(this).redactor({ buildCallBack : 
+				function(){
+					jQuery(element.data('redactor').$box).addClass(jQuery(parent).attr('class'));
+				},path: Ressource.getConfiguration().getValue('domainName')+'/'+Ressource.getConfiguration().getValue('TemplateDirectory')+'lib/redactorjs/' , lang: 'fr' });
+			var redactor=element.data('redactor');
+		});
+	</script>
+</td>	
+</tr>

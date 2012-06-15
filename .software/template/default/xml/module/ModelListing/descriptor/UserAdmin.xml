@@ -1,0 +1,67 @@
+<listing>
+	<type>simple</type>
+	<model>UserAdmin</model>
+	<title>Admin Users List</title>
+	<class>ModelListingDescriptor</class>
+	<hooks>
+	</hooks>
+	<params>
+		<param name="modelEditor" type="simple">UserAdmin</param>
+	</params>
+	<columns>
+		<column>
+			<head>
+				<title>Username</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>username</key>
+				<class>SimpleCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title>Firstname</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>firstname</key>
+				<class>SimpleCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title>Lastname</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>lastname</key>
+				<class>SimpleCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>EditCellML</class>
+				<params>
+					<param name="modelEditor" type="simple">UserAdmin</param>
+				</params>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>DeleteCellML</class>
+				<params>
+					<param name="modelEditor" type="simple">UserAdmin</param>
+				</params>
+			</body>
+		</column>
+	</columns>
+</listing>

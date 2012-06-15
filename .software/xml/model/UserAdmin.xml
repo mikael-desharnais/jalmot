@@ -1,0 +1,27 @@
+<model>
+	<name>userAdmin</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idUserAdmin</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>username</name>
+			<type>string</type>
+		</field>
+		<field>
+			<name>password</name>
+			<type>string</type>
+			<encryptor>SimpleEncryptor</encryptor>
+		</field>
+		<field>
+			<name>firstname</name>
+			<type>string</type>
+		</field>
+		<field>
+			<name>lastname</name>
+			<type>string</type>
+		</field>
+	</fields>
+</model>

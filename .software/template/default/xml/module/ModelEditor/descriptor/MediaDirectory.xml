@@ -1,0 +1,38 @@
+<editor>
+	<class>ModelEditorDescriptor</class>
+	<type>simple</type>
+	<model>MediaDirectory</model>
+	<title>
+		<class>SimpleTitleME</class>
+		<model>test</model>
+		<field>name</field>
+	</title>
+	<data_fetchers>
+		<data_fetcher>
+			<class>SimpleDataFetcher</class>
+		</data_fetcher>
+	</data_fetchers>
+	<hooks><!-- 
+		<hook>
+			<name>ModelEditor.form</name>
+			<modules>
+			</modules>
+		</hook> -->
+	</hooks>
+	<inputs>
+		<input>
+			<key>name</key>
+			<title>Nom</title>
+			<class>SimpleFieldME</class>
+		</input>
+		<input>
+			<key>idParentMediaDirectory</key>
+			<title>Nom</title>
+			<class>ParametersHiddenFieldME</class>
+			<params>
+				<param type="simple" name="paramKey">idMediaDirectory</param>
+				<param type="simple" name="defaultValue">1</param>
+			</params>
+		</input>
+	</inputs>
+</editor>

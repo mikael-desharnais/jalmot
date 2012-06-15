@@ -1,0 +1,9 @@
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','JSRessource.js',false)),2); ?>
+<script>
+var Ressource=new Ressource();
+Ressource.setConfiguration(new Configuration());
+Ressource.getConfiguration().setValue('AliasName','<?php echo Ressource::getConfiguration()->getValue('AliasName'); ?>');
+Ressource.getConfiguration().setValue('TemplateDirectory','<?php echo Ressource::getCurrentTemplate()->getFile(new File('','',true))->toFullURL(); ?>');
+Ressource.getConfiguration().setValue('domainName','<?php echo Ressource::getConfiguration()->getValue('domainName'); ?>');
+
+</script>

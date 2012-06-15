@@ -1,0 +1,19 @@
+<contextmenu>
+	<class>ContextMenuDescriptor</class>
+	<elements>
+		<element>
+			<title>Edit Directory</title>
+			<class>ModelEditorElementCM</class>
+			<model>MediaDirectory</model>
+			<modelEditor>MediaDirectory</modelEditor>
+			<mode>edit</mode>
+		</element>
+		<element>
+			<title>Delete Directory</title>
+			<class>SourceParamsModelEditorElementCM</class>
+			<model>MediaDirectory</model>
+			<modelEditor>MediaDirectory</modelEditor>
+			<mode>delete</mode>
+		</element>
+	</elements>
+</contextmenu>

@@ -1,0 +1,56 @@
+.blackAlphaDiv
+	{
+	display : none;
+	position : absolute;
+	z-index : 0;
+	left : 0px;
+	top :0px;
+	width : 0px;
+	height : 0px;
+	background-color : black;
+	opacity : 0.6;
+	}
+.contentBlackAlphaDiv
+	{
+	position : absolute;
+	}
+.connectionDiv
+	{
+	background-color : white;
+	padding : 15px;
+	width : 400px;
+	display : none;
+	}
+.closeButton
+	{
+	width : 10px;
+	height : 10px;
+	position : relative;
+	left : -10px;
+	top : -10px;
+	}
+.connectionTopDiv
+	{
+	text-align : center;
+	width : 400px;
+	float : left;
+	font-weight : bold;
+	font-size : 15px;
+	}
+.connectionTitreDiv
+	{
+	width : 200px;
+	float : left;
+	margin-top : 5px;
+	}
+.connectionInputDiv
+	{
+	width : 200px;
+	float : left;
+	}
+.connectionInput
+	{
+	width : 200px;
+	border : 1px solid black;
+	}
+	

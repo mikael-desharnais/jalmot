@@ -1,0 +1,1 @@
+<?php class SessionManager extends CoreSessionManager {} ?>

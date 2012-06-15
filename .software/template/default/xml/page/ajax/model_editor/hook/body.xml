@@ -1,0 +1,9 @@
+<hook>
+	<name>model_editor.body</name>
+	<modules>
+		<module>
+			<name>modelEditor</name>
+			<instance>body</instance>
+		</module>
+	</modules>
+</hook>

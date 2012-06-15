@@ -1,0 +1,1 @@
+<?php class JSFilterFlow extends CoreJSFilterFlow {} ?>

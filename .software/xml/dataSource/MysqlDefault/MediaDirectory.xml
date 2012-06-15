@@ -1,0 +1,21 @@
+<modelInDS>
+	<name>MediaDirectory</name>
+	<dbname>media_directory</dbname>
+	<fields>
+		<field>
+			<name>idMediaDirectory</name>
+			<dbname>id_media_directory</dbname>
+			<params>
+				<param type="simple" name="autoincrement">1</param>
+			</params>
+		</field>
+		<field>
+			<name>idParentMediaDirectory</name>
+			<dbname>id_parent_media_directory</dbname>
+		</field>
+		<field>
+			<name>name</name>
+			<dbname>name</dbname>
+		</field>
+	</fields>
+</modelInDS>

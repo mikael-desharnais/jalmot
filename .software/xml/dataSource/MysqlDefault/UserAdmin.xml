@@ -1,0 +1,29 @@
+<modelInDS>
+	<name>UserAdmin</name>
+	<dbname>user_admin</dbname>
+	<fields>
+		<field>
+			<name>idUserAdmin</name>
+			<dbname>id_user_admin</dbname>
+			<params>
+				<param type="simple" name="autoincrement">1</param>
+			</params>
+		</field>
+		<field>
+			<name>username</name>
+			<dbname>username</dbname>
+		</field>
+		<field>
+			<name>password</name>
+			<dbname>password</dbname>
+		</field>
+		<field>
+			<name>firstname</name>
+			<dbname>firstname</dbname>
+		</field>
+		<field>
+			<name>lastname</name>
+			<dbname>lastname</dbname>
+		</field>
+		</fields>
+</modelInDS>

@@ -1,0 +1,1 @@
+<?php class Module extends CoreModule {} ?>
