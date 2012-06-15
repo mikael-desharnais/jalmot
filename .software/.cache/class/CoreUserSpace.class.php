@@ -1,1 +1,0 @@
-<?php class UserSpace extends CoreUserSpace {} ?>

@@ -1,1 +1,0 @@
-<?php class Ressource extends CoreRessource {} ?>

@@ -1,1 +1,0 @@
-<?php class String extends CoreString {} ?>

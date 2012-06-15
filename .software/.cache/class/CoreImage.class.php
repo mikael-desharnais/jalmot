@@ -1,1 +1,0 @@
-<?php class Image extends CoreImage {} ?>

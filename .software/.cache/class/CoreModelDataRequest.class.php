@@ -1,1 +1,0 @@
-<?php class ModelDataRequest extends CoreModelDataRequest {} ?>

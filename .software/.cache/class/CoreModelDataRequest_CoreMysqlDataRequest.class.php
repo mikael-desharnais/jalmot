@@ -1,1 +1,0 @@
-<?php class MysqlDataRequest extends CoreMysqlDataRequest {} ?>

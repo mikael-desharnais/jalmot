@@ -1,1 +1,0 @@
-<?php class ModelDataRequestEqualCondition extends CoreModelDataRequestEqualCondition {} ?>

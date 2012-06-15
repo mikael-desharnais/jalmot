@@ -1,1 +1,0 @@
-<?php class ModelField extends CoreModelField {} ?>

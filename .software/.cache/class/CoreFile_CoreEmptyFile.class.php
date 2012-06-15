@@ -1,1 +1,0 @@
-<?php class EmptyFile extends CoreEmptyFile {} ?>

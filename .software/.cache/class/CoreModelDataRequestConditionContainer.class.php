@@ -1,1 +1,0 @@
-<?php class ModelDataRequestConditionContainer extends CoreModelDataRequestConditionContainer {} ?>

@@ -1,1 +1,0 @@
-<?php class MysqlConditionContainer extends CoreMysqlConditionContainer {} ?>

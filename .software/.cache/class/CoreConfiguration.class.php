@@ -1,1 +1,0 @@
-<?php class Configuration extends CoreConfiguration {} ?>

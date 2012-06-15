@@ -1,1 +1,0 @@
-<?php class MysqlEqualCondition extends CoreMysqlEqualCondition {} ?>

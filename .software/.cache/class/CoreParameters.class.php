@@ -1,1 +1,0 @@
-<?php class Parameters extends CoreParameters {} ?>

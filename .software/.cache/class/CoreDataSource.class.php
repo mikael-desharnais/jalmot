@@ -1,1 +1,0 @@
-<?php class DataSource extends CoreDataSource {} ?>
