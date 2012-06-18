@@ -1,9 +1,9 @@
 <th>
 	<h1>
 		<?php if (!$hasTitle) {?>
-			Création d'un nouveau élément
+			<?php echo Ressource::getCurrentLanguage()->getTranslation('Create a new element'); ?>
 		<?php }else {?>
-			Edition de <?php $getName="get".ucfirst($this->title_field); echo $element->$getName() ?>
+			<?php echo Ressource::getCurrentLanguage()->getTranslation('Editing '); ?> <?php $getName="get".ucfirst($this->title_field); echo $element->$getName() ?>
 		<?php }?>
 	</h1>
 </th>

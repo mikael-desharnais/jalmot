@@ -22,5 +22,4 @@ include("misc/functions.php");
  
  //HTAccess::generate();
  
- 
  ?>

@@ -10,10 +10,14 @@ class ModelEditorDesktopIcon extends DesktopIcon {
         }
         include($file);
         return ob_get_clean();
-    }	
+    }
+    
 	public static function readFromXML($icon){
 	    $desktopIcon=new ModelEditorDesktopIcon($icon->instance,$icon->image."",$icon->text."");
 	    $desktopIcon->setConfParams(XMLParamsReader::read($icon));
 	    return $desktopIcon;
+	}
+	public function getTemplateFile($instance){
+	    return Ressource::getCurrentTemplate()->getURL("html/module/".$this->class."_".$instance.".phtml");
 	}
 }

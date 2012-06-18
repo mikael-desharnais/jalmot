@@ -69,7 +69,7 @@
 				return $this->translations[$id];
 			}
 			else {
-				if (Ressource::getConfiguration()->getValue('debugMode')==1){
+				if (Ressource::getConfiguration()->getValue('debugMode')>=1){
 					Log::Warning("[Missing Translation : ".$id."]");
 					return "[Missing Translation : ".$id."]";
 				}

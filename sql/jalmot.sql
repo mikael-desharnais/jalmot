@@ -42,12 +42,15 @@ CREATE TABLE `media_file` (
   `file` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   UNIQUE KEY `id_media_file` (`id_media_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_file` */
 
 insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (1,6,'P1130211.JPG','Mon image avec un ');
 insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (2,6,'image2.jpg','the JPG');
+insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (51,6,'dsc03048.jpg','dsc03048.jpg');
+insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (52,6,'P1100587.JPG','P1100587.JPG');
+insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (53,6,'produit1.jpg','produit1.jpg');
 
 /*Table structure for table `test` */
 
@@ -79,6 +82,34 @@ CREATE TABLE `test_lang` (
 insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,1,'Nom du test','<p>Description en français<br>\r\n</p>\r\n','');
 insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,2,'','<p>Description in English<br>\r\n</p>\r\n','');
 insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,3,'','','');
+
+/*Table structure for table `text_content` */
+
+CREATE TABLE `text_content` (
+  `id_text_content` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_text_content`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `text_content` */
+
+insert  into `text_content`(`id_text_content`,`name`) values (1,'Texte du footer');
+
+/*Table structure for table `text_content_lang` */
+
+CREATE TABLE `text_content_lang` (
+  `id_text_content` int(11) NOT NULL,
+  `id_lang` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id_text_content`,`id_lang`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `text_content_lang` */
+
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,1,'Texte du footer','<p>Propulsé par JalmotPHP<br>\r\n</p>\r\n');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,2,'','');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,3,'','');
 
 /*Table structure for table `user_admin` */
 

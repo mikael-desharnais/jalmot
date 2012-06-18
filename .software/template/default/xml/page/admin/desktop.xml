@@ -29,5 +29,14 @@
 				<param name="modelListing" type="simple">MediaManager</param>
 			</params>
 		</icon>
+		<icon>
+			<class>ModelEditorDesktopIcon</class>
+			<image>media/image/icon/cms.png</image>
+			<text>CMS</text>
+			<instance></instance>
+			<params>
+				<param name="modelListing" type="simple">TextContent</param>
+			</params>
+		</icon>
 	</icons>
 </desktop>

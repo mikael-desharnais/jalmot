@@ -4,7 +4,6 @@
 	<model>MediaDirectory</model>
 	<title>
 		<class>SimpleTitleME</class>
-		<model>test</model>
 		<field>name</field>
 	</title>
 	<data_fetchers>
@@ -22,12 +21,12 @@
 	<inputs>
 		<input>
 			<key>name</key>
-			<title>Nom</title>
+			<title>Folder name</title>
 			<class>SimpleFieldME</class>
 		</input>
 		<input>
 			<key>idParentMediaDirectory</key>
-			<title>Nom</title>
+			<title></title>
 			<class>ParametersHiddenFieldME</class>
 			<params>
 				<param type="simple" name="paramKey">idMediaDirectory</param>

@@ -1,0 +1,25 @@
+<model>
+	<name>TextContent</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idTextContent</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>name</name>
+			<type>string</type>
+		</field>
+	</fields>
+	<relations>
+		<relation>
+			<name>lang</name>
+			<source>idTextContent</source>
+			<type>CascadeOnDelete</type>
+			<destination>
+				<model>TextContentLang</model>
+				<field>idTextContent</field>
+			</destination>
+		</relation>
+	</relations>
+</model>

@@ -4,7 +4,6 @@
 	<model>MediaFile</model>
 	<title>
 		<class>SimpleTitleME</class>
-		<model>test</model>
 		<field>name</field>
 	</title>
 	<data_fetchers>
@@ -22,7 +21,7 @@
 	<inputs>
 		<input>
 			<key>name</key>
-			<title>Nom</title>
+			<title>Filename</title>
 			<class>SimpleFieldME</class>
 		</input>
 		<input>

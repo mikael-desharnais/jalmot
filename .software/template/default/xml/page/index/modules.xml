@@ -9,4 +9,19 @@
 		<class>ReloadManager</class>
 		<params></params>
 	</module>
+	<module>
+		<instancename>Structure</instancename>
+		<class>ColumnStructure</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>TextContentDisplayer</instancename>
+		<class>TextContentDisplayer</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>JSCSSMinifier</instancename>
+		<class>JSCSSMinifier</class>
+		<params></params>
+	</module>
 </modules>

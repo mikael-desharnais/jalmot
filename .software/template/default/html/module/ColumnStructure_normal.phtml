@@ -1,0 +1,21 @@
+<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ColumnStructure.css',false)),0); ?>
+<div class="global">
+	<div class="header">
+		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.header')->toHTML(); ?>
+	</div>
+	
+	<div class="leftColumn">
+		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.left')->toHTML(); ?>
+	</div>
+	<div class="content">
+		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.content')->toHTML(); ?>
+	</div>
+	<div class="rightColumn">
+		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.right')->toHTML(); ?>
+	</div>
+	<br class="clearer"/>
+	
+	<div class="footer">
+		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.footer')->toHTML(); ?>
+	</div>
+</div>

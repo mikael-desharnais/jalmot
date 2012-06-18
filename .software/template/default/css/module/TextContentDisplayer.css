@@ -1,0 +1,6 @@
+.global .footer .textContent {
+	color : white;
+	font-style : italic;
+	text-align : right;
+	padding : 10px;
+}

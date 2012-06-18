@@ -164,7 +164,7 @@ SimpleLengthRuleFV = function(target){
 			if (typeof this.confParams['minLength'] =='undefined'){
 				return "There is no Condition";
 			}
-			return elements.data('field-name')+" length should be bigger then %minLength%";
+			return elements.data('field-name')+" length should be longer then %minLength%";
 		}else {
 			if (typeof this.confParams['minLength'] =='undefined'){
 				return elements.data('field-name')+" length is limited to %maxLength%";

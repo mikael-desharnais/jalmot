@@ -1,2 +1,2 @@
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ReloadManager.js',false)),1); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ReloadManager.js',false)),1); ?>

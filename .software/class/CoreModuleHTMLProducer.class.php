@@ -49,7 +49,7 @@
 	  */
 	public function toHTML($currentHook){
 	    $this->module->setCurrentHTMLProducer($this);
-		$html= $this->module->toHTML($currentHook,$this->instance);
+		$html= $this->module->toHTMLCache($currentHook,$this->instance);
 		$this->module->setCurrentHTMLProducer(null);
 		return $html;
 	}

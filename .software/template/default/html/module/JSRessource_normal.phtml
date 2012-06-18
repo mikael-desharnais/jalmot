@@ -1,4 +1,4 @@
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','JSRessource.js',false)),2); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','JSRessource.js',false)),2); ?>
 <script>
 var Ressource=new Ressource();
 Ressource.setConfiguration(new Configuration());

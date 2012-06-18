@@ -1,0 +1,6 @@
+<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','TextContentDisplayer.css',false)),0); ?>
+<div class="textContent">
+	<?php 
+		print($this->textContentLang->getDescription());
+	?>
+</div>

@@ -1,0 +1,12 @@
+<hook>
+	<name>index.footer</name>
+	<modules>
+		<module>
+			<name>TextContentDisplayer</name>
+			<instance>just_text</instance>
+			<params>
+				<param type="simple" name="id">1</param>
+			</params>
+		</module>
+	</modules>
+</hook>

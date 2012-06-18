@@ -1,3 +1,4 @@
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ModelEditor.js',false)),0); ?>
+<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ModelEditor.js',false)),0); ?>
+<?php  Ressource::getCurrentLanguage()->init('module/ModelEditor'); ?>
 <?php print($this->descriptor->toHTML()); ?>

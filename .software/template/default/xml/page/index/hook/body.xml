@@ -1,0 +1,9 @@
+<hook>
+	<name>index.body</name>
+	<modules>
+		<module>
+			<name>Structure</name>
+			<instance>normal</instance>
+		</module>
+	</modules>
+</hook>

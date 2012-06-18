@@ -15,4 +15,4 @@ Configuration = function(){
 	this.setValue=function(key,value){
 		this.values[key]=value;
 	};
-}
+};

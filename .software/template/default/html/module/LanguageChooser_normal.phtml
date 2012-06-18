@@ -1,6 +1,6 @@
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','LanguageChooser.css',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','LanguageChooser.js',false)),2); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','LanguageChooser.css',false)),0); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','LanguageChooser.js',false)),2); ?>
 <div class="LanguageFieldME-languageChooser-container">
 	<?php $languages=Language::getAvailableLanguages() ; ?>
 	<?php foreach($languages as $language){ ?>

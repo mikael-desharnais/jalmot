@@ -156,8 +156,11 @@
 	/**
     * TODO : check use and name
     */
-	public function AppendRightToDirectory($folder){
+	public function appendRightToDirectory($folder){
 		return new File($this->folder.$folder,$this->file,$this->isFolder);
+	}
+	public function appendLeftToDirectory($folder){
+		return new File($folder.$this->folder,$this->file,$this->isFolder);
 	}
 }
 ?>

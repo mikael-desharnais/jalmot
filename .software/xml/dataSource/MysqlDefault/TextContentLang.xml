@@ -1,0 +1,22 @@
+<modelInDS>
+	<name>TextContentLang</name>
+	<dbname>text_content_lang</dbname>
+	<fields>
+		<field>
+			<name>idTextContent</name>
+			<dbname>id_text_content</dbname>
+		</field>
+		<field>
+			<name>idLang</name>
+			<dbname>id_lang</dbname>
+		</field>
+		<field>
+			<name>title</name>
+			<dbname>title</dbname>
+		</field>
+		<field>
+			<name>description</name>
+			<dbname>description</dbname>
+		</field>
+	</fields>
+</modelInDS>

@@ -1,6 +1,7 @@
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','DesktopManager.js',false)),2); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','DesktopManager.css',false)),0); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','DesktopManager.js',false)),2); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','DesktopManager.css',false)),0); ?>
+<?php  Ressource::getCurrentLanguage()->init('module/DesktopManager'); ?>
 <div class="desktop hero-unit">
 <?php foreach($this->icons as $icon){ ?>
 	<?php echo $icon->toHTML(); ?>

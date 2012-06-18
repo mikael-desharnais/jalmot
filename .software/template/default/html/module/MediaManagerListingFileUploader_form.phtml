@@ -1,5 +1,5 @@
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/html5uploader','html5uploader.js',false)),2); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','MediaFileUploader.js',false)),3); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/html5uploader','html5uploader.js',false)),2); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','MediaFileUploader.js',false)),3); ?>
 <script>
 	jQuery(document).ready(function(){
 		setTimeout(function(){

@@ -118,6 +118,8 @@ class CoreModule{
 	protected $class;
 	protected $file;
 	protected $confParams;
+	protected $usesCache = false;
+	
 	/**
 	 * Execution stack for the event before the current module
 	 * @access protected
@@ -144,6 +146,7 @@ class CoreModule{
 	protected $executed = false;
 	
 	protected $htmlProducer=false;
+	protected $cacheCreateMode = false;
 	
 	
 	/**
@@ -184,8 +187,52 @@ class CoreModule{
 	 */
 	public function toHTML($currentHook,$instance){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/".$this->class."_".$instance.".phtml"));
+		include(Ressource::getCurrentTemplate()->getFile($this->getTemplateFile($instance))->toURL());
 		return ob_get_clean();
+	}
+	
+	public function getTemplateFile($instance){
+	    return new File("html/module",$this->class."_".$instance.".phtml",false);
+	}
+	public function getCacheFile($baseFile){
+	    $filename=pathinfo($baseFile->getFile());
+	    return new File (".cache/template/".Ressource::getCurrentTemplate()->getName()."/".$baseFile->getDirectory(),$filename['filename'].'-'.md5(implode($this->getCacheValues())).".".$filename['extension'],$baseFile->isFolder());
+	}
+	public function getCacheValues(){
+	    return array();
+	}
+	public function toHTMLCache($currentHook,$instance){
+	    ob_start();
+	    $baseFile = $this->getTemplateFile($instance);
+	    if (Ressource::getConfiguration()->getValue('cacheActive')==1&&$this->usesCache){
+	        $fileToUse=$this->getCacheFile($baseFile);
+	        if (!$fileToUse->exists()){
+	            $this->cacheCreateMode=true;
+	            @mkdir($fileToUse->getDirectory(),0777,true);
+	            echo $this->toHTML($currentHook,$instance);
+	            $toWrite = ob_get_clean();
+	            $fileToUse->write($toWrite);
+	            $this->cacheCreateMode=false;
+	            ob_start();
+	        }
+	        include($fileToUse->toURL());
+	        
+	    }else {
+	        echo $this->toHTML($currentHook,$instance);
+	    }
+	    return ob_get_clean();
+	}
+	public function addJS($file,$silent){
+	    if ($this->cacheCreateMode){
+	        print('<?php $this->addJS(new File(\''.$file->getDirectory().'\',\''.$file->getFile().'\',\''.var_export($file->isFolder(),true).'\'),'.var_export($silent,true).'); ?>');
+	    }
+	    Ressource::getCurrentPage()->addJS($file,$silent);
+	}
+	public function addCSS($file,$silent){
+		if ($this->cacheCreateMode){
+	        print('<?php $this->addCSS(new File(\''.$file->getDirectory().'\',\''.$file->getFile().'\',\''.var_export($file->isFolder(),true).'\'),'.var_export($silent,true).'); ?>');
+	    }
+	    Ressource::getCurrentPage()->addCSS($file,$silent);
 	}
 	
 	public function setCurrentHTMLProducer($htmlProducer){

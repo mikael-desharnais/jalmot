@@ -29,6 +29,12 @@
 	public function getPointerName(){
 		return $this->name;
 	}
+	public function setCSSFilterFlow($cssFilterFlow){
+	    $this->CSSFilterFlow=$cssFilterFlow;
+	}
+	public function setJSFilterFlow($jsFilterFlow){
+	    $this->JSFilterFlow=$jsFilterFlow;
+	}
 	public function setTitle($title){
 		$this->title = $title;
 	}

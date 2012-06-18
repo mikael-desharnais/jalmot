@@ -39,4 +39,9 @@
 		<class>ReloadManager</class>
 		<params></params>
 	</module>
+	<module>
+		<instancename>JSCSSMinifier</instancename>
+		<class>JSCSSMinifier</class>
+		<params></params>
+	</module>
 </modules>
