@@ -24,6 +24,7 @@ body {
 	width : 1024px;
 	box-shadow: 0 0 3px 3px #656565;
 	background-color : white;
+	font-family: Georgia,"Bitstream Charter",serif;
 }
 .global .header,.global .footer {
 	width : 100%;

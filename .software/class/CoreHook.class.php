@@ -1,51 +1,50 @@
 <?php
 /**
- * Hook object. A hook is a collector of HTML to be displayed somewhere. Modules have to register for each Hook they want to append HTML to. On displaying of a hook, it calls all registered modules and asks for content
- * 
- * @author Mikael Desharnais
- * @version 1.0
- * @package CoreClass
- */
+* Hook object. A hook is a collector of HTML to be displayed somewhere. Modules have to register for each Hook they want to append HTML to. On displaying of a hook, it calls all registered modules and asks for content
+* 
+* 
+*/
 	class CoreHook{
-    /**
-     * List of all hooks
-     * @access private
-     * @var array
-     */
+		/**
+		* List of all hooks
+		* 
+		*/
 		private static $hooklist=array();
-    /**
-     * name of the hook
-     * @access private
-     * @var string
-     */
+		/**
+		* name of the hook
+		* 
+		*/
 		private $name;
-    /**
-     * list of elements witch will append HTML to this hook
-     * @access private
-     * @var array
-     */
+		/**
+		* list of elements witch will append HTML to this hook
+		* 
+		*/
 		private $listenerList=array();
-
-
-	/**
-    * Builds a hook (the name has to be unique)
-	* @param $name	 	name of the hook
-    */
+		/**
+		* Builds a hook (the name has to be unique)
+		* 
+		* @param string $name name of the hook
+		*/
 		public function __construct($name){
 			$this->name=$name;
 		}
-	/**
-    * returns a hook object considering its name (TODO : SHOULD perhaps throws an exeception instead of create an row in logs)
-	* @param $name	 	name of the hook required
-	* @return a hook object considering its name
-    */
+		/**
+		* returns a hook object considering its name (TODO : SHOULD perhaps throws an exeception instead of create an row in logs)
+		* 
+		* @return Hook a hook object considering its name
+		* @param string $name name of the hook required
+		*/
 		public static function getHook($name){
 			if (!array_key_exists($name,self::$hooklist)){
 				self::initHook($name);
 			}
 			return self::$hooklist[$name];
 		}
-		
+		/**
+		* Returns true if the hook exists, false otherwise
+		* @return boolean true if the hook exists, false otherwise
+		* @param string  $name name of the hook to search
+		*/
 		public static function hookExists($name){
 		    if (!array_key_exists($name,self::$hooklist)){
 		        if (Ressource::getCurrentPage()->getHookDescriptionFile(self::getHookFileName($name),true)->exists()){
@@ -56,11 +55,11 @@
 		        return true;
 		    }
 		}
-
-	/**
-    * returns the HTML content of the hook. calls all registered modules and witch return their generated content
-	* @return the HTML content of the hook
-    */
+		/**
+		* Returns the HTML content of the hook. calls all registered modules and witch return their generated content
+		* 
+		* @return string the HTML content of the hook
+		*/
 		public function toHTML(){
 			$toReturn="";
 			foreach($this->listenerList as $val){
@@ -68,27 +67,39 @@
 			}
 		return $toReturn;
 		}
-
-	/**
-    * Allows a module or any element to register a content supplier for this Hook
-	* @param $listener	 	content supplier for this hook
-    */
+		/**
+		* Allows a module or any element to register a content supplier for this Hook
+		* 
+		* @param mixed $listener a module or any element to register a content supplier for this Hook
+		*/
 		public function addToHTMLListener($listener){
 			$this->listenerList[]=$listener;
 		}
-	/**
-    * Init all hooks : parses the config hook folder, checks the name of hook written in XML (filename=name in XML), registers modules for the hook (based on the content of the config file);
-    */
+		/**
+		* Returns the name of the file that contains the description of the hook
+		* 
+		* @return string  the name of the file that contains the description of the hook
+		* @param string $name the name of the hook
+		*/
 		public static function getHookFileName($name){
 		    $name_array=explode('.',$name);
 		    $name_instance=$name_array[1];
 		    return  $name_instance;
 		}
+		/**
+		* Initialises a hook based on its name
+		* @param string  $name hook name
+		*/
 		public static function initHook($name){
 			$xml_url=Ressource::getCurrentPage()->getHookDescriptionFile(self::getHookFileName($name));
 			$xml = XMLDocument::parseFromFile($xml_url);
 			self::initHookFromXML($name,$xml);
 		}
+		/**
+		* Initialises a hook based on the xml description
+		* @param string $name name of the hook
+		* @param mixed $xml Simple XML document
+		*/
 		public static function initHookFromXML($name,$xml){
 			if ($name!=$xml->name){
 				Log::Error('The hook description filename must be the name of the module '.$name."!=".$xml->name);
@@ -111,4 +122,6 @@
 			}
 		}
 	}
+
+
 ?>

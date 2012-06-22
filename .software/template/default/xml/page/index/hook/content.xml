@@ -1,5 +1,12 @@
 <hook>
 	<name>index.content</name>
 	<modules>
+		<module>
+			<name>TextContentDisplayer</name>
+			<instance>normal</instance>
+			<params>
+				<param type="simple" name="id">2</param>
+			</params>
+		</module>
 	</modules>
 </hook>

@@ -1,6 +1,14 @@
-<?php 
+<?php
+/**
+* The equal condition object adapted to Mysql
+* @see ModelDataRequestEqualCondition
+*/
 class CoreMysqlEqualCondition extends CoreModelDataRequestEqualCondition{
-    public function getSQL(){
+	/**
+	* Returns the SQL query for this equal condition
+	* @return string the SQL query for this equal condition
+	*/
+	public function getSQL(){
         $toReturn="";
         $dataRequest=$this->parentConditionContainer->getDataRequest();
         if ($this->val1 instanceof ModelField){
@@ -21,4 +29,10 @@ class CoreMysqlEqualCondition extends CoreModelDataRequestEqualCondition{
         return $toReturn;
     }
 }
+
+
+
+
+
+
 

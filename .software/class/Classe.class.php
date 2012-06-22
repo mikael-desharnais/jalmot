@@ -1,15 +1,16 @@
 <?php
 /**
- * Base Class mostly static that loads others system classes
- *
- * 
- * @author Mikael Desharnais
- * @version 1.0
- * @package CoreClass
- */
-
+* Base Class mostly static that loads others system classes
+* 
+* 
+* 
+*/
 class Classe {
-	
+	/**
+	* Parses recursively a directory and returns all the classes that can be loaded
+	* @return array array of all the classes that can be loaded
+	* @param string $directoryName directory to parse
+	*/
 	public static function parseDirectory($directoryName){
 		$directory = glob ( $directoryName."/*" );
 		$toInclude = array();
@@ -22,10 +23,19 @@ class Classe {
 		}
 		return $toInclude;
 	}
-	
+	/**
+	* Includes all the classes from a Directory and its children
+	* @param string $directoryName Name of the directory to use
+	*/
 	public static function includeDirectory($directoryName){
 		self::includeClasses(Classe::parseDirectory($directoryName));
 	}
+	/**
+	* Include the classes given as parameters
+	* there is an auto override, if the class is called Corexxx, 
+	* the system will look for /override/class/xxx.class.php, if it exists, it will be included otherwise, a class will be created that will extend the Corexxx class.
+	* @param array $classes Array of classes to include
+	*/
 	public static function includeClasses($classes){
 	    $filenameToInclude=array_keys($classes);
 	    sort ( $filenameToInclude );
@@ -46,10 +56,19 @@ class Classe {
 	        }
 	    }
 	}
+	/**
+	* Includes all the classes of the system (to be found in class/)
+	*/
 	public static function includeAll() {
 		Classe::includeDirectory("class");
 	}
-
+	/**
+	* Manages Autoload, if a class is not found, this method will be called, it searches in all modules for the class.
+	* This method should never be called because modules should import their classes properly.
+	* The only good reason is when SessionStart requires the import of classes before the call to Module::init
+	* TODO : create a cache
+	* @param string $class Name of the missing class
+	*/
 	public static function autoload($class){
 	    $directory=glob("module/*");
 	    foreach($directory as $subdir){
@@ -62,4 +81,6 @@ class Classe {
 	    }
 	}
 }
+
+
 

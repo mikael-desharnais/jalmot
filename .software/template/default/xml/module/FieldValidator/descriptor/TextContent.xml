@@ -3,10 +3,6 @@
 	<name>TextContent</name>
 	<rules>
 		<rule>
-			<class>SimpleWordRuleFV</class>
-			<target>name</target>
-		</rule>
-		<rule>
 			<class>SimpleLengthRuleFV</class>
 			<target>name</target>
 			<params>

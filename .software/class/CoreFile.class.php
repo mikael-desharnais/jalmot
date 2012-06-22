@@ -1,142 +1,126 @@
 <?php
 /**
- * Wrapper for elements of the file system, like in any UNIX, a folder is considered a file. A file is composed of a directory and a file name.
- * 
- * @author Mikael Desharnais
- * @version 1.0
- * @package CoreClass
- */
+* File class : may contain a file or a directory (just like the Unix File Concept)
+*/
 	class CoreFile{
-
-    /**
-     * Name of the file
-     * @access private
-     * @var string
-     */
-	public $file;
-	public $directory;
-    /**
-     * Name of the folder containing this directory
-     * @access private
-     * @var string
-     */
-	private $folder;
-    /**
-     * Is this file a folder ? Used to cache the result of isDirectory()
-     * @access private
-     * @var boolean
-     */
-	private $isFolder=null;
-    /**
-     * Extension for the current file. Used to cache the result of getExtension
-     * @access private
-     * @var string
-     */
-	private $extension=null;
-	
-	
-
 	/**
-    * Builds a file Objects
-	* @param $folder	 	name of the folder containing the file
-	* @param $file	 		name of the file
-    */
+	* The filename
+	*/
+	public $file;
+	/**
+	* The directory name
+	*/
+	public $directory;
+	/**
+	* True if the File is a directory, False otherwise 
+	*/
+	private $isFolder=null;
+	/**
+	* The extension of the file
+	*/
+	private $extension=null;
+	/**
+	* Initialises the directory name, filename, and isFolder
+	* @param string $folder The directory name
+	* @param string $file The filename
+	* @param boolean $isFolder True if the file is a directory, false Otherwise
+	*/
 	public function __construct($folder,$file,$isFolder){
 		$this->file = $file;
 		$this->directory = $folder;
 		$this->isFolder=$isFolder;
 	}
 	/**
-    * returns the name of the current file
-	* @return the name of the current file
-    */
+	* Returns the filename
+	* @return string filename
+	*/
 	public function getFile(){
 		return $this->file;
 	}
 	/**
-    * USES CACHE : returns true if this file is a folder (TODO : Check if it should be named isFolder)
-	* @return true if this file is a folder
-    */
+	* Returns true if the file is a directory, false otherwise
+	* @return boolean  true if the file is a directory, false otherwise
+	*/
 	public function isFolder(){
 		return $this->isFolder;
 	}
 	/**
-    * USES CACHE : returns true if this file is a true file (not a folder) (TODO : Check if it should be named isFolder)
-	* @return true if this file is a true file
-    */
+	* Returns false if the file is a directory, true otherwise
+	* @return boolean false if the file is a directory, true otherwise
+	*/
 	public function isFile(){
 		return !$this->isFolder();
 	}
 	/**
-    * SHOULD USE CACHE : returns true if this file exists
-	* @return true if this file exists
-    */
+	* Returns true if the file exists
+	* @return boolean true if the file exists
+	*/
 	public function exists(){
 		return file_exists((!empty($this->directory)?$this->directory."/":"").$this->file);
 	}
 	/**
-    * returns the name of the directory containing the file (A string : TODO : check if it should return an object)
-	* @return the name of the directory containing the file 
-    */
+	* Returns the name of the directory
+	* @return string  the name of the directory
+	*/
 	public function getDirectory(){
 		return $this->directory;
 	}
 	/**
-    * returns the name of a file without extension
-	* @param $filename	 	full name of a file
-	* @return the name of a file without extension
-    */
+	* Returns the filename without the extension
+	* @return string the filename without the extension
+	* @param string $filename the filename to use
+	*/
 	public static function stripExtension($filename){
 		$info = pathinfo($filename);
 		return $info['filename'];
 	}
 	/**
-    * returns the extension of a file
-	* @param $filename	 	full name of a file
-	* @return the extension of a file
-    */
+	* Returns the extension of a filename
+	* @return string the extension of a filename
+	* @param string $filename the filename
+	*/
 	public static function getExtensionStatic($filename){
 		$info = pathinfo($filename);
 		return strtolower(array_key_exists('extension',$info)?$info['extension']:"");
 	}
 	/**
-    * returns the extension of the current file
-	* @return the extension of the current file
-    */
+	* Returns the extension of the current File
+	* @return string the extension of the current File
+	*/
 	public function getExtension(){
 		if ($this->extension==null){
 			 $this->extension=self::getExtensionStatic($this->file);
 		}
 		return $this->extension;
 	}
-	
-	
 	/**
-    * returns the full url to access this file
-	* @return the full url to access this file
-    */
+	* Returns the URL of the file
+	* @return string the URL of the file
+	*/
 	public function toURL(){
 		return $this->toURLAppendToDirectory("");
 	}
 	/**
-    * returns the full url to access this file, right appending a name the folder
-	* @return the full url to access this file, right appending a name the folder
-    */
+	* Returns the URL of the file while appending a value to the directory name's end
+	* @return string  the URL of the file while appending a value to the directory name's end
+	* @param string $value the value to append to directory name
+	*/
 	public function toURLAppendToDirectory($value){
 		return (!empty($this->directory)?$this->directory."/":"").$value.$this->file;
 	}
 	/**
-    * TODO : change the location of this method (SHOULD BE IN override)
-	* @return 
-    */
+	* Returns the absolute URL of the file
+	* Uses configuration values : AliasName , SoftwareDirectory
+	* @return string  the absolute URL of the file
+	*/
 	public function toFullURL(){
 		return '/'.Ressource::getConfiguration()->getValue("AliasName").'/'.Ressource::getConfiguration()->getValue("SoftwareDirectory").'/'.$this->toURL();
 	}
 	/**
-    * returns a file object created from URL
-	* @param $url	 	url of the file
-	* @return a file object created from URL
-    */
+	* Creates a File Object From URL
+	* @return File The File Object corresponding to the URL
+	* @param string $url The URL to analyse
+	*/
 	public static function createFromURL($url){
 	    if (is_dir(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$url)){
 	        return new File($url,"",true);
@@ -145,22 +129,31 @@
 	    } 
 	}
 	/**
-    * write to file (TODO : specify the type of access mode)
-	* @param $toWrite	 	string to write to file
-    */
+	* Writes data to the current File
+	* @param string $toWrite the data to write to file
+	*/
 	public function write($toWrite){
 		$fh = fopen($this->directory.'/'.$this->file, 'w');
 		fwrite($fh, $toWrite);
 		fclose($fh);
 	}
 	/**
-    * TODO : check use and name
-    */
+	* Appends a string to the end of the directory
+	* @return File File containing the modified directory
+	* @param string $folder string to append to the directory name's end
+	*/
 	public function appendRightToDirectory($folder){
 		return new File($this->folder.$folder,$this->file,$this->isFolder);
 	}
+	/**
+	* Appends a string to the start of the directory
+	* @return File File containing the modified directory
+	* @param string $folder string to append to the directory name's end
+	*/
 	public function appendLeftToDirectory($folder){
 		return new File($folder.$this->folder,$this->file,$this->isFolder);
 	}
 }
+
+
 ?>

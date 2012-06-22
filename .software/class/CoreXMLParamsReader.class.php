@@ -1,6 +1,13 @@
 <?php
-
+/**
+* Used to read Configuration parameters from XML
+*/
 class CoreXMLParamsReader{
+	/**
+	* Reads Configuration parameters from XML
+	* @return array Configuration Parameter Array
+	* @param SimpleXMLElement $xml XML containing the Configuration Parameter XML
+	*/
 	public static function read($xml){
 	    $params=array();
 	    if ($xml->params->getName()=="params"){
@@ -21,4 +28,6 @@ class CoreXMLParamsReader{
 	    return $params;
 	}
 }
+
+
 ?>

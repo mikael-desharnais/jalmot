@@ -1,39 +1,45 @@
 <?php
 /**
- * class managing JPG files
- * 
- * @author Mikael Desharnais
- * @version 1.0
- * @package CoreClass
- * 
- * TODO : Extend CoreImage
- */
+* class managing JPG files
+* 
+* 
+* TODO : TO remove from COre
+* 
+*/
 class CoreImageJPG{
-	protected $file;
-	protected $dimension;
-	
 	/**
-     * Stores the file object
-     * @param	File object
-     */
+	* TODO : TO remove from COre
+	*/
+	protected $file;
+	/**
+	* TODO : TO remove from COre
+	*/
+	protected $dimension;
+	/**
+	* Stores the file object
+	* 
+	*/
 	public function __construct($file){
 		$this->file=$file;
 	}
-	
 	/**
-    * TODO : REmake it : not proper
-    */
+	* TODO : REmake it : not proper
+	* 
+	*/
 	public function writeToFile($image,$file){
 		@mkdir(Ressource::getConfiguration()->getValue("baseDirectory")."/".$file->getDirectory(),"0777",true);
 		imagejpeg($image,Ressource::getConfiguration()->getValue("baseDirectory")."/".$file->toURL());
 	}
-	
 	/**
-    * Returns Exif data from a photo file (TODO : think about caching ???)
-    */
+	* Returns Exif data from a photo file (TODO : think about caching ???)
+	* 
+	*/
 	public function getExif(){
 		return exif_read_data(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$this->file->toURL(), 0, true);
 	}
+	/**
+	* TODO : TO remove from COre
+	*/
 	public function getThumb($max_width,$max_height){
 		$src_width=0;
 		$src_height=0;
@@ -89,7 +95,12 @@ class CoreImageJPG{
 		imagecopyresampled($dest_image, $baseImage, 0, 0, 0, 0, $dest_width, $dest_height, $src_width, $src_height);
 		return $dest_image;
 	}
+	/**
+	* TODO : TO remove from COre
+	*/
 	public function getMimeType(){
 		return "image/jpg";
 	}
 }
+
+

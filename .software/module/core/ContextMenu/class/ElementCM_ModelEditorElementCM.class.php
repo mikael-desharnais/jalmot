@@ -1,4 +1,7 @@
 <?php
+/**
+ *
+ */
 class ModelEditorElementCM extends ElementCM {
     public static function readFromXML($parentDescriptor,$xml){
         $contextMenuElement=parent::readFromXML($parentDescriptor, $xml);

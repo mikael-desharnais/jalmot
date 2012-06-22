@@ -1,59 +1,61 @@
 <?php
 /**
- * Manages a template
- *
- * @author Mikael Desharnais
- * @version 1.0
- * @package CoreClass
- */
+* Manages a template
+* 
+* 
+*/
 class CoreTemplate{
-	    /**
-	     * name of the template
-	     * @access private
-	     * @var string
-	     */
-	private $name;
-	    /**
-	     * parent template
-	     * @access private
-	     * @var Template
-	     */
-	private $parent;
-	
-	
 	/**
-	 * Defines the name of the template
-	 * @param $name	 	name of the template
-	 */
+	* name of the template
+	* 
+	*/
+	private $name;
+	/**
+	* parent template
+	* 
+	*/
+	private $parent;
+	/**
+	* Defines the name of the template
+	* 
+	* @param string $name name of the template
+	*/
 	public function __construct($name){
 		$this->name = $name;
 	}
 	/**
-	 * Returns the name of the template
-	 * @return 	 	name of the template
-	 */
+	* Returns the name of the template
+	* 
+	* @return name of the template
+	*/
 	public function getName(){
 		return $this->name;
 	}
+	/**
+	* Defines the template's parent
+	* @param Template Template $parent the template's parent
+	*/
 	public function setParent(Template $parent){
 		$this->parent=$parent;
 	}
 	/**
-	 * Returns the URL of a file in the current template
-	 * @param $file	 	file to find in the current template
-	 * @param $silent	true if the inability to find a file results in nothing / false for an error TODO : use LOG
-	 * @return file URL in the current template
-	 */
+	* Returns the URL of a file in the current template
+	* 
+	* @return string the URL of the file in the current template
+	* @param string $file URL of the File outside the template
+	* @param boolean $silent=false if false no error will be triggered if file not found
+	*/
 	public function getURL($file,$silent=false){
 		$file = $this->getFile(File::createFromURL($file),$silent);
 		return $file->toURL();
 	}
 	/**
-	 * Returns a file in the current template given the partial URL of the file : Searches in the current template then recursively in parent templates
-	 * @param $file	 	file to find in the current template
-	 * @param $silent	true if the inability to find a file results in nothing / false for an error TODO : use LOG
-	 * @return file in the current template
-	 */
+	* Returns a file in the current template given the partial URL of the file : Searches in the current template then recursively in parent templates
+	* 
+	* @return File the file in the current templatefilein the current template
+	* @param File $file File outside the template
+	* @param boolean $silent=false if false no error will be triggered if file not found
+	*/
 	public function getFile($file,$silent=false){
 		if (file_exists("template/".$this->name."/".$file->toURL())){
 			return new File("template/".$this->name."/".$file->getDirectory(),$file->getFile(),$file->isFolder());
@@ -76,13 +78,15 @@ class CoreTemplate{
 			}
 		}
 	}
-	
 	/**
-	 * Returns the current template
-	 * @return The current template
-	 */
+	* Returns the current template
+	* 
+	* @return Template The current template
+	*/
 	public static function getCurrentTemplate(){
 	    return new Template(Ressource::getConfiguration()->getValue('DefaultTemplate'));
 	} 
 }
+
+
 ?>

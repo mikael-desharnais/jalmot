@@ -1,4 +1,7 @@
 <?php
+/**
+ *
+ */
 class JSCSSMinifier extends Module{
 	public function init(){
 	    parent::init();

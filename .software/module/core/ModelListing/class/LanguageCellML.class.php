@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *
+ */
 class LanguageCellML extends SimpleCellML {
 
 	private $model_lang;

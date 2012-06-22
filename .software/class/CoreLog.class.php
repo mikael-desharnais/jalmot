@@ -22,8 +22,7 @@ class CoreLog
      * 
      * @param $message		message to log 
      */
-    public static function Error ($message)
-    {
+    public static function Error ($message){
         self::LogData($message, 0);
         self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 0);
         die();
@@ -33,8 +32,7 @@ class CoreLog
      * 
      * @param $message		message to log 
      */
-    public static function Warning ($message)
-    {
+    public static function Warning ($message){
         self::LogData($message, 1);
         self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 1);
     }
@@ -44,8 +42,7 @@ class CoreLog
      * @param $data		data to log (can be anything (array, boolean ...))
      * @param $level	level of the current log entry 
      */
-    public static function LogData ($data, $level)
-    {
+    public static function LogData ($data, $level){
         if (self::$logLevel >= $level) {
             print('<pre>');
             print_r($data);

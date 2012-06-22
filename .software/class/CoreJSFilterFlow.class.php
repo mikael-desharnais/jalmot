@@ -1,24 +1,23 @@
 <?php
 /**
- * Used to order/filter/concatenate/modify a set of JS files given by the application and templates
- * May be overriden to implement other ways to filter/concatenate/modify JS files
- *
- * @author Mikael Desharnais
- * @version 1.0
- * @package CoreClass
- */
+* Could order/filter/concatenate/modify a set of JS files given by the application and templates
+* This one a very basic version, it does not concatenate the files. If you want a better version try the one given with the JalmotBootstrap
+* 
+* 
+* 
+*/
 class CoreJSFilterFlow{
 	/**
-     * Does nothing, may be overriden if required
-     */
+	* Does nothing
+	*/
 	public function __construct(){
 
 	}
 	/**
-    * orders/filters/concatenates/modifies JS files
-	* @param $JSArray	 	Two dimensions array : 1st dimension : order of files : 2nd dimension : files 
+	* sorts and filters CSS files
 	* @return Array with files ordered/filtered/concatenated/modified
-    */
+	* @param array $JSArray two dimensions array containing the js files to filter
+	*/
 	public function filter($JSArray){
 		$tmp_array=array();
 		foreach ($JSArray as $order=>$JSLevel){
@@ -33,12 +32,23 @@ class CoreJSFilterFlow{
 		ksort($JSArray);
 		return $JSArray;
 	}
-	
+	/**
+	* Filters and Compresses a one dimension array containing JS files
+	* @return array Filtered and Compressed CSS files
+	* @param array $JSArray one dimension array containing CSS files to compress and filter
+	*/
 	public function filterAndCompress($JSArray){
 	    return $this->compress($this->filter($JSArray));
 	}
+	/**
+	* Compresses a one dimension array containing JS files
+	* @return array Compressed CSS files
+	* @param array $JSArray one dimension array containing CSS files to compress
+	*/
 	public function compress($JSArray){
 	    return $JSArray;
 	}
 }
+
+
 ?>

@@ -14,6 +14,7 @@ class AdminUser {
 	    if ($rightName=='ACCESS_ADMIN'){
 	        return true;
 	    }
+        return false;
 	}
 	public function getId(){
 	    $this->data->getId();

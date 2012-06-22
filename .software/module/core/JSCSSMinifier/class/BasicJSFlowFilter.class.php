@@ -1,4 +1,7 @@
 <?php
+/**
+ *
+ */
 class BasicJSFlowFilter extends JSFilterFlow {
     public function compress($JSArray){
         $file_key = "";
