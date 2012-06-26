@@ -19,7 +19,7 @@
      }
      /**
      * returns the datasource corresponding to the name given in parameter
-     * @return type The object of the datasource required
+     * @return DataSource The object of the datasource required
      * @param String $name Name of the datasource to return
      */
      public static function getDataSource($name){
@@ -30,7 +30,7 @@
      * Returns the current Datasource according to the configuration values :
      * DefaultDataSourceType
      * DefaultDataSourceName
-     * @return type The current datasource according to the configuration
+     * @return DataSource The current datasource according to the configuration
      */
      public static function getCurrentDataSource(){
          $defaultDataSourceType=Ressource::getConfiguration()->getValue('DefaultDataSourceType');
@@ -62,14 +62,14 @@
      }
      /**
      * Returns the name of the datasource
-     * @return type The name of the datasource
+     * @return String The name of the datasource
      */
      public function getName(){
          return $this->name;
      }
 	 /**
 	 * Returns true if the given queryUUID corresponds to a cached QueryResult, false otherwise
-	 * @return type  true if the given queryUUID corresponds to a cached QueryResult, false otherwise
+	 * @return boolean  true if the given queryUUID corresponds to a cached QueryResult, false otherwise
 	 * @param string $queryUUID the query UUID that identifies the cached element
 	 */
 	 public function isDataModelCached($queryUUID){
