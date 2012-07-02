@@ -1,7 +1,7 @@
 <desktop>
 	<icons>
 		<icon>
-			<class>ModelEditorDesktopIcon</class>
+			<class>ModelListingDesktopIcon</class>
 			<image>media/image/icon/user.png</image>
 			<text>User Management</text>
 			<instance></instance>
@@ -11,7 +11,7 @@
 			</params>
 		</icon>
 		<icon>
-			<class>ModelEditorDesktopIcon</class>
+			<class>ModelListingDesktopIcon</class>
 			<image>media/image/icon/test.png</image>
 			<text>Test</text>
 			<instance></instance>
@@ -21,7 +21,7 @@
 			</params>
 		</icon>
 		<icon>
-			<class>ModelEditorDesktopIcon</class>
+			<class>ModelListingDesktopIcon</class>
 			<image>media/image/icon/media.png</image>
 			<text>Media Management</text>
 			<instance></instance>
@@ -30,7 +30,7 @@
 			</params>
 		</icon>
 		<icon>
-			<class>ModelEditorDesktopIcon</class>
+			<class>ModelListingDesktopIcon</class>
 			<image>media/image/icon/cms.png</image>
 			<text>CMS</text>
 			<instance></instance>

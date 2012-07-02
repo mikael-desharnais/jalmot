@@ -18,7 +18,6 @@ class LanguageFieldME extends SimpleFieldME {
 				return $line->$getter();
 			}
 		}
-        return;
 	}
 	public static function readFromXML($model_editor,$xml){
 	    $toReturn = parent::readFromXML($model_editor,$xml);

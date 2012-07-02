@@ -31,5 +31,8 @@ abstract class RuleFV {
 	    $rule->setConfParams(XMLParamsReader::read($xml));
 	    return $rule;
 	}
+	
 	public abstract function isValid();
+	
+	
 }
