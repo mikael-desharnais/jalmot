@@ -58,11 +58,6 @@ class CoreModel{
     */
     public $relations=array();
     /**
-    * List of Model Data instances cached
-    * TODO : Should perphaps be removed
-    */
-    public $cachedInstances=array();
-    /**
     * Initialises the name of the model
     * @param string $name Nom du modèle
     */

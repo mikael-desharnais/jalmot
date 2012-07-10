@@ -1,18 +1,18 @@
 <?php
 /**
 * The equal condition object adapted to Mysql
-* @see ModelDataRequestEqualCondition
+* @see ModelDataQueryEqualCondition
 */
-class CoreMysqlEqualCondition extends CoreModelDataRequestEqualCondition{
+class CoreMysqlEqualCondition extends CoreModelDataQueryEqualCondition{
 	/**
 	* Returns the SQL query for this equal condition
 	* @return string the SQL query for this equal condition
 	*/
 	public function getSQL(){
         $toReturn="";
-        $dataRequest=$this->parentConditionContainer->getDataRequest();
+        $DataQuery=$this->parentConditionContainer->getDataQuery();
         if ($this->val1 instanceof ModelField){
-            $toReturn.=" ". $dataRequest->getDataSource()->getDbFieldName($dataRequest->getModel()->getName(),$this->val1->getName())." ";
+            $toReturn.=" ". $DataQuery->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->val1->getName())." ";
         }elseif (is_numeric($this->val1)) {
             $toReturn.=" ".$this->val1." ";
         }else {

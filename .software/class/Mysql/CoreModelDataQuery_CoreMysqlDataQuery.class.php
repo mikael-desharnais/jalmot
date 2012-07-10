@@ -1,8 +1,8 @@
 <?php
 /**
-* Mysql Implementation of ModelDataRequest
+* Mysql Implementation of ModelDataQuery
 */
-class CoreMysqlDataRequest extends ModelDataRequest{
+class CoreMysqlDataQuery extends ModelDataQuery{
 	/**
 	* Returns an instance of MysqlConditionContainer of the type given
 	* @return MysqlConditionContainer an instance of MysqlConditionContainer of the type given
@@ -12,18 +12,18 @@ class CoreMysqlDataRequest extends ModelDataRequest{
 		return new MysqlConditionContainer($type);
 	}
 	/**
-	* Defines the Root conditionContainer and defines its parent dataRequest
+	* Defines the Root conditionContainer and defines its parent DataQuery
 	*/
 	public function setRootConditionContainer(){
-		$this->conditionContainer=self::getConditionContainerInstance(ModelDataRequestConditionContainer::$MODEL_DATA_REQUEST_CONDITION_CONTAINER_AND);
-		$this->conditionContainer->setDataRequest($this);
+		$this->conditionContainer=self::getConditionContainerInstance(ModelDataQueryConditionContainer::$MODEL_DATA_QUERY_CONDITION_CONTAINER_AND);
+		$this->conditionContainer->setDataQuery($this);
 	}
 	/**
 	* Returns the SQL source code for this Query
 	* @return string  the SQL source code for this Query
 	*/
 	public function getSQL(){
-         if ($this->getType()==ModelDataRequest::$SELECT_REQUEST){
+         if ($this->getType()==ModelDataQuery::$SELECT_QUERY){
          	$query="SELECT * FROM ".$this->getDataSource()->getTableName($this->getModel()->getName());
          	$hasWhere=false;
 			$where=$this->getConditionContainer()->getSQL();
@@ -32,9 +32,9 @@ class CoreMysqlDataRequest extends ModelDataRequest{
 			}
 			return $query;
 		}
-         if ($request->getType()==ModelDataRequest::$UPDATE_REQUEST){
+         if ($query->getType()==ModelDataQuery::$UPDATE_QUERY){
 		}
-         if ($request->getType()==ModelDataRequest::$INSERT_REQUEST){
+         if ($query->getType()==ModelDataQuery::$INSERT_QUERY){
 		}
 	}
 }

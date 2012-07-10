@@ -1,34 +1,34 @@
 <?php
 /**
-* This class works as a container for conditions in a DataRequest.
+* This class works as a container for conditions in a DataQuery.
 * It can be seen as brackets in a text query.
 * A condition container contains other conditions and other condition containers.
 * A condition container has a type : either OR or AND.
 * Example : 
 * If the type is AND, the serialisation of this condition container will be [conditionContainer[1] AND ... AND conditionContainer[n] AND condition[1] AND ... AND condition[n]]
 */
-abstract class CoreModelDataRequestConditionContainer{
+abstract class CoreModelDataQueryConditionContainer{
 	/**
 	* Type type of this Condition Container
-	* Value taken from the Class Constants : $MODEL_DATA_REQUEST_CONDITION_CONTAINER_AND or $MODEL_DATA_REQUEST_CONDITION_CONTAINER_OR
+	* Value taken from the Class Constants : $MODEL_DATA_QUERY_CONDITION_CONTAINER_AND or $MODEL_DATA_QUERY_CONDITION_CONTAINER_OR
 	*/
 	private $type;
 	/**
 	* Class constant for a type AND condition container
 	*/
-	public static $MODEL_DATA_REQUEST_CONDITION_CONTAINER_AND = 1;
+	public static $MODEL_DATA_QUERY_CONDITION_CONTAINER_AND = 1;
 	/**
 	* Class constant for a type OR condition container
 	*/
-	public static $MODEL_DATA_REQUEST_CONDITION_CONTAINER_OR = 0;
+	public static $MODEL_DATA_QUERY_CONDITION_CONTAINER_OR = 0;
 	/**
 	* List of all conditions contained by this ConditionContainer
 	*/
 	private $conditions = array();
 	/**
-	* The parent DataRequest of this Condition container
+	* The parent DataQuery of this Condition container
 	*/
-	private $dataRequest;
+	private $DataQuery;
 	/**
 	* List of all ConditionContainers contained by this ConditionContainer
 	*/
@@ -41,23 +41,22 @@ abstract class CoreModelDataRequestConditionContainer{
 		$this->type=$type;
 	}
 	/**
-	* Defines the ModelDataRequest that contains this conditionContainer
-	* @param ModelDataRequest  $dataRequest  the ModelDataRequest that contains this conditionContainer
+	* Defines the ModelDataQuery that contains this conditionContainer
+	* @param ModelDataQuery  $DataQuery  the ModelDataQuery that contains this conditionContainer
 	*/
-	public function setDataRequest($dataRequest){
-	    $this->dataRequest=$dataRequest;
+	public function setDataQuery($DataQuery){
+	    $this->DataQuery=$DataQuery;
 	}
 	/**
-	* Returns  the DataRequest that contains this conditionContainer
-	* @return ModelDataRequest  the ModelDataRequest that contains this conditionContainer
+	* Returns  the DataQuery that contains this conditionContainer
+	* @return ModelDataQuery  the ModelDataQuery that contains this conditionContainer
 	*/
-	public function getDataRequest(){
-	    return $this->dataRequest;
+	public function getDataQuery(){
+	    return $this->DataQuery;
 	}
 	/**
 	* Adds a condition to this ConditionContainer
-	* TODO : there should be a class for CoreModelDataRequestCondition
-	* @param ModelDataRequestCondition $condition The condition to add to this ConditionContainer
+	* @param ModelDataQueryCondition $condition The condition to add to this ConditionContainer
 	*/
 	public function addCondition($condition){
 	    $condition->setParentConditionContainer($this);
@@ -65,10 +64,10 @@ abstract class CoreModelDataRequestConditionContainer{
 	}
 	/**
 	* Adds a ConditionContainer to this ConditionContainer
-	* @param ModelDataRequestConditionContainer $conditionContainer The ConditionContainer to add to this ConditionContainer
+	* @param ModelDataQueryConditionContainer $conditionContainer The ConditionContainer to add to this ConditionContainer
 	*/
 	public function addConditionContainer($conditionContainer){
-	    $conditionContainer->setDataRequest($this->dataRequest);
+	    $conditionContainer->setDataQuery($this->DataQuery);
 		$this->conditionContainers[]=$conditionContainer;
 	}
 	/**

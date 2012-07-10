@@ -36,7 +36,6 @@ class FieldValidatorDescriptor {
 	/**
 	* Returns an instance of fieldValidator as described with $xml
 	* Uses readFromXML for rules on classes specified in XML
-	* TODO : use class of the XML File
 	* @return FieldValidatorDescriptor an instance of fieldValidator as described with $xml
 	* @param SimpleXMLElement $xml The xml describing the object requested
 	*/

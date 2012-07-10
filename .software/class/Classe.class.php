@@ -49,7 +49,8 @@ class Classe {
 	                include_once ("override/class/" . $fullclassname . ".class.php");
 	            } else {
 	                if (!file_exists(".cache/class/".$fullclassname . ".class.php")){
-	                    file_put_contents (".cache/class/".$fullclassname . ".class.php","<?php class " . $classname . " extends Core" . $classname . " {} ?>");
+	                    $class = new ReflectionClass("Core" . $classname);
+	                    file_put_contents (".cache/class/".$fullclassname . ".class.php","<?php ".($class->isAbstract()?"abstract":"")." class " . $classname . " extends Core" . $classname . " {} ?>");
 	                }
 	                include_once(".cache/class/".$fullclassname . ".class.php");
 	            }

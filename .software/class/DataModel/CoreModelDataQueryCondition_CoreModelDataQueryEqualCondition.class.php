@@ -1,10 +1,9 @@
 <?php
 /**
-* TODO : There should be parent class for all conditions
-* This class describes an equal condition for a ModelDataRequest
+* This class describes an equal condition for a ModelDataQuery
 * This condition uses two values that can be either ModelFields ,string or integer
 */
-abstract class CoreModelDataRequestEqualCondition{
+abstract class CoreModelDataQueryEqualCondition{
     /**
     * The two values of this Condition
     */
@@ -25,7 +24,7 @@ abstract class CoreModelDataRequestEqualCondition{
     }
     /**
     * Defines the Condition Container that contains this condition
-    * @param ModelDataRequestConditionContainer $parentConditionContainer the Condition Container that contains this condition
+    * @param ModelDataQueryConditionContainer $parentConditionContainer the Condition Container that contains this condition
     */
     public function setParentConditionContainer($parentConditionContainer){
         $this->parentConditionContainer=$parentConditionContainer;

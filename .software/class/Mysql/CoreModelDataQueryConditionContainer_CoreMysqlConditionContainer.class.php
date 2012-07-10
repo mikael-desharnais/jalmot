@@ -1,8 +1,8 @@
 <?php
 /**
-* Mysql Implementation of the ModelDataRequestConditionContainer
+* Mysql Implementation of the ModelDataQueryConditionContainer
 */
-class CoreMysqlConditionContainer extends CoreModelDataRequestConditionContainer{
+class CoreMysqlConditionContainer extends CoreModelDataQueryConditionContainer{
 	/**
 	* Returns the string query corresponding to this ConditionContainer in Mysql Language
 	* @return string the string query corresponding to this ConditionContainer in Mysql Language
@@ -24,7 +24,7 @@ class CoreMysqlConditionContainer extends CoreModelDataRequestConditionContainer
 	* @return string the proper Mysql separator for this Container (either AND or OR)
 	*/
 	public function getSeparator(){
-		if ($this->getType()==self::$MODEL_DATA_REQUEST_CONDITION_CONTAINER_AND){
+		if ($this->getType()==self::$MODEL_DATA_QUERY_CONDITION_CONTAINER_AND){
 			return " AND ";
 		}else {
 			return " OR ";

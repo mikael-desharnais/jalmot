@@ -13,7 +13,7 @@ class SimpleDataFetcher {
 	        $element=$model->getInstance();
 	        $element->data_source=Ressource::getDataSource();
 	    }else {
-	        $query=Ressource::getDataSource()->getModelDataRequest(ModelDataRequest::$SELECT_REQUEST,$model);
+	        $query=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model);
 	        foreach($modelEditorDescriptor->getId() as $key_element=>$value_element){
 	            $query=$query->addConditionBySymbol('=',$model->getField($key_element), $value_element);
 	        }

@@ -17,7 +17,7 @@ class MediaFileManager extends Module{
 	*/
 	public function getFileById($id){
 	    $mediaFileModel=Model::getModel('MediaFile');
-	    $file=Ressource::getDataSource()->getModelDataRequest(ModelDataRequest::$SELECT_REQUEST,$mediaFileModel)
+	    $file=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$mediaFileModel)
 				    ->addConditionBySymbol('=',$mediaFileModel->getField('idMediaFile'),(int)$id)
 				    ->getModelData();
 	    if (count($file)>0){

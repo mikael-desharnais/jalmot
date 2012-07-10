@@ -20,31 +20,31 @@
          $this->loadDbToModelData();
      }
      /**
-     * Returns a new Instance of MysqlDataRequest with proper type and Model.
+     * Returns a new Instance of MysqlDataQuery with proper type and Model.
      * 
-     * @return MysqlDataRequest a new Instance of MysqlDataRequest with proper type and Model.
-     * @param integer $type the type of Query required (see CoreModelDataRequest)
+     * @return MysqlDataQuery a new Instance of MysqlDataQuery with proper type and Model.
+     * @param integer $type the type of Query required (see CoreModelDataQuery)
      * @param Model $model the model targetted by this Query
      */
-     public function getModelDataRequest($type,$model){
-         return new MysqlDataRequest($type,$model,$this);
+     public function getModelDataQuery($type,$model){
+         return new MysqlDataQuery($type,$model,$this);
      }
      /**
-     * Executes a ModelDataRequest
+     * Executes a ModelDataQuery
      * @return array An array of DataModel that correspond to the Model
-     * @param ModelDataRequest $request The ModelDataRequest to execute
+     * @param ModelDataQuery $query The ModelDataQuery to execute
      */
-     public function execute($request){
-         if ($request->getType()==ModelDataRequest::$SELECT_REQUEST){
-			$query=$request->getSQL();
-         	$resultset=$this->dbConnection->query($query);
+     public function execute($query){
+         if ($query->getType()==ModelDataQuery::$SELECT_QUERY){
+			$raw_query=$query->getSQL();
+         	$resultset=$this->dbConnection->query($raw_query);
          	$toReturn=array();
          	while($line=$this->dbConnection->fetchAssoc($resultset)){
-         	    $instance=$request->getModel()->getInstance();
+         	    $instance=$query->getModel()->getInstance();
          	    $instance->source=ModelData::$SOURCE_FROM_DATASOURCE;
 				$instance->data_source=$this;
          	    foreach($line as $key=>$val){
-         	        $function="set".ucfirst(strtolower($this->getModelFieldName($this->getTableName($request->getModel()->getName()),$key)));
+         	        $function="set".ucfirst(strtolower($this->getModelFieldName($this->getTableName($query->getModel()->getName()),$key)));
          	        $instance->$function($val);
          	    }
          	    $toReturn[]=$instance;
@@ -114,8 +114,8 @@
        	 }
      }
 	/**
-	* Returns a ModelDataRequestCondition corresponding to the symbol given as first parameter
-	* @return ModelDataRequestCondition  a ModelDataRequestCondition corresponding to the symbol given as first parameter
+	* Returns a ModelDataQueryCondition corresponding to the symbol given as first parameter
+	* @return ModelDataQueryCondition  a ModelDataQueryCondition corresponding to the symbol given as first parameter
 	* @param array $args All The arguments passed
 	*/
 	public function getConditionBySymbol($args){

@@ -28,7 +28,7 @@ class AdminLoginManager extends Module{
 	    parent::execute();
 	    if (Ressource::getParameters()->valueExists("userInput")&&Ressource::getParameters()->valueExists("passwordInput")){
 	        $userModel=Model::getModel('UserAdmin');
-	        $users=Ressource::getDataSource()->getModelDataRequest(ModelDataRequest::$SELECT_REQUEST,$userModel)
+	        $users=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$userModel)
 	        										->addConditionBySymbol('=',$userModel->getField('username'), Ressource::getParameters()->getValue("userInput"))
 	        										->addConditionBySymbol('=',$userModel->getField('password'), $userModel->getField('password')->getEncryptor(Ressource::getParameters()->getValue("passwordInput"))->getValue())
 	        										->getModelData();

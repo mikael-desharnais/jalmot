@@ -75,8 +75,8 @@ class CoreModelData{
 	* Magic method that catches calls to :
 	*   set[FIELDNAME] : allows to set a value of a field of this DataModel
 	*   get[FIELDNAME] :  returns a value  of a field of this DataModel
-	*   lst[RELATIONNAME] : returns a ModelDataRequest to fetch the elements linked to this DataModel through the Relation
-	* @return Mixed If set : return nothing, If get : returns the value of the field of the this DataModel, if lst : the ModelDataRequest to fetch the elements linked to this DataModel through the Relation 
+	*   lst[RELATIONNAME] : returns a ModelDataQuery to fetch the elements linked to this DataModel through the Relation
+	* @return Mixed If set : return nothing, If get : returns the value of the field of the this DataModel, if lst : the ModelDataQuery to fetch the elements linked to this DataModel through the Relation 
 	* @param string $name name of the method called
 	* @param array $arguments the arguments used to call this method
 	*/
@@ -93,7 +93,7 @@ class CoreModelData{
 	        $model=$this->__parent_model->getRelation($fieldName)->getDestination()->getModel();
 	        $source_field=strtolower($this->__parent_model->getRelation($fieldName)->getSource()->getName());
 	        $source_field_value=$this->$source_field;
-	        return $this->data_source->getModelDataRequest(ModelDataRequest::$SELECT_REQUEST,$model)->addConditionBySymbol('=',$this->__parent_model->getRelation($fieldName)->getDestination(),$source_field_value);
+	        return $this->data_source->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)->addConditionBySymbol('=',$this->__parent_model->getRelation($fieldName)->getDestination(),$source_field_value);
 	    }
 	    
 	}

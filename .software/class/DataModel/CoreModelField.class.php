@@ -55,7 +55,6 @@ class CoreModelField{
     }
     /**
     * Returns the type of this field
-    * TODO : There should perhaps be a list of all types with Class Constants
     * @return string the type of this field
     */
     public function getType(){

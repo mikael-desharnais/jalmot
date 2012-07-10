@@ -1,24 +1,23 @@
 <?php
 /**
 * Query Object to fetch DataModels
-* TODO : Should perhaps be renamed ModelDataQuery
 */
-abstract class CoreModelDataRequest{
+abstract class CoreModelDataQuery{
     /**
-    * Class Constant to use as type for a ModelDataRequest
+    * Class Constant to use as type for a ModelDataQuery
     * Query Type : Select
     */
-    public static $SELECT_REQUEST=1;
+    public static $SELECT_QUERY=1;
     /**
-    * Class Constant to use as type for a ModelDataRequest
+    * Class Constant to use as type for a ModelDataQuery
     * Query Type : Update
     */
-    public static $UPDATE_REQUEST=2;
+    public static $UPDATE_QUERY=2;
     /**
-    * Class Constant to use as type for a ModelDataRequest
+    * Class Constant to use as type for a ModelDataQuery
     * Query Type : Insert
     */
-    public static $INSERT_REQUEST=3;
+    public static $INSERT_QUERY=3;
     /**
     * Base condition container of this Query
     * By default, it should be a AND conditionContainer
@@ -38,8 +37,8 @@ abstract class CoreModelDataRequest{
     private $type;
     /**
     * Initialises the type, model and datasource of this Query
-    * Defines the root condition container of this ModelDataRequest using setRootConditionContainer
-    * @see ModelDataRequest::setRootConditionContainer()
+    * Defines the root condition container of this ModelDataQuery using setRootConditionContainer
+    * @see ModelDataQuery::setRootConditionContainer()
     * @param integer $type Use a value from class contans : either for select, update, create
     * @param Model $model the model targeted by this query
     * @param DataSource $data_source The datasource to use for this query
@@ -54,7 +53,7 @@ abstract class CoreModelDataRequest{
 	* Sets the default Condition container with a AND condition container
 	*/
 	public function setRootConditionContainer(){
-		$this->conditionContainer=self::getConditionContainerInstance(ModelDataRequestConditionContainer::$MODEL_DATA_REQUEST_CONDITION_CONTAINER_AND);
+		$this->conditionContainer=self::getConditionContainerInstance(ModelDataQueryConditionContainer::$MODEL_DATA_QUERY_CONDITION_CONTAINER_AND);
 	}
 	/**
 	* returns the UUID of this query
@@ -65,8 +64,8 @@ abstract class CoreModelDataRequest{
 	}
     /**
     * Adds a condition to this query (In fact to the root condition container)
-    * @return ModelDataRequest this
-    * @param ModelDataRequestCondition $condition condition to add to this query
+    * @return ModelDataQuery this
+    * @param ModelDataQueryCondition $condition condition to add to this query
     */
     public function addCondition($condition){
         $this->conditionContainer->addCondition($condition);
@@ -74,7 +73,7 @@ abstract class CoreModelDataRequest{
     }
 	/**
 	* Adds a condition to this query (The condition to add is defined by its symbol and the given parameters (See the different conditions and their symbols))
-	* @return ModelDataRequest this
+	* @return ModelDataQuery this
 	* @param string $symbol Symbol of the condition to create and Add
 	*/
 	public function addConditionBySymbol($symbol){
@@ -83,8 +82,8 @@ abstract class CoreModelDataRequest{
 	}
     /**
     * Adds a condition container to this query
-    * @return ModelDataRequest this
-    * @param ModelDataRequestConditionContainer $conditionContainer the Condition container to add to this query
+    * @return ModelDataQuery this
+    * @param ModelDataQueryConditionContainer $conditionContainer the Condition container to add to this query
     */
     public function addConditionContainer($conditionContainer){
         $this->conditionContainer->addConditionContainer($conditionContainer);
@@ -110,7 +109,7 @@ abstract class CoreModelDataRequest{
     /**
     * Executes the query and returns  the first Model Data of the result
     * This method uses cache, the same way as getModelData
-    * @see ModelDataRequest::getModelData
+    * @see ModelDataQuery::getModelData
     * @return DataModel The first DataModel of the result of the query
     * @param boolean $useCache=false true to use cache for this query / false otherwise
     */
@@ -134,7 +133,7 @@ abstract class CoreModelDataRequest{
     }
     /**
     * Returns the root condition container of this query
-    * @return ModelDataRequestConditionContainer the root condition container of this query
+    * @return ModelDataQueryConditionContainer the root condition container of this query
     */
     public function getConditionContainer(){
         return $this->conditionContainer;

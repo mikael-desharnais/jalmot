@@ -32,10 +32,7 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
         }
         return array(array($fileToUse));
     }
-    /**
-    * TODO : Should be rename currentFile
-    */
-    public $file;
+    public $currentFile;
     /**
     * Adapts the url contents in the css file to change the directory
     * @return string the content of the file modified
