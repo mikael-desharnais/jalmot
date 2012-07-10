@@ -1,6 +1,6 @@
 <?php
-/**
-* TODO : See if it's used 
+/** 
+* TODO : Use it and implement 
 */
 class CoreModelType{
     /**

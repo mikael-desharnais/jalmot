@@ -13,9 +13,8 @@ class CoreUserSpace{
 	private $rightManager;
     /**
     * Builds a UserSpace
-    * TODO : Should be private
     */
-    public function UserSpace(){
+    private function UserSpace(){
         
     }
     /**

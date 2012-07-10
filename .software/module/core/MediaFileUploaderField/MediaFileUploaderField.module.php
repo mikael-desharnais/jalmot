@@ -1,11 +1,15 @@
 <?php
-
+/**
+* Module that adds the MediaFileUploaderFieldME to the possible FieldME
+*/
 class MediaFileUploaderField extends Module{
-    
-	protected $descriptors=array();
-	
+	/**
+	* Imports the classes
+	*/
 	public function init(){
 		parent::init();
 		$this->importClasses();
 	}
 }
+
+

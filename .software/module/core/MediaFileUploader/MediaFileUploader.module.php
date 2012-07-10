@@ -1,13 +1,18 @@
 <?php
-
+/**
+* Module that manages the Upload of a MediaFile
+*/
 class MediaFileUploader extends Module{
-    
-	protected $descriptors=array();
-	
+	/**
+	* Adds to global execution stack
+	*/
 	public function init(){
 		parent::init();
         $this->addToGlobalExecuteStack();
 	}
+	/**
+	* Moves the file to tmp/upload/[time]/[filename]
+	*/
 	public function execute(){
 		parent::execute();
 	    $time=time();
@@ -38,26 +43,60 @@ class MediaFileUploader extends Module{
 		    }
 		}
 	}
+	/**
+	* True if the current file was uploaded
+	*/
 	protected $uploaded;
+	/**
+	* The current file name
+	*/
 	protected $filename;
+	/**
+	* The current file temporary name
+	*/
 	protected $tempFilename;
-	
+	/**
+	* Defines the current file uploaded status
+	* @param boolean $uploaded  the current file uploaded status
+	*/
 	public function setUploaded($uploaded){
 	    $this->uploaded=$uploaded;
 	}
+	/**
+	* Defines the current file name
+	* @param string $filename The current file name
+	*/
 	public function setFilename($filename){
 	    $this->filename=$filename;
 	}
+	/**
+	* Defines the current file temporary name
+	* @param string $tempFilename the current file temporary name
+	*/
 	public function setTempFilename($tempFilename){
 	    $this->tempFilename=$tempFilename;
 	}
+	/**
+	* Returns the current file upload status
+	* @return boolean the current file upload status
+	*/
 	public function getUploaded(){
 	    return $this->uploaded;
 	}
+	/**
+	* Returns the current file name
+	* @return string the current file name
+	*/
 	public function getFilename(){
 	     return $this->filename;
 	}
+	/**
+	* Returns the current file temporary name
+	* @return string  the current file temporary name
+	*/
 	public function getTempFilename(){
 	     return $this->tempFilename;
 	}
 }
+
+

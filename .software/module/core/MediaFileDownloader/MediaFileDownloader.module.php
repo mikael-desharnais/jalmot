@@ -1,11 +1,20 @@
 <?php
-
+/**
+* Module that forces the download of a MediaFile : The MediaFile is the one with the Id given as parameter
+*/
 class MediaFileDownloader extends Module{
+	/**
+	* Imports classes
+	* Adds to global execution Stack
+	*/
 	public function init(){
 		parent::init();
 		$this->importClasses();
         $this->addToGlobalExecuteStack();
 	}
+	/**
+	* Stops the execution of the page and then forces the download
+	*/
 	public function execute(){
 	    Ressource::getCurrentPage()->stopExecution();
 	    if(ini_get('zlib.output_compression')) { ini_set('zlib.output_compression', 'Off');  }
@@ -31,3 +40,5 @@ class MediaFileDownloader extends Module{
 		readfile($fileURL);
 	}
 }
+
+

@@ -1,14 +1,30 @@
 <?php
-
+/**
+* A FieldMe that allows you to upload files : It uses a HTML5 drag and drop feature. It may not work with a standard input file ...
+*/
 class MediaFileUploaderFieldME extends FieldME {
-    
+	/**
+	* Returns the usefull element from the fetched data of the Descriptor
+	* @return mixed the usefull element from the fetched data of the Descriptor
+	* @param mixed $dataFetched The data fetched for the descriptor
+	*/
 	public function getUsefullData($dataFetched){
 	    return $dataFetched['simple'];
 	}
+	/**
+	* Returns the value used by this field from the current DataModel
+	* @return mixed  the value used by this field from the current element
+	* @param mixed $element the current DataModel
+	*/
 	protected function getValue($element){
 		$getter="get".ucfirst($this->key);
 		return $element->$getter();
 	}
+	/**
+	* Returns the elements to save
+	* Copies the file from tmp/upload/[time]/[filename] to its name in the media directory
+	* @param mixed $dataFetched the data fetched for this descriptor
+	*/
 	public function fetchElementsToSave($dataFetched){
 	    if (Ressource::getParameters()->valueExists($this->getName())){
 	        $fileInfos=Ressource::getParameters()->getValue($this->getName());
@@ -29,6 +45,11 @@ class MediaFileUploaderFieldME extends FieldME {
 	        }
 	    }
 	}
+	/**
+	* Returns the html output for this field
+	* @return string the html output for this field
+	* @param mixed $dataFetched The data fetched for the descriptor
+	*/
 	public function toHTML($dataFetched){
 	    $element=$this->getUsefullData($dataFetched);
 		ob_start();
@@ -36,3 +57,5 @@ class MediaFileUploaderFieldME extends FieldME {
 		return ob_get_clean();
 	}
 }
+
+

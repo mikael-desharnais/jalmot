@@ -320,7 +320,7 @@ class CoreModule{
 	*/
 	public function setInstalled($installed){
 		if ($installed){
-			Log::LogData("Module ".$this->name." is installed for page ".Ressource::getCurrentPage()->getName(),2);
+			Log::LogData("Module ".$this->name." is installed for page ".Ressource::getCurrentPage()->getName(),Log::$LOG_LEVEL_INFO);
 		}
 		$this->installed=$installed;
 	}

@@ -1,5 +1,14 @@
 <?php
+/**
+* Simple implementation of the Core Class JSFilterFlow
+* Merges all files and then minifies them using an external class JSMinify
+*/
 class BasicJSFlowFilter extends JSFilterFlow {
+    /**
+    * Merges all files and then minifies them using an external class JSMinify
+    * @return array array of array containing the file containing the merged data
+    * @param array $JSArray The files to compress
+    */
     public function compress($JSArray){
         $file_key = "";
         foreach($JSArray as $file_array){
@@ -21,4 +30,6 @@ class BasicJSFlowFilter extends JSFilterFlow {
         }
         return array(array($fileToUse));
     }
-} 
+}
+
+ 

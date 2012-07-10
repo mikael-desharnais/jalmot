@@ -29,7 +29,7 @@
 			$this->name=$name;
 		}
 		/**
-		* returns a hook object considering its name (TODO : SHOULD perhaps throws an exeception instead of create an row in logs)
+		* returns a hook object considering its name
 		* 
 		* @return Hook a hook object considering its name
 		* @param string $name name of the hook required

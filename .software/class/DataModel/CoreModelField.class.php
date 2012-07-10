@@ -20,12 +20,9 @@ class CoreModelField{
     * True if this field is part of the primary key for the Model
     */
     protected $isPrimaryKey;
-    /**
-    * TODO : see if it's still in use
-    */
     protected $params;
     /**
-    * TODO : see if it's still in use
+    * The encryptor's name for this field
     */
     protected $encryptor;
     /**
@@ -44,7 +41,6 @@ class CoreModelField{
     /**
     * Returns the PHP code for this Field 
     * This is used to generate the Class
-    * TODO : Should perhaps be in cache
     * @return string the PHP code for this Field 
     */
     public function getCode(){
@@ -94,11 +90,10 @@ class CoreModelField{
     }
     /**
     * Returns the encrypted value of the one given has parameter
-    * TODO : should be rename : getEncryptedValue
     * @return string  the encrypted value of the one given has parameter
     * @param string $value the value to encrypt
     */
-    public function getEncryptor($value){
+    public function getEncryptedValue($value){
         return new $this->encryptor($value);
     }
     /**

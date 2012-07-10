@@ -36,7 +36,9 @@ class ModelListingDesktopIcon extends DesktopIcon {
 	    return $desktopIcon;
 	}
 	/**
-	* TODO : see the use of this method
+	* Returns the phtml File to use for HTML output
+	* @return File the phtml File to use for HTML output
+	* @param string $instance the name of the HTML instance
 	*/
 	public function getTemplateFile($instance){
 	    return Ressource::getCurrentTemplate()->getURL("html/module/".$this->class."_".$instance.".phtml");

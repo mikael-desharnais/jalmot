@@ -63,11 +63,10 @@ class CoreModel{
     */
     public $cachedInstances=array();
     /**
-    * TODO : should be private
-    * 
+    * Initialises the name of the model
     * @param string $name Nom du modèle
     */
-    public function __construct($name){
+    private function __construct($name){
         $this->name=$name;
     }
     /**
@@ -94,37 +93,26 @@ class CoreModel{
         }
         return new $this->name($this);
     }
-    /**
-    * TODO : Should be removed
-    */
-    public function getInstanceWithData($params){
-        if (in_array(serialize($params),$this->cachedInstances)){
-            return $this->cachedInstances[serialize($params)];
-        }
-        $instance=$this->getInstance();
-        foreach($params as $key=>$value){
-            $setter="set".ucfirst($key);
-            $instance->$setter($value);
-        }
-        $this->cachedInstances[serialize($params)]=$instance;
-        return $instance;
-        
-    }
+
     /**
     * Creates the class of the ModelData used by this Model,
     *  a class called after the name of this model and extending ModelData
     * There is a possibility to override this class with a file named override/model/($name).class.php
     */
     public function includeClass(){
-    	$code="
-    	class Core".$this->name." extends ModelData{
-    	";
-    	foreach($this->fields as $field){
-    	    $code.=$field->getCode();
-    	}
-    	$code.="\n}";
-    	eval($code);
-    	$name=$this->name;
+        $file = new File(".cache/class/model","Core".$this->name.'.class.php',false);
+        if (!$file->exists()){
+            $code="<?php
+	    	class Core".$this->name." extends ModelData{
+	    	";
+	    	foreach($this->fields as $field){
+	    	    $code.=$field->getCode();
+	    	}
+	    	$code.="\n}";
+	    	@mkdir($file->getDirectory(),0777,true);
+	    	$file->write($code);
+        }
+        include_once($file->toURL());
 		if (file_exists('override/model/'.$this->name.'.class.php')){
 			include('override/model/'.$this->name.'.class.php');
 		}else {

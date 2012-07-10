@@ -1,12 +1,21 @@
 <?php
-
+/**
+* An implementation of ModelListingDescriptor adapted for MediaDirectoryListing
+*/
 class DirectoryModelListingDescriptor extends ModelListingDescriptor {
-    
+	/**
+	* Returns the html output for this module
+	* @return string  the html output for this module
+	*/
 	public function toHTML(){
 		ob_start();
 		include(Ressource::getCurrentTemplate()->getURL("html/module/MediaManager/DirectoryModelListingDescriptor_".$this->type.".phtml"));
 		return ob_get_clean();
 	}
+	/**
+	* Fetches the data for the current directory taken from Parameter id[idMediaDirectory]
+	* If the current directory is not root directory, a ParentDirectory Is added to the list of elements
+	*/
 	public function fetchData(){
 	    $this->list=array();
 	    $model=Model::getModel($this->model);
@@ -31,3 +40,5 @@ class DirectoryModelListingDescriptor extends ModelListingDescriptor {
 	    $this->list=array_merge($this->list,$currentElement->lstChildren()->getModelData(),$currentElement->lstFile()->getModelData());
 	}
 }
+
+

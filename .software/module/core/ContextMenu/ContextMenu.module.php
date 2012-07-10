@@ -36,14 +36,13 @@ class ContextMenu extends Module{
     public function loadElementDescriptor($key){
         $xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ContextMenu/descriptor",$key.".xml",false)));
         $classname=$xml->class."";
-        $this->setElementDescriptor(call_user_func(array($classname,"readFromXML"),$key,$xml));
+        $this->addElementDescriptor(call_user_func(array($classname,"readFromXML"),$key,$xml));
     }
     /**
     * Adds a ContextMenuDescriptor
-    * TODO : should be renamed
     * @param ContextMenuDescriptor $descriptor The ContextMenuDescriptor  to add
     */
-    public function setElementDescriptor($descriptor){
+    public function addElementDescriptor($descriptor){
         $this->elementDescriptors[$descriptor->getName()]=$descriptor;
     }
 }

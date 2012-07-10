@@ -174,7 +174,7 @@
 	}
 	/**
 	* Adds a listener for the Start Page Event
-	* @param StartPageListener $listener the listener for the Start Page Event
+	* @param EventListener $listener the listener for the Start Page Event
 	*/
 	public function addStartPageEventListener($listener){
 		$this->startPageEventListener[]=$listener;

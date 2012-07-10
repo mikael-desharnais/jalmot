@@ -66,17 +66,26 @@ class Classe {
 	* Manages Autoload, if a class is not found, this method will be called, it searches in all modules for the class.
 	* This method should never be called because modules should import their classes properly.
 	* The only good reason is when SessionStart requires the import of classes before the call to Module::init
-	* TODO : create a cache
 	* @param string $class Name of the missing class
 	*/
 	public static function autoload($class){
-	    $directory=glob("module/*");
-	    foreach($directory as $subdir){
-	        $subdirectory=glob($subdir."/*");
-	        foreach($subdirectory as $module){
-	           if (file_exists($module."/class/".$class.".class.php")){
-	               include_once($module."/class/".$class.".class.php");
-	           }
+	    $fileCache=new File(".cache/class","autoLoad.php",false);
+	    @include($fileCache->toURL());
+	    if (!isset($autoloadCache)){
+	        $autoloadCache=array();
+	    }
+	    if (array_key_exists($class,$autoloadCache)){
+	        include_once($autoloadCache[$class]);
+	    }else {
+	        try {
+	        	$file = File::findFile("module",$class.".class.php");
+	        	$url=$file->toURL();
+	        	include_once($url);
+	        	$autoloadCache[$class]=$url;
+	        	@mkdir($fileCache,0777,true);
+	        	$fileCache->write('<?php $autoloadCache='.var_export($autoloadCache,true).';');
+	        }catch (Exception $exc){
+	            
 	        }
 	    }
 	}

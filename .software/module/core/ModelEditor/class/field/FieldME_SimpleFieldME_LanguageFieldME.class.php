@@ -44,7 +44,7 @@ class LanguageFieldME extends SimpleFieldME {
 	            $eventListener->afterSavePerformed=$functionEventListener;
 	            $dataFetched['simple']->addAfterSaveListener($eventListener);
 	        }
-	        $dataFetched['simple']->addModelForChainSave($line_lang[$key]);
+	        $dataFetched['simple']->addModelDataForChainSave($line_lang[$key]);
 	    }
 	}
 }

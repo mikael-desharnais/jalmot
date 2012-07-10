@@ -33,10 +33,9 @@ class AdminUser {
 	}
 	/**
 	* Returns the Id of the user
-	* TODO : should return something
 	*/
 	public function getId(){
-	    $this->data->getId();
+	    return $this->data->getId();
 	}
 	
 }

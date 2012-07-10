@@ -12,7 +12,7 @@ class AdminLoginManager extends Module{
 		parent::init();
 		$this->importClasses();
         $this->addToGlobalExecuteStack();
-		$startPageListener=new StartPageListener();
+		$startPageListener=new EventListener($this);
 		$startPageListener->actionPerformed=function ($sourcePage){
 			if (!Ressource::getUserSpace()->hasRight('ACCESS_ADMIN')&&Ressource::getCurrentPage()->getName()!='connection'){
 				Module::getInstalledModule('ConnectionManager')->displayConnectionForm();

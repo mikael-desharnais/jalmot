@@ -29,49 +29,40 @@ class CoreModelData{
 	public $source;
 	/**
 	* List of all listeners for the event beforeUpdate
-	* TODO : should be private
 	*/
-	public $beforeUpdateListenerList=array();
+	protected $beforeUpdateListenerList=array();
 	/**
 	* List of all listeners for the event afterUpdate
-	* TODO : should be private
 	*/
-	public $afterUpdateListenerList=array();
+	protected $afterUpdateListenerList=array();
 	/**
 	* List of all listeners for the event beforeCreate
-	* TODO : should be private
 	*/
-	public $beforeCreateListenerList=array();
+	protected $beforeCreateListenerList=array();
 	/**
 	* List of all listeners for the event afterCreate
-	* TODO : should be private
 	*/
-	public $afterCreateListenerList=array();
+	protected $afterCreateListenerList=array();
 	/**
 	* List of all listeners for the event beforeSave
-	* TODO : should be private
 	*/
-	public $beforeSaveListenerList=array();
+	protected $beforeSaveListenerList=array();
 	/**
 	* List of all listeners for the event afterSave
-	* TODO : should be private
 	*/
-	public $afterSaveListenerList=array();
+	protected $afterSaveListenerList=array();
 	/**
 	* List of all models to create after having created this ModelData
-	* TODO : should be private
 	*/
-	public $modelsToChainCreate=array();
+	protected $modelsToChainCreate=array();
 	/**
 	* List of all models to update after having update this ModelData
-	* TODO : should be private
 	*/
-	public $modelsToChainUpdate=array();
+	protected $modelsToChainUpdate=array();
 	/**
 	* List of all models to save after having saved this ModelData
-	* TODO : should be private
 	*/
-	public $modelsToChainSave=array();
+	protected $modelsToChainSave=array();
     /**
     * Initialises the parent model and sets the source to new
     * @param Model $pm The parent model of this DataModel
@@ -294,10 +285,9 @@ class CoreModelData{
 	/**
 	* Adds a ModelData for chain create
 	* All the ModelData will be created after the creation of this DataModel
-	* TODO : Should be renamed : addModelDataForChainCreate
 	* @param DataModel $relation_model The ModelData for chain create
 	*/
-	public function addModelForChainCreate($relation_model){
+	public function addModelDataForChainCreate($relation_model){
 		if (!in_array($relation_model,$this->modelsToChainCreate)){
 		    $this->modelsToChainCreate[]=$relation_model;
 		}
@@ -313,10 +303,9 @@ class CoreModelData{
 	/**
 	* Adds a ModelData for chain Update
 	* All the ModelData will be updated after the update of this DataModel
-	* TODO : Should be renamed : addModelDataForChainUpdate
 	* @param DataModel $relation_model The ModelData for chain create
 	*/
-	public function addModelForChainUpdate($relation_model){
+	public function addModelDataForChainUpdate($relation_model){
 		if (!in_array($relation_model,$this->modelsToChainUpdate)){
 		    $this->modelsToChainUpdate[]=$relation_model;
 		}
@@ -332,10 +321,9 @@ class CoreModelData{
 	/**
 	* Adds a ModelData for chain Save
 	* All the ModelData will be saved after the save of this DataModel
-	* TODO : Should be renamed : addModelDataForChainSave
 	* @param DataModel $relation_model The ModelData for chain save
 	*/
-	public function addModelForChainSave($relation_model){
+	public function addModelDataForChainSave($relation_model){
 		if (!in_array($relation_model,$this->modelsToChainSave)){
 		    $this->modelsToChainSave[]=$relation_model;
 		}

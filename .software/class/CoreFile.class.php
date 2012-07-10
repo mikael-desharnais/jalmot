@@ -153,6 +153,23 @@
 	public function appendLeftToDirectory($folder){
 		return new File($folder.$this->folder,$this->file,$this->isFolder);
 	}
+	public static function findFile($directory,$name){
+	    $directory=glob($directory."/*");
+	    foreach($directory as $subdir){
+	        if (is_dir($subdir)&&$subdir!="."&&$subdir!=".."){
+	            try {
+	             	$file = File::findFile($subdir,$name);
+	             	return $file;
+	            }catch (Exception $exc){}
+	        }else {
+	            $path=pathinfo($subdir);
+	            if ($path['basename']==$name){
+	                return File::createFromURL($subdir);
+	            }
+	        }
+	    }
+	    throw new Exception("File not found");
+	}
 }
 
 

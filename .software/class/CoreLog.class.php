@@ -1,7 +1,6 @@
 <?php
 /**
  * Manages the logging system
- * TODO : Add the possibility to log custom data
  *
  * @author Mikael Desharnais
  * @version 1.0
@@ -18,14 +17,35 @@ class CoreLog
     protected static $logLevel = 0;
     
     /**
-     * propagate a log with error log level then logs the stacktrace then sends a die TODO : create constants for logging levels 
+     * Log Level for errors
+     */
+    public static $LOG_LEVEL_ERROR=0;
+    
+    /**
+     * Log Level for warnings
+     */
+    public static $LOG_LEVEL_WARNING=1;
+    
+    /**
+     * Log Level for debugs
+     */
+    public static $LOG_LEVEL_DEBUG=2;
+    
+    /**
+     * Log Level for infos
+     */
+    public static $LOG_LEVEL_INFO=3;
+    
+    
+    /**
+     * propagate a log with error log level then logs the stacktrace then sends a die 
      * 
      * @param $message		message to log 
      */
     public static function Error ($message){
-        self::LogData($message, 0);
-        self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 0);
-        die();
+        self::LogData($message, self::$LOG_LEVEL_ERROR);
+        self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), self::$LOG_LEVEL_ERROR);
+		throw new Exception($message);
     }    
     /**
      * propagate a log with warning log level then logs the stacktrace 
@@ -33,8 +53,8 @@ class CoreLog
      * @param $message		message to log 
      */
     public static function Warning ($message){
-        self::LogData($message, 1);
-        self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 1);
+        self::LogData($message, self::$LOG_LEVEL_WARNING);
+        self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), self::$LOG_LEVEL_WARNING);
     }
     /**
      * propagate a log with custom log level if the given level is greater than or equal to the global log level, the message will be displayed 
