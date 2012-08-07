@@ -1,0 +1,7 @@
+<validator>
+	<class>FieldValidatorDescriptor</class>
+	<name>TextCategory</name>
+	<rules>
+		
+	</rules>
+</validator>

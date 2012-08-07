@@ -3,9 +3,9 @@
 	<type>simple</type>
 	<model>TextCategory</model>
 	<title>
-		<class>SimpleTitleME</class>
+		<class>LanguageTitleME</class>
 		<model>testLang</model>
-		<field>name</field>
+		<field>title</field>
 	</title>
 	<data_fetchers>
 		<data_fetcher>
@@ -19,6 +19,13 @@
 		<hook>
 			<name>ModelEditor.form</name>
 			<modules>
+				<module>
+					<name>FieldValidator</name>
+					<instance>form</instance>
+					<params>
+						<param name="validator" type="simple">TextCategory</param>
+					</params>
+				</module>
 				<module>
 					<name>LanguageChooser</name>
 					<instance>normal</instance>

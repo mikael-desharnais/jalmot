@@ -61,16 +61,20 @@
          $query="UPDATE ".$this->getTableName($model->getName())." SET ";
 		 $set="";
          $where="";
+         $foundParamToUpdate = false;
          foreach($model->getFields() as $field){
              $fieldName="get".ucfirst($field->getName());
              if ($field->isPrimaryKey()){
                  $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".$this->dbConnection->escapeString($element->$fieldName())."' \n";
              }else {
+                $foundParamToUpdate=true;
              	$set.=($set==""?"":",")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".$this->dbConnection->escapeString($element->$fieldName())."' \n";
              }
          }
          $query.=$set." ".$where;
-       	 $this->dbConnection->query($query);
+         if ($foundParamToUpdate){
+       	 	$this->dbConnection->query($query);
+         }
      }
      /**
      * Deletes Mysql data using a ModelData as reference
