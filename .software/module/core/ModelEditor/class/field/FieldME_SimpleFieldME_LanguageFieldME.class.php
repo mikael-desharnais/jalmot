@@ -28,10 +28,10 @@ class LanguageFieldME extends SimpleFieldME {
 	    $line_lang=$dataFetched['lang'];
 	    $values=Ressource::getParameters()->getValue($this->getName());
 	    $function="set".ucfirst($this->getName());
-	    foreach($line_lang as $key=>$line_element){
+	    foreach($line_lang as $line_element){
 	        $value=array_key_exists($line_element->getIdLang(), $values)?$values[$line_element->getIdLang()]:null;
-	        $line_lang[$key]->$function($value);
-	        $eventListener=new EventListener($line_lang[$key]);
+	        $line_element->$function($value);
+	        $eventListener=new EventListener($line_element);
 	        $functionEventListener=function ($target,$listener){
 	            $primary_keys=$target->getPrimaryKeys();
 	            foreach($primary_keys as $key=>$value){
@@ -40,11 +40,11 @@ class LanguageFieldME extends SimpleFieldME {
 	            }
 	        };
 	         
-	        if ($line_lang[$key]->source==ModelData::$SOURCE_NEW){
+	        if ($line_element->source==ModelData::$SOURCE_NEW){
 	            $eventListener->afterSavePerformed=$functionEventListener;
 	            $dataFetched['simple']->addAfterSaveListener($eventListener);
 	        }
-	        $dataFetched['simple']->addModelDataForChainSave($line_lang[$key]);
+	        $dataFetched['simple']->addModelDataForChainSave($line_element);
 	    }
 	}
 }

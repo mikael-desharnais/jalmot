@@ -21,7 +21,8 @@ class ModelEditorDescriptor {
 		}
 		foreach($xml->data_fetchers->children() as $dataFetcher){
 		    $classname=$dataFetcher->class."";
-		    $modelEditor->addDataFetcher(new $classname($modelEditor));
+			$element=call_user_func(array($classname,"readFromXML"),$modelEditor,$dataFetcher);
+		    $modelEditor->addDataFetcher($element);
 		}
 		return $modelEditor;
 	}

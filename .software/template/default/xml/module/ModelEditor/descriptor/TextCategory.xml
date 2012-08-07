@@ -1,0 +1,36 @@
+<editor>
+	<class>ModelEditorDescriptor</class>
+	<type>simple</type>
+	<model>TextCategory</model>
+	<title>
+		<class>SimpleTitleME</class>
+		<model>testLang</model>
+		<field>name</field>
+	</title>
+	<data_fetchers>
+		<data_fetcher>
+			<class>SimpleDataFetcher</class>
+		</data_fetcher>
+		<data_fetcher>
+			<class>LanguageDataFetcher</class>
+		</data_fetcher>
+	</data_fetchers>
+	<hooks>
+		<hook>
+			<name>ModelEditor.form</name>
+			<modules>
+				<module>
+					<name>LanguageChooser</name>
+					<instance>normal</instance>
+				</module>
+			</modules>
+		</hook>
+	</hooks>
+	<inputs>
+		<input>
+			<key>title</key>
+			<title>Title</title>
+			<class>LanguageFieldME</class>
+		</input>
+	</inputs>
+</editor>

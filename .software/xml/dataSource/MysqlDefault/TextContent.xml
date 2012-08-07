@@ -13,5 +13,9 @@
 			<name>name</name>
 			<dbname>name</dbname>
 		</field>
+		<field>
+			<name>idTextCategory</name>
+			<dbname>id_text_category</dbname>
+		</field>
 	</fields>
 </modelInDS>

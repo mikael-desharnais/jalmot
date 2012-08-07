@@ -1,0 +1,48 @@
+<listing>
+	<type>simple</type>
+	<model>TextCategory</model>
+	<title>CMS Category List</title>
+	<class>ModelListingDescriptor</class>
+	<hooks>
+	</hooks>
+	<params>
+		<param name="modelEditor" type="simple">TextCategory</param>
+	</params>
+	<columns>
+		<column>
+			<head>
+				<title>Title</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>title</key>
+				<class>LanguageCellML</class>
+				<model>TextContentLang</model>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>EditCellML</class>
+				<params>
+					<param name="modelEditor" type="simple">TextCategory</param>
+				</params>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>DeleteCellML</class>
+				<params>
+					<param name="modelEditor" type="simple">TextCategory</param>
+				</params>
+			</body>
+		</column>
+	</columns>
+</listing>

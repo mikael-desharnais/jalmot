@@ -38,7 +38,7 @@
          if ($query->getType()==ModelDataQuery::$SELECT_QUERY){
 			$raw_query=$query->getSQL();
          	$resultset=$this->dbConnection->query($raw_query);
-         	$toReturn=array();
+         	$toReturn = new ModelDataCollection();
          	while($line=$this->dbConnection->fetchAssoc($resultset)){
          	    $instance=$query->getModel()->getInstance();
          	    $instance->source=ModelData::$SOURCE_FROM_DATASOURCE;
@@ -47,7 +47,7 @@
          	        $function="set".ucfirst(strtolower($this->getModelFieldName($this->getTableName($query->getModel()->getName()),$key)));
          	        $instance->$function($val);
          	    }
-         	    $toReturn[]=$instance;
+         	    $toReturn->addModelData($instance);
          	}
          }
         return $toReturn;
@@ -187,7 +187,13 @@
 	* @param string $dbFieldName The name of the field
 	*/
 	public function getModelFieldName($tableName,$dbFieldName){
-	    return $this->dbFieldNames[$tableName][$dbFieldName];
+	    if (!array_key_exists($tableName, $this->dbFieldNames)){
+	        Log::Error("Can't find table name ".$tableName." in mysql tables description");
+	    }else if (!array_key_exists($dbFieldName, $this->dbFieldNames[$tableName])){
+	        Log::Error("Can't find field name ".$dbFieldName." in mysql fields description of table ".$tableName);
+	    }else {
+	    	return $this->dbFieldNames[$tableName][$dbFieldName];
+	    }
 	}
 }
 

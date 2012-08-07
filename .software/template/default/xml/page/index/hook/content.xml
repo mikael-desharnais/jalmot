@@ -8,5 +8,9 @@
 				<param type="simple" name="id">2</param>
 			</params>
 		</module>
+		<module>
+			<name>StaticContentDisplayer</name>
+			<instance>normal</instance>
+		</module>
 	</modules>
 </hook>

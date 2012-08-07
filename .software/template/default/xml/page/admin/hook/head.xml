@@ -9,5 +9,9 @@
 			<name>ReloadManager</name>
 			<instance>normal</instance>
 		</module>
+		<module>
+			<name>Draggable</name>
+			<instance>normal</instance>
+		</module>
 	</modules>
 </hook>

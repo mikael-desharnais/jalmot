@@ -1,0 +1,35 @@
+<model>
+	<name>TextContentMediaFile</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idTextContent</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idMediaFile</name>
+			<type>integer</type>
+		</field>
+	</fields>
+	<relations>
+		<relation>
+			<name>textContent</name>
+			<source>idTextContent</source>
+			<type>Normal</type>
+			<destination>
+				<model>TextContent</model>
+				<field>idTextContent</field>
+			</destination>
+		</relation>
+		<relation>
+			<name>mediaFile</name>
+			<source>idMediaFile</source>
+			<type>Normal</type>
+			<destination>
+				<model>MediaFile</model>
+				<field>idMediaFile</field>
+			</destination>
+		</relation>
+	</relations>
+</model>

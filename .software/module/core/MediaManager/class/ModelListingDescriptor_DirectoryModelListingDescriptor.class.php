@@ -17,7 +17,7 @@ class DirectoryModelListingDescriptor extends ModelListingDescriptor {
 	* If the current directory is not root directory, a ParentDirectory Is added to the list of elements
 	*/
 	public function fetchData(){
-	    $this->list=array();
+	    $this->list=new ModelDataCollection;
 	    $model=Model::getModel($this->model);
 	    $id_directory=1;
 	    if (Ressource::getParameters()->valueExists('id')){
@@ -35,9 +35,9 @@ class DirectoryModelListingDescriptor extends ModelListingDescriptor {
 	        $parent_directory->setName('Parent Directory');
 	        $parent_directory->editable=false;
 	        $parent_directory->setIdMediaDirectory($currentElement->lstParent()->getModelDataElement()->getIdMediaDirectory());
-	        $this->list[]=$parent_directory;
+	        $this->list->addModelData($parent_directory);
 	    }
-	    $this->list=array_merge($this->list,$currentElement->lstChildren()->getModelData(),$currentElement->lstFile()->getModelData());
+	    $this->list=$this->list->merge($currentElement->lstChildren()->getModelData())->merge($currentElement->lstFile()->getModelData());
 	}
 }
 

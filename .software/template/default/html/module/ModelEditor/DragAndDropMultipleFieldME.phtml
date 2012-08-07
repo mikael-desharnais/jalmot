@@ -1,0 +1,38 @@
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','DragAndDropFieldME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','DragAndDropFieldME.js',false)),0); ?>
+<tr>
+<td>
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td  class=""> 
+<div class="draggableTarget" targetType="mediaFile">
+
+<?php 
+foreach($element['reference'] as $elt){
+    $selected=false;
+    foreach($element['data'] as $data){
+        if ($this->getValue($elt)==$this->getValue($data)){
+            $selected=true;
+        }
+    }
+    
+    
+    ?>
+    <div class="element element_<?php echo $this->getValue($elt); ?> <?php echo $selected?"element_selected":""; ?>">
+    	<a href="#" class="delete">
+    		
+    	</a>
+    	<div class="title">
+    		<?php echo $this->getNameValue($elt); ?>
+    	</div>
+    	<br class="clearer">
+    	<input type="hidden" name="<?php echo $this->getName(); ?>[]" value="<?php echo $this->getValue($elt); ?>" <?php echo $selected?"":"disabled"; ?>>
+    </div>
+    <?php 
+}
+?>
+</pre>
+</div>
+</td>	
+</tr>
+

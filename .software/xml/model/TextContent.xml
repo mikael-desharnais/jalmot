@@ -10,14 +10,36 @@
 			<name>name</name>
 			<type>string</type>
 		</field>
+		<field>
+			<name>idTextCategory</name>
+			<type>integer</type>
+		</field>
 	</fields>
 	<relations>
+		<relation>
+			<name>textCategory</name>
+			<source>idTextCategory</source>
+			<type>CascadeOnDelete</type>
+			<destination>
+				<model>TextCategory</model>
+				<field>idTextCategory</field>
+			</destination>
+		</relation>
 		<relation>
 			<name>lang</name>
 			<source>idTextContent</source>
 			<type>CascadeOnDelete</type>
 			<destination>
 				<model>TextContentLang</model>
+				<field>idTextContent</field>
+			</destination>
+		</relation>
+		<relation>
+			<name>mediaFileNM</name>
+			<source>idTextContent</source>
+			<type>CascadeOnDelete</type>
+			<destination>
+				<model>TextContentMediaFile</model>
 				<field>idTextContent</field>
 			</destination>
 		</relation>

@@ -1,0 +1,30 @@
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','DragAndDropFieldME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','DragAndDropFieldME.js',false)),0); ?>
+<tr>
+<td>
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td  class=""> 
+<div>
+
+<select name="<?php echo $this->getName(); ?>[]" multiple="multiple">
+<?php 
+foreach($element['reference'] as $elt){
+    $selected=false;
+    foreach($element['data'] as $data){
+        if ($this->getValue($elt)==$this->getValue($data)){
+            $selected=true;
+        }
+    }
+    
+    
+    ?>
+    	<option  value="<?php echo $this->getValue($elt); ?>" <?php echo $selected?" selected ":""; ?>><?php echo $this->getNameValue($elt); ?></option>
+    <?php 
+}
+?>
+</select>
+</div>
+</td>	
+</tr>
+

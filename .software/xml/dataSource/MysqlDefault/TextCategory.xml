@@ -1,0 +1,13 @@
+<modelInDS>
+	<name>TextCategory</name>
+	<dbname>text_category</dbname>
+	<fields>
+		<field>
+			<name>idTextCategory</name>
+			<dbname>id_text_category</dbname>
+			<params>
+				<param type="simple" name="autoincrement">1</param>
+			</params>
+		</field>
+	</fields>
+</modelInDS>

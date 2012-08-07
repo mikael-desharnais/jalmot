@@ -138,6 +138,15 @@
 		fclose($fh);
 	}
 	/**
+	* Writes data to the current File
+	* @param string $toWrite the data to write to file
+	*/
+	public function append($toWrite){
+		$fh = fopen($this->directory.'/'.$this->file, 'a+');
+		fwrite($fh, $toWrite);
+		fclose($fh);
+	}
+	/**
 	* Appends a string to the end of the directory
 	* @return File File containing the modified directory
 	* @param string $folder string to append to the directory name's end

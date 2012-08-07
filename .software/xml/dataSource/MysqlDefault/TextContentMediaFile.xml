@@ -1,0 +1,14 @@
+<modelInDS>
+	<name>TextContentMediaFile</name>
+	<dbname>text_content_media_file</dbname>
+	<fields>
+		<field>
+			<name>idTextContent</name>
+			<dbname>id_text_content</dbname>
+		</field>
+		<field>
+			<name>idMediaFile</name>
+			<dbname>id_media_file</dbname>
+		</field>
+	</fields>
+</modelInDS>

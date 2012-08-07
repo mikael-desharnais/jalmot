@@ -1,0 +1,21 @@
+<model>
+	<name>TextCategory</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idTextCategory</name>
+			<type>integer</type>
+		</field>
+	</fields>
+	<relations>
+		<relation>
+			<name>lang</name>
+			<source>idTextCategory</source>
+			<type>CascadeOnDelete</type>
+			<destination>
+				<model>TextCategoryLang</model>
+				<field>idTextCategory</field>
+			</destination>
+		</relation>
+	</relations>
+</model>

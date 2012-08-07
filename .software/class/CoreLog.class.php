@@ -16,6 +16,20 @@ class CoreLog
      */
     protected static $logLevel = 0;
     
+    
+    protected static $logMode = 1;
+    
+    
+    /**
+     * Log Level for errors
+     */
+    public static $LOG_MODE_STD_OUTPUT=0;
+    /**
+     * Log Level for errors
+     */
+    public static $LOG_MODE_STD_OUTPUT_AND_FILE=1;
+    
+    
     /**
      * Log Level for errors
      */
@@ -35,6 +49,8 @@ class CoreLog
      * Log Level for infos
      */
     public static $LOG_LEVEL_INFO=3;
+    
+    private static $startTime; 
     
     
     /**
@@ -63,10 +79,19 @@ class CoreLog
      * @param $level	level of the current log entry 
      */
     public static function LogData ($data, $level){
+        if (empty(self::$startTime)){
+            self::$startTime = microtime(true);
+        }
+        
         if (self::$logLevel >= $level) {
             print('<pre>');
             print_r($data);
             print('</pre>');
+        }
+        if (self::$logMode>=Log::$LOG_MODE_STD_OUTPUT_AND_FILE){
+	        $file = new File('tmp/log','jalmot.log',false);
+	        $microtime = microtime(true);
+	        $file->append(date('d M Y h:i:s',$microtime)."\t\t".(round(($microtime-self::$startTime)*1000))."ms\t\t".$data."\r\n");
         }
     }
 }

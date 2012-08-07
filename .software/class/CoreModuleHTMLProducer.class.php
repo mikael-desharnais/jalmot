@@ -45,6 +45,13 @@
 	    return $this->confParams;
 	}
 	/**
+	* Returns  the hmtl instance used by this HTMLProducer
+	* @return String the hmtl instance used by this HTMLProducer
+	*/
+	public function getInstance(){
+	    return $this->instance;
+	}
+	/**
 	* Returns a Configuration parameter value given its key
 	* @return string The Configuration parameter value
 	* @param string $key the key to the Configuration parameter value

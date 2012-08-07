@@ -1,0 +1,6 @@
+.draggableInField  {
+	background : url('../../../media/image/module/ModelEditor/drag.png') bottom right no-repeat;	
+}
+.draggableInField:hover{
+	background-position : bottom right;
+}

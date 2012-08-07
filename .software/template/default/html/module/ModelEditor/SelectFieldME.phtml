@@ -1,0 +1,25 @@
+<tr>
+<td>
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td  class=""> 
+<div>
+
+<select name="<?php echo $this->getName(); ?>">
+<?php 
+foreach($element['reference'] as $elt){
+    $selected=false;
+    if ($this->getValue($elt)==$this->getValue($element['simple'])){
+        $selected=true;
+    }
+    
+    ?>
+    	<option  value="<?php echo $this->getValue($elt); ?>" <?php echo $selected?" selected ":""; ?>><?php echo $this->getNameValue($elt); ?></option>
+    <?php 
+}
+?>
+</select>
+</div>
+</td>	
+</tr>
+

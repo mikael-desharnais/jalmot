@@ -1,0 +1,18 @@
+<modelInDS>
+	<name>TextCategoryLang</name>
+	<dbname>text_category_lang</dbname>
+	<fields>
+		<field>
+			<name>idTextCategory</name>
+			<dbname>id_text_category</dbname>
+		</field>
+		<field>
+			<name>idLang</name>
+			<dbname>id_lang</dbname>
+		</field>
+		<field>
+			<name>title</name>
+			<dbname>title</dbname>
+		</field>
+	</fields>
+</modelInDS>

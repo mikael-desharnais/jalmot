@@ -30,11 +30,11 @@ class AdminLoginManager extends Module{
 	        $userModel=Model::getModel('UserAdmin');
 	        $users=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$userModel)
 	        										->addConditionBySymbol('=',$userModel->getField('username'), Ressource::getParameters()->getValue("userInput"))
-	        										->addConditionBySymbol('=',$userModel->getField('password'), $userModel->getField('password')->getEncryptor(Ressource::getParameters()->getValue("passwordInput"))->getValue())
+	        										->addConditionBySymbol('=',$userModel->getField('password'), $userModel->getField('password')->getEncryptedValue(Ressource::getParameters()->getValue("passwordInput"))->getValue())
 	        										->getModelData();
 
-	        if (count($users)>0){
-	            $userAdmin=new AdminUser($users[0]);
+	        if ($users->valid()){
+	            $userAdmin=new AdminUser($users->current());
 	            Ressource::getUserSpace()->addUser($userAdmin);
 				Module::getInstalledModule('ConnectionManager')->returnFromConnectionForm();
 	        }

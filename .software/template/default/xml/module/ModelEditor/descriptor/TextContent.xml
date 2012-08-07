@@ -14,6 +14,21 @@
 		<data_fetcher>
 			<class>LanguageDataFetcher</class>
 		</data_fetcher>
+		<data_fetcher>
+			<class>LanguageForeignKeyDataFetcher</class>
+			<params>
+				<param name="reference" type="simple">TextCategory</param>
+			</params>
+		</data_fetcher>
+		<!-- 
+		<data_fetcher>
+			<class>NMForeignKeyDataFetcher</class>
+			<params>
+				<param name="relation" type="simple">mediaFileNM</param>
+				<param name="reference" type="simple">MediaFile</param>
+			</params>
+		</data_fetcher>
+		 -->
 	</data_fetchers>
 	<hooks>
 		<hook>
@@ -44,6 +59,31 @@
 			<title>Title</title>
 			<class>LanguageFieldME</class>
 		</input>
+		<input>
+			<key>idTextCategory</key>
+			<title>Category</title>
+			<class>SelectFieldME</class>
+			<params>
+				<param name="localKey" type="simple">idTextContent</param>
+				<param name="listReference" type="simple">TextCategory</param>
+				<param name="nameKey" type="simple">title</param>
+			</params>
+		</input>
+		<!-- 
+		<input>
+			<key>idMediaFile</key>
+			<title>Images</title>
+			<class>DragAndDropMultipleFieldME</class>
+			<params>
+				<param name="relation" type="simple">mediaFileNM</param>
+				<param name="localKey" type="simple">idTextContent</param>
+				<param name="listReference" type="simple">MediaFile</param>
+				<param name="IdForeignKeyInRelation" type="simple">idMediaFile</param>
+				<param name="IdCurrentKeyInRelation" type="simple">idTextContent</param>
+				<param name="nameKey" type="simple">name</param>
+			</params>
+		</input>
+		 -->
 		<input>
 			<key>description</key>
 			<model>testLang</model>

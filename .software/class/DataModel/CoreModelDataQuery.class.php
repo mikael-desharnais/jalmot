@@ -114,8 +114,8 @@ abstract class CoreModelDataQuery{
     * @param boolean $useCache=false true to use cache for this query / false otherwise
     */
     public function getModelDataElement($useCache=false){
-        $array=$this->getModelData($useCache);
-        return $array[0];
+        $result = $this->getModelData($useCache);
+        return $result->valid()?$result->current():null;
     }
     /**
     * Returns the Model used for this query

@@ -1,0 +1,25 @@
+.draggableTarget .element {
+	display : none;
+}
+.draggableTarget .element_selected {
+	display : block;
+}
+.draggableTarget .delete{
+	display : block;
+	float : left;
+	background : url('../../../media/image/share/close.png') no-repeat;
+	width : 22px;
+	height : 22px;
+}
+.draggableTarget .title{
+	float : left;
+	font-size : 11px;
+	height : 22px;
+}
+.draggableTarget {
+	min-height : 50px;
+	width : 90%;
+	background : url('../../../media/image/module/ModelEditor/target.png') bottom right no-repeat #cacafd;
+	padding : 15px;
+	border-radius : 5px;
+}

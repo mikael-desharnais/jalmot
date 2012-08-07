@@ -24,4 +24,9 @@
 		<class>JSCSSMinifier</class>
 		<params></params>
 	</module>
+	<module>
+		<instancename>StaticContentDisplayer</instancename>
+		<class>StaticContentDisplayer</class>
+		<params></params>
+	</module>
 </modules>
