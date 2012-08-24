@@ -3,7 +3,7 @@
 class CoreModelDataCollection implements Iterator {
     private $content = array();
     private $position =0;
-    public function current (){
+    public function current(){
         return $this->content[$this->position];
     }
     public function key (){

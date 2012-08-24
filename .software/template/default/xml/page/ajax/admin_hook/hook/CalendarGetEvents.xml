@@ -1,0 +1,9 @@
+<hook>
+	<name>admin_hook.CalendarGetEvents</name>
+	<modules>
+		<module>
+			<name>Calendar</name>
+			<instance>getEvents</instance>
+		</module>
+	</modules>
+</hook>

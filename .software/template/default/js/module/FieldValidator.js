@@ -1,6 +1,9 @@
 jQuery(document).ready(function(){
 	jQuery('.field-validator-target').live('before_submit',function(event,result_return){
-		result_return.result=window.FieldValidator.getDescriptor(jQuery(this).data('field-validator')).isValid(jQuery(this),true);
+		var validator = window.FieldValidator.getDescriptor(jQuery(this).data('field-validator'));
+		if (typeof validator !='undefined'){
+			result_return.result=.isValid(jQuery(this),true);
+		}
 	});
 });
 

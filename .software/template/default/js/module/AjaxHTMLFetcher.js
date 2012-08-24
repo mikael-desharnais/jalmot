@@ -5,6 +5,7 @@ AjaxHTMLFetcher.setFetcher=function(id,url,callback){
 	AjaxHTMLFetcher.fetchers[id]=new Object();
 	AjaxHTMLFetcher.fetchers[id].url=url;
 	AjaxHTMLFetcher.fetchers[id].callback=callback;
+	return AjaxHTMLFetcher.fetchers[id];
 };
 function AjaxHTMLFetcher(){
 	this.html;
@@ -26,9 +27,11 @@ function AjaxHTMLFetcher(){
 					this.url.params,
 					function(data){
 						json=jQuery.parseJSON(data);
-						parent.css=json.css;
-						parent.js=json.js;
-						parent.html=json.html;
+						if (json!=null){
+							parent.css=json.css;
+							parent.js=json.js;
+							parent.html=json.html;
+						}
 					});
 	};
 	this.integrate=function(){

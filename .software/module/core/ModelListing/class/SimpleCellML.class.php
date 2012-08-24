@@ -20,7 +20,8 @@ class SimpleCellML {
 		return $line->$getter();
 	}
 	public static function readFromXML($xml){
-	    $cellDescriptor=new self($xml->key."");
+	    $classname = $xml->class."";
+	    $cellDescriptor=new $classname($xml->key."");
 	    $cellDescriptor->setConfParams(XMLParamsReader::read($xml));
 		return $cellDescriptor;
 	}

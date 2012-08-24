@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-	jQuery('body').bind('htmlAppend',function(event,htmlElement){
+	jQuery('body').bind('htmlAppending',function(event,htmlElement){
 		jQuery('.draggableInField').draggable( "destroy" );
 		jQuery('.draggableInField').draggable({ helper: "clone" ,  zIndex: 2700 , appendTo: "body" });
 		jQuery('.draggableTarget').droppable( "destroy" );
@@ -12,5 +12,5 @@ jQuery(document).ready(function(){
 		
 		});
 	});
-	jQuery('body').bind('htmlAppend',jQuery('body'));
+	jQuery('body').trigger('htmlAppending',jQuery('body'));
 });

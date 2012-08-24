@@ -1,0 +1,12 @@
+<hook>
+	<name>admin_hook.Calendar</name>
+	<modules>
+		<module>
+			<name>Calendar</name>
+			<instance>normal</instance>
+			<params>
+				<param name="modelEditor" type="simple">Event</param>
+			</params>
+		</module>
+	</modules>
+</hook>

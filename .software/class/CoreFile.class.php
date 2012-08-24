@@ -114,7 +114,7 @@
 	* @return string  the absolute URL of the file
 	*/
 	public function toFullURL(){
-		return '/'.Ressource::getConfiguration()->getValue("AliasName").'/'.Ressource::getConfiguration()->getValue("SoftwareDirectory").'/'.$this->toURL();
+		return Ressource::getConfiguration()->getValue("AliasName").Ressource::getConfiguration()->getValue("SoftwareDirectory").'/'.$this->toURL();
 	}
 	/**
 	* Creates a File Object From URL

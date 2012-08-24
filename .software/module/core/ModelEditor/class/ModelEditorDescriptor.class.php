@@ -111,13 +111,15 @@ class ModelEditorDescriptor {
 	    foreach($this->dataFetchers as $dataFetcher){
 	        $this->fetchedData=array_merge($this->fetchedData,$dataFetcher->fetchData($this));
 	    }
+	    $this->fetchDataToSave();
+	}
+	
+	public function fetchDataToSave(){
+		foreach($this->inputs as $input){
+		    $input->fetchElementsToSave($this->fetchedData);
+		}
 	}
 	public function save(){
-	    $this->fetchData();
-		$toSave=array();
-		foreach($this->inputs as $input){
-			$input->fetchElementsToSave($this->fetchedData);
-		}
 	    $this->fetchedData['simple']->save();
 	}
 	

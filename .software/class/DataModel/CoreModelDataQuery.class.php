@@ -87,7 +87,7 @@ abstract class CoreModelDataQuery{
     */
     public function addConditionContainer($conditionContainer){
         $this->conditionContainer->addConditionContainer($conditionContainer);
-        return $this;
+        return  $this->conditionContainer;
     }
     /**
     * Executes the query and returns a Model Data Array containing the result

@@ -53,6 +53,21 @@
 	public function getHookDescriptionFile($name,$silent=false){
 		return Ressource::getCurrentTemplate()->getFile(new File("xml/page/ajax/".$this->ajaxTarget."/hook",$name.".xml",false),$silent);
 	}
+	/**
+	* Defines a value for the JSON ajax content
+	* @param string $key the key to the JSON ajax content
+	* @param mixed $value the value for the JSON ajax content
+	*/
+	public function setAjaxContent($key,$value){
+		$this->ajaxContent[$key]=$value;
+	}
+	/**
+	* Returns the JSON ajax Content
+	* @return array the JSON ajax Content
+	*/
+	public function getAjaxContent(){
+		return $this->ajaxContent;
+	}
 }
 
 

@@ -25,26 +25,28 @@ class LanguageFieldME extends SimpleFieldME {
 		return $toReturn;
 	}
 	public function fetchElementsToSave($dataFetched){
-	    $line_lang=$dataFetched['lang'];
-	    $values=Ressource::getParameters()->getValue($this->getName());
-	    $function="set".ucfirst($this->getName());
-	    foreach($line_lang as $line_element){
-	        $value=array_key_exists($line_element->getIdLang(), $values)?$values[$line_element->getIdLang()]:null;
-	        $line_element->$function($value);
-	        $eventListener=new EventListener($line_element);
-	        $functionEventListener=function ($target,$listener){
-	            $primary_keys=$target->getPrimaryKeys();
-	            foreach($primary_keys as $key=>$value){
-	                $function="set".ucfirst($key);
-	                $listener->$function($value);
-	            }
-	        };
-	         
-	        if ($line_element->source==ModelData::$SOURCE_NEW){
-	            $eventListener->afterSavePerformed=$functionEventListener;
-	            $dataFetched['simple']->addAfterSaveListener($eventListener);
-	        }
-	        $dataFetched['simple']->addModelDataForChainSave($line_element);
+	    if (Ressource::getParameters()->valueExists($this->getName())){
+		    $line_lang=$dataFetched['lang'];
+		    $values=Ressource::getParameters()->getValue($this->getName());
+		    $function="set".ucfirst($this->getName());
+		    foreach($line_lang as $line_element){
+		        $value=array_key_exists($line_element->getIdLang(), $values)?$values[$line_element->getIdLang()]:null;
+		        $line_element->$function($value);
+		        $eventListener=new EventListener($line_element);
+		        $functionEventListener=function ($target,$listener){
+		            $primary_keys=$target->getPrimaryKeys();
+		            foreach($primary_keys as $key=>$value){
+		                $function="set".ucfirst($key);
+		                $listener->$function($value);
+		            }
+		        };
+		         
+		        if ($line_element->source==ModelData::$SOURCE_NEW){
+		            $eventListener->afterSavePerformed=$functionEventListener;
+		            $dataFetched['simple']->addAfterSaveListener($eventListener);
+		        }
+		        $dataFetched['simple']->addModelDataForChainSave($line_element);
+		    }
 	    }
 	}
 }

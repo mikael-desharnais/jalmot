@@ -71,6 +71,18 @@ class CoreModelData{
         $this->__parent_model=$pm;
         $this->source=ModelData::$SOURCE_NEW;
     }
+    /**
+     * Initialises the parent model and sets the source to new
+     * @return Array returns an associative array containing only the data of this ModelData
+     */
+    public function toArray(){
+        $toReturn = array();
+        $fields=$this->__parent_model->getFields();
+        foreach($fields as $field){
+            $toReturn[$field->getName()]=$this->{strtolower($field->getName())};
+        }
+        return $toReturn;
+    }
 	/**
 	* Magic method that catches calls to :
 	*   set[FIELDNAME] : allows to set a value of a field of this DataModel

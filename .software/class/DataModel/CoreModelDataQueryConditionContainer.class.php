@@ -98,6 +98,15 @@ abstract class CoreModelDataQueryConditionContainer{
 	protected function getDataSource(){
 	    return $this->dataSource;
 	}
+	/**
+	* Adds a condition to this query (The condition to add is defined by its symbol and the given parameters (See the different conditions and their symbols))
+	* @return ModelDataQuery this
+	* @param string $symbol Symbol of the condition to create and Add
+	*/
+	public function addConditionBySymbol($symbol){
+		$this->addCondition(call_user_func(array($this->DataQuery->getDataSource(),"getConditionBySymbol"),func_get_args()));
+		return $this;
+	}
 }
 
 

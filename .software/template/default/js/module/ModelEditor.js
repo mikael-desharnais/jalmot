@@ -1,6 +1,17 @@
 jQuery('.model-editor-cancel-button').live('click',function(){
 	jQuery.window.getSelectedWindow().close();
 });
+jQuery('.model-editor-delete-button').live('click',function(){
+	var parent=this;
+	var url=jQuery(this).closest('.window_panel').data('object').url;
+
+	if (confirm('Etes vous sûr de vouloir supprimer cet élement ?')){
+		jQuery.post(url.address+'delete/',url.params,function(){
+			ReloadManager.propagateChangeEvent(jQuery(parent));
+			jQuery.window.getSelectedWindow().close();
+		});
+	}
+});
 
 jQuery('.model-editor-form').live('submit',function(event){
 	event.preventDefault();

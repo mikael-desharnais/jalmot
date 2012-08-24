@@ -1,0 +1,22 @@
+<modules>
+	<module>
+		<instancename>AdminLoginManager</instancename>
+		<class>AdminLoginManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ConnectionManager</instancename>
+		<class>ConnectionManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>Calendar</instancename>
+		<class>Calendar</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>WindowManager</instancename>
+		<class>WindowManager</class>
+		<params></params>
+	</module>
+</modules>

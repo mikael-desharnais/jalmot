@@ -81,7 +81,8 @@ class DesktopIcon {
 	* @param SimpleXMLElement $icon the xml describing the Icon
 	*/
 	public static function readFromXML($icon){
-	    $desktopIcon=new DesktopIcon($icon->instance,$icon->image."",$icon->text."");
+	    $classname = $icon->class."";
+	    $desktopIcon=new $classname($icon->instance,$icon->image."",$icon->text."");
 	    $desktopIcon->setConfParams(XMLParamsReader::read($icon));
 	    return $desktopIcon;
 	}

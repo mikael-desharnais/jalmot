@@ -15,6 +15,8 @@ class SelectFieldME extends SimpleFieldME {
 	}
 	public function fetchElementsToSave($dataFetched){
 	    $function="set".ucfirst($this->getName());
-	    $dataFetched['simple']->$function(Ressource::getParameters()->getValue($this->getName()));
+	    if (Ressource::getParameters()->valueExists($this->getName())){
+	    	$dataFetched['simple']->$function(Ressource::getParameters()->getValue($this->getName()));
+	    }
 	}
 }

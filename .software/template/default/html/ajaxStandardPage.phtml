@@ -1,27 +1,34 @@
 <?php 
+
 ob_start();
 include(Ressource::getCurrentTemplate()->getURL("html/ajax/".$this->ajaxTarget.".phtml")); 
 $bodyCore = ob_get_clean();
 
-$ajaxContent=array('css'=>array(),
-					'js'=>array(),
-					'html'=>$bodyCore);
+
+Ressource::getCurrentPage()->setAjaxContent('html',$bodyCore);
+
+$css=array();
+$js=array();
 
 $newCSSListe = $this->CSSFilterFlow->filter($this->cssListe);
 
 foreach($newCSSListe as $arrayOfFiles){
 	foreach($arrayOfFiles as $file){ 
-		$ajaxContent['css'][]=$file->toFullURL();
+		$css[]=$file->toFullURL();
 	}
 }
 
 $newJSListe = $this->JSFilterFlow->filter($this->jsListe);
 foreach($newJSListe as $arrayOfFiles){
 	foreach($arrayOfFiles as $file){ 
-		$ajaxContent['js'][]=$file->toFullURL();
+		$js[]=$file->toFullURL();
 	}
 }
-echo json_encode($ajaxContent);
+
+Ressource::getCurrentPage()->setAjaxContent('css',$css);
+Ressource::getCurrentPage()->setAjaxContent('js',$js);
+
+echo json_encode(Ressource::getCurrentPage()->getAjaxContent());
 /*
 ?>
 <html>

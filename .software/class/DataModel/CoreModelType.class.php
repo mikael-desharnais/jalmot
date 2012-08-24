@@ -15,6 +15,12 @@ class CoreModelType{
     public function checkValue($value){
         
     }
+    public static function parse($value){
+        return $value;
+    }
+    public static function toSQL($value){
+        return $value;
+    }
 }
 
 

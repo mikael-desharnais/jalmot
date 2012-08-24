@@ -72,7 +72,7 @@ Window=function(){
 		this.htmlElement.data('object',this);
 		this.htmlElement.addClass('reload-change-listener');
 		this.htmlElement.data('ReloadManager',this);
-		jQuery('body').trigger('htmlAppend',this.htmlElement);
+		jQuery('body').trigger('htmlAppending',this.htmlElement);
 		this.jqueryElement.object=this;
 
 	}
@@ -87,7 +87,7 @@ Window=function(){
 			parent.jqueryElement.getFrame().html(content);
 			parent.jqueryElement.setTitle(parent.jqueryElement.getContainer().find('h1').html());
 			parent.jqueryElement.getContainer().find('h1').css('display','none');
-			jQuery('body').trigger('htmlAppend',parent.htmlElement);
+			jQuery('body').trigger('htmlAppending',parent.htmlElement);
 		});
 		fetcher.fetch();
 		fetcher.integrate();

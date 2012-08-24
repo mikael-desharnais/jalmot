@@ -1,6 +1,6 @@
 <?php Ressource::getCurrentLanguage()->init('module/EditCellML'); ?>
 <script> 
-AjaxHTMLFetcher.setFetcher('edit_<?php print($this->getId($line)); ?>',new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/','<?php print($this->getParams($line)); ?>'),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('edit_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/','<?php print($this->getParams($line)); ?>'),function(htmlContent){
 
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelListing-'.$this->getListing()->getModel())); ?>);

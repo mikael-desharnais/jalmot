@@ -10,7 +10,7 @@
     <?php $class = "AjaxHTMLFetcher  icn-media-manager-file context-menu-actionner reload-change-propagator"; ?>
 <?php } ?>
 <script> 
-AjaxHTMLFetcher.setFetcher('edit_media_file_<?php print($this->getId($line)); ?>',new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/MediaFile/','<?php print($this->getParams($line)); ?>'),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('edit_media_file_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/MediaFile/','<?php print($this->getParams($line)); ?>'),function(htmlContent){
 
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelEditor-MediaFile')); ?>);

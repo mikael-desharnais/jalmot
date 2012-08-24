@@ -121,11 +121,11 @@ ModelEditorElementCM=function(title){
 		var parent = this;
 		var fetcher=new AjaxHTMLFetcher();
 		if (this.mode=="edit"){
-			fetcher.setURL(new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data('url-params')));
+			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data('url-params')));
 		}else if (this.mode=="create") {
-			fetcher.setURL(new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/','source=create'));
+			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/','source=create'));
 		}else {
-			fetcher.setURL(new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data('url-params')));
+			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data('url-params')));
 		}
 		if (this.mode=="delete"){
 			fetcher.setCallBack(function(htmlCont){
@@ -152,11 +152,11 @@ SourceParamsModelEditorElementCM=function(title){
 		var parent = this;
 		var fetcher=new AjaxHTMLFetcher();
 		if (this.mode=="edit"){
-			fetcher.setURL(new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data('url-params')));
+			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data('url-params')));
 		}else if (this.mode=="create") {
-			fetcher.setURL(new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/','source=create&'+this.descriptor.actionner.closest('.window_panel').data('object').url.params));
+			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/','source=create&'+this.descriptor.actionner.closest('.window_panel').data('object').url.params));
 		}else {
-			fetcher.setURL(new URL('/'+Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data('url-params')));
+			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data('url-params')));
 		}
 		if (this.mode=="delete"){
 			fetcher.setCallBack(function(htmlCont){

@@ -44,8 +44,10 @@
          	    $instance->source=ModelData::$SOURCE_FROM_DATASOURCE;
 				$instance->data_source=$this;
          	    foreach($line as $key=>$val){
-         	        $function="set".ucfirst(strtolower($this->getModelFieldName($this->getTableName($query->getModel()->getName()),$key)));
-         	        $instance->$function($val);
+         	        $fieldName = $this->getModelFieldName($this->getTableName($query->getModel()->getName()),$key);
+         	        $type = $query->getModel()->getField($fieldName)->getType();
+         	        $function="set".ucfirst(strtolower($fieldName));
+         	        $instance->$function(call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","parse"),$val));
          	    }
          	    $toReturn->addModelData($instance);
          	}
@@ -64,11 +66,12 @@
          $foundParamToUpdate = false;
          foreach($model->getFields() as $field){
              $fieldName="get".ucfirst($field->getName());
+             $type =$model->getField($field->getName())->getType();
              if ($field->isPrimaryKey()){
-                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".$this->dbConnection->escapeString($element->$fieldName())."' \n";
+                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())."' \n";
              }else {
                 $foundParamToUpdate=true;
-             	$set.=($set==""?"":",")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".$this->dbConnection->escapeString($element->$fieldName())."' \n";
+             	$set.=($set==""?"":",")." `".$this->getDBFieldName($model->getName(),$field->getName())."`=".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())." \n";
              }
          }
          $query.=$set." ".$where;
@@ -86,8 +89,9 @@
          $where="";
          foreach($model->getFields() as $field){
              $fieldName="get".ucfirst($field->getName());
+             $type = $model->getField($field->getName())->getType();
              if ($field->isPrimaryKey()){
-                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".$this->dbConnection->escapeString($element->$fieldName())."' \n";
+                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())."' \n";
              }
          }
          $query.=" ".$where;
@@ -104,8 +108,9 @@
          $values="";
          foreach($model->getFields() as $field){
              $fieldName="get".ucfirst($field->getName());
+             $type =$model->getField($field->getName())->getType();
              $fields.=($fields==""?"":",")." `".$this->getDBFieldName($model->getName(),$field->getName())."`";
-             $values.=($values==""?"":",")."'".$this->dbConnection->escapeString($element->$fieldName())."' \n";
+             $values.=($values==""?"":",")."".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())." \n";
          }
          $query.= $fields.') values('.$values.')';
        	 $this->dbConnection->query($query);
@@ -127,7 +132,14 @@
 			case "=" :
 				return new MysqlEqualCondition($args[1],$args[2]);
 			break;
+			case "BETWEEN" :
+				return new MysqlBetweenCondition($args[1],$args[2],$args[3]);
+			break;
+			default :
+			    Log::Error(__CLASS__." cant't find operator ".$args[0]);
+			break;
 		}
+		
 	}
 	/**
 	* Array to translate Mysql field names into Model field names
