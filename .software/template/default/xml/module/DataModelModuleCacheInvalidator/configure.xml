@@ -1,0 +1,8 @@
+<data_models>
+	<data_model>
+		<name>TextContent</name>
+		<modules>
+			<module>TextContentDisplayer</module>
+		</modules>
+	</data_model>
+</data_models>

@@ -27,6 +27,9 @@ class CoreModelData{
 	* it should be either one of this Class constants (from database or new element)
 	*/
 	public $source;
+	
+	/** Event listeners */
+	
 	/**
 	* List of all listeners for the event beforeUpdate
 	*/
@@ -52,8 +55,56 @@ class CoreModelData{
 	*/
 	protected $afterSaveListenerList=array();
 	/**
-	* List of all models to create after having created this ModelData
+	* List of all listeners for the event beforeDelete
 	*/
+	protected $beforeDeleteListenerList=array();
+	/**
+	* List of all listeners for the event afterDelete
+	*/
+	protected $afterDeleteListenerList=array();
+
+	
+	/** Static Event Listeners */
+
+	
+	/**
+	 * List of all listeners for the event beforeUpdate (static mode)
+	 */
+	protected static $beforeUpdateStaticListenerList=array();
+	/**
+	 * List of all listeners for the event afterUpdate (static mode)
+	 */
+	protected static $afterUpdateStaticListenerList=array();
+	/**
+	 * List of all listeners for the event beforeCreate (static mode)
+	 */
+	protected static $beforeCreateStaticListenerList=array();
+	/**
+	 * List of all listeners for the event afterCreate (static mode)
+	 */
+	protected static $afterCreateStaticListenerList=array();
+	/**
+	 * List of all listeners for the event beforeSave (static mode)
+	 */
+	protected static $beforeSaveStaticListenerList=array();
+	/**
+	 * List of all listeners for the event afterSave (static mode)
+	 */
+	protected static $afterSaveStaticListenerList=array();
+	/**
+	 * List of all listeners for the event beforeDelete (static mode)
+	 */
+	protected static $beforeDeleteStaticListenerList=array();
+	/**
+	 * List of all listeners for the event afterDelete (static mode)
+	 */
+	protected static $afterDeleteStaticListenerList=array();
+	
+	
+	
+	/**
+	 * List of all models to create after having created this ModelData
+	 */	
 	protected $modelsToChainCreate=array();
 	/**
 	* List of all models to update after having update this ModelData
@@ -63,6 +114,13 @@ class CoreModelData{
 	* List of all models to save after having saved this ModelData
 	*/
 	protected $modelsToChainSave=array();
+	/**
+	* List of all models to delete after having deleted this ModelData
+	*/
+	protected $modelsToChainDelete=array();
+	
+	
+	
     /**
     * Initialises the parent model and sets the source to new
     * @param Model $pm The parent model of this DataModel
@@ -118,8 +176,10 @@ class CoreModelData{
 	*/
 	public function update(){
 	    $this->propagateBeforeUpdate();
+	    $this->propagateBeforeStaticUpdate($this);
 	    $this->data_source->update($this);
 	    $this->propagateAfterUpdate();
+	    $this->propagateAfterStaticUpdate($this);
 	    $this->chainUpdate();
 	}
 	/**
@@ -131,8 +191,10 @@ class CoreModelData{
 	*/
 	public function create(){
 	    $this->propagateBeforeCreate();
+	    $this->propagateBeforeStaticCreate($this);
 	    $this->data_source->create($this);
 	    $this->propagateAfterCreate();
+	    $this->propagateAfterStaticCreate($this);
 	    $this->chainCreate();
 	}
 	/**
@@ -143,8 +205,10 @@ class CoreModelData{
 	*/
 	public function save(){
 	    $this->propagateBeforeSave();
+	    $this->propagateBeforeStaticSave($this);
 	    $this->source==ModelData::$SOURCE_NEW?$this->create():$this->update();
 	    $this->propagateAfterSave();
+	    $this->propagateAfterStaticSave($this);
 	    $this->chainSave();
 	}
 	/**
@@ -152,6 +216,8 @@ class CoreModelData{
 	* It also deletes the DataModel that are linked to this DataModel through relations with type CascadeOnDelete
 	*/
 	public function delete(){
+	    $this->propagateBeforeDelete();
+	    $this->propagateBeforeStaticDelete($this);
 	    $this->data_source->delete($this);
 	    $relations=$this->getParentModel()->getRelations();
 	    foreach($relations as $relation){
@@ -163,6 +229,9 @@ class CoreModelData{
 	            }
 	        }
 	    }
+	    $this->propagateAfterDelete();
+	    $this->propagateAfterStaticDelete($this);
+	    $this->chainDelete();
 	}
 	/**
 	* Return the parent Model of this ModelData
@@ -240,6 +309,24 @@ class CoreModelData{
 	    }
 	}
 	/**
+	* Adds a listener for the Before Delete Event
+	* @param EventListener $listener the listener to the Before Delete Event
+	*/
+	public function addBeforeDeleteListener($listener){
+	    if (!in_array($listener,$this->beforeDeleteListenerList)){
+	        $this->beforeDeleteListenerList[]=$listener;
+	    }
+	}
+	/**
+	* Adds a listener for the After Delete Event
+	* @param EventListener $listener the listener to the After Delete Event
+	*/
+	public function addAfterDeleteListener($listener){
+	    if (!in_array($listener,$this->afterDeleteListenerList)){
+	        $this->afterDeleteListenerList[]=$listener;
+	    }
+	}
+	/**
 	* Triggers the Before Update Event
 	*/
 	public function propagateBeforeUpdate(){
@@ -291,6 +378,25 @@ class CoreModelData{
 	    
 	    foreach($this->afterCreateListenerList as $listener){
 	        $functionToExecute=$listener->afterCreatePerformed;
+	        $functionToExecute($this,$listener->getListeningObject());
+	    }
+	}
+	/**
+	* Triggers the Before Delete Event
+	*/
+	public function propagateBeforeDelete(){
+	    foreach($this->beforeDeleteListenerList as $listener){
+	        $functionToExecute=$listener->beforeDeletePerformed;
+	        $functionToExecute($this,$listener->getListeningObject());
+	    }
+	}
+	/**
+	* Triggers the After Delete Event
+	*/
+	public function propagateAfterDelete(){
+	    
+	    foreach($this->afterDeleteListenerList as $listener){
+	        $functionToExecute=$listener->afterDeletePerformed;
 	        $functionToExecute($this,$listener->getListeningObject());
 	    }
 	}
@@ -348,7 +454,184 @@ class CoreModelData{
 	        $relation_model->save();
 	    }
 	}
+	/**
+	* Adds a ModelData for chain delete
+	* All the ModelData will be deleted after the deletion of this DataModel
+	* @param DataModel $relation_model The ModelData for chain delete
+	*/
+	public function addModelDataForChainDelete($relation_model){
+		if (!in_array($relation_model,$this->modelsToChainDelete)){
+		    $this->modelsToChainDelete[]=$relation_model;
+		}
+	}
+	/**
+	* Triggers the chain deletion
+	*/
+	public function chainDelete(){
+	    foreach($this->modelsToChainDelete as $relation_model){
+	        $relation_model->delete();
+	    }
+	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Adds a listener for the Before Update Event
+	 * @param EventListener $listener the listener to the Before Update Event
+	 */
+	public static function addBeforeUpdateStaticListener($listener){
+	    if (!in_array($listener,self::$beforeUpdateStaticListenerList)){
+	        self::$beforeUpdateStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the After Update Event
+	 * @param EventListener $listener the listener to the After Update Event
+	 */
+	public static function addAfterUpdateStaticListener($listener){
+	    if (!in_array($listener,self::$afterUpdateStaticListenerList)){
+	        self::$afterUpdateStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the Before Save Event
+	 * @param EventListener $listener the listener to the Before Save Event
+	 */
+	public static function addBeforeSaveStaticListener($listener){
+	    if (!in_array($listener,self::$beforeSaveStaticListenerList)){
+	        self::$beforeSaveStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the After Save Event
+	 * @param EventListener $listener the listener to the After Save Event
+	 */
+	public static function addAfterSaveStaticListener($listener){
+	    if (!in_array($listener,self::$afterSaveStaticListenerList)){
+	        self::$afterSaveStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the Before Create Event
+	 * @param EventListener $listener the listener to the Before Create Event
+	 */
+	public static function addBeforeCreateStaticListener($listener){
+	    if (!in_array($listener,self::$beforeCreateStaticListenerList)){
+	        self::$beforeCreateStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the After Create Event
+	 * @param EventListener $listener the listener to the After Create Event
+	 */
+	public static function addAfterCreateStaticListener($listener){
+	    if (!in_array($listener,self::$afterCreateStaticListenerList)){
+	        self::$afterCreateStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the Before Delete Event
+	 * @param EventListener $listener the listener to the Before Delete Event
+	 */
+	public static function addBeforeDeleteStaticListener($listener){
+	    if (!in_array($listener,self::$beforeDeleteStaticListenerList)){
+	        self::$beforeDeleteStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Adds a listener for the After Delete Event
+	 * @param EventListener $listener the listener to the After Delete Event
+	 */
+	public static function addAfterDeleteStaticListener($listener){
+	    if (!in_array($listener,self::$afterDeleteStaticListenerList)){
+	        self::$afterDeleteStaticListenerList[]=$listener;
+	    }
+	}
+	/**
+	 * Triggers the Before Update Event
+	 */
+	public static function propagateBeforeStaticUpdate($element){
+	    foreach(self::$beforeUpdateStaticListenerList as $listener){
+	        $functionToExecute=$listener->beforeUpdatePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the After Update Event
+	 */
+	public static function propagateAfterStaticUpdate($element){
+	    foreach(self::$afterUpdateStaticListenerList as $listener){
+	        $functionToExecute=$listener->afterUpdatePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the Before Save Event
+	 */
+	public static function propagateBeforeStaticSave($element){
+	    foreach(self::$beforeSaveStaticListenerList as $listener){
+	        $functionToExecute=$listener->beforeSavePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the After Save Event
+	 */
+	public static function propagateAfterStaticSave($element){
+	    foreach(self::$afterSaveStaticListenerList as $listener){
+	        $functionToExecute=$listener->afterSavePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the Before Create Event
+	 */
+	public static function propagateBeforeStaticCreate($element){
+	    foreach(self::$beforeCreateStaticListenerList as $listener){
+	        $functionToExecute=$listener->beforeCreatePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the After Create Event
+	 */
+	public static function propagateAfterStaticCreate($element){
+	     
+	    foreach(self::$afterCreateStaticListenerList as $listener){
+	        $functionToExecute=$listener->afterCreatePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the Before Delete Event
+	 */
+	public static function propagateBeforeStaticDelete($element){
+	    foreach(self::$beforeDeleteStaticListenerList as $listener){
+	        $functionToExecute=$listener->beforeDeletePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
+	/**
+	 * Triggers the After Delete Event
+	 */
+	public static function propagateAfterStaticDelete($element){
+	     
+	    foreach(self::$afterDeleteStaticListenerList as $listener){
+	        $functionToExecute=$listener->afterDeletePerformed;
+	        $functionToExecute($element,$listener->getListeningObject());
+	    }
+	}
 	
 }
 

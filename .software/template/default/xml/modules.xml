@@ -1,0 +1,7 @@
+<modules>
+	<module>
+		<instancename>DataModelModuleCacheInvalidator</instancename>
+		<class>DataModelModuleCacheInvalidator</class>
+		<params></params>
+	</module>
+</modules>

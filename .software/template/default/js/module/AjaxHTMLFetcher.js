@@ -81,13 +81,16 @@ function AjaxHTMLFetcher(){
 			}
 		}
 		if (!found){
-			jQuery.getScript(this.js[counter],function(){
+			jQuery.getScript(this.js[counter]).done(function(){
+				parent.integrateJS(counter+1,callback);
+			}).fail(function(jqxhr, settings, exception){
 				parent.integrateJS(counter+1,callback);
 			});
 			JSLoadedFiles.push(this.js[counter]);
 		}else {
 			this.integrateJS(counter+1,callback);
 		}
+
 	};
 	this.integrateHTML=function(){
 		this.callback(this.html);

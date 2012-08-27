@@ -18,7 +18,7 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
             	$file_key.=$file->toURL().'-'.filemtime($file->toURL()).'-';
             }
         }
-        $fileToUse = new File(".cache/template/".Ressource::getCurrentTemplate()->getName()."/css","css-".md5($file_key).".css",false);
+        $fileToUse = new File(".cache/template/".Ressource::getCurrentTemplate()->getName()."/JSCSSMinifier/css","css-".md5($file_key).".css",false);
         @mkdir($fileToUse->getDirectory(),0777,true);
         if (Ressource::getConfiguration()->getValue('cacheCSS')==0||!$fileToUse->exists()){
             $filecontent = "";

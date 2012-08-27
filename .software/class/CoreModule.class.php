@@ -42,15 +42,20 @@ class CoreModule{
 	* Loading means Including files, creating an instance, init all modules and execute the basic execution stack
 	*/
 	public static function loadAll(){
+		$xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File('xml','modules.xml',false)));
+		foreach($xml as $xmlModule){
+			$object=self::loadModule($xmlModule->instancename."",$xmlModule->class."");
+			$object->setConfParams(XMLParamsReader::read($xmlModule));
+		}
 		$xml=XMLDocument::parseFromFile(Ressource::getCurrentPage()->getXMLModuleFileConfiguration());
 		foreach($xml as $xmlModule){
 			$object=self::loadModule($xmlModule->instancename."",$xmlModule->class."");
 			$object->setConfParams(XMLParamsReader::read($xmlModule));
 		}
-	Log::LogData("Module before Init",Log::$LOG_LEVEL_INFO);
-	self::initModule();
-	Log::LogData("Module before Execution",Log::$LOG_LEVEL_INFO);
-	self::executeModule();
+		Log::LogData("Module before Init",Log::$LOG_LEVEL_INFO);
+		self::initModule();
+		Log::LogData("Module before Execution",Log::$LOG_LEVEL_INFO);
+		self::executeModule();
 	}
 	/**
 	* Loads a module by class
@@ -213,8 +218,18 @@ class CoreModule{
 	* @param File $baseFile the phtml file that would be used without cache
 	*/
 	public function getCacheFile($baseFile){
+	    $directory = self::getCacheDirectory($this->class);
 	    $filename=pathinfo($baseFile->getFile());
-	    return new File (".cache/template/".Ressource::getCurrentTemplate()->getName()."/".$baseFile->getDirectory(),$filename['filename'].'-'.md5(implode($this->getCacheValues())).".".$filename['extension'],$baseFile->isFolder());
+	    $file = new File($directory->toURL()."/".$baseFile->getDirectory(),md5($baseFile->getFile()."-".implode($this->getCacheValues(),'-')).".".$baseFile->getExtension(),$baseFile->isFolder());
+	    return $file;
+	}
+	/**
+	* Returns the directory containing the HTML cache files for this module
+	* @return File the file containing the HTML cache
+	* @param File $baseFile the directory containing the HTML cache files for this module
+	*/
+	public static function getCacheDirectory($class){
+	    return new File (".cache/template/".Ressource::getCurrentTemplate()->getName(),$class,true);
 	}
 	/**
 	* Returns the values to take into account for cache management

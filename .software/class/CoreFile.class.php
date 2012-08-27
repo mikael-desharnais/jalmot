@@ -122,7 +122,7 @@
 	* @param string $url The URL to analyse
 	*/
 	public static function createFromURL($url){
-	    if (is_dir(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$url)){
+	    if (is_dir($url)){
 	        return new File($url,"",true);
 	    }else {
 	        return new File(dirname($url),basename($url),false);
@@ -178,6 +178,27 @@
 	        }
 	    }
 	    throw new Exception("File not found");
+	}
+	public function listFiles(){
+	    $files = glob($this->toURL().'/*');
+	    $toReturn = array();
+	    foreach($files as $file){
+	        if ($file!="."&&$file!=".."){
+	            $toReturn[] = File::createFromURL($file);
+	        }
+	    }
+	    return $toReturn;
+	}
+	public function delete(){
+	    if ($this->isFile()){
+	        unlink($this->toURL());
+	    }else {
+	        $files = $this->listFiles();
+	        foreach($files as $file){
+	            $file->delete();
+	        }
+	        rmdir($this->toURL());
+	    }
 	}
 }
 
