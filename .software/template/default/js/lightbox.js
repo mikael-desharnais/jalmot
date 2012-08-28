@@ -1,11 +1,11 @@
 function openLightBox(name){
 	jQuery("#blackAlphaDiv").fadeIn();
-	adaptLightBoxBackground();
 	jQuery("#"+name).fadeIn();
 	jQuery("#"+name).css('opacity','0');
 	jQuery("#"+name).css('display','block');
 	positionLightBox(name);
 	document.multipleSelector=false;
+	adaptLightBoxBackground();
 }
 function closeLightBox(name){
 	jQuery("#blackAlphaDiv").fadeOut();
@@ -14,7 +14,7 @@ function closeLightBox(name){
 }
 function positionLightBox(name){
 	jQuery("#"+name).css('left',(jQuery(window).width()-jQuery("#"+name).width())/2);
-	jQuery("#"+name).css('top',(jQuery(window).height()-jQuery("#"+name).height())/2);
+	jQuery("#"+name).css('top',(Math.min(jQuery(window).height(),300)-jQuery("#"+name).height())/2);
 	jQuery("#"+name).css('position','absolute');
 }
 function adaptLightBoxBackground(){

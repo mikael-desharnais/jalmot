@@ -91,7 +91,7 @@ class CoreLog
         if (self::$logMode>=Log::$LOG_MODE_STD_OUTPUT_AND_FILE){
 	        $file = new File('tmp/log','jalmot.log',false);
 	        $microtime = microtime(true);
-	        $file->append(date('d M Y h:i:s',$microtime)."\t\t".(round(($microtime-self::$startTime)*1000))."ms\t\t".$data."\r\n");
+	        $file->append(date('d M Y H:i:s',$microtime)."\t\t".(round(($microtime-self::$startTime)*1000))."ms\t\t".str_replace("\r","",str_replace("\n","",$data))."\r\n");
         }
     }
 }
