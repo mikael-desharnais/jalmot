@@ -83,17 +83,50 @@ insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_descrip
 insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,2,'','<p>Description in English<br>\r\n</p>\r\n','');
 insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,3,'','','');
 
+/*Table structure for table `text_category` */
+
+CREATE TABLE `text_category` (
+  `id_text_category` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_text_category`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `text_category` */
+
+insert  into `text_category`(`id_text_category`) values (1);
+insert  into `text_category`(`id_text_category`) values (2);
+
+/*Table structure for table `text_category_lang` */
+
+CREATE TABLE `text_category_lang` (
+  `id_text_category` int(11) NOT NULL,
+  `id_lang` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_text_category`,`id_lang`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `text_category_lang` */
+
+insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (1,1,'Bibi');
+insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (1,2,'');
+insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (1,3,'');
+insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (2,1,'Information');
+insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (2,2,'');
+insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (2,3,'');
+
 /*Table structure for table `text_content` */
 
 CREATE TABLE `text_content` (
   `id_text_content` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `id_text_category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_text_content`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `text_content` */
 
-insert  into `text_content`(`id_text_content`,`name`) values (1,'Texte du footer');
+insert  into `text_content`(`id_text_content`,`name`,`id_text_category`) values (1,'Texte du footer',2);
+insert  into `text_content`(`id_text_content`,`name`,`id_text_category`) values (2,'Texte de la page d\'accueil',1);
+insert  into `text_content`(`id_text_content`,`name`,`id_text_category`) values (10,'Précisions',1);
 
 /*Table structure for table `text_content_lang` */
 
@@ -110,6 +143,27 @@ CREATE TABLE `text_content_lang` (
 insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,1,'Texte du footer','<p>Propulsé par JalmotPHP<br>\r\n</p>\r\n');
 insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,2,'','');
 insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,3,'','');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (2,1,'Bienvenue','<p>JalmotPHP est un framework simple et puissant.</p>\r\n<p>Ceci est un test de cache<br>\r\n\r\n</p>\r\n');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (2,2,'','');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (2,3,'','');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (10,1,'Dudulle','<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and \r\ntypesetting industry. Lorem Ipsum has been the industry\'s standard dummy\r\n text ever since the 1500s, when an unknown printer took a galley of \r\ntype and scrambled it to make a type specimen book. It has survived not \r\nonly five centuries, but also the leap into electronic typesetting, \r\nremaining essentially unchanged. It was popularised in the 1960s with \r\nthe release of Letraset sheets containing Lorem Ipsum passages, and more\r\n recently with desktop publishing software like Aldus PageMaker \r\nincluding versions of Lorem Ipsum.<span id=\"pastemarkerend\">&nbsp;</span></p>\r\n');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (10,2,'','');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (10,3,'','');
+
+/*Table structure for table `text_content_media_file` */
+
+CREATE TABLE `text_content_media_file` (
+  `id_text_content` int(11) NOT NULL,
+  `id_media_file` int(11) NOT NULL,
+  PRIMARY KEY (`id_text_content`,`id_media_file`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `text_content_media_file` */
+
+insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (2,1);
+insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (2,53);
+insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (10,51);
+insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (10,53);
 
 /*Table structure for table `user_admin` */
 
