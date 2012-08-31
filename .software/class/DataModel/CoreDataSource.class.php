@@ -23,24 +23,17 @@
      * @param String $name Name of the datasource to return
      */
      public static function getDataSource($name){
+         if (!array_key_exists($name,self::$DataSource)){
+             self::loadDataSource($name);
+         }
          return self::$DataSource[$name];
      }
-     /**
-     * public function 
-     * Returns the current Datasource according to the configuration values :
-     * DefaultDataSourceType
-     * DefaultDataSourceName
-     * @return DataSource The current datasource according to the configuration
-     */
-     public static function getCurrentDataSource(){
-         $defaultDataSourceType=Ressource::getConfiguration()->getValue('DefaultDataSourceType');
-         $defaultDataSourceName=Ressource::getConfiguration()->getValue('DefaultDataSourceName');
-         if (!in_array($defaultDataSourceName,self::$DataSource)){
-             $dataSource=new $defaultDataSourceType($defaultDataSourceName);
-             self::addDataSource($dataSource);
-         }
-         return self::getDataSource($defaultDataSourceName);
+     public static function loadDataSource($name){
+         $xml = XMLDocument::parseFromFile(new File("xml/dataSource",$name.".xml",false));
+         $datasourceType = $xml->type."";
+         $dataSource = new $datasourceType($name);
      }
+
      /**
      * Name of the datasource
      */
@@ -57,7 +50,6 @@
      */
      public function __construct($name){
          $this->name=$name;
-         $xml = XMLDocument::parseFromFile(new File("xml/dataSource",$this->name.".xml",false));
          self::addDataSource($this);
      }
      /**
@@ -92,6 +84,9 @@
 	*/
 	public function registerDataModelForCache($queryUUID,$dataModel){
 		$this->cachedQueries[$queryUUID]=$dataModel;
+	}
+	public function getOrderBy($field,$type){
+	    return new MysqlDataQueryOrderBy($field,$type);
 	}
 }
 

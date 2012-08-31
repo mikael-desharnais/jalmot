@@ -10,9 +10,9 @@ class CoreMysqlBetweenCondition extends CoreModelDataQueryBetweenCondition{
 	*/
 	public function getSQL(){
         $toReturn="";
-        $DataQuery=$this->parentConditionContainer->getDataQuery();
+        $dataQuery=$this->parentConditionContainer->getDataQuery();
         if ($this->compared instanceof ModelField){
-            $toReturn.=" ". $DataQuery->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->compared->getName())." ";
+            $toReturn.=" ". $dataQuery->getModel()->getDataSource()->getDbFieldName($dataQuery->getModel()->getName(),$this->compared->getName())." ";
         }elseif ($this->compared instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->compared)." ";
         }else {
@@ -20,7 +20,7 @@ class CoreMysqlBetweenCondition extends CoreModelDataQueryBetweenCondition{
         }
         $toReturn.=" BETWEEN ";
         if ($this->val1 instanceof ModelField){
-            $toReturn.=" ". $DataQuery->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->val1->getName())." ";
+            $toReturn.=" ". $dataQuery->getModel()->getDataSource()->getDbFieldName($dataQuery->getModel()->getName(),$this->val1->getName())." ";
         }elseif ($this->val1 instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->val1)." ";
         }else {
@@ -28,7 +28,7 @@ class CoreMysqlBetweenCondition extends CoreModelDataQueryBetweenCondition{
         }
         $toReturn.=" AND ";
         if ($this->val2 instanceof ModelField){
-            $toReturn.=" ". $DataQuery->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->val2->getName())." ";
+            $toReturn.=" ". $dataQuery->getModel()->getDataSource()->getDbFieldName($dataQuery->getModel()->getName(),$this->val2->getName())." ";
         }elseif ($this->val2 instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->val2)." ";
         }else {

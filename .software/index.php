@@ -13,7 +13,6 @@ include("misc/functions.php");
  Ressource::setCurrentTemplate(Template::getCurrentTemplate());
  Ressource::setCurrentLanguage(Language::getCurrentLanguage());
  Ressource::setCurrentPage(Page::getCurrentPage());
- Ressource::setDataSource(DataSource::getCurrentDataSource());
  Ressource::setSessionManager(SessionManager::getCurrentSessionManager());
  Ressource::setUserSpace(UserSpace::getCurrentUserSpace());
  

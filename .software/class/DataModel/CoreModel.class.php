@@ -26,7 +26,7 @@ class CoreModel{
     */
     public static function loadModel($name){
         $xml=XMLDocument::parseFromFile(new File("xml/model",$name.".xml",false));
-        $model=new Model($name);
+        $model=new Model($name,DataSource::getDataSource($xml->datasource.""));
         foreach($xml->fields->children() as $field){
             $model_field=new ModelField($model,$field->name."",$field->type."",(isset($field->primary_key)&&$field->primary_key.""==1?true:false));
 			$params=XMLParamsReader::read($field);
@@ -57,12 +57,19 @@ class CoreModel{
     * Relations between this model and other models
     */
     public $relations=array();
+    
+    protected $datasource;
+    
     /**
     * Initialises the name of the model
-    * @param string $name Nom du modèle
+    * @param string $name Nom du modï¿½le
     */
-    private function __construct($name){
+    private function __construct($name,$datasource){
         $this->name=$name;
+        $this->datasource =$datasource;
+    }
+    public function getDatasource(){
+        return $this->datasource;
     }
     /**
     * Add a field to the model

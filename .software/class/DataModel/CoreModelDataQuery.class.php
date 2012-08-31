@@ -23,30 +23,39 @@ abstract class CoreModelDataQuery{
     * By default, it should be a AND conditionContainer
     */
     protected $conditionContainer;
+    
+    /**
+     * List of all Order Bys
+     */
+    protected $orderBy = array();
+    
     /**
     * The model which is the target of this query
     */
     private $model;
-    /**
-    * The data source to use for this query
-    */
-    private $dataSource;
+
     /**
     * The type of this query
     */
     private $type;
+    /**
+    * The start point of the fetching
+    */
+    protected $startPoint=0;
+    /**
+    * The size of the data fetched
+    */
+    protected $sizeLimit=-1;
     /**
     * Initialises the type, model and datasource of this Query
     * Defines the root condition container of this ModelDataQuery using setRootConditionContainer
     * @see ModelDataQuery::setRootConditionContainer()
     * @param integer $type Use a value from class contans : either for select, update, create
     * @param Model $model the model targeted by this query
-    * @param DataSource $data_source The datasource to use for this query
     */
-    public function __construct($type,$model,$data_source){
+    public function __construct($type,$model){
         $this->type=$type;
         $this->model=$model;
-        $this->dataSource=$data_source;
 		$this->setRootConditionContainer();
     }
 	/**
@@ -77,9 +86,38 @@ abstract class CoreModelDataQuery{
 	* @param string $symbol Symbol of the condition to create and Add
 	*/
 	public function addConditionBySymbol($symbol){
-		$this->addCondition(call_user_func(array($this->dataSource,"getConditionBySymbol"),func_get_args()));
+		$this->addCondition(call_user_func(array($this->getModel()->getDataSource(),"getConditionBySymbol"),func_get_args()));
 		return $this;
 	}
+	/**
+	* Adds an order by
+	* @return ModelDataQuery this
+	* @param ModelDataQueryOrderBy $orderBy The order By to add
+	*/
+	public function addOrderBy($orderBy){
+		$this->orderBy[]=$orderBy;
+		return $this;
+	}
+	/**
+	* Sets the fetching start point (0 by default)
+	* @param int $startPoint The start point of the fetching
+	* @return ModelDataQuery this
+	*/
+	public function setStartPoint($startPoint){
+		$this->startPoint = $startPoint;
+		return $this;
+	}
+	/**
+	* Sets the size of the data fetched
+	* @param int $sizeLimit the size of the data fetched
+	* @return ModelDataQuery this
+	*/
+	public function setSizeLimit($sizeLimit){
+		$this->sizeLimit = $sizeLimit;
+		return $this;
+	}
+	
+	
     /**
     * Adds a condition container to this query
     * @return ModelDataQuery this
@@ -96,12 +134,12 @@ abstract class CoreModelDataQuery{
     * @param boolean $useCache=false true to use cache for this query / false otherwise
     */
     public function getModelData($useCache=false){
-		if ($useCache&&$this->dataSource->isDataModelCached($this->getUUID())){
-			return $this->dataSource->getCachedDataModel($this->getUUID());
+		if ($useCache&&$this->getModel()->getDataSource()->isDataModelCached($this->getUUID())){
+			return $this->getModel()->getDataSource()->getCachedDataModel($this->getUUID());
 		}else {
-    		$array= $this->dataSource->execute($this);
+    		$array= $this->getModel()->getDataSource()->execute($this);
 			if ($useCache){
-				$this->dataSource->registerDataModelForCache($this->getUUID(),$array);
+				$this->getModel()->getDataSource()->registerDataModelForCache($this->getUUID(),$array);
 			}
     		return $array;
 		}
@@ -138,13 +176,7 @@ abstract class CoreModelDataQuery{
     public function getConditionContainer(){
         return $this->conditionContainer;
     }
-    /**
-    * Returns the Datasource to use for this query
-    * @return DataSource the Datasource to use for this query
-    */
-    public function getDataSource(){
-        return $this->dataSource;
-    }
+
 }
 
 

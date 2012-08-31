@@ -26,16 +26,16 @@ class CoreImageJPG{
 	* TODO : REmake it : not proper
 	* 
 	*/
-	public function writeToFile($image,$file){
-		@mkdir(Ressource::getConfiguration()->getValue("baseDirectory")."/".$file->getDirectory(),"0777",true);
-		imagejpeg($image,Ressource::getConfiguration()->getValue("baseDirectory")."/".$file->toURL());
+	public static function writeToFile($image,$file){
+		@mkdir($file->getDirectory(),0777,true);
+		imagejpeg($image,$file->toURL());
 	}
 	/**
 	* Returns Exif data from a photo file (TODO : think about caching ???)
 	* 
 	*/
 	public function getExif(){
-		return exif_read_data(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$this->file->toURL(), 0, true);
+		return exif_read_data($this->file->toURL(), 0, true);
 	}
 	/**
 	* TODO : TO remove from COre
@@ -43,13 +43,13 @@ class CoreImageJPG{
 	public function getThumb($max_width,$max_height){
 		$src_width=0;
 		$src_height=0;
-		$stringImage=@exif_thumbnail(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$this->file->toURL(),$src_width,$src_height);
+		$stringImage=@exif_thumbnail($this->file->toURL(),$src_width,$src_height);
 		if (!empty($stringImage)){
 			$baseImage=imagecreatefromstring($stringImage);
 		}
 		else {
-			$baseImage=imagecreatefromjpeg(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$this->file->toURL());
-			$size_array=getimagesize(Ressource::getConfiguration()->getValue("baseDirectory").'/'.$this->file->toURL());
+			$baseImage=imagecreatefromjpeg($this->file->toURL());
+			$size_array=getimagesize($this->file->toURL());
 			$src_width=$size_array[0];
 			$src_height=$size_array[1];
 		}

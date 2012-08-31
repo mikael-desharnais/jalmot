@@ -26,7 +26,7 @@ class DirectoryModelListingDescriptor extends ModelListingDescriptor {
 	            $id_directory=$id['idMediaDirectory'];
 	        }
 	    }
-	    $currentElement=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
+	    $currentElement=$model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
 		          		->addConditionBySymbol('=',$model->getField('idMediaDirectory'), $id_directory)
 		           		->getModelDataElement();
 

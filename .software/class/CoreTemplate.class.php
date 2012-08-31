@@ -84,8 +84,22 @@ class CoreTemplate{
 	* @return Template The current template
 	*/
 	public static function getCurrentTemplate(){
-	    return new Template(Ressource::getConfiguration()->getValue('DefaultTemplate'));
-	} 
+	    return self::getTemplate(Ressource::getConfiguration()->getValue('DefaultTemplate'));
+	}
+	/**
+	* Returns the template with the given name
+	* @param String name the name of the template to return
+	* 
+	* @return Template the template with the given name
+	*/
+	public static function getTemplate($name){
+	    $xml = XMLDocument::parseFromFile(new File('template/'.$name.'/xml/','configure.xml',false));
+	    $template = new Template($xml->name."");
+	    if (!empty($xml->parent)){
+	        $template->setParent(self::getTemplate($xml->parent.""));
+	    }
+	    return $template;
+	}
 }
 
 

@@ -12,7 +12,7 @@ class CoreMysqlEqualCondition extends CoreModelDataQueryEqualCondition{
         $toReturn="";
         $DataQuery=$this->parentConditionContainer->getDataQuery();
         if ($this->val1 instanceof ModelField){
-            $toReturn.=" ". $DataQuery->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->val1->getName())." ";
+            $toReturn.=" ". $DataQuery->getModel()->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->val1->getName())." ";
         }elseif (is_numeric($this->val1)) {
             $toReturn.=" ".$this->val1." ";
         }else {

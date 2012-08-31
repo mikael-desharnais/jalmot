@@ -28,7 +28,7 @@ abstract class CoreModelDataQueryConditionContainer{
 	/**
 	* The parent DataQuery of this Condition container
 	*/
-	private $DataQuery;
+	private $dataQuery;
 	/**
 	* List of all ConditionContainers contained by this ConditionContainer
 	*/
@@ -42,17 +42,17 @@ abstract class CoreModelDataQueryConditionContainer{
 	}
 	/**
 	* Defines the ModelDataQuery that contains this conditionContainer
-	* @param ModelDataQuery  $DataQuery  the ModelDataQuery that contains this conditionContainer
+	* @param ModelDataQuery  $dataQuery  the ModelDataQuery that contains this conditionContainer
 	*/
-	public function setDataQuery($DataQuery){
-	    $this->DataQuery=$DataQuery;
+	public function setDataQuery($dataQuery){
+	    $this->dataQuery=$dataQuery;
 	}
 	/**
-	* Returns  the DataQuery that contains this conditionContainer
-	* @return ModelDataQuery  the ModelDataQuery that contains this conditionContainer
+	* Returns  the dataQuery that contains this conditionContainer
+	* @return ModeldataQuery  the ModeldataQuery that contains this conditionContainer
 	*/
-	public function getDataQuery(){
-	    return $this->DataQuery;
+	public function getdataQuery(){
+	    return $this->dataQuery;
 	}
 	/**
 	* Adds a condition to this ConditionContainer
@@ -67,7 +67,7 @@ abstract class CoreModelDataQueryConditionContainer{
 	* @param ModelDataQueryConditionContainer $conditionContainer The ConditionContainer to add to this ConditionContainer
 	*/
 	public function addConditionContainer($conditionContainer){
-	    $conditionContainer->setDataQuery($this->DataQuery);
+	    $conditionContainer->setDataQuery($this->dataQuery);
 		$this->conditionContainers[]=$conditionContainer;
 	}
 	/**
@@ -104,7 +104,7 @@ abstract class CoreModelDataQueryConditionContainer{
 	* @param string $symbol Symbol of the condition to create and Add
 	*/
 	public function addConditionBySymbol($symbol){
-		$this->addCondition(call_user_func(array($this->DataQuery->getDataSource(),"getConditionBySymbol"),func_get_args()));
+		$this->addCondition(call_user_func(array($this->dataQuery->getModel()->getDataSource(),"getConditionBySymbol"),func_get_args()));
 		return $this;
 	}
 }

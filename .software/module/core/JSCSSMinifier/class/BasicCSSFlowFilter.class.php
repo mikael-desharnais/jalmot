@@ -41,7 +41,7 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
     */
     public function adaptContentURLs($file,$content){
         $this->currentFile = $file;
-        return preg_replace_callback('/url\(./',array($this,"replaceURL"),$content);
+        return preg_replace_callback('/:[ ]*url\(./',array($this,"replaceURL"),$content);
     }
     /**
     * Used by the adaptContentURLs to modify the url contents properly

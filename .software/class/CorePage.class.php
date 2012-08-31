@@ -210,7 +210,7 @@
 	    if (Ressource::getParameters()->getValue('pageMode')=='ajax'){
 	    	return new AjaxPage($currentPage);
 	    }else {
-	        return new page($currentPage);
+	        return new Page($currentPage);
 	    }
 	}
 	/**

@@ -21,8 +21,8 @@ class LanguageDataFetcher extends SimpleDataFetcher {
 	            }
 	        }
 	        if (!$found){
-	            $element=($model->getRelation('lang')->getDestination()->getModel()==$model?$model->getRelation('lang')->getSource()->getModel()->getInstance():$model->getRelation('lang')->getDestination()->getModel()->getInstance());
-	            $element->data_source=Ressource::getDataSource();
+	            $modelLang = ($model->getRelation('lang')->getDestination()->getModel()==$model?$model->getRelation('lang')->getSource()->getModel():$model->getRelation('lang')->getDestination()->getModel());
+	            $element=$modelLang->getInstance();
 	            $element->setIdLang($language->getId());
 	            $db_lines[]=$element;
 	        }

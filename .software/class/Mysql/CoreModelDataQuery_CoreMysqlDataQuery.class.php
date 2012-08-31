@@ -24,11 +24,28 @@ class CoreMysqlDataQuery extends ModelDataQuery{
 	*/
 	public function getSQL(){
          if ($this->getType()==ModelDataQuery::$SELECT_QUERY){
-         	$query="SELECT * FROM ".$this->getDataSource()->getTableName($this->getModel()->getName());
+         	$query="SELECT * FROM ".$this->getModel()->getDataSource()->getTableName($this->getModel()->getName());
          	$hasWhere=false;
 			$where=$this->getConditionContainer()->getSQL();
 			if (!empty($where)){
 				$query.=" WHERE ".$where;
+			}
+			if (count($this->orderBy)>0){
+			    $query.=" ORDER BY ";
+			    $first = true;
+			    foreach($this->orderBy as $orderBy){
+			        $query.=$orderBy->toSQL($this);
+			        if (!$first){
+			            $query.=',';
+			        }
+			        $first = false;
+			    }
+			}
+			if ( $this->sizeLimit!=-1){
+			    $query.=" LIMIT ".$this->sizeLimit." ";
+			}
+			if ($this->startPoint!=0){
+			    $query.=" OFFSET ".(int)$this->startPoint." ";
 			}
 			return $query;
 		}

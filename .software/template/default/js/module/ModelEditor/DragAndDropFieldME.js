@@ -6,8 +6,11 @@ jQuery(document).ready(function(){
 		return false;
 	});
 	jQuery('body').bind('draggablestop',function(event,draggable,droppable){
+		droppable.find('.element_selected').removeClass('element_selected');
+		droppable.find('.element_selected input').attr("disabled","disabled");
 		droppable.find('.element_'+draggable.attr('draggable-id')).addClass('element_selected');
 		droppable.find('.element_'+draggable.attr('draggable-id')+' input').removeAttr('disabled');
 		}
 	);
 });
+

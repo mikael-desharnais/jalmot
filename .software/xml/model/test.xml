@@ -1,4 +1,5 @@
 <model>
+	<datasource>MysqlDefault</datasource>
 	<name>test</name>
 	<fields>
 		<field>

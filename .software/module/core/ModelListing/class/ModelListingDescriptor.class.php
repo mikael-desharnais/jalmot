@@ -65,7 +65,7 @@ class ModelListingDescriptor {
 	}
 	public function fetchData(){
 	        $model=Model::getModel($this->model);
-	        $this->list=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
+	        $this->list=$model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
 	        										->getModelData();
 	}
 	public function getConfParams(){

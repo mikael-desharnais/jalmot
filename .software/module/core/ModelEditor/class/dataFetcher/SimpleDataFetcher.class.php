@@ -20,9 +20,8 @@ class SimpleDataFetcher {
 	    $model=Model::getModel($this->model_editor->getModel());
 	    if ($modelEditorDescriptor->getSource()==ModelData::$SOURCE_NEW){
 	        $element=$model->getInstance();
-	        $element->data_source=Ressource::getDataSource();
 	    }else {
-	        $query=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model);
+	        $query=$model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model);
 	        foreach($modelEditorDescriptor->getId() as $key_element=>$value_element){
 	            $query=$query->addConditionBySymbol('=',$model->getField($key_element), $value_element);
 	        }

@@ -30,7 +30,14 @@ class MediaFileWrapper {
     * @return string the URL of the file corresponding the DataModel Wrapped
     */
     public function getFileURL(){
-        return "media/file_".str_pad($this->data->getIdMediaFile(),10,'0',STR_PAD_LEFT).".".File::getExtensionStatic($this->data->getFile());
+        return $this->getFile()->toURL();
+    }
+    /**
+     * Returns File object corresponding the DataModel Wrapped
+     * @return File the File object corresponding the DataModel Wrapped
+     */
+    public function getFile(){
+        return new File("media","file_".str_pad($this->data->getIdMediaFile(),10,'0',STR_PAD_LEFT).".".File::getExtensionStatic($this->data->getFile()),false);
     }
     /**
     * Returns the Name of the file

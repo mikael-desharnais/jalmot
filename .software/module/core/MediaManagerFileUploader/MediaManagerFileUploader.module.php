@@ -15,7 +15,6 @@ class MediaManagerFileUploader extends Module{
 			        $idMediaDirectory=1;
 			    }
 			    $element=$model->getInstance();
-			    $element->data_source=Ressource::getDataSource();
 			    $element->setFile($listenedTo->getFilename());
 			    $element->setName($listenedTo->getFilename());
 			    $element->setIdMediaDirectory($idMediaDirectory);

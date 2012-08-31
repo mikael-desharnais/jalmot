@@ -60,8 +60,8 @@
          $dateArray = date_parse_from_format($format, $date);
          return new Date($dateArray['year'],$dateArray['month'],$dateArray['day'],$dateArray['hour'],$dateArray['minute'],$dateArray['second']);
      }
-     public function format(){
-         return date("d/m/Y H:i",$this->getTimeStamp());
+     public function format($format = "d/m/Y H:i"){
+         return date($format,$this->getTimeStamp());
      }
 }
 ?>

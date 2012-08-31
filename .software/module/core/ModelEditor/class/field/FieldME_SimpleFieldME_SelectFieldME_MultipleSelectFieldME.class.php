@@ -23,7 +23,6 @@ class MultipleSelectFieldME extends SelectFieldME {
 	        if (is_array($toCreate)){
 		        foreach($toCreate as $id_foreign_key){
 		            $element = Model::getModel($this->model_editor->getModel())->getRelation($this->getConfParam('relation'))->getDestination()->getModel()->getInstance();
-		            $element->data_source=Ressource::getDataSource();
 		            $element->$nameIdForeignKeyInRelation($id_foreign_key);
 			    	if ($dataFetched['simple']->source!=ModelData::$SOURCE_NEW){
 			    	    $element->$nameIdCurrentKeyInRelation($dataFetched['simple']->$nameLocalKey());

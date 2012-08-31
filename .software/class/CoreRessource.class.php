@@ -23,10 +23,7 @@ class CoreRessource{
 	* The current GET/POST parameters Object
 	*/
 	protected static $parameters;
-	/**
-	* The current Datasource object
-	*/
-	protected static $dataSource;
+
 	/**
 	* The current UserSpace Object
 	*/
@@ -105,20 +102,7 @@ class CoreRessource{
 	public static function getParameters(){
 		return self::$parameters;
 	}
-	/**
-	* Defines the current Datasource Object
-	* @param DataSource $cDataSource the current Datasource Object
-	*/
-	public static function setDataSource($cDataSource){
-		self::$dataSource=$cDataSource;
-	}
-	/**
-	* Returns the current Datasource Object
-	* @return DataSource the current Datasource Object
-	*/
-	public static function getDataSource(){
-		return self::$dataSource;
-	}
+
 	/**
 	* Defines the current UserSpace Object
 	* @param UserSpace $cUserSpace the current UserSpace Object

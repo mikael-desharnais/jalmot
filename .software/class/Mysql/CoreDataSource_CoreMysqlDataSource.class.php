@@ -42,7 +42,6 @@
          	while($line=$this->dbConnection->fetchAssoc($resultset)){
          	    $instance=$query->getModel()->getInstance();
          	    $instance->source=ModelData::$SOURCE_FROM_DATASOURCE;
-				$instance->data_source=$this;
          	    foreach($line as $key=>$val){
          	        $fieldName = $this->getModelFieldName($this->getTableName($query->getModel()->getName()),$key);
          	        $type = $query->getModel()->getField($fieldName)->getType();

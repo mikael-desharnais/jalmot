@@ -1,11 +1,11 @@
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','DragAndDropFieldME.css',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','DragAndDropFieldME.js',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','DragAndDropMultipleFieldME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','DragAndDropMultipleFieldME.js',false)),0); ?>
 <tr>
 <td>
 	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
 </td>
 <td  class=""> 
-<div class="draggableTarget" targetType="mediaFile">
+<div class="draggableMultipleTarget" targetType="mediaFile">
 
 <?php 
 foreach($element['reference'] as $elt){

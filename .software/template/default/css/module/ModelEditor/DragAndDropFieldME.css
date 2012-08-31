@@ -17,7 +17,7 @@
 	height : 22px;
 }
 .draggableTarget {
-	min-height : 50px;
+	min-height : 20px;
 	width : 90%;
 	background : url('../../../media/image/module/ModelEditor/target.png') bottom right no-repeat #cacafd;
 	padding : 15px;

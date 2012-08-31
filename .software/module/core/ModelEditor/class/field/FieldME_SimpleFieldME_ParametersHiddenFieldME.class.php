@@ -2,6 +2,7 @@
 
 class ParametersHiddenFieldME extends SimpleFieldME {
     public function toHTML($dataFetched){
+        ob_start();
         $element=$this->getUsefullData($dataFetched);
         $value=$this->getValue($element);
         if (!empty($value)){

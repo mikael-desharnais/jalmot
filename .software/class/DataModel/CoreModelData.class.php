@@ -18,11 +18,6 @@ class CoreModelData{
     */
     private $__parent_model;
 	/**
-	* The datasource that created this DataModel or that should be used to save it
-	* When creating a ModelData, you will have to define the datasource to use.
-	*/
-	public $data_source;
-	/**
 	* The source type of this DataModel
 	* it should be either one of this Class constants (from database or new element)
 	*/
@@ -163,7 +158,7 @@ class CoreModelData{
 	        $model=$this->__parent_model->getRelation($fieldName)->getDestination()->getModel();
 	        $source_field=strtolower($this->__parent_model->getRelation($fieldName)->getSource()->getName());
 	        $source_field_value=$this->$source_field;
-	        return $this->data_source->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)->addConditionBySymbol('=',$this->__parent_model->getRelation($fieldName)->getDestination(),$source_field_value);
+	        return $this->getParentModel()->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)->addConditionBySymbol('=',$this->__parent_model->getRelation($fieldName)->getDestination(),$source_field_value);
 	    }
 	    
 	}
@@ -177,7 +172,7 @@ class CoreModelData{
 	public function update(){
 	    $this->propagateBeforeUpdate();
 	    $this->propagateBeforeStaticUpdate($this);
-	    $this->data_source->update($this);
+	    $this->getParentModel()->getDataSource()->update($this);
 	    $this->propagateAfterUpdate();
 	    $this->propagateAfterStaticUpdate($this);
 	    $this->chainUpdate();
@@ -192,7 +187,7 @@ class CoreModelData{
 	public function create(){
 	    $this->propagateBeforeCreate();
 	    $this->propagateBeforeStaticCreate($this);
-	    $this->data_source->create($this);
+	    $this->getParentModel()->getDataSource()->create($this);
 	    $this->propagateAfterCreate();
 	    $this->propagateAfterStaticCreate($this);
 	    $this->chainCreate();
@@ -218,7 +213,7 @@ class CoreModelData{
 	public function delete(){
 	    $this->propagateBeforeDelete();
 	    $this->propagateBeforeStaticDelete($this);
-	    $this->data_source->delete($this);
+	    $this->getParentModel()->getDataSource()->delete($this);
 	    $relations=$this->getParentModel()->getRelations();
 	    foreach($relations as $relation){
 	        if ($relation->getType()=='CascadeOnDelete'){
