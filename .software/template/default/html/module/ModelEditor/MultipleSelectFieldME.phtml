@@ -1,6 +1,6 @@
 <?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','DragAndDropFieldME.css',false)),0); ?>
 <?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','DragAndDropFieldME.js',false)),0); ?>
-<tr>
+<tr class="reload-on-model-editor-<?php echo $this->getConfParam('listReference'); ?>-change">
 <td>
 	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
 </td>
@@ -24,6 +24,18 @@ foreach($element['reference'] as $elt){
 }
 ?>
 </select>
+<?php if ($this->getConfParam('modelListing')!=''){?>
+<script>
+	AjaxHTMLFetcher.setFetcher('list_model_<?php echo $this->getName(); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',''),function(htmlContent){
+		var window = new Window();
+		window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('icon_test')); ?>);
+		window.setContent(htmlContent);
+		window.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',''));
+		window.display();
+	}); 
+</script>
+<a id="list_model_<?php echo $this->getName(); ?>" class="AjaxHTMLFetcher btn btn-primary btn-list-modellist" href="#"><?php echo Ressource::getCurrentLanguage()->getTranslation('Edit the list'); ?></a>
+<?php } ?>
 </div>
 </td>	
 </tr>

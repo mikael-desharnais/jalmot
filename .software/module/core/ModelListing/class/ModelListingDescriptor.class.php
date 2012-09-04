@@ -28,6 +28,7 @@ class ModelListingDescriptor {
 	protected $list;
 	protected $title;
 	protected $confParams=array();
+	protected $filters = array();
 
 	public function __construct(){
 	}
@@ -63,10 +64,16 @@ class ModelListingDescriptor {
 		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/ModelListingDescriptor_".$this->type.".phtml"));
 		return ob_get_clean();
 	}
+	public function addFilter($filter){
+	    $this->filters[]=$filter;
+	}
 	public function fetchData(){
-	        $model=Model::getModel($this->model);
-	        $this->list=$model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
-	        										->getModelData();
+		$model=Model::getModel($this->model);
+		$query = $model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model);
+		foreach($this->filters as $filter){
+		    $query->addCondition($filter->getModelDataQueryCondition($model));
+		}
+		$this->list=$query->getModelData();
 	}
 	public function getConfParams(){
 	    return $this->confParams;

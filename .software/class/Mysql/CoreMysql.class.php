@@ -52,7 +52,7 @@
 	* @param string $query the query to execute
 	*/
 	public function query($query){
-	    Log::LogData($query, Log::$LOG_LEVEL_INFO);
+	    Log::LogData("Executing Query ".$query, Log::$LOG_LEVEL_INFO);
 		$result= mysqli_query($this->sql_link,$query) or Log::Error($query);
 		return $result;
 	}

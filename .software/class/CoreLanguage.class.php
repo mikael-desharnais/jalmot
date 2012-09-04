@@ -42,6 +42,7 @@
 		* @param string $file name of the file to load
 		*/
 		public function init($file){
+		    Log::LogData("Load language/".$this->name.'/'.$file.".lng.xml",Log::$LOG_LEVEL_INFO);
 			$xml_file=Ressource::getCurrentTemplate()->getFile(new File("language/".$this->name,$file.".lng.xml",false));
 			if (!empty($xml_file)){
 				$xml = XMLDocument::parseFromFile($xml_file);

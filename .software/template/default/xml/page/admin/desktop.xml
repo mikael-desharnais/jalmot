@@ -38,14 +38,5 @@
 				<param name="modelListing" type="simple">TextContent</param>
 			</params>
 		</icon>
-		<icon>
-			<class>DesktopIcon</class>
-			<image>media/image/icon/cmscategory.png</image>
-			<text>CMS Category</text>
-			<instance>ModelListing</instance>
-			<params>
-				<param name="modelListing" type="simple">TextCategory</param>
-			</params>
-		</icon>
 	</icons>
 </desktop>

@@ -52,7 +52,7 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
         if ($match[0][strlen($match[0])-1]=='"'||$match[0][strlen($match[0])-1]=="'"){
             return $match[0]."../../../../../".$this->currentFile->getDirectory().'/';
         }else {
-        	return "url(../../../../../".$this->currentFile->getDirectory().'/'.$match[0][strlen($match[0])-1];
+        	return " : url(../../../../../".$this->currentFile->getDirectory().'/'.$match[0][strlen($match[0])-1];
         } 
     }
 }

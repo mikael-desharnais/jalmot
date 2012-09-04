@@ -67,6 +67,7 @@
 				<param name="localKey" type="simple">idTextContent</param>
 				<param name="listReference" type="simple">TextCategory</param>
 				<param name="nameKey" type="simple">title</param>
+				<param name="modelListing" type="simple">TextCategory</param>
 			</params>
 		</input>
 		<!-- 
@@ -90,5 +91,14 @@
 			<title>Description</title>
 			<class>HTMLLanguageFieldME</class>
 		</input>
+		<input>
+			<key>idTextCategory</key>
+			<title>SubElements</title>
+			<class>ModelListingME</class>
+			<params>
+				<param name="modelListing" type="simple">TextCategory</param>
+			</params>
+		</input>
+		
 	</inputs>
 </editor>

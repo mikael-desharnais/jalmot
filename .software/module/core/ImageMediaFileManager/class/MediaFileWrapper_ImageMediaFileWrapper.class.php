@@ -1,0 +1,11 @@
+<?php
+/**
+* The class that wraps a MediaFile into an ImageMediaFile
+*/
+class ImageMediaFileWrapper extends  MediaFileWrapper{
+   public function getURLForSize($height,$width,$title=null){
+       return '/media/'.Ressource::getCurrentTemplate()->getName().'/'.$this->data->getIdMediaFile().'-'.$height.'x'.$width.'-'.urlencode(str_replace('.','',is_null($title)?$this->data->getName():$title)).'.'.File::getExtensionStatic($this->data->getFile());
+   }
+}
+
+

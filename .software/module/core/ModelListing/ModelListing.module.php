@@ -16,7 +16,9 @@ class ModelListing extends Module{
 		    $xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelListing/descriptor",Ressource::getParameters()->getValue("descriptor").".xml",false)));
 			$this->setDescriptor(call_user_func(array($xml->class."","readFromXML"),$xml));
 		}
-		$this->descriptor->fetchData();
+		if ($this->descriptor!=null){
+			$this->descriptor->fetchData();
+		}
 	}
 	public function setDescriptor($descriptor){
 		$this->descriptor=$descriptor;

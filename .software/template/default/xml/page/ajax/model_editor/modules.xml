@@ -8,6 +8,14 @@
 		</params>
 	</module>
 	<module>
+		<instancename>modelListing</instancename>
+		<class>ModelListing</class>
+		<params>
+			<param type="simple" name="mode">0</param>
+			<param type="simple" name="listingModelDescriptor">ModelListingDescriptor</param>
+		</params>
+	</module>
+	<module>
 		<instancename>LanguageChooser</instancename>
 		<class>LanguageChooser</class>
 		<params></params>
@@ -24,5 +32,11 @@
 	<module>
 		<instancename>MediaFileUploaderField</instancename>
 		<class>MediaFileUploaderField</class>
+	</module>
+	<module>
+		<instancename>WindowManager</instancename>
+		<class>WindowManager</class>
+		<params></params>
+	</module>
 	</module>
 </modules>

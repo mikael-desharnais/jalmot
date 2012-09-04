@@ -1,3 +1,4 @@
+<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
 <?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getModel()); ?>
 <script> 
 AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/','model=<?php echo $this->model; ?>&source=create'),function(htmlContent){
