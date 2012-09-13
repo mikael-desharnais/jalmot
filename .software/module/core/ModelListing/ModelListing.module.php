@@ -14,7 +14,9 @@ class ModelListing extends Module{
 		parent::execute();
 		if ($this->getConfParam('mode')==self::$MODE_GET_MODEL_LISTING_FILE_FROM_PARAMETERS){
 		    $xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelListing/descriptor",Ressource::getParameters()->getValue("descriptor").".xml",false)));
-			$this->setDescriptor(call_user_func(array($xml->class."","readFromXML"),$xml));
+		    $descriptor = call_user_func(array($xml->class."","readFromXML"),$xml);
+		    $descriptor->setPage((int)Ressource::getParameters()->getValue("page_number"));
+			$this->setDescriptor($descriptor);
 		}
 		if ($this->descriptor!=null){
 			$this->descriptor->fetchData();

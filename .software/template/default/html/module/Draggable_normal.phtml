@@ -1,3 +1,5 @@
 <?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/jQueryUI','jquery-ui-1.8.19.custom.min.js',false)),1); ?>
 <?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','Draggable.js',false)),1); ?>
 <?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','Draggable.css',false)),0); ?>
+<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('lib/jQueryUI/css','jquery-ui-1.8.16.custom.css',false)),0); ?>

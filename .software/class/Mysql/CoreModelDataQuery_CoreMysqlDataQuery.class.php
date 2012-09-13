@@ -3,6 +3,9 @@
 * Mysql Implementation of ModelDataQuery
 */
 class CoreMysqlDataQuery extends ModelDataQuery{
+    
+    public $foundRows;
+    
 	/**
 	* Returns an instance of MysqlConditionContainer of the type given
 	* @return MysqlConditionContainer an instance of MysqlConditionContainer of the type given
@@ -24,7 +27,7 @@ class CoreMysqlDataQuery extends ModelDataQuery{
 	*/
 	public function getSQL(){
          if ($this->getType()==ModelDataQuery::$SELECT_QUERY){
-         	$query="SELECT * FROM ".$this->getModel()->getDataSource()->getTableName($this->getModel()->getName());
+         	$query="SELECT SQL_CALC_FOUND_ROWS * FROM ".$this->getModel()->getDataSource()->getTableName($this->getModel()->getName());
          	$hasWhere=false;
 			$where=$this->getConditionContainer()->getSQL();
 			if (!empty($where)){
@@ -53,6 +56,12 @@ class CoreMysqlDataQuery extends ModelDataQuery{
 		}
          if ($query->getType()==ModelDataQuery::$INSERT_QUERY){
 		}
+	}
+	public function getFoundRows(){
+	    if ($this->foundRows==null){
+	        $this->foundRows=$this->getModel()->getDataSource()->getFoundRows();
+	    }
+	    return $this->foundRows;
 	}
 }
 

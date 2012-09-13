@@ -1,5 +1,6 @@
 <?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
 <?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getModel()); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ModelListing.js',false)),0); ?>
 <script> 
 AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/','model=<?php echo $this->model; ?>&source=create'),function(htmlContent){
 
@@ -30,10 +31,35 @@ AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.g
 		<?php } ?>
 	</tbody>
 	<tfoot>
-		<tr>
-			<td colspan="100%" align="right">
-					<a href="#"  class="AjaxHTMLFetcher btn btn-primary" id="new_<?php echo $this->model; ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('New') ?></a>
-			</td>
+		<tr class="change-page">
+			<?php
+				$first = true; 
+				$count = 0;
+				foreach($this->columns as $column){ 
+					$count++;
+					if ($first){
+					?>
+					<td align="left">
+							<a href="#"  class="AjaxHTMLFetcher btn btn-primary btn-mini" id="new_<?php echo $this->model; ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('New') ?></a>
+					</td>
+					<?php }
+					elseif ($count<count($this->columns)) { ?>
+					<td align="right"></td>
+				<?php }else{ ?>
+					<td align="right">
+							<?php 
+							if ($this->originalSize>$this->pageSize){
+								for($x=0;$x<floor(($this->originalSize-1)/$this->pageSize)+1;$x++){ 
+								?>
+								<a href="#" class="btn <?php if ($x==$this->page){ echo "disabled"; }	?>" data-page="<?php echo $x; ?>"><?php echo $x+1; ?></a>
+								<?php 
+								}
+							}
+							?>
+					</td>
+				<?php }
+					$first = false;
+				} ?>
 		</tr>
 	</tfoot>
 </table>

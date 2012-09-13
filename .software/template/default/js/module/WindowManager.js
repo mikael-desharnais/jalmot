@@ -28,7 +28,7 @@ Window=function(){
 				setTimeout(function(){
 					var height=window.getFrame().height();
 					window.getFrame().css('height','auto');
-					var newHeight=Math.min(window.getFrame().height(),jQuery(document).height());
+					var newHeight=Math.min(window.getFrame().height(),jQuery('.desktop').height()-100);
 					var frameHeight=window.getContainer().height();
 					var frameWidth=window.getContainer().width();
 					window.getFrame().height(newHeight);
@@ -41,8 +41,8 @@ Window=function(){
 		};
 
 		if (jQuery.window.getAll().length==0){
-			this.configuration.x=50;
-			this.configuration.y=50;
+			this.configuration.x=100;
+			this.configuration.y=100;
 		}else {
 			var currentWindow=jQuery.window.getSelectedWindow();
 			if (typeof(currentWindow)=='undefined'){

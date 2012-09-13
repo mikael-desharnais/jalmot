@@ -1,0 +1,4 @@
+<template>
+	<name>default_new</name>
+	<parent>default</parent>
+</template>

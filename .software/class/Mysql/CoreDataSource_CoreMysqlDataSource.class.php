@@ -210,6 +210,11 @@
 	    	return $this->dbFieldNames[$tableName][$dbFieldName];
 	    }
 	}
+	public function getFoundRows(){
+	    $query = $this->dbConnection->query('SELECT FOUND_ROWS() AS nbRows');
+	    $line=$this->dbConnection->fetchAssoc($query);
+	    return (int)$line['nbRows'];
+	}
 }
 
 

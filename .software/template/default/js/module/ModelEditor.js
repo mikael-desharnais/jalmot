@@ -1,14 +1,14 @@
 jQuery('.model-editor-cancel-button').live('click',function(){
-	jQuery.window.getSelectedWindow().close();
+	jQuery(this).closest('.reload-change-listener').data('object').close();
 });
 jQuery('.model-editor-delete-button').live('click',function(){
 	var parent=this;
-	var url=jQuery(this).closest('.window_panel').data('object').url;
+	var url=jQuery(this).closest('.reload-change-listener').data('object').url;
 
 	if (confirm('Etes vous sûr de vouloir supprimer cet élement ?')){
 		jQuery.post(url.address+'delete/',url.params,function(){
 			ReloadManager.propagateChangeEvent(jQuery(parent));
-			jQuery.window.getSelectedWindow().close();
+			jQuery(parent).closest('.reload-change-listener').data('object').close();
 		});
 	}
 });
@@ -22,10 +22,10 @@ jQuery('.model-editor-form').live('submit',function(event){
 		return false;
 	}
 	var parent=this;
-	var url=jQuery(this).closest('.window_panel').data('object').url;
+	var url=jQuery(this).closest('.reload-change-listener').data('object').url;
 	jQuery.post(url.address+'save/',url.params+'&'+jQuery(this).closest('.window_frame').find(':input').serialize(),function(){
 		ReloadManager.propagateChangeEvent(jQuery(parent));
-		jQuery.window.getSelectedWindow().close();
+		jQuery(parent).closest('.reload-change-listener').data('object').close();
 	});
 	
 	return false;

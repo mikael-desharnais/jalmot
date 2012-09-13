@@ -7,6 +7,9 @@ class ModelListingDescriptor {
 		$modelListing->setType($xml->type."");
 		$modelListing->setModel($xml->model."");
 		$modelListing->setTitle($xml->title."");
+		if (!empty($xml->pageSize)){
+		    $modelListing->setPageSize((int)$xml->pageSize);
+		}
 		foreach($xml->columns->children() as $column){
 			$heading=$column->head->class."";
 			$body=$column->body->class."";
@@ -29,10 +32,15 @@ class ModelListingDescriptor {
 	protected $title;
 	protected $confParams=array();
 	protected $filters = array();
+	protected $page = 0;
+	protected $pageSize = 10;
+	protected $originalSize = 0;
 
 	public function __construct(){
 	}
-	
+	public function setPageSize($size){
+	    $this->pageSize = $size;
+	}
 	public function setType($type){
 	    $this->type=$type;
 	}
@@ -73,7 +81,10 @@ class ModelListingDescriptor {
 		foreach($this->filters as $filter){
 		    $query->addCondition($filter->getModelDataQueryCondition($model));
 		}
+		$query->setStartPoint(0+$this->page*$this->pageSize);
+		$query->setSizeLimit($this->pageSize);
 		$this->list=$query->getModelData();
+		$this->originalSize = $query->getFoundRows();
 	}
 	public function getConfParams(){
 	    return $this->confParams;
@@ -83,5 +94,8 @@ class ModelListingDescriptor {
 	}
 	public function getConfParam($key){
 	    return $this->confParams[$key];
+	}
+	public function setPage($page){
+	    $this->page = $page;
 	}
 }

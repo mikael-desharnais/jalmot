@@ -5,5 +5,5 @@ AjaxHTMLFetcher.setFetcher('delete_<?php print($this->getId($line)); ?>',new URL
 }); 
 </script>
 <td>
-	<a href="#"  class="AjaxHTMLFetcher btn btn-inverse reload-change-propagator" data-reload-change-type="model-editor-<?php echo $this->getListing()->getModel(); ?>" id="delete_<?php print($this->getId($line)); ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('Delete') ?></a>
+	<a href="#"  class="AjaxHTMLFetcher btn btn-inverse reload-change-propagator btn-mini" data-reload-change-type="model-editor-<?php echo $this->getListing()->getModel(); ?>" id="delete_<?php print($this->getId($line)); ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('Delete') ?></a>
 </td>
