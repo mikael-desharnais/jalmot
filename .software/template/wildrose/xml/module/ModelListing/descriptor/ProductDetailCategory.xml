@@ -1,0 +1,50 @@
+<listing>
+	<type>catalog</type>
+	<model>ProductDetailCategory</model>
+	<title>Catalog</title>
+	<class>ProductDetailModelListingDescriptor</class>
+	<hooks>
+		<hook>
+			<name>ModelEditor.form</name>
+			<modules>
+				<module>
+					<name>ContextMenu</name>
+					<instance>normal</instance>
+					<params><!-- 
+						<param type="array" name="descriptors">
+							<element key="0">MediaManagerCreate</element>
+							<element key="1">MediaManagerDirectoryEdit</element>
+							<element key="2">MediaManagerFileEdit</element>
+						</param> -->
+					</params>
+				</module>
+			</modules>
+		</hook>
+	</hooks>
+	<params>
+		<param name="modelEditor" type="simple">ProductDetailCategory</param>
+		<param name="modelEditorProductDetail" type="simple">ProductDetail</param>
+	</params>
+	<columns>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key></key>
+				<class>IconCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title>Name</title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<key>name</key>
+				<class>LanguageCellML</class>
+			</body>
+		</column>
+	</columns>
+</listing>

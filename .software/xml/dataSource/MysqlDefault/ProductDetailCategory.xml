@@ -1,0 +1,17 @@
+<modelInDS>
+	<name>ProductDetailCategory</name>
+	<dbname>product_detail_category</dbname>
+	<fields>
+		<field>
+			<name>idProductDetailCategory</name>
+			<dbname>id_product_detail_category</dbname>
+			<params>
+				<param type="simple" name="autoincrement">1</param>
+			</params>
+		</field>
+		<field>
+			<name>idParentProductDetailCategory</name>
+			<dbname>id_parent_product_detail_category</dbname>
+		</field>
+	</fields>
+</modelInDS>

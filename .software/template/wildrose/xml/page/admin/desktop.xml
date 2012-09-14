@@ -1,0 +1,51 @@
+<desktop>
+	<icons>
+		<icon>
+			<class>DesktopIcon</class>
+			<image>media/image/icon/user.png</image>
+			<text>User Management</text>
+			<instance>ModelListing</instance>
+			<params>
+				<param name="modelListing" type="simple">UserAdmin</param>
+				<param name="modelEditor" type="simple">UserAdmin</param>
+			</params>
+		</icon>
+		<icon>
+			<class>DesktopIcon</class>
+			<image>media/image/icon/test.png</image>
+			<text>Test</text>
+			<instance>ModelListing</instance>
+			<params>
+				<param name="modelListing" type="simple">test2</param>
+				<param name="modelEditor" type="simple">test3</param>
+			</params>
+		</icon>
+		<icon>
+			<class>DesktopIcon</class>
+			<image>media/image/icon/media.png</image>
+			<text>Media Management</text>
+			<instance>ModelListing</instance>
+			<params>
+				<param name="modelListing" type="simple">MediaManager</param>
+			</params>
+		</icon>
+		<icon>
+			<class>DesktopIcon</class>
+			<image>media/image/icon/cms.png</image>
+			<text>CMS</text>
+			<instance>ModelListing</instance>
+			<params>
+				<param name="modelListing" type="simple">TextContent</param>
+			</params>
+		</icon>
+		<icon>
+			<class>DesktopIcon</class>
+			<image>media/image/icon/media.png</image>
+			<text>Products</text>
+			<instance>ModelListing</instance>
+			<params>
+				<param name="modelListing" type="simple">ProductDetailCategory</param>
+			</params>
+		</icon>
+	</icons>
+</desktop>

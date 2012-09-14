@@ -1,0 +1,33 @@
+<model>
+	<datasource>MysqlDefault</datasource>
+	<name>ProductDetail</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idProductDetail</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>idProductDetailCategory</name>
+			<type>integer</type>
+		</field>
+	</fields>
+	<relations>
+		<relation>
+			<name>category</name>
+			<source>idProductDetailCategory</source>
+			<destination>
+				<model>ProductDetailCategory</model>
+				<field>idProductDetailCategory</field>
+			</destination>
+		</relation>
+		<relation>
+			<name>lang</name>
+			<source>idProductDetail</source>
+			<destination>
+				<model>ProductDetailLang</model>
+				<field>idProductDetail</field>
+			</destination>
+		</relation>
+	</relations>
+</model>

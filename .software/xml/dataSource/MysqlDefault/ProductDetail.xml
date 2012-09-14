@@ -1,0 +1,17 @@
+<modelInDS>
+	<name>ProductDetail</name>
+	<dbname>product_detail</dbname>
+	<fields>
+		<field>
+			<name>idProductDetail</name>
+			<dbname>id_product_detail</dbname>
+			<params>
+				<param type="simple" name="autoincrement">1</param>
+			</params>
+		</field>
+		<field>
+			<name>idProductDetailCategory</name>
+			<dbname>id_product_detail_category</dbname>
+		</field>
+	</fields>
+</modelInDS>

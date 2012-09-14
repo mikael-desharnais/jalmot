@@ -1,0 +1,45 @@
+<editor>
+	<class>ModelEditorDescriptor</class>
+	<type>simple</type>
+	<model>ProductDetailCategory</model>
+	<title>
+		<class>SimpleTitleME</class>
+		<model>ProductDetailCategoryLang</model>
+		<field>name</field>
+	</title>
+	<data_fetchers>
+		<data_fetcher>
+			<class>SimpleDataFetcher</class>
+		</data_fetcher>
+		<data_fetcher>
+			<class>LanguageDataFetcher</class>
+		</data_fetcher>
+	</data_fetchers>
+	<hooks>
+		<hook>
+			<name>ModelEditor.form</name>
+			<modules>
+				<module>
+					<name>LanguageChooser</name>
+					<instance>normal</instance>
+				</module>
+			</modules>
+		</hook>
+	</hooks>
+	<inputs>
+		<input>
+			<key>name</key>
+			<title>Name</title>
+			<class>LanguageFieldME</class>
+		</input>
+		<input>
+			<key>idParentProductDetailCategory</key>
+			<title></title>
+			<class>ParametersHiddenFieldME</class>
+			<params>
+				<param type="simple" name="paramKey">idProductDetailCategory</param>
+				<param type="simple" name="defaultValue">1</param>
+			</params>
+		</input>
+	</inputs>
+</editor>

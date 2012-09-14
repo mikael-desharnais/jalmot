@@ -1,0 +1,22 @@
+<modelInDS>
+	<name>ProductDetailLang</name>
+	<dbname>product_detail_lang</dbname>
+	<fields>
+		<field>
+			<name>idProductDetail</name>
+			<dbname>id_product_detail</dbname>
+		</field>
+		<field>
+			<name>idLang</name>
+			<dbname>id_lang</dbname>
+		</field>
+		<field>
+			<name>name</name>
+			<dbname>name</dbname>
+		</field>
+		<field>
+			<name>description</name>
+			<dbname>description</dbname>
+		</field>
+	</fields>
+</modelInDS>

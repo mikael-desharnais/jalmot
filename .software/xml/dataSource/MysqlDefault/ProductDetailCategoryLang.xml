@@ -1,0 +1,18 @@
+<modelInDS>
+	<name>ProductDetailCategoryLang</name>
+	<dbname>product_detail_category_lang</dbname>
+	<fields>
+		<field>
+			<name>idProductDetailCategory</name>
+			<dbname>id_product_detail_category</dbname>
+		</field>
+		<field>
+			<name>idLang</name>
+			<dbname>id_lang</dbname>
+		</field>
+		<field>
+			<name>name</name>
+			<dbname>name</dbname>
+		</field>
+	</fields>
+</modelInDS>

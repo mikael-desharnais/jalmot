@@ -1,0 +1,38 @@
+<modules>
+	<module>
+		<instancename>modelListing</instancename>
+		<class>ModelListing</class>
+		<params>
+			<param type="simple" name="mode">1</param>
+			<param type="simple" name="listingModelDescriptor">ModelListingDescriptor</param>
+		</params>
+	</module>
+	<module>
+		<instancename>ReloadManager</instancename>
+		<class>ReloadManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>WindowManager</instancename>
+		<class>WindowManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>MediaManager</instancename>
+		<class>MediaManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ProductDetailManager</instancename>
+		<class>ProductDetailManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ContextMenu</instancename>
+		<class>ContextMenu</class>
+	</module>
+	<module>
+		<instancename>MediaManagerListingFileUploader</instancename>
+		<class>MediaManagerListingFileUploader</class>
+	</module>
+</modules>

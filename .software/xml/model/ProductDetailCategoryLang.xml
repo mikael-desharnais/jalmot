@@ -1,0 +1,20 @@
+<model>
+	<datasource>MysqlDefault</datasource>
+	<name>ProductDetailCategoryLang</name>
+	<fields>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idProductDetailCategory</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<primary_key>1</primary_key>
+			<name>idLang</name>
+			<type>integer</type>
+		</field>
+		<field>
+			<name>name</name>
+			<type>string</type>
+		</field>
+	</fields>
+</model>

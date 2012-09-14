@@ -1,0 +1,4 @@
+<template>
+	<name>wildrose</name>
+	<parent>default_new</parent>
+</template>
