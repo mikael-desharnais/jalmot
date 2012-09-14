@@ -1,5 +1,7 @@
 <?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
 <?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs','redactor.js',false)),2); ?>
+<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/langs','fr.js',false)),2); ?>
+<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/toolbars','default.js',false)),2); ?>
 <?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/css','redactor.css',false)),2); ?>
 <?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','LanguageFieldME.css',false)),0); ?>
 <?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','TextareaLanguageFieldME.css',false)),0); ?>
@@ -18,15 +20,19 @@
 		<?php } ?>
 	</div>
 	<script>
+	jQuery(document).ready(function(){
 		jQuery('.HTMLLanguageFieldMEToWYSIWYG').each(function(){
 			jQuery(this).removeClass('HTMLLanguageFieldMEToWYSIWYG');
 			var parent=this;
 			var element = jQuery(this).redactor({ buildCallBack : 
 				function(){
 					jQuery(element.data('redactor').$box).addClass(jQuery(parent).attr('class'));
-				},path: Ressource.getConfiguration().getValue('domainName')+'/'+Ressource.getConfiguration().getValue('TemplateDirectory')+'lib/redactorjs/' , lang: 'fr' });
+				},path: Ressource.getConfiguration().getValue('domainName')+'/'+Ressource.getConfiguration().getValue('TemplateDirectory')+'lib/redactorjs/' , lang: 'fr',
+				css :'<?php   echo '/'.Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/css','style.css',false))->toFullURL(); ?>'});
 			var redactor=element.data('redactor');
+			redactor.start();
 		});
+	});
 	</script>
 </td>	
 </tr>

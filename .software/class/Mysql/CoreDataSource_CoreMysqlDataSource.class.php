@@ -173,7 +173,7 @@
 		    $this->dbFieldNames[$xml->name.""]=array();
 		    foreach($xml->fields->children() as $field){
 		        $this->dbFieldNames[$xml->name.""][$field->name.""]=$field->dbname."";
-		        $this->dbFieldNames[$xml->dbname.""][$field->dbname.""]=$field->name."";
+		        $this->modelFieldNames[$xml->dbname.""][$field->dbname.""]=$field->name."";
 				$this->params[$xml->name.""][$field->name.""]=XMLParamsReader::read($field);
 		    }
 	    }
@@ -193,6 +193,13 @@
 	* @param string $modelFieldName The field name
 	*/
 	public function getDbFieldName($modelName,$modelFieldName){
+	    if (!array_key_exists($modelName, $this->dbFieldNames)){
+	        Log::Error("Can't find model name ".$modelName." in model description");
+	    }elseif (!array_key_exists($modelFieldName, $this->dbFieldNames[$modelName])){
+	        print('<pre>++');
+	        print_r($modelName);
+	        Log::Error("Can't find model name ".$modelFieldName." in model description : ".$modelName);
+	    }
 	    return $this->dbFieldNames[$modelName][$modelFieldName];
 	}
 	/**
@@ -202,12 +209,12 @@
 	* @param string $dbFieldName The name of the field
 	*/
 	public function getModelFieldName($tableName,$dbFieldName){
-	    if (!array_key_exists($tableName, $this->dbFieldNames)){
+	    if (!array_key_exists($tableName, $this->modelFieldNames)){
 	        Log::Error("Can't find table name ".$tableName." in mysql tables description");
-	    }else if (!array_key_exists($dbFieldName, $this->dbFieldNames[$tableName])){
+	    }else if (!array_key_exists($dbFieldName, $this->modelFieldNames[$tableName])){
 	        Log::Error("Can't find field name ".$dbFieldName." in mysql fields description of table ".$tableName);
 	    }else {
-	    	return $this->dbFieldNames[$tableName][$dbFieldName];
+	    	return $this->modelFieldNames[$tableName][$dbFieldName];
 	    }
 	}
 	public function getFoundRows(){

@@ -96,46 +96,7 @@ var RTOOLBAR = {};
 	// Functionality
 	Redactor.prototype = {
 
-		// DYNAMICALLY LOAD
-		_loadFile: function(file, array)
-		{
-			var item = array[0];
-			array.splice(0, 1);
-
-			var callback;
-			if (typeof(item) == 'function') callback = item;
-			else callback = $.proxy(function() { this._loadFile(item, array); }, this);
 		
-			this.dynamicallyLoad(file, callback);
-		},
-		loadFiles: function(array)
-		{
-			var item = array[0];
-			array.splice(0, 1);
-
-			this._loadFile(item, array);
-		},
-		dynamicallyLoad: function (url, callback)
-		{
-			var head = document.getElementsByTagName("head")[0];
-			var script = document.createElement("script");
-			script.src = url;
-
-			var done = false;
-
-			script.onload = script.onreadystatechange = function()
-			{
-				if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete"))
-				{
-					done = true;
-					if (callback) callback();
-					script.onload = script.onreadystatechange = null;
-				}
-			};
-			
-			head.appendChild(script);
-
-		},
 
 		// Initialization
 		init: function()
@@ -143,24 +104,9 @@ var RTOOLBAR = {};
 			// get path to styles
 			this.getPath();
 
-			if (this.opts.load)
-			{
-				// load files
-				var files = [];
-
-				files.push(this.opts.path + '/langs/' + this.opts.lang + '.js');
-				if (this.opts.toolbar !== false) files.push(this.opts.path + '/toolbars/' + this.opts.toolbar + '.js');
-				files.push($.proxy(this.start, this));
-
-				this.loadFiles(files);
-			}
-			else this.start();
-
-
 		},
 		start: function()
 		{
-
 			// get dimensions
 			this.height = this.$el.css('height');
 			this.width = this.$el.css('width');
@@ -344,7 +290,7 @@ var RTOOLBAR = {};
 		setDoc: function(html)
 		{
 			var frameHtml = '<!DOCTYPE html>\n';
-			frameHtml += '<html><head><link media="all" type="text/css" href="' + this.opts.path + '/css/' + this.opts.css + '" rel="stylesheet"></head>';
+			frameHtml += '<html><head><link media="all" type="text/css" href="' + this.opts.css + '" rel="stylesheet"></head>';
 			frameHtml += '<body><div id="page" contenteditable="true">';
 			frameHtml += html;
 			frameHtml += '</div></body></html>';
@@ -2151,7 +2097,7 @@ var RTOOLBAR = {};
 			atext: RLANG.or_choose
 			
 		}, options);
-		
+		console.log(this.opts);
 		this.$el = $(el);
 	}
 

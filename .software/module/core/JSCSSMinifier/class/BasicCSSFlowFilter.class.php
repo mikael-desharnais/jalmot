@@ -41,7 +41,8 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
     */
     public function adaptContentURLs($file,$content){
         $this->currentFile = $file;
-        return preg_replace_callback('/:[ ]*url\(./',array($this,"replaceURL"),$content);
+        $newContent= preg_replace_callback('/(:[ ]*url\()(.)([^\'"\)]*)/',array($this,"replaceURL"),$content);
+        return $newContent;
     }
     /**
     * Used by the adaptContentURLs to modify the url contents properly
@@ -49,10 +50,17 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
     * @param string $match the matched part
     */
     private function replaceURL($match){
-        if ($match[0][strlen($match[0])-1]=='"'||$match[0][strlen($match[0])-1]=="'"){
-            return $match[0]."../../../../../".$this->currentFile->getDirectory().'/';
+        $baseDirectory = preg_replace('/template\/[^\/]*\//','',$this->currentFile->getDirectory());
+        if ($match[2]=='"'||$match[2]=="'"){
+        	$file = File::createFromURL($baseDirectory.'/'.$match[3]);
         }else {
-        	return " : url(../../../../../".$this->currentFile->getDirectory().'/'.$match[0][strlen($match[0])-1];
+        	$file = File::createFromURL($baseDirectory.'/'.$match[2].$match[3]);
+        }
+        $template_file=Ressource::getCurrentTemplate()->getFile($file);
+        if ($match[2]=='"'||$match[2]=="'"){
+            return $match[1].$match[2].'../../../../../'.$template_file->toURL();
+        }else {
+        	return $match[1].'../../../../../'.$template_file->toURL();
         } 
     }
 }

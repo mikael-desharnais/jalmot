@@ -27,7 +27,6 @@
 			<body>
 				<key>title</key>
 				<class>LanguageCellML</class>
-				<model>TextContentLang</model>
 			</body>
 		</column>
 		<column>

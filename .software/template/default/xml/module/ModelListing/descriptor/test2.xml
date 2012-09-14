@@ -46,7 +46,6 @@
 			</head>
 			<body>
 				<key>name</key>
-				<model>testLang</model>
 				<class>LanguageCellML</class>
 			</body>
 		</column>

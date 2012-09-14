@@ -2,15 +2,10 @@
 
 class LanguageCellML extends SimpleCellML {
 
-	private $model_lang;
-	public function __construct($key,$model_lang){
-		parent::__construct($key);
-		$this->model_lang=$model_lang;
-	}
-	public function toHTML($line){
-		$line=$line->lstLang()
-					->addConditionBySymbol('=',Model::getModel($this->model_lang)->getField('idLang'), Ressource::getCurrentLanguage()->getId())
-					->getModelDataElement();
+	public function toHTML($element){
+		$line_query=$element->lstLang();
+		$line = $line_query->addConditionBySymbol('=',$line_query->getModel()->getField('idLang'), Ressource::getCurrentLanguage()->getId())
+							->getModelDataElement();
 		ob_start();
 		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML.phtml"));
 		return ob_get_clean();

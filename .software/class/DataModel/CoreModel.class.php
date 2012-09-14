@@ -154,6 +154,9 @@ class CoreModel{
     * @param string $name The name of the relation to return
     */
     public function getRelation($name){
+        if (!array_key_exists(strtolower($name), $this->relations)){
+            Log::Error('Trying to use relation '.$name.' that cannot be found for model '.$this->name);
+        }
         $toReturn= $this->relations[strtolower($name)];
         return $toReturn;
     }

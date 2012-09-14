@@ -92,6 +92,9 @@ Window=function(){
 		fetcher.fetch();
 		fetcher.integrate();
 	};
+	this.close=function(){
+		this.jqueryElement.close();
+	}
 }
 
 Window.formerPosition = new Object();
