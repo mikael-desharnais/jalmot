@@ -20,15 +20,13 @@
 				<param name="reference" type="simple">TextCategory</param>
 			</params>
 		</data_fetcher>
-		<!-- 
 		<data_fetcher>
 			<class>NMForeignKeyDataFetcher</class>
 			<params>
 				<param name="relation" type="simple">mediaFileNM</param>
 				<param name="reference" type="simple">MediaFile</param>
 			</params>
-		</data_fetcher>
-		 -->
+		</data_fetcher> 
 	</data_fetchers>
 	<hooks>
 		<hook>
@@ -70,7 +68,6 @@
 				<param name="modelListing" type="simple">TextCategory</param>
 			</params>
 		</input>
-		<!-- 
 		<input>
 			<key>idMediaFile</key>
 			<title>Images</title>
@@ -84,7 +81,7 @@
 				<param name="nameKey" type="simple">name</param>
 			</params>
 		</input>
-		 -->
+
 		<input>
 			<key>description</key>
 			<model>testLang</model>

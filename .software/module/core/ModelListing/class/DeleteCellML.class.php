@@ -11,7 +11,7 @@ class DeleteCellML extends SimpleCellML {
 
 	protected function getId($line){
 		$primary_keys=$line->getPrimaryKeys();
-		$toReturn="";
+		$toReturn=$line->getParentModel()->getName();
 		foreach($primary_keys as $name=>$value){
 			$toReturn.=($toReturn==""?"":"-").$value;
 		}

@@ -5,7 +5,6 @@ class LanguageDataFetcher extends SimpleDataFetcher {
 	public function fetchData($modelEditorDescriptor){
 	    $fetchedData=$modelEditorDescriptor->getFetchedData();
 	    $model=Model::getModel($this->model_editor->getModel());
-	    $db_lines=array();
 	    if ($modelEditorDescriptor->getSource()!=ModelData::$SOURCE_NEW){
 	        $db_lines=$fetchedData['simple']->lstLang()
 	        				->getModelData(true);
@@ -24,7 +23,7 @@ class LanguageDataFetcher extends SimpleDataFetcher {
 	            $modelLang = ($model->getRelation('lang')->getDestination()->getModel()==$model?$model->getRelation('lang')->getSource()->getModel():$model->getRelation('lang')->getDestination()->getModel());
 	            $element=$modelLang->getInstance();
 	            $element->setIdLang($language->getId());
-	            $db_lines[]=$element;
+	            $db_lines->addModelData($element);
 	        }
 	    }
 	    return array("lang"=>$db_lines);

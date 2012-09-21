@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 		jQuery('.draggableTarget').droppable( "destroy" );
 		jQuery('.draggableTarget').droppable({ 
 			drop: function(event,ui){
-				jQuery('body').trigger('draggablestop',new Array(ui.helper,jQuery(this)))},
+				jQuery('body').trigger('draggablestop',new Array(ui.helper,jQuery(this),ui.draggable))},
 			over : function(event,ui){
 				ui.helper.trigger('draggableover',ui.helper);
 			}
