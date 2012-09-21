@@ -1,0 +1,12 @@
+<?php if ($element->getParentModel()->getName()=="ProductDetailCategory"){ ?>
+	<?php $isCategory = true; ?>
+<?php } else {?>
+	<?php $isCategory = false; ?>
+<?php }?>
+
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/modelListing','ProductDetailElementIconCellML.js',false)),0); ?>
+<td style="padding : 0;" width="30" align="right" class="<?php echo $isCategory?'draggableTarget':''; ?> <?php echo $element->getParentModel()->getName(); ?> ProductDetailElementIcon reload-change-propagator" target-type="<?php echo $element->getParentModel()->getName(); ?>"  data-idProductDetailCategory="<?php echo $element->getIdProductDetailCategory(); ?>"  data-reload-change-type="model-editor-<?php echo $element->getParentModel()->getName(); ?>">
+	<a href="#" class="<?php echo $isCategory?'draggableInField':''; ?>" <?php if ($isCategory){ ?> data-idProductDetailCategory="<?php echo $element->getIdProductDetailCategory(); ?>" draggable-type="<?php echo $element->getParentModel()->getName(); ?>" <?php }?>>
+		<img width="30" src="<?php print(Ressource::getCurrentTemplate()->getFile(new File("media/image/module/ProductDetailManager",$element->getParentModel()->getName().".png",false))->toFullURL()); ?>">
+	</a>
+</td>

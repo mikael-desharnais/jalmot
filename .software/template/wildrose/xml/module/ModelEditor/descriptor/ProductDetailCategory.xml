@@ -3,7 +3,7 @@
 	<type>simple</type>
 	<model>ProductDetailCategory</model>
 	<title>
-		<class>SimpleTitleME</class>
+		<class>LanguageTitleME</class>
 		<model>ProductDetailCategoryLang</model>
 		<field>name</field>
 	</title>

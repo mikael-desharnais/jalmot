@@ -7,17 +7,6 @@
 		<hook>
 			<name>ModelEditor.form</name>
 			<modules>
-				<module>
-					<name>ContextMenu</name>
-					<instance>normal</instance>
-					<params><!-- 
-						<param type="array" name="descriptors">
-							<element key="0">MediaManagerCreate</element>
-							<element key="1">MediaManagerDirectoryEdit</element>
-							<element key="2">MediaManagerFileEdit</element>
-						</param> -->
-					</params>
-				</module>
 			</modules>
 		</hook>
 	</hooks>
@@ -33,7 +22,7 @@
 			</head>
 			<body>
 				<key></key>
-				<class>IconCellML</class>
+				<class>ProductDetailElementIconCellML</class>
 			</body>
 		</column>
 		<column>
@@ -43,7 +32,33 @@
 			</head>
 			<body>
 				<key>name</key>
-				<class>LanguageCellML</class>
+				<class>ProductDetailElementLanguageCellML</class>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>ProductDetailElementEditCellML</class>
+				<params>
+					<param name="modelEditorProductDetailCategory" type="simple">ProductDetailCategory</param>
+					<param name="modelEditorProductDetail" type="simple">ProductDetail</param>
+				</params>
+			</body>
+		</column>
+		<column>
+			<head>
+				<title></title>
+				<class>SimpleHeadCellML</class>
+			</head>
+			<body>
+				<class>ProductDetailElementDeleteCellML</class>
+				<params>
+					<param name="modelEditorProductDetailCategory" type="simple">ProductDetailCategory</param>
+					<param name="modelEditorProductDetail" type="simple">ProductDetail</param>
+				</params>
 			</body>
 		</column>
 	</columns>

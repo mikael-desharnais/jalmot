@@ -2,6 +2,8 @@
 
 class ProductDetailModelListingDescriptor extends ModelListingDescriptor {
 
+    public $currentElementParent;
+    
 	/**
 	* Fetches the data for the current directory taken from Parameter id[idMediaDirectory]
 	* If the current directory is not root directory, a ParentDirectory Is added to the list of elements
@@ -19,15 +21,42 @@ class ProductDetailModelListingDescriptor extends ModelListingDescriptor {
 	    $currentElement=$model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
 		          		->addConditionBySymbol('=',$model->getField('idProductDetailCategory'), $id_category)
 		           		->getModelDataElement();
-
+	    
 	    if ($id_category!=1){
-	        $parent_category=$model->getInstance();
-	        $parent_category->setName('Parent Category');
-	        $parent_category->editable=false;
-	        $parent_category->setIdMediaDirectory($currentElement->lstParent()->getModelDataElement()->getIdMediaDirectory());
-	        $this->list->addModelData($parent_category);
+	    	$this->currentElementParent=$currentElement->lstParent()->getModelDataElement();
+	        $this->list->addModelData($this->currentElementParent);
 	    }
-	    $this->list=$this->list->merge($currentElement->lstChildren()->getModelData())->merge($currentElement->lstProduct()->getModelData());
+	    
+	    $childrenQuery = $currentElement->lstChildren();
+	    $productQuery = $currentElement->lstProduct();
+	    
+	    foreach($this->filters as $filter){
+	        $childrenQuery->addCondition($filter->getModelDataQueryCondition($childrenQuery->getModel()));
+	        $productQuery->addCondition($filter->getModelDataQueryCondition($productQuery->getModel()));
+	    }
+	    
+	    $children = $childrenQuery->getModelData();
+	    $childrenSize = $childrenQuery->getFoundRows();
+	    $product = $productQuery->getModelData();
+	    $productSize = $productQuery->getFoundRows();
+	    $this->list->merge($children)->merge($product);
+	    $this->originalSize=$childrenSize+$productSize;
+	    
+	    $pageList = new ModelDataCollection();
+	    
+	    $counter = 0;
+	    
+	    foreach($this->list as $element){
+	    	if ($counter>=($this->page*$this->pageSize)&&$counter<(($this->page+1)*$this->pageSize)){
+	    	   $pageList->addModelData($element);
+	    	}
+	    	$counter++;
+	    }
+	    
+	    $this->list = $pageList;
+	    
+	    
+	    
 	}
 }
 

@@ -31,7 +31,7 @@ AjaxHTMLFetcher.setFetcher('new_ProductDetail',new URL(Ressource.getConfiguratio
 	</thead>
 	<tbody>
 		<?php foreach($this->list as $line){ ?>
-			<tr>
+			<tr class="modelListingLine">
 				<?php foreach($this->columns as $column){ ?>
 					<?php echo $column['body']->toHTML($line); ?>
 				<?php } ?>
@@ -41,36 +41,22 @@ AjaxHTMLFetcher.setFetcher('new_ProductDetail',new URL(Ressource.getConfiguratio
 	<tfoot>
 		<tr class="change-page">
 			<td colspan="<?php echo count($this->columns);?>">
-			<table width="100%">
-				<tr>
-			<?php
-				$first = true; 
-				$count = 0;
-				foreach($this->columns as $column){ 
-					$count++;
-					if ($first){
-					?>
-					<td align="left" width="50%">
-							<a href="#"  class="AjaxHTMLFetcher btn btn-primary btn-mini" id="new_<?php echo $this->model; ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('New Category') ?></a>&nbsp;&nbsp;<a href="#"  class="AjaxHTMLFetcher btn btn-primary btn-mini" id="new_ProductDetail"><?php echo Ressource::getCurrentLanguage()->getTranslation('New Product') ?></a>
-					</td>
-					<?php }
-					elseif ($count<count($this->columns)) { ?>
-					<td align="right" width="50%"></td>
-				<?php }else{ ?>
-					<td align="right" width="50%">
-							<?php 
-							if ($this->originalSize>$this->pageSize){
-								for($x=0;$x<floor(($this->originalSize-1)/$this->pageSize)+1;$x++){ 
-								?>
-								<a href="#" class="btn <?php if ($x==$this->page){ echo "disabled"; }	?>" data-page="<?php echo $x; ?>"><?php echo $x+1; ?></a>
+				<table width="100%">
+					<tr>
+						<td align="left" width="50%">
+								<a href="#"  class="AjaxHTMLFetcher btn btn-primary btn-mini" id="new_<?php echo $this->model; ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('New Category') ?></a>&nbsp;&nbsp;<a href="#"  class="AjaxHTMLFetcher btn btn-primary btn-mini" id="new_ProductDetail"><?php echo Ressource::getCurrentLanguage()->getTranslation('New Product') ?></a>
+						</td>
+						<td align="right" width="50%">
 								<?php 
+								if ($this->originalSize>$this->pageSize){
+									for($x=0;$x<floor(($this->originalSize-1)/$this->pageSize)+1;$x++){ 
+									?>
+									<a href="#" class="btn <?php if ($x==$this->page){ echo "disabled"; }	?>" data-page="<?php echo $x; ?>"><?php echo $x+1; ?></a>
+									<?php 
+									}
 								}
-							}
-							?>
-					</td>
-				<?php }
-					$first = false;
-				} ?>
+								?>
+						</td>
 					</tr>
 				</table>
 			</td>
