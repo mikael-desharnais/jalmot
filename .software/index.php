@@ -1,8 +1,6 @@
 <?php
 
 include("class/Classe.class.php");
-include("misc/functions.php");
-
 
  Classe::IncludeAll();
  

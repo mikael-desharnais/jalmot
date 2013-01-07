@@ -20,7 +20,7 @@ class TextContentDisplayer extends Module{
         
         $textContentModel=Model::getModel('TextContent');
         $textContentLangModel=Model::getModel('TextContentLang');
-        $this->textContent=Ressource::getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$textContentModel)
+        $this->textContent=$textContentModel->getDatasource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$textContentModel)
         	->addConditionBySymbol('=',$textContentModel->getField('idTextContent'), $this->htmlProducer->getConfParam('id'))
         	->getModelDataElement();
         $this->textContentLang=$this->textContent

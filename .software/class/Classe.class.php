@@ -61,6 +61,7 @@ class Classe {
 	* Includes all the classes of the system (to be found in class/)
 	*/
 	public static function includeAll() {
+		spl_autoload_register(array("Classe","autoload"));
 		Classe::includeDirectory("class");
 	}
 	/**
