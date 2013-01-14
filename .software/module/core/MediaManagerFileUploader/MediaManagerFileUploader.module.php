@@ -7,6 +7,7 @@ class MediaManagerFileUploader extends Module{
 		
 		if (Ressource::getParameters()->valueExists('action')&&Ressource::getParameters()->getValue('action')=="create_file"){
 			$listener=new EventListener($this);
+			//TODO a refaire dans execute
 			$listener->afterExecutePerformed=function ($listenedTo,$listeningObject){
 			    $model = Model::getModel("MediaFile");
 			    $id=Ressource::getParameters()->getValue('id');

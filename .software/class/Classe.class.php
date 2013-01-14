@@ -45,8 +45,9 @@ class Classe {
 	            $classnameArray = explode ( "_", $fullclassname );
 	            $classname = substr($classnameArray [count ( $classnameArray ) - 1],4);
 	    
-	            if (file_exists ( "override/class/" . $fullclassname . ".class.php" )) {
-	                include_once ("override/class/" . $fullclassname . ".class.php");
+	            // TO DO not a good way to do things
+	            if (file_exists ( "override/class/" . $classname . ".class.php" )) {
+	                include_once ("override/class/" . $classname . ".class.php");
 	            } else {
 	                if (!file_exists(".cache/class/".$fullclassname . ".class.php")){
 	                    $class = new ReflectionClass("Core" . $classname);

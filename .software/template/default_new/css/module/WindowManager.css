@@ -1,0 +1,31 @@
+.windowContainer {
+	width : 950px;
+	height : 100%;
+	float : left;
+	position : relative;
+}
+.windowPanel{
+	position : absolute;
+	top : 0;
+	width : 100%;
+	height : 100%;
+	background-color : #F5F5F5;
+	overflow : auto;
+  	overflow-x : auto;
+}
+.closeButton {
+	position : absolute;
+	width : 20px;
+	height : 20px;
+	right : 10px;
+	top : 10px;
+	background : url('../../media/image/share/close.png') no-repeat;
+}
+.windowContent {
+	position : absolute;
+	width : 100%;
+	height : 100%;
+}
+form.well {
+	height : auto;
+}

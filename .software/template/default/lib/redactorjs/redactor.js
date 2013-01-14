@@ -168,7 +168,6 @@ var RTOOLBAR = {};
 					// new line p
 					if (key == 13 && !e.shiftKey && !e.ctrlKey && !e.metaKey) return this.formatNewLine(e);
 				}
-				//console.log(e);
 				this.syncCode();
 
 			}, this));
@@ -273,7 +272,11 @@ var RTOOLBAR = {};
 		{
 			this.doc.open();
 			this.doc.write(html);
-			this.doc.close();
+			// Correction pour Chrome
+			$.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase()); 
+			if (!$.browser.chrome){
+				this.doc.close();
+			}
 		},
 		enable: function(html)
 		{
@@ -2097,7 +2100,6 @@ var RTOOLBAR = {};
 			atext: RLANG.or_choose
 			
 		}, options);
-		console.log(this.opts);
 		this.$el = $(el);
 	}
 
