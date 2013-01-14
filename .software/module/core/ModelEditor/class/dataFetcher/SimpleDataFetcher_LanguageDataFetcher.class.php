@@ -8,6 +8,8 @@ class LanguageDataFetcher extends SimpleDataFetcher {
 	    if ($modelEditorDescriptor->getSource()!=ModelData::$SOURCE_NEW){
 	        $db_lines=$fetchedData['simple']->lstLang()
 	        				->getModelData(true);
+	    }else {
+	    	$db_lines = new ModelDataCollection();
 	    }
 	    
 	    $languages=Language::getAvailableLanguages();
