@@ -9,7 +9,11 @@ class CoreXMLDocument{
 	* @param File $filename File to load
 	*/
 	public static function parseFromFile($filename){
-	    return simplexml_load_file($filename->toURL());
+		if (!file_exists($filename->toURL())){
+			throw new Exception('Trying to open unknown xml file '.$filename->toURL());	
+		}else {
+	    	return simplexml_load_file($filename->toURL());
+		}
 	}
 }
 
