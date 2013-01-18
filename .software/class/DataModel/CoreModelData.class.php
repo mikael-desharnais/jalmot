@@ -23,6 +23,8 @@ class CoreModelData{
 	*/
 	public $source;
 	
+	
+	public $changeLog = array();
 	/** Event listeners */
 	
 	/**
@@ -125,7 +127,7 @@ class CoreModelData{
         $this->source=ModelData::$SOURCE_NEW;
     }
     /**
-     * Initialises the parent model and sets the source to new
+     * returns an associative array containing only the data of this ModelData
      * @return Array returns an associative array containing only the data of this ModelData
      */
     public function toArray(){
@@ -153,6 +155,9 @@ class CoreModelData{
 	    }else if ($action=="set"){
 	        $value=$arguments[0];
 	        ModelType::getType($this->__parent_model->getField($fieldName)->getType())->checkValue($value);
+	        if (!array_key_exists($fieldName, $this->changeLog)){
+	        	$this->changeLog[$fieldName]=$this->$fieldName;
+	        }
 	        $this->$fieldName=$value;
 	    }else if ($action=="lst"){
 	        $model=$this->__parent_model->getRelation($fieldName)->getDestination()->getModel();
@@ -228,6 +233,14 @@ class CoreModelData{
 	    $this->propagateAfterStaticDelete($this);
 	    $this->chainDelete();
 	}
+	
+	public function startChangeLogging(){
+		$this->changeLog=array();
+	}
+	public function getChangeLog(){
+		return $this->changeLog;
+	}
+	
 	/**
 	* Return the parent Model of this ModelData
 	* @return Model the parent Model of this ModelData

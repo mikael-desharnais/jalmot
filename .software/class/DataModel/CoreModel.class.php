@@ -26,24 +26,38 @@ class CoreModel{
     */
     public static function loadModel($name){
         $xml=XMLDocument::parseFromFile(new File("xml/model",$name.".xml",false));
-        $model=new Model($name,DataSource::getDataSource($xml->datasource.""));
-        foreach($xml->fields->children() as $field){
-            $model_field=new ModelField($model,$field->name."",$field->type."",(isset($field->primary_key)&&$field->primary_key.""==1?true:false));
-			$params=XMLParamsReader::read($field);
-            $model_field->setParams($params);
-            if (!empty($field->encryptor)){
-	            $model_field->setEncryptor($field->encryptor."");
-            } 
-        	$model->addField($model_field);
+        if (empty($xml->class)){
+        	$modelClass="Model";
+        }else{
+        	$modelClass=$xml->class."";
         }
-        self::$models[$name]=$model;
+        $model=call_user_func(array($modelClass,"readFromXML"),$modelClass,$name,$xml);
+    }
+    public static function readFromXML($class,$name,$xml){
+    	$toReturn = new $class($name);
+    	$toReturn->setDatasource(DataSource::getDataSource($xml->datasource.""));
+        foreach($xml->fields->children() as $field){
+        	if (empty($field->class)){
+        		$fieldClass = "ModelField";
+        	}else{
+        		$fieldClass = $field->class."";
+        	} 
+        	$model_field = call_user_func(array($fieldClass,"readFromXML"),$toReturn,$fieldClass,$field);
+        	$toReturn->addField($model_field);
+        }
+        self::$models[$name]=$toReturn;
 		if (count($xml->relations)>0){
 	        foreach($xml->relations->children() as $relation){
-	            $source=$model->getField($relation->source."");
-	            $destination=Model::getModel($relation->destination->model."")->getField($relation->destination->field."");
-	           	$model->addRelation(new ModelRelation($relation->name."",$source,$destination,($relation->type."")));
+	        	if (empty($relation->class)){
+	        		$relationClass = "ModelRelation";
+	        	}else{
+	        		$relationClass = $relation->class."";
+	        	}
+	        	$relation = call_user_func(array($relationClass,"readFromXML"),$toReturn,$relationClass,$relation);
+	           	$toReturn->addRelation($relation);
 	        }
 		}
+		return $toReturn;
     }
     /**
     * Name of the model
@@ -60,12 +74,16 @@ class CoreModel{
     
     protected $datasource;
     
+    protected $modelDataClass = "ModelData";
+    
     /**
     * Initialises the name of the model
-    * @param string $name Nom du mod�le
+    * @param string $name name of the model
     */
-    private function __construct($name,$datasource){
+    public function __construct($name){
         $this->name=$name;
+    }
+    public function setDatasource($datasource){
         $this->datasource =$datasource;
     }
     public function getDatasource(){
@@ -105,7 +123,7 @@ class CoreModel{
         $file = new File(".cache/class/model","Core".$this->name.'.class.php',false);
         if (!$file->exists()){
             $code="<?php
-	    	class Core".$this->name." extends ModelData{
+	    	class Core".$this->name." extends ".$modelDataClass."{
 	    	";
 	    	foreach($this->fields as $field){
 	    	    $code.=$field->getCode();
@@ -128,7 +146,7 @@ class CoreModel{
     * @param string $name the name of the field to return
     */
     public function getField($name){
-		if (!array_key_exists(strtolower($name),$this->fields)){
+		if (!$this->fieldExists($name)){
 			Log::Error('Trying to access to unknown Model Field "'.$this->name.'"."'.strtolower($name).'"');
 		}
         $toReturn= $this->fields[strtolower($name)];
@@ -140,6 +158,14 @@ class CoreModel{
     */
     public function getFields(){
         return $this->fields;
+    }
+    /**
+    * Returns true if the field exists
+    * @param string $name the name of the field to search
+    * @return boolean true if the field exists
+    */
+    public function fieldExists($name){
+        return array_key_exists(strtolower($name),$this->fields);
     }
     /**
     * Returns the name of the Model

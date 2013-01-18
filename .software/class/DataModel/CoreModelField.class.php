@@ -4,6 +4,17 @@
 * It is the equivalent of a column in a mysql table
 */
 class CoreModelField{
+	
+	public static function readFromXML($model,$class,$xml){
+		$toReturn = new $class($model,$xml->name."",$xml->type."",(isset($xml->primary_key)&&$xml->primary_key.""==1?true:false));
+		$params=XMLParamsReader::read($xml);
+		$toReturn->setParams($params);
+		if (!empty($xml->encryptor)){
+			$toReturn->setEncryptor($xml->encryptor."");
+		}
+		return $toReturn;
+	}
+	
     /**
     * The name of this field
     */

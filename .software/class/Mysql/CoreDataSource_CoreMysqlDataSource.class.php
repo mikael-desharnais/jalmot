@@ -48,6 +48,7 @@
          	        $function="set".ucfirst(strtolower($fieldName));
          	        $instance->$function(call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","parse"),$val));
          	    }
+         	    $instance->startChangeLogging();
          	    $toReturn->addModelData($instance);
          	}
          }

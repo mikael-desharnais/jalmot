@@ -5,6 +5,15 @@
 * 
 */
 class CoreModelRelation{
+	
+
+	public static function readFromXML($model,$class,$xml){
+		$source=$model->getField($xml->source."");
+		$destination=Model::getModel($xml->destination->model."")->getField($xml->destination->field."");
+		$toReturn = new $class($xml->name."",$source,$destination,$xml->type."");
+		return $toReturn;
+	}
+	
 	/**
 	* The name of the relation.
 	* To use when using magin method lst[RELATIONNAME]
