@@ -89,7 +89,8 @@
 			<class>HTMLLanguageFieldME</class>
 		</input>
 		<input>
-			<key>idTextCategory</key>
+			<localKey>idTextCategory</localKey>
+			<referenceKey>idTextCategory</referenceKey>
 			<title>SubElements</title>
 			<class>ModelListingME</class>
 			<params>

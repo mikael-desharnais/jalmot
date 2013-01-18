@@ -1,8 +1,10 @@
 <listing>
-	<type>simple</type>
+	<type>media</type>
 	<model>MediaDirectory</model>
 	<title>Media Manager</title>
-	<class>DirectoryModelListingDescriptor</class>
+	<class>CategoryModelListingDescriptor</class>
+	<linkingField>idMediaDirectory</linkingField>
+	<contentRelation>file</contentRelation>
 	<hooks>
 		<hook>
 			<name>ModelEditor.form</name>

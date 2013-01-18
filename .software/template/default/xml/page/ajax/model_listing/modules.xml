@@ -1,5 +1,10 @@
 <modules>
 	<module>
+		<instancename>AdminLoginManager</instancename>
+		<class>AdminLoginManager</class>
+		<params></params>
+	</module>
+	<module>
 		<instancename>modelListing</instancename>
 		<class>ModelListing</class>
 		<params>

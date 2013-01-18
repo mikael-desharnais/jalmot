@@ -59,8 +59,11 @@ class CoreLog
      * @param $message		message to log 
      */
     public static function Error ($message){
+    	if (!defined('DEBUG_BACKTRACE_IGNORE_ARGS')){
+    		define('DEBUG_BACKTRACE_IGNORE_ARGS',1);
+    	}
         self::LogData($message, self::$LOG_LEVEL_ERROR);
-        self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), self::$LOG_LEVEL_ERROR);
+        //self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), self::$LOG_LEVEL_ERROR);
 		throw new Exception($message);
     }    
     /**
@@ -69,8 +72,11 @@ class CoreLog
      * @param $message		message to log 
      */
     public static function Warning ($message){
+    	if (!defined('DEBUG_BACKTRACE_IGNORE_ARGS')){
+    		define('DEBUG_BACKTRACE_IGNORE_ARGS',1);
+    	}
         self::LogData($message, self::$LOG_LEVEL_WARNING);
-        self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), self::$LOG_LEVEL_WARNING);
+        //self::LogData(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), self::$LOG_LEVEL_WARNING);
     }
     /**
      * propagate a log with custom log level if the given level is greater than or equal to the global log level, the message will be displayed 

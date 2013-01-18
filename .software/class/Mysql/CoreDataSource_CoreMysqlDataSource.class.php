@@ -134,6 +134,12 @@
 			case "BETWEEN" :
 				return new MysqlBetweenCondition($args[1],$args[2],$args[3]);
 			break;
+			case ">" :
+				return new MysqlGreaterThanCondition($args[1],$args[2]);
+			break;
+			case "<" :
+				return new MysqlLesserThanCondition($args[1],$args[2]);
+			break;
 			default :
 			    Log::Error(__CLASS__." cant't find operator ".$args[0]);
 			break;
@@ -166,7 +172,11 @@
 	private function loadDbToModelData(){	    
 	    $directory = glob ( "xml/dataSource/".$this->getName()."/*.xml" );
 	    foreach($directory as $file){
+		    $fileObject=File::createFromURL($file);
 		    $xml=XMLDocument::parseFromFile(File::createFromURL($file));
+		    if ($xml->name.".".$fileObject->getExtension()!=$fileObject->getFile()){
+		    	Log::Error("Error : the name of the DataSource File must be identical to that of the Model : ".$fileObject->getFile());
+		    }
 		    $this->modelNames[$xml->dbname.""]=$xml->name."";
 		    $this->modelFieldNames[$xml->dbname.""]=array();
 		    $this->dbTableNames[$xml->name.""]=$xml->dbname."";
@@ -196,8 +206,6 @@
 	    if (!array_key_exists($modelName, $this->dbFieldNames)){
 	        Log::Error("Can't find model name ".$modelName." in model description");
 	    }elseif (!array_key_exists($modelFieldName, $this->dbFieldNames[$modelName])){
-	        print('<pre>++');
-	        print_r($modelName);
 	        Log::Error("Can't find model name ".$modelFieldName." in model description : ".$modelName);
 	    }
 	    return $this->dbFieldNames[$modelName][$modelFieldName];

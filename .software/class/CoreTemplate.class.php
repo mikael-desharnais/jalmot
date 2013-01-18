@@ -66,7 +66,7 @@ class CoreTemplate{
 			}
 			if (empty($toInclude)&&!$silent){
 				print('<pre>');
-				debug_print_backtrace();
+				//debug_print_backtrace();
 				print("template/".$this->name."/".$file->toURL()." Introuvable dans le système de template");
 				die();
 			}

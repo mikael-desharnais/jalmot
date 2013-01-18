@@ -10,7 +10,11 @@ ReloadManager=function(){
 			if (jQuery(this).hasClass('reload-change-listener')){
 				jQuery(this).data('ReloadManager').reload();
 			}else {
-				jQuery(this).closest('.reload-change-listener').data('ReloadManager').reload();
+				if (jQuery(this).closest('.reload-change-listener').size()>0){
+					jQuery(this).closest('.reload-change-listener').data('ReloadManager').reload();
+				}else {
+					console.log(jQuery(this).css('backgroundColor','red'));
+				}
 			}
 			
 		});

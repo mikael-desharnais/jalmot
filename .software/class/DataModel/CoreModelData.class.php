@@ -213,7 +213,6 @@ class CoreModelData{
 	public function delete(){
 	    $this->propagateBeforeDelete();
 	    $this->propagateBeforeStaticDelete($this);
-	    $this->getParentModel()->getDataSource()->delete($this);
 	    $relations=$this->getParentModel()->getRelations();
 	    foreach($relations as $relation){
 	        if ($relation->getType()=='CascadeOnDelete'){
@@ -224,6 +223,7 @@ class CoreModelData{
 	            }
 	        }
 	    }
+	    $this->getParentModel()->getDataSource()->delete($this);
 	    $this->propagateAfterDelete();
 	    $this->propagateAfterStaticDelete($this);
 	    $this->chainDelete();

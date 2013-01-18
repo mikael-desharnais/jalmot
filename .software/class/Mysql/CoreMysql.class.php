@@ -53,7 +53,7 @@
 	*/
 	public function query($query){
 	    Log::LogData("Executing Query ".$query, Log::$LOG_LEVEL_INFO);
-		$result= mysqli_query($this->sql_link,$query) or Log::Error($query);
+		$result= mysqli_query($this->sql_link,$query) or Log::Error(mysqli_error($this->sql_link)." : ".$query);
 		return $result;
 	}
 	/**

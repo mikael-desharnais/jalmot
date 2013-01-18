@@ -1,10 +1,11 @@
 <?php
 
 class ModelListingDescriptor {
-	public static function readFromXML($xml){
+	public static function readFromXML($name,$xml){
 	    $classname=$xml->class."";
 		$modelListing=new $classname();
 		$modelListing->setType($xml->type."");
+		$modelListing->setName($name);
 		$modelListing->setModel($xml->model."");
 		$modelListing->setTitle($xml->title."");
 		if (!empty($xml->pageSize)){
@@ -26,6 +27,7 @@ class ModelListingDescriptor {
 	}
 
 	protected $type;
+	protected $name;
 	protected $columns=array();
 	protected $model;
 	protected $list;
@@ -56,6 +58,14 @@ class ModelListingDescriptor {
 		return $this->title;
 	}
 
+	public function setName($name){
+		$this->name=$name;
+	}
+	
+	public function getName(){
+		return $this->name;
+	}
+	
 	public function setModel($model){
 		$this->model=$model;
 	}
@@ -97,5 +107,12 @@ class ModelListingDescriptor {
 	}
 	public function setPage($page){
 	    $this->page = $page;
+	}
+	public function getFiltersURLParams(){
+		$toReturn="";
+		foreach($this->filters as $filter){
+			$toReturn.=($toReturn==""?"":"&").$filter->getURLParams();
+		}
+		return $toReturn;
 	}
 }

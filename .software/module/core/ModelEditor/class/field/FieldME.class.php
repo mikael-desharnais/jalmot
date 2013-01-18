@@ -7,6 +7,7 @@ abstract class FieldME {
 	protected $model_editor;
 	protected $confParams=array();
 	protected $class;
+	protected $instance;
 	
 	
 	protected abstract function getUsefullData($element);
@@ -19,13 +20,18 @@ abstract class FieldME {
 		$this->title=$title;
 		$this->class=$class;
 	}
+	public function setInstance($instance){
+		$this->instance=$instance;
+	}
 	public function toHTML($dataFetched){
 	    $element=$this->getUsefullData($dataFetched);
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor",$this->class.".phtml",false))->toURL());
+		include(Ressource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor",$this->class.(empty($this->instance)?"":"_".$this->instance).".phtml",false))->toURL());
 		return ob_get_clean();
 	}
-	
+	public function getModelEditor(){
+		return $this->model_editor;
+	}
 	
 	public function getName(){
 		return $this->key;
@@ -34,6 +40,10 @@ abstract class FieldME {
 	    $classname=$xml->class."";
 	    $toReturn=new $classname($classname,$model_editor,$xml->key."",$xml->title."");
 	    $toReturn->setConfParams(XMLParamsReader::read($xml));
+	    $instance = $xml->instance."";
+	    if (!empty($instance)){
+	    	$toReturn->setInstance($xml->instance."");
+	    }
 		return $toReturn;
 	}
 	public function getConfParams(){

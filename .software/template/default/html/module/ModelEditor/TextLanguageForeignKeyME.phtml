@@ -1,0 +1,21 @@
+<tr class="reload-on-model-editor-<?php echo $this->getConfParam('listReference'); ?>-change">
+<td>
+
+
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td> 
+<div>
+
+<?php 
+foreach($element['reference'] as $elt){
+    if ($this->getValue($elt)==$this->getValue($element['simple'])){
+        echo $this->getNameValue($elt);
+        break;
+    }
+}
+?>
+</div>
+</td>	
+</tr>
+

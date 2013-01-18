@@ -20,6 +20,10 @@
 		* 
 		*/
 		private $translations;
+		/*
+		 * list of all loaded files
+		 */
+		private $loadedFiles = array();
 		/**
 		* is the language loaded
 		* 
@@ -36,21 +40,25 @@
 			$this->name=$name;
 			$this->translations=array();
 		}
+		
 		/**
 		* Reads a .lng.xml language file and loads its content
 		* 
 		* @param string $file name of the file to load
 		*/
 		public function init($file){
-		    Log::LogData("Load language/".$this->name.'/'.$file.".lng.xml",Log::$LOG_LEVEL_INFO);
-			$xml_file=Ressource::getCurrentTemplate()->getFile(new File("language/".$this->name,$file.".lng.xml",false));
-			if (!empty($xml_file)){
-				$xml = XMLDocument::parseFromFile($xml_file);
-				$translationList=$xml->translation;
-				
-				foreach($translationList as $translation){
-					$this->translations[$translation->id.""]=$translation->value."";
+			if (!in_array($this->name.'/'.$file,$this->loadedFiles)){
+			    Log::LogData("Load language/".$this->name.'/'.$file.".lng.xml",Log::$LOG_LEVEL_INFO);
+				$xml_file=Ressource::getCurrentTemplate()->getFile(new File("language/".$this->name,$file.".lng.xml",false));
+				if (!empty($xml_file)){
+					$xml = XMLDocument::parseFromFile($xml_file);
+					$translationList=$xml->translation;
+					
+					foreach($translationList as $translation){
+						$this->translations[$translation->id.""]=$translation->value."";
+					}
 				}
+				$this->loadedFiles[]=$this->name.'/'.$file;
 			}
 		}
 		/**

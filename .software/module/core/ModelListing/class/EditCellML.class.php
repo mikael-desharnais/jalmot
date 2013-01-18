@@ -22,11 +22,7 @@ class EditCellML extends SimpleCellML {
 		foreach($primary_keys as $name=>$value){
 			$toReturn.=($toReturn==""?"":"&")."id[".$name."]=".$value;
 		}
-		return $toReturn;
-	}
-	public static function readFromXML($xml){
-	    $cellDescriptor=new self($xml->key."");
-	    $cellDescriptor->setConfParams(XMLParamsReader::read($xml));
-		return $cellDescriptor;
+		$paramsListing = $this->getListing()->getFiltersURLParams();
+		return $toReturn.($paramsListing==""?"":"&").$paramsListing;
 	}
 }

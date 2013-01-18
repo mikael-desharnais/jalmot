@@ -15,5 +15,10 @@ class FilterML {
 	public function getModelDataQueryCondition($model){
 		return  $model->getDataSource()->getConditionBySymbol(array($this->symbol,$model->getField($this->field),$this->value));
 	}
+
+	public function getURLParams(){
+		return "id[".$this->field."]=".$this->value;
+	}
+	
 	
 }

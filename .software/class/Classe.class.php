@@ -78,7 +78,11 @@ class Classe {
 	        $autoloadCache=array();
 	    }
 	    if (array_key_exists($class,$autoloadCache)){
-	        include_once($autoloadCache[$class]);
+	    	if (file_exists($autoloadCache[$class])){
+	    		include_once($autoloadCache[$class]);
+	    	}else {
+	    		unset($autoloadCache[$class]);
+	    	}
 	    }else {
 	        try {
 	        	$file = File::findFile("module",$class.".class.php");

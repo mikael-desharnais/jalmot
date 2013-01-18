@@ -3,6 +3,7 @@
 class SimpleCellML {
     
 	protected $key;
+	protected $instance;
 	
 	protected $listing;
 	protected $confParams=array();
@@ -12,10 +13,13 @@ class SimpleCellML {
 	}
 	public function toHTML($line){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML.phtml"));
+		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
 	}
 	protected function getValue($line){
+		if (!is_object($line)){
+			Log::Error('Trying to acess to key '.$this->key.' on a non object');
+		}
 		$getter="get".ucfirst($this->key);
 		return $line->$getter();
 	}
@@ -23,6 +27,10 @@ class SimpleCellML {
 	    $classname = $xml->class."";
 	    $cellDescriptor=new $classname($xml->key."");
 	    $cellDescriptor->setConfParams(XMLParamsReader::read($xml));
+	    $instance = $xml->instance."";
+	    if (!empty($instance)){
+	    	$cellDescriptor->setInstance($xml->instance."");
+	    }
 		return $cellDescriptor;
 	}
 	public function getListing(){
@@ -39,5 +47,11 @@ class SimpleCellML {
 	}
 	public function getConfParam($key){
 	    return $this->confParams[$key];
+	}
+	public function setInstance($instance){
+		$this->instance=$instance;
+	}
+	public function getKey(){
+		return $this->key;
 	}
 }

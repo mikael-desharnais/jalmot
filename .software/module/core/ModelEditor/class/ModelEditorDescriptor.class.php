@@ -71,6 +71,17 @@ class ModelEditorDescriptor {
 	    }
 		return "ModelEditorDescriptor-".md5($this->type.$this->model.$concat);
 	}
+	public function getURLParams(){
+	    if ($this->source==ModelData::$SOURCE_NEW){
+	        $concat="";
+	    }else {
+			$concat="";
+			foreach($this->id as $key_element=>$value_element){
+				$concat.=$key_element."=".$value_element."&";
+			}
+	    }
+		return $concat;
+	}
 	public function setId($id){
 		$this->id=is_array($id)?$id:array();
 		if (count($id)==0&&$this->getSource()==ModelData::$SOURCE_FROM_DATASOURCE){

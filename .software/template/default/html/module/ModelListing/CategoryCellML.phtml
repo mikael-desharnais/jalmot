@@ -1,0 +1,15 @@
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelListing','CategoryCellML.js',false)),0); ?>
+<td>
+	<?php if ($element->getParentModel()->getName()==$this->getListing()->getModel()){ ?>
+		<a href="#" class="categoryListingCellMLOpen" data-url-params="<?php print($this->getParams($element)); ?>">
+	<?php }?>
+	<?php if (!isset($element->editable) || $element->editable){?>
+		<?php print_r($this->getValue($line)); ?>
+	<?php } else {?>
+		<?php print(Ressource::getCurrentLanguage()->getTranslation('Parent Directory'));?>
+	<?php }?>
+	
+	<?php if ($element->getParentModel()->getName()==$this->getListing()->getModel()){ ?>
+	</a>
+	<?php }?>
+</td>
