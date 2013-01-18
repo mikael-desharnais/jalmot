@@ -1,0 +1,11 @@
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','numberInput.js',false)),3); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','numberInput.css',false)),2); ?>
+<tr>
+<td>
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td class="control-group" width="75%">
+	<input type="text" name="<?php echo $this->getName(); ?>" class="number-content span3" value="<?php echo htmlentities((int)$this->getValue($element),ENT_COMPAT,"UTF-8"); ?>" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>">
+</td>	
+</tr>
+

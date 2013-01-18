@@ -13,6 +13,8 @@ function AjaxHTMLFetcher(){
 	this.js=new Array();
 	this.url;
 	this.callback;
+	this.status;
+	this.message;
 
 	this.setURL=function(url){
 		this.url=url;
@@ -26,11 +28,20 @@ function AjaxHTMLFetcher(){
 		jQuery.post(this.url.address,
 					this.url.params,
 					function(data){
-						json=jQuery.parseJSON(data);
+						var json = null;
+						try {
+							json=jQuery.parseJSON(data);
+						} catch (e) {
+							parent.message = 'Error Parsing XML';
+							parent.html = data;
+							parent.status = 0;
+						}
 						if (json!=null){
 							parent.css=json.css;
 							parent.js=json.js;
 							parent.html=json.html;
+							parent.message=json.message;
+							parent.status=json.status;
 						}
 					});
 	};
@@ -93,6 +104,9 @@ function AjaxHTMLFetcher(){
 
 	};
 	this.integrateHTML=function(){
+		if (this.status!=1){
+			this.html = '<h1>Une erreur s\'est produite : '+this.message+'</h1><pre>'+this.html+'</pre>';
+		}
 		this.callback(this.html);
 	};
 }

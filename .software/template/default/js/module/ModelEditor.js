@@ -6,8 +6,13 @@ jQuery('.model-editor-delete-button').live('click',function(){
 	var url=jQuery(this).closest('.reload-change-listener').data('object').url;
 
 	if (confirm('Etes vous sûr de vouloir supprimer cet élement ?')){
-		jQuery.post(url.address+'delete/',url.params,function(){
+		jQuery.post(url.address+'delete/',url.params,function(data){
 			ReloadManager.propagateChangeEvent(jQuery(parent));
+			if (data!=''){
+				window.alert("Data save delete\n"+data);
+			}else {
+				jQuery(parent).closest('.reload-change-listener').data('object').close();	
+			}
 			jQuery(parent).closest('.reload-change-listener').data('object').close();
 		});
 	}
@@ -23,9 +28,13 @@ jQuery('.model-editor-form').live('submit',function(event){
 	}
 	var parent=this;
 	var url=jQuery(this).closest('.reload-change-listener').data('object').url;
-	jQuery.post(url.address+'save/',url.params+'&'+jQuery(this).closest('.window_frame').find(':input').serialize(),function(){
+	jQuery.post(url.address+'save/',url.params+'&'+jQuery(this).closest('.window_frame').find(':input').serialize(),function(data){
 		ReloadManager.propagateChangeEvent(jQuery(parent));
-		jQuery(parent).closest('.reload-change-listener').data('object').close();
+		if (data!=''){
+			window.alert("Data save failed\n"+data);
+		}else {
+			jQuery(parent).closest('.reload-change-listener').data('object').close();	
+		}
 	});
 	
 	return false;

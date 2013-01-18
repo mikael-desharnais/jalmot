@@ -1,11 +1,15 @@
 <?php 
-
-ob_start();
-include(Ressource::getCurrentTemplate()->getURL("html/ajax/".$this->ajaxTarget.".phtml")); 
-$bodyCore = ob_get_clean();
-
-
-Ressource::getCurrentPage()->setAjaxContent('html',$bodyCore);
+try{
+	ob_start();
+	include(Ressource::getCurrentTemplate()->getURL("html/ajax/".$this->ajaxTarget.".phtml")); 
+	$bodyCore = ob_get_clean();
+	Ressource::getCurrentPage()->setAjaxContent('html',$bodyCore);
+	Ressource::getCurrentPage()->setAjaxContent('status',1);
+}catch (Exception $ex){
+	Ressource::getCurrentPage()->setAjaxContent('status',0);
+	Ressource::getCurrentPage()->setAjaxContent('message',$ex->getMessage());
+	Ressource::getCurrentPage()->setAjaxContent('html',$ex->getTrace());
+}
 
 $css=array();
 $js=array();
