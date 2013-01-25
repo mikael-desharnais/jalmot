@@ -152,6 +152,9 @@ class CoreModelData{
 	    $action=substr($name,0,3);
 	    $fieldName=strtolower(substr($name,3));
 	    if ($action=="get"){
+	    	if (!property_exists($this,$fieldName)){
+	    		throw new Exception('Unknown property '.$fieldName.' in model '.$this->getParentModel()->getName());	
+	    	}
 	        return $this->$fieldName;
 	    }else if ($action=="set"){
 	        $value=$arguments[0];
