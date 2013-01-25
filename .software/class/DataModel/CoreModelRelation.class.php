@@ -9,8 +9,7 @@ class CoreModelRelation{
 
 	public static function readFromXML($model,$class,$xml){
 		$source=$model->getField($xml->source."");
-		$destination=Model::getModel($xml->destination->model."")->getField($xml->destination->field."");
-		$toReturn = new $class($xml->name."",$source,$destination,$xml->type."");
+		$toReturn = new $class($xml->name."",$source,$xml->destination->model."",$xml->destination->field."",$xml->type."");
 		return $toReturn;
 	}
 	
@@ -28,6 +27,14 @@ class CoreModelRelation{
 	*/
 	private $destination;
 	/**
+	* The model for the end point of the relation
+	*/
+	private $destinationModel;
+	/**
+	* The field name for the end point of the relation
+	*/
+	private $destinationField;
+	/**
 	* The type of the relation
 	* Example :
 	* if the type is deleteOnCascade 
@@ -41,10 +48,11 @@ class CoreModelRelation{
     * @param ModelField $destination The field that is the end point of the relation
     * @param string $type the type of the relation
     */
-    public function __construct($name,$source,$destination,$type){
+    public function __construct($name,$source,$destinationModel,$destinationField,$type){
 		$this->name=$name;
 		$this->source=$source;
-		$this->destination=$destination;
+		$this->destinationModel=$destinationModel;
+		$this->destinationField=$destinationField;
 		$this->type=$type;
 	}
 	/**
@@ -59,6 +67,9 @@ class CoreModelRelation{
 	* @return ModelField the end point of the relation
 	*/
 	public function getDestination(){
+		if (empty($this->destination)){
+			$this->destination=Model::getModel($this->destinationModel)->getField($this->destinationField);
+		}
 		return $this->destination;
 	}
 	/**

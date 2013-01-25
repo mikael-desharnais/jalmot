@@ -1,0 +1,36 @@
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','multipleCheckbox.css',false)),2); ?>
+<tr class="reload-on-model-editor-<?php echo $this->getConfParam('referenceModel'); ?>-change">
+<td>
+	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+</td>
+<td  class=""> 
+<div>
+<?php
+foreach($element['reference'] as $elt){
+    $checked=false;
+    foreach($element['data'] as $data){
+        if ($this->getValue($elt)==$this->getValue($data)){
+            $checked=true;
+        }
+    }
+    ?>
+    <label><input class="checkboxInline" type="checkbox" name="<?php echo $this->getName(); ?>[]" value="<?php echo $this->getValue($elt); ?>" <?php echo $checked?" checked ":""; ?>> <?php echo $this->getNameValue($elt); ?></label>
+    <?php 
+}
+?>
+<?php if ($this->getConfParam('modelListing')!=''){?>
+<script>
+	AjaxHTMLFetcher.setFetcher('list_model_<?php echo $this->getName(); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',''),function(htmlContent){
+		var window = new Window();
+		window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('icon_test')); ?>);
+		window.setContent(htmlContent);
+		window.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',''));
+		window.display();
+	}); 
+</script>
+<a id="list_model_<?php echo $this->getName(); ?>" class="AjaxHTMLFetcher btn btn-primary btn-list-modellist" href="#"><?php echo Ressource::getCurrentLanguage()->getTranslation('Edit the list'); ?></a>
+<?php } ?>
+</div>
+</td>	
+</tr>
+

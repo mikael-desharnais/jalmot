@@ -16,7 +16,7 @@ class CoreModelData{
     /**
     * The parent model of this ModelData
     */
-    private $__parent_model;
+    protected $__parent_model;
 	/**
 	* The source type of this DataModel
 	* it should be either one of this Class constants (from database or new element)
@@ -25,6 +25,7 @@ class CoreModelData{
 	
 	
 	public $changeLog = array();
+	
 	/** Event listeners */
 	
 	/**
@@ -155,7 +156,7 @@ class CoreModelData{
 	    }else if ($action=="set"){
 	        $value=$arguments[0];
 	        ModelType::getType($this->__parent_model->getField($fieldName)->getType())->checkValue($value);
-	        if (!array_key_exists($fieldName, $this->changeLog)){
+	        if (!array_key_exists($fieldName, $this->changeLog)&&$this->$fieldName!=$value){
 	        	$this->changeLog[$fieldName]=$this->$fieldName;
 	        }
 	        $this->$fieldName=$value;

@@ -1,6 +1,6 @@
 <?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','MediaManager.css',false)),0); ?>
 <?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','MediaManager.js',false)),0); ?>
-<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getModel()); ?>
+<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getName()); ?>
 
 <?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
 <script> 

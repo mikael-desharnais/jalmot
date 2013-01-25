@@ -72,6 +72,7 @@ class Classe {
 	* @param string $class Name of the missing class
 	*/
 	public static function autoload($class){
+		Log::LogData("Looking for ".$class,Log::$LOG_LEVEL_DEBUG);
 	    $fileCache=new File(".cache/class","autoLoad.php",false);
 	    @include($fileCache->toURL());
 	    if (!isset($autoloadCache)){
@@ -92,7 +93,10 @@ class Classe {
 	        	@mkdir($fileCache,0777,true);
 	        	$fileCache->write('<?php $autoloadCache='.var_export($autoloadCache,true).';');
 	        }catch (Exception $exc){
-	            
+	        	try{
+	        		Model::getModel($class)->includeClass();
+	        	}catch (Exception $exc){
+	        	}
 	        }
 	    }
 	}

@@ -63,5 +63,8 @@
      public function format($format = "d/m/Y H:i"){
          return date($format,$this->getTimeStamp());
      }
+     public function __toString(){
+     	return $this->format();
+     }
 }
 ?>

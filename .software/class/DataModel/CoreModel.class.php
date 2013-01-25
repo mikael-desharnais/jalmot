@@ -25,12 +25,19 @@ class CoreModel{
     * @param string $name name of the model to load
     */
     public static function loadModel($name){
-        $xml=XMLDocument::parseFromFile(new File("xml/model",$name.".xml",false));
+	$fileModel = new File("xml/model",$name.".xml",false);
+	if (!$fileModel->exists()){
+		Log::Error('Could not find model xml file : '.$name);
+	}
+        $xml=XMLDocument::parseFromFile($fileModel);
         if (empty($xml->class)){
         	$modelClass="Model";
         }else{
         	$modelClass=$xml->class."";
         }
+	if (!is_callable(array($modelClass,"readFromXML"))){
+		Log::Error($modelClass."::readFromXML is not callable");
+	}
         $model=call_user_func(array($modelClass,"readFromXML"),$modelClass,$name,$xml);
     }
     public static function readFromXML($class,$name,$xml){
@@ -123,7 +130,7 @@ class CoreModel{
         $file = new File(".cache/class/model","Core".$this->name.'.class.php',false);
         if (!$file->exists()){
             $code="<?php
-	    	class Core".$this->name." extends ".$modelDataClass."{
+	    	class Core".$this->name." extends ".$this->modelDataClass."{
 	    	";
 	    	foreach($this->fields as $field){
 	    	    $code.=$field->getCode();

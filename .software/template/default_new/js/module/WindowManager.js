@@ -13,9 +13,6 @@ Window = function(){
 	this.html.addClass('reload-change-listener');
 	var parent = this;
 	
-	this.wrapper.scroll(function(){
-		console.log(parent.wrapper.scrollTop());
-	});
 	
 	jQuery(window).resize(function(){
 		parent.wrapper.outerHeight(jQuery(window).height());

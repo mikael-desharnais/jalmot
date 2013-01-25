@@ -86,7 +86,7 @@
 		$this->cachedQueries[$queryUUID]=$dataModel;
 	}
 	public function getOrderBy($field,$type){
-	    return new MysqlDataQueryOrderBy($field,$type);
+	    return new ModelDataQueryOrderBy($field,$type);
 	}
 }
 

@@ -1,5 +1,5 @@
 <?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
-<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getModel()); ?>
+<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getName()); ?>
 <?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ModelListing.js',false)),0); ?>
 <script> 
 AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditorCategory'); ?>/','model=<?php echo $this->model; ?>&source=create&<?php echo $this->getCurrentElementParams(); ?>'),function(htmlContent){

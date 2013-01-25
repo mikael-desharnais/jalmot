@@ -4,6 +4,13 @@
 * @see ModelDataQueryCondition
 */
 class CoreMysqlLesserThanCondition extends CoreModelDataQueryEqualCondition{
+
+	protected $orEqual = false;
+	
+	public function __construct($val1, $val2,$orEqual=false){
+		parent::__construct($val1, $val2);
+		$this->orEqual=$orEqual;
+	}
 	/**
 	* Returns the SQL query for this lesser than condition
 	* @return string the SQL query for this lesser than condition
@@ -20,7 +27,7 @@ class CoreMysqlLesserThanCondition extends CoreModelDataQueryEqualCondition{
         }else {
             $toReturn.=" '".$this->val1."' ";
         }
-        $toReturn.=" < ";
+        $toReturn.=" <".($this->orEqual?"=":"")." ";
         if ($this->val2 instanceof ModelField){
             $toReturn.=" ".$this->val2->getName()." ";
         }elseif ($this->val2 instanceof Date) {

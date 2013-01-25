@@ -68,7 +68,7 @@
              $fieldName="get".ucfirst($field->getName());
              $type =$model->getField($field->getName())->getType();
              if ($field->isPrimaryKey()){
-                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())."' \n";
+                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`=".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())." \n";
              }else {
                 $foundParamToUpdate=true;
              	$set.=($set==""?"":",")." `".$this->getDBFieldName($model->getName(),$field->getName())."`=".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())." \n";
@@ -91,7 +91,7 @@
              $fieldName="get".ucfirst($field->getName());
              $type = $model->getField($field->getName())->getType();
              if ($field->isPrimaryKey()){
-                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`='".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())."' \n";
+                 $where.=($where==""?" WHERE ":" AND ")." `".$this->getDBFieldName($model->getName(),$field->getName())."`=".call_user_func(array(ucfirst(strtolower($type))."MysqlModelType","toSQL"),$element->$fieldName())." \n";
              }
          }
          $query.=" ".$where;
@@ -140,6 +140,12 @@
 			break;
 			case "<" :
 				return new MysqlLesserThanCondition($args[1],$args[2]);
+			break;
+			case ">=" :
+				return new MysqlGreaterThanCondition($args[1],$args[2],true);
+			break;
+			case "<=" :
+				return new MysqlLesserThanCondition($args[1],$args[2],true);
 			break;
 			default :
 			    Log::Error(__CLASS__." cant't find operator ".$args[0]);
@@ -230,6 +236,9 @@
 	    $query = $this->dbConnection->query('SELECT FOUND_ROWS() AS nbRows');
 	    $line=$this->dbConnection->fetchAssoc($query);
 	    return (int)$line['nbRows'];
+	}
+	public function getOrderBy($field,$type){
+	    return new MysqlDataQueryOrderBy($field,$type);
 	}
 }
 

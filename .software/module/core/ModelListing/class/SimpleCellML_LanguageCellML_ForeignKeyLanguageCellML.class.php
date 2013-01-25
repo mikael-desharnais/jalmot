@@ -10,7 +10,7 @@ class ForeignKeyLanguageCellML extends LanguageCellML {
 		$line = $line_query->addConditionBySymbol('=',$line_query->getModel()->getField('idLang'), Ressource::getCurrentLanguage()->getId())
 							->getModelDataElement();
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML.phtml"));
+		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
 	}
 	

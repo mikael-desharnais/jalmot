@@ -9,14 +9,13 @@ class ForeignKeyCellML extends SimpleCellML {
 		$line=$element->$listName()->getModelDataElement();
 
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML.phtml"));
+		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
 	}
 	
 	public static function readFromXML($xml){
-	    $cellDescriptor=new self($xml->key."",$xml->model."");
+	    $cellDescriptor=parent::readFromXML($xml);
 	    $cellDescriptor->setRelation($xml->relation."");
-	    $cellDescriptor->setConfParams(XMLParamsReader::read($xml));
 	    return $cellDescriptor;
 	}
 	public function setRelation($relation){

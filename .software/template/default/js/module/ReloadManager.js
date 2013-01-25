@@ -12,8 +12,6 @@ ReloadManager=function(){
 			}else {
 				if (jQuery(this).closest('.reload-change-listener').size()>0){
 					jQuery(this).closest('.reload-change-listener').data('ReloadManager').reload();
-				}else {
-					console.log(jQuery(this).css('backgroundColor','red'));
 				}
 			}
 			

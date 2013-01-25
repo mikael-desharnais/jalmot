@@ -53,6 +53,10 @@ class CoreUserSpace{
 		}
 		return $toReturn;
 	}
+	
+	public function getUsers(){
+		return $this->users;
+	}
 }
 
 
