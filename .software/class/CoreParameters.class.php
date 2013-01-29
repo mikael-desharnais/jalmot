@@ -43,7 +43,7 @@
 		 * @return  true if the  parameter exists given the key
 		 */
 	public function valueExists($key){
-		return !empty($this->values[$key]);
+		return isset($this->values[$key]);
 	}
 	/**
 	 * Returns the current Parameters
