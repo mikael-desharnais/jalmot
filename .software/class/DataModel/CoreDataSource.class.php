@@ -17,6 +17,15 @@
      public static function addDataSource($data_source){
          self::$DataSource[$data_source->getName()]=$data_source;
      }
+
+     /**
+      * Returns the proper ModelDataQuery for this DataSource
+      * @param int $type see ModelDataQuery types
+      * @param Model $model the model targeted by the dataquery
+      * @return ModelDataQuery
+      */
+     public abstract function getModelDataQuery($type,$model);
+     
      /**
      * returns the datasource corresponding to the name given in parameter
      * @return DataSource The object of the datasource required

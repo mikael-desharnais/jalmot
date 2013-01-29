@@ -644,6 +644,17 @@ class CoreModelData{
 	        $functionToExecute($element,$listener->getListeningObject());
 	    }
 	}
+	public function __toString(){
+		$toReturn="ModelData :|\n".
+				"	Model : ".$this->getParentModel()->getName()." |\n".
+				"	Fields : |\n";
+		$fields=$this->getParentModel()->getFields();
+		foreach($fields as $field){
+			$getter = "get".ucFirst($field->getName());
+			$toReturn.="Field : ".$field->getName()." ".$this->$getter()." |\n";
+		}
+		return $toReturn;
+	}
 	
 }
 

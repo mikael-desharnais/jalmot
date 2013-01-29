@@ -25,19 +25,19 @@ class CoreModel{
     * @param string $name name of the model to load
     */
     public static function loadModel($name){
-	$fileModel = new File("xml/model",$name.".xml",false);
-	if (!$fileModel->exists()){
-		Log::Error('Could not find model xml file : '.$name);
-	}
+		$fileModel = new File("xml/model",$name.".xml",false);
+		if (!$fileModel->exists()){
+			Log::Error('Could not find model xml file : '.$name);
+		}
         $xml=XMLDocument::parseFromFile($fileModel);
         if (empty($xml->class)){
         	$modelClass="Model";
         }else{
         	$modelClass=$xml->class."";
         }
-	if (!is_callable(array($modelClass,"readFromXML"))){
-		Log::Error($modelClass."::readFromXML is not callable");
-	}
+		if (!is_callable(array($modelClass,"readFromXML"))){
+			Log::Error($modelClass."::readFromXML is not callable");
+		}
         $model=call_user_func(array($modelClass,"readFromXML"),$modelClass,$name,$xml);
     }
     public static function readFromXML($class,$name,$xml){
@@ -93,6 +93,10 @@ class CoreModel{
     public function setDatasource($datasource){
         $this->datasource =$datasource;
     }
+    /**
+    * The datasource for this model
+    * @return DataSource
+    */
     public function getDatasource(){
         return $this->datasource;
     }

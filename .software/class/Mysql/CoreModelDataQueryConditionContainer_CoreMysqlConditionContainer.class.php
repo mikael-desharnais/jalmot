@@ -12,7 +12,7 @@ class CoreMysqlConditionContainer extends CoreModelDataQueryConditionContainer{
 		$conditions=$this->getConditions();
 		$containers=$this->getContainers();
 		foreach($containers as $containerElement){
-			$toReturn.=($toReturn==""?"":" ".$containerElement->getSeparator()." ")."(".$containerElement->getSQL().")";
+			$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ")."(".$containerElement->getSQL().")";
 		}
 		foreach($conditions as $condition){
         	$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ").$condition->getSQL();
