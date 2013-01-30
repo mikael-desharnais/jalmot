@@ -1,0 +1,12 @@
+.tabs .tabTitle {
+	float : left;
+}
+.tabs .tabTitleGroup .currentTabTitle {
+	float : left;
+}
+.tabs .tab {
+	display : none;
+}
+.tabs .tabGroup .currentTab {
+	display : block;
+}

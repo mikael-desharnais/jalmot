@@ -35,7 +35,7 @@ class AdminUser {
 	* Returns the Id of the user
 	*/
 	public function getId(){
-	    return $this->data->getId();
+	    return $this->data->getIdUserAdmin();
 	}
 	
 }
