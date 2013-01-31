@@ -78,6 +78,9 @@ class CoreModelField{
     public function getModel(){
         return $this->model;
     }
+    public function setModel($model){
+        $this->model = $model;
+    }
     /**
     * Returns true if this field is a part of the primary Key for his Model
     */

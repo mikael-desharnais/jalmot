@@ -73,5 +73,13 @@ class CoreEAVModelData extends CoreModelData{
 	public function getPrimaryKeys(){
 		return $this->baseModelData->getPrimaryKeys();
 	}
+	public function __toString(){
+		$toReturn=$this->baseModelData->__toString();
+		foreach($this->eavContent as $name=>$field){
+			$getter = "get".ucFirst($name);
+			$toReturn.="Field : ".$name." ".$this->$getter()." |\n";
+		}
+		return $toReturn;
+	}
 }
 

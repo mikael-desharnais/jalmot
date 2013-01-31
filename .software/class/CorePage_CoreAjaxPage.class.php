@@ -8,12 +8,12 @@
 	*/
 	protected $ajaxTarget;
 	/**
-	* Calls the parent constructor with name ajaxDispatcher
+	* Calls the parent constructor with name
 	* Defines the unique name of the page
 	* @param string $ajaxTarget the unique name of the page
 	*/
 	public function __construct($ajaxTarget){
-		parent::__construct('ajaxDispatcher');
+		parent::__construct($ajaxTarget);
 		$this->ajaxTarget=$ajaxTarget;
 	}
 	/**

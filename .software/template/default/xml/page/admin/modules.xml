@@ -10,6 +10,11 @@
 		<params></params>
 	</module>
 	<module>
+		<instancename>AjaxConnectionManager</instancename>
+		<class>AjaxConnectionManager</class>
+		<params></params>
+	</module>
+	<module>
 		<instancename>DesktopManager</instancename>
 		<class>DesktopManager</class>
 		<params></params>

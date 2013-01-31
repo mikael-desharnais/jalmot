@@ -1,0 +1,12 @@
+<modules>
+	<module>
+		<instancename>ConnectionManager</instancename>
+		<class>AjaxConnectionManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ConnectionManager</instancename>
+		<class>ConnectionManager</class>
+		<params></params>
+	</module>
+</modules>

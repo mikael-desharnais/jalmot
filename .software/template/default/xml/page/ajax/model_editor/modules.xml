@@ -1,5 +1,15 @@
 <modules>
 	<module>
+		<instancename>AdminLoginManager</instancename>
+		<class>AdminLoginManager</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ConnectionManager</instancename>
+		<class>AjaxConnectionManager</class>
+		<params></params>
+	</module>
+	<module>
 		<instancename>modelEditor</instancename>
 		<class>ModelEditor</class>
 		<params>
@@ -38,9 +48,5 @@
 		<class>WindowManager</class>
 		<params></params>
 	</module>
-	<module>
-		<instancename>AdminLoginManager</instancename>
-		<class>AdminLoginManager</class>
-		<params></params>
-	</module>
+	
 </modules>

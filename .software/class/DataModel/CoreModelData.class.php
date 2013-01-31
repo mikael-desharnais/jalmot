@@ -167,7 +167,7 @@ class CoreModelData{
 	        $model=$this->__parent_model->getRelation($fieldName)->getDestination()->getModel();
 	        $source_field=strtolower($this->__parent_model->getRelation($fieldName)->getSource()->getName());
 	        $source_field_value=$this->$source_field;
-	        return $this->getParentModel()->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)->addConditionBySymbol('=',$this->__parent_model->getRelation($fieldName)->getDestination(),$source_field_value);
+	        return $model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)->addConditionBySymbol('=',$this->__parent_model->getRelation($fieldName)->getDestination(),$source_field_value);
 	    }
 	    
 	}

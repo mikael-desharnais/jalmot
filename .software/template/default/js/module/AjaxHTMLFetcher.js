@@ -104,10 +104,13 @@ function AjaxHTMLFetcher(){
 
 	};
 	this.integrateHTML=function(){
+		jQuery('body').trigger('AjaxHTMLFetcherStatus',this);
 		if (this.status!=1){
 			this.html = '<h1>Une erreur s\'est produite : '+this.message+'</h1><pre>'+this.html+'</pre>';
 		}
-		this.callback(this.html);
+		if (this.status!=404){
+			this.callback(this.html);
+		}
 	};
 }
 function URL(address,params){

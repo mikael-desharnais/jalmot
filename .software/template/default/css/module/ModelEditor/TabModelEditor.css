@@ -1,0 +1,18 @@
+.tabs .tabTitle {
+	float : left;
+}
+.tabs .tabTitleGroup .currentTabTitle {
+	float : left;
+}
+.tabs .tab {
+}
+.tabs .tabGroup .currentTab {
+}
+.tabs .tabViewPort{
+	position : relative;
+	overflow : hidden;
+	height : 100%;
+}
+.tabs .tabGroup{
+	position : absolute;
+}

@@ -33,7 +33,12 @@ jQuery('.model-editor-form').live('submit',function(event){
 		if (data!=''){
 			window.alert("Data save failed\n"+data);
 		}else {
-			jQuery(parent).closest('.reload-change-listener').data('object').close();	
+			if (typeof jQuery(parent).closest('.reload-change-listener').data('object') == 'undefined'){
+				console.log(jQuery(parent));
+				window.alert('Could not find reloader');
+			}else {
+				jQuery(parent).closest('.reload-change-listener').data('object').close();
+			}
 		}
 	});
 	

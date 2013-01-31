@@ -41,8 +41,8 @@ Window = function(){
 		this.wrapper.append(this.html);
 		this.wrapper.append(this.closeButton);
 		jQuery('.windowContainer').append(this.wrapper);
-		jQuery('body').trigger('htmlAppending',this.html);
 		this.html.append(this.content);
+		jQuery('body').trigger('htmlAppending',this.html);
 	}
 	this.reload=function(){
 		var parent=this;

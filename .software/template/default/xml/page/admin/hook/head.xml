@@ -13,5 +13,9 @@
 			<name>Draggable</name>
 			<instance>normal</instance>
 		</module>
+		<module>
+			<name>AjaxConnectionManager</name>
+			<instance>normal</instance>
+		</module>
 	</modules>
 </hook>

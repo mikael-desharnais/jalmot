@@ -35,4 +35,9 @@
 		<instancename>MediaManagerListingFileUploader</instancename>
 		<class>MediaManagerListingFileUploader</class>
 	</module>
+	<module>
+		<instancename>ConnectionManager</instancename>
+		<class>AjaxConnectionManager</class>
+		<params></params>
+	</module>
 </modules>

@@ -1,0 +1,9 @@
+<hook>
+	<name>connection.body</name>
+	<modules>
+		<module>
+			<name>ConnectionManager</name>
+			<instance>ConnectionBox</instance>
+		</module>
+	</modules>
+</hook>
