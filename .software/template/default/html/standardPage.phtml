@@ -12,6 +12,7 @@ $headCore = ob_get_clean();
 <html>
 	<head>
 		<title><?php echo Ressource::getCurrentPage()->getTitle() ?></title>
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
 		<?php $newCSSListe = $this->CSSFilterFlow->filterAndCompress($this->cssListe); ?>
 		<?php 	foreach($newCSSListe as $arrayOfFiles){ ?>
 		<?php 		foreach($arrayOfFiles as $file){  ?>

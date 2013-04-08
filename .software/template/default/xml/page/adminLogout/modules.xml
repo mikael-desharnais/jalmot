@@ -1,0 +1,7 @@
+<modules>
+	<module>
+		<instancename>AdminLogoutManager</instancename>
+		<class>AdminLogoutManager</class>
+		<params></params>
+	</module>
+</modules>

@@ -37,6 +37,9 @@ class CoreModule{
 		}
 		return self::$module[$moduleName];
 	}
+	public static function isInstalledModule($moduleName){
+		return array_key_exists($moduleName,self::$module);
+	}
 	/**
 	* Load all modules : in module/core, module/dev/, module/usr
 	* Loading means Including files, creating an instance, init all modules and execute the basic execution stack
@@ -52,9 +55,9 @@ class CoreModule{
 			$object=self::loadModule($xmlModule->instancename."",$xmlModule->class."");
 			$object->setConfParams(XMLParamsReader::read($xmlModule));
 		}
-		Log::LogData("Module before Init",Log::$LOG_LEVEL_INFO);
+		Log::GlobalLogData("Module before Init",Log::$LOG_LEVEL_INFO);
 		self::initModule();
-		Log::LogData("Module before Execution",Log::$LOG_LEVEL_INFO);
+		Log::GlobalLogData("Module before Execution",Log::$LOG_LEVEL_INFO);
 		self::executeModule();
 	}
 	/**
@@ -302,11 +305,11 @@ class CoreModule{
 		if ($this->executed){
 			Log::Warning('A module should not be executed Twice !!!!');
 		}
-		Log::LogData('Module '.$this->getName().' Start Execution',Log::$LOG_LEVEL_INFO);
+		Log::GlobalLogData('Module '.$this->getName().' Start Execution',Log::$LOG_LEVEL_INFO);
 		$this->propagateBeforeExecute();
 		$this->execute();
 		$this->propagateAfterExecute();
-		Log::LogData('Module '.$this->getName().' End Execution',Log::$LOG_LEVEL_INFO);
+		Log::GlobalLogData('Module '.$this->getName().' End Execution',Log::$LOG_LEVEL_INFO);
 		$this->executed=true;
 	}
 	/**
@@ -339,7 +342,7 @@ class CoreModule{
 	*/
 	public function setInstalled($installed){
 		if ($installed){
-			Log::LogData("Module ".$this->name." is installed for page ".Ressource::getCurrentPage()->getName(),Log::$LOG_LEVEL_INFO);
+			Log::GlobalLogData("Module ".$this->name." is installed for page ".Ressource::getCurrentPage()->getName(),Log::$LOG_LEVEL_INFO);
 		}
 		$this->installed=$installed;
 	}

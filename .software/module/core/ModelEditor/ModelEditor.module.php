@@ -9,8 +9,8 @@ class ModelEditor extends Module{
 	
 	public function init(){
 		parent::init();
-        $this->addToGlobalExecuteStack();
 		$this->importClasses();
+        $this->addToGlobalExecuteStack();
 	}
 	public function execute(){
 		parent::execute();
@@ -34,10 +34,12 @@ class ModelEditor extends Module{
 		    }
 			$this->descriptor->save();
 			Ressource::getCurrentPage()->stopExecution();
+			print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
 			$this->propagateAfterSave();
 		}else if (Ressource::getParameters()->valueExists("action")&&Ressource::getParameters()->getValue("action")=="delete"){
 		    $this->descriptor->delete();
 			Ressource::getCurrentPage()->stopExecution();
+			print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
 		}
 	}
 	public function setDescriptor($descriptor){

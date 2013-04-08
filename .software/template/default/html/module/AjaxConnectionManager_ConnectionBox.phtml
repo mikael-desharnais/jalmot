@@ -1,6 +1,6 @@
 <?php Ressource::getCurrentLanguage()->init('module/AjaxConnectionManager'); ?>
 <?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','AjaxConnectionManager.js',false)),0); ?>
-<h1><?php echo Ressource::getCurrentLanguage()->getTranslation("Your session has expired, please login again"); ?></h1>
+<legend><?php echo Ressource::getCurrentLanguage()->getTranslation("Your session has expired, please login again"); ?></legend>
 <br>
 <br>
 <form action="" style="margin : 0px;" method="post" id="ajaxConnection">
@@ -11,7 +11,7 @@
 		<div class="connectionTopDiv"><input type="submit" value="<?php echo Ressource::getCurrentLanguage()->getTranslation("Login") ?>" class="btn btn-primary connectionInput" id="connectionSubmit"></div><br class="clearer"/>
 	</center>
 </form>
-<?php if (Ressource::getUserSpace()->hasRight('ACCESS_ADMIN')) {?>
+<?php if (Ressource::getUserSpace()->getSlot('ADMIN')->hasRight('ACCESS_ADMIN')) {?>
 <script>
 jQuery('#ajaxConnection').closest('.reload-change-listener').data('object').close();
 </script>

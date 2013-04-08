@@ -47,19 +47,22 @@
 		* @param string $file name of the file to load
 		*/
 		public function init($file){
+			$loadedTranslations = array();
 			if (!in_array($this->name.'/'.$file,$this->loadedFiles)){
-			    Log::LogData("Load language/".$this->name.'/'.$file.".lng.xml",Log::$LOG_LEVEL_INFO);
+			    Log::GlobalLogData("Load language/".$this->name.'/'.$file.".lng.xml",Log::$LOG_LEVEL_INFO);
 				$xml_file=Ressource::getCurrentTemplate()->getFile(new File("language/".$this->name,$file.".lng.xml",false));
 				if (!empty($xml_file)){
 					$xml = XMLDocument::parseFromFile($xml_file);
 					$translationList=$xml->translation;
 					
 					foreach($translationList as $translation){
+						$loadedTranslations[$translation->id.""]=$translation->value."";
 						$this->translations[$translation->id.""]=$translation->value."";
 					}
 				}
 				$this->loadedFiles[]=$this->name.'/'.$file;
 			}
+			return $loadedTranslations;
 		}
 		/**
 		* Returns the translation of the given text
@@ -101,7 +104,7 @@
 		/**
 		* Default language id
 		*/
-		private static $defaultLanguageId;
+		public static $defaultLanguageId;
 		/**
 		* Returns a language given an ID
 		* 
@@ -113,6 +116,13 @@
 		        self::$languages[$id]=new Language($id);
 		    }
 		    return self::$languages[$id];
+		}
+		public static function getLanguageByName($name){
+			foreach(self::$languages as $language){
+				if ($language->getName()==$name){
+					return $language;
+				}
+			}
 		}
 		/**
 		* Adds a Language to used ones

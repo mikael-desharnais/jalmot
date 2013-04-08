@@ -15,6 +15,7 @@ function AjaxHTMLFetcher(){
 	this.callback;
 	this.status;
 	this.message;
+	this.params;
 
 	this.setURL=function(url){
 		this.url=url;
@@ -26,7 +27,7 @@ function AjaxHTMLFetcher(){
 		var parent=this;
 		jQuery.ajaxSetup({'async' : false});
 		jQuery.post(this.url.address,
-					this.url.params,
+					this.url.toQueryString(),
 					function(data){
 						var json = null;
 						try {
@@ -42,6 +43,7 @@ function AjaxHTMLFetcher(){
 							parent.html=json.html;
 							parent.message=json.message;
 							parent.status=json.status;
+							parent.params=json.params;
 						}
 					});
 	};
@@ -55,7 +57,7 @@ function AjaxHTMLFetcher(){
 	};
 	this.integrateCSS=function(counter,callback){
 		var parent=this;
-		
+
 		if (counter>=this.css.length){
 			callback();
 			return;
@@ -69,6 +71,7 @@ function AjaxHTMLFetcher(){
 				found=true;
 			}
 		}
+
 		if (!found){
 			var script=jQuery('<link rel="stylesheet" href="'+this.css[counter]+'" type="text/css">');
 			jQuery('head').append(script);
@@ -78,6 +81,7 @@ function AjaxHTMLFetcher(){
 	};
 	this.integrateJS=function(counter,callback){
 		var parent=this;
+
 		if (counter>=this.js.length){
 			callback();
 			return;
@@ -91,6 +95,7 @@ function AjaxHTMLFetcher(){
 				found=true;
 			}
 		}
+
 		if (!found){
 			jQuery.getScript(this.js[counter]).done(function(){
 				parent.integrateJS(counter+1,callback);
@@ -105,7 +110,7 @@ function AjaxHTMLFetcher(){
 	};
 	this.integrateHTML=function(){
 		jQuery('body').trigger('AjaxHTMLFetcherStatus',this);
-		if (this.status!=1){
+		if (this.status==0){
 			this.html = '<h1>Une erreur s\'est produite : '+this.message+'</h1><pre>'+this.html+'</pre>';
 		}
 		if (this.status!=404){
@@ -116,6 +121,29 @@ function AjaxHTMLFetcher(){
 function URL(address,params){
 	this.address=address;
 	this.params=params;
+	this.addParams=function(params){
+		for(var i in params){
+			var key = i;
+			var value = params[i]
+			if (i.slice(-2)=='[]'){
+				key = i.slice(0,-2);
+				value = (typeof this.params[key] != "undefined"?this.params[key]:new Array());
+				value.push(params[i]);
+			}
+			this.params[key]=value;
+		}
+	}
+	this.addSerializedArrayParams=function(params){
+		for(var i in params){
+			var modifiedArray = new Array();
+			modifiedArray[params[i].name]=params[i].value;
+			this.addParams(modifiedArray);
+		}
+		
+	}
+	this.toQueryString=function(){
+		return jQuery.param(this.params);
+	}
 };
 
 

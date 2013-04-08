@@ -23,6 +23,8 @@ class CoreModelData{
 	*/
 	public $source;
 	
+	public $uuid;
+	
 	
 	public $changeLog = array();
 	
@@ -126,6 +128,11 @@ class CoreModelData{
     public function __construct($pm){
         $this->__parent_model=$pm;
         $this->source=ModelData::$SOURCE_NEW;
+        $this->uuid = microtime(true);
+    }
+    
+    public function __wakeup(){
+    	$this->__parent_model=Model::getModel($this->__parent_model->getName());
     }
     /**
      * returns an associative array containing only the data of this ModelData
@@ -159,8 +166,8 @@ class CoreModelData{
 	    }else if ($action=="set"){
 	        $value=$arguments[0];
 	        ModelType::getType($this->__parent_model->getField($fieldName)->getType())->checkValue($value);
-	        if (!array_key_exists($fieldName, $this->changeLog)&&$this->$fieldName!=$value){
-	        	$this->changeLog[$fieldName]=$this->$fieldName;
+	        if (!array_key_exists($this->__parent_model->getField($fieldName)->getName(), $this->changeLog)&&$this->$fieldName!=$value){
+	        	$this->changeLog[$this->__parent_model->getField($fieldName)->getName()]=$this->$fieldName;
 	        }
 	        $this->$fieldName=$value;
 	    }else if ($action=="lst"){
@@ -197,6 +204,7 @@ class CoreModelData{
 	    $this->propagateBeforeCreate();
 	    $this->propagateBeforeStaticCreate($this);
 	    $this->getParentModel()->getDataSource()->create($this);
+	    $this->source=ModelData::$SOURCE_FROM_DATASOURCE;
 	    $this->propagateAfterCreate();
 	    $this->propagateAfterStaticCreate($this);
 	    $this->chainCreate();
@@ -645,7 +653,7 @@ class CoreModelData{
 	    }
 	}
 	public function __toString(){
-		$toReturn="ModelData :|\n".
+		$toReturn="ModelData ".$this->uuid." :|\n".
 				"	Model : ".$this->getParentModel()->getName()." |\n".
 				"	Fields : |\n";
 		$fields=$this->getParentModel()->getFields();

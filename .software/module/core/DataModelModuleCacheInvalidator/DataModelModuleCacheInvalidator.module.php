@@ -33,7 +33,7 @@ class DataModelModuleCacheInvalidator extends Module{
 		        include_once($moduleFile->toURL());
 		        $directory = call_user_func(array($module,"getCacheDirectory"),$module,new File('html/module/','',false));
 		        if (file_exists($directory->toURL())){
-		            Log::LogData("Invalidating Cache for module ".$module." because of DataModel ".$element->getParentModel()->getName(), Log::$LOG_LEVEL_INFO);
+		            Log::GlobalLogData("Invalidating Cache for module ".$module." because of DataModel ".$element->getParentModel()->getName(), Log::$LOG_LEVEL_INFO);
 		        	$directory->delete();
 		        }
 	        }

@@ -1,0 +1,10 @@
+
+<tr>
+<td colspan="2" class="control-group" width="75%">
+	<?php if($this->getValue($element)){
+		echo Ressource::getCurrentLanguage()->getTranslation($this->getConfParam('trueText')); 
+	} else { 
+		echo Ressource::getCurrentLanguage()->getTranslation($this->getConfParam('falseText'));
+	}?>
+</td>	
+</tr>

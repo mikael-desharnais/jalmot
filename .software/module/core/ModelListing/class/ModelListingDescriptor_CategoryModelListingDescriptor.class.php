@@ -4,8 +4,8 @@
 */ 
 class CategoryModelListingDescriptor extends ModelListingDescriptor {
 	
-	private $linkingField;
-	private $contentRelation;
+	protected $linkingField;
+	protected $contentRelation;
 	protected $currentElement;
 	
 	/**
@@ -38,8 +38,8 @@ class CategoryModelListingDescriptor extends ModelListingDescriptor {
 	* If the current directory is not root directory, a ParentDirectory Is added to the list of elements
 	*/
 	public function fetchData(){
-	    $this->list=new ModelDataCollection;
 	    $model=Model::getModel($this->model);
+	    $this->list=new ModelDataCollection($model);
 	    $id_directory=1;
 	    if (Ressource::getParameters()->valueExists('id')){
 	        $id=Ressource::getParameters()->getValue('id');
@@ -63,10 +63,9 @@ class CategoryModelListingDescriptor extends ModelListingDescriptor {
 	    $this->list=$this->list->merge($this->currentElement->lstChildren()->getModelData())->merge($this->currentElement->$listName()->getModelData());
 	}
 	public function getCurrentElementParams(){
-		$primary_keys=$this->currentElement->getPrimaryKeys();
-		$toReturn="";
-		foreach($primary_keys as $name=>$value){
-			$toReturn.=($toReturn==""?"":"&")."id[".$name."]=".$value;
+		$toReturn = array();
+		foreach($this->currentElement->getPrimaryKeys() as $key=>$value){
+			$toReturn['id['.$key.']']=$value;
 		}
 		return $toReturn;
 	}

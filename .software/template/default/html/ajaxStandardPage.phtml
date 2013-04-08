@@ -1,14 +1,15 @@
 <?php 
+ob_start();
 try{
-	ob_start();
 	include(Ressource::getCurrentTemplate()->getURL("html/ajax/".$this->ajaxTarget.".phtml")); 
 	$bodyCore = ob_get_clean();
 	Ressource::getCurrentPage()->setAjaxContent('html',$bodyCore);
 	Ressource::getCurrentPage()->setAjaxContent('status',1);
 }catch (Exception $ex){
+	while (@ob_get_clean());
 	Ressource::getCurrentPage()->setAjaxContent('status',0);
 	Ressource::getCurrentPage()->setAjaxContent('message',$ex->getMessage());
-	Ressource::getCurrentPage()->setAjaxContent('html',$ex->getTrace());
+	Ressource::getCurrentPage()->setAjaxContent('html',print_r($ex->getTrace(),true));
 }
 
 $css=array();
@@ -31,7 +32,6 @@ foreach($newJSListe as $arrayOfFiles){
 
 Ressource::getCurrentPage()->setAjaxContent('css',$css);
 Ressource::getCurrentPage()->setAjaxContent('js',$js);
-
 echo json_encode(Ressource::getCurrentPage()->getAjaxContent());
 /*
 ?>

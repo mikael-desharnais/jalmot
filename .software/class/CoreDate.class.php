@@ -2,6 +2,7 @@
 /**
 * Date wrapper for dates
 */
+date_default_timezone_set("GMT");
  class CoreDate{
      
      public $year;
@@ -10,6 +11,8 @@
      public $hour;
      public $minute;
      public $second;
+     
+     private $timestamp;
      
      
      /**
@@ -54,7 +57,10 @@
          return new date(date("Y",$timestamp),date("n",$timestamp),date("j",$timestamp),date("H",$timestamp),date("i",$timestamp),date("s",$timestamp));
      }
      public function getTimeStamp(){
-         return mktime($this->hour,$this->minute,$this->second,$this->month,$this->day,$this->year);
+     	if (is_null($this->timestamp)){
+     		$this->timestamp=mktime($this->hour,$this->minute,$this->second,$this->month,$this->day,$this->year);
+     	}
+        return $this->timestamp;
      }
      public static function parseFromFormat($format,$date){
          $dateArray = date_parse_from_format($format, $date);

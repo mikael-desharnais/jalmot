@@ -73,14 +73,10 @@ class ModelEditorDescriptor {
 	}
 	public function getURLParams(){
 	    if ($this->source==ModelData::$SOURCE_NEW){
-	        $concat="";
+	        return array();
 	    }else {
-			$concat="";
-			foreach($this->id as $key_element=>$value_element){
-				$concat.=$key_element."=".$value_element."&";
-			}
+			return $this->id;
 	    }
-		return $concat;
 	}
 	public function setId($id){
 		$this->id=is_array($id)?$id:array();
@@ -136,5 +132,11 @@ class ModelEditorDescriptor {
 	
 	public function delete(){
 	    $this->fetchedData['simple']->delete();
+	}
+	public function wrapFieldName($name){
+		return 'ModelEditor['.$name.']';
+	}
+	public function getParameterContainer(){
+		return is_array(Ressource::getParameters()->getValue('ModelEditor'))?Ressource::getParameters()->getValue('ModelEditor'):array();
 	}
 }

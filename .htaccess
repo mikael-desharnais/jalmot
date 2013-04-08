@@ -2,7 +2,7 @@ RewriteEngine On
 RewriteCond 	%{ENV:REDIRECT_STATUS} 	200
 RewriteRule 	.* 						- 																																	[L,QSA]
 
-RewriteBase																	/test/jalmot/
+RewriteBase																	/jalmot/
 
 RewriteRule	^\.software.*$													-																								[NE,L]
 RewriteRule	^$																.software/index.php																				[L,QSA]

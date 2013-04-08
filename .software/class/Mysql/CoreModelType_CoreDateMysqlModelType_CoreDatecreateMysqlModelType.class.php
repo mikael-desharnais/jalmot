@@ -1,12 +1,12 @@
 <?php
 
-class CoreDatecreateMysqlModelType extends CoreDateMysqlModelType{
+class CoreDatecreateMysqlModelType extends DateMysqlModelType{
 
     public static function toSQL($value){
     	if($value == ''){
-    		return "FROM_UNIXTIME(".Date::getNow()->getTimeStamp().")";
+    		return parent::toSQL(Date::getNow()->getTimeStamp());
     	}else{
-        	return "FROM_UNIXTIME(".$value->getTimeStamp().")";
+    		return parent::toSQL($value->getTimeStamp());
     	}
     }
 }

@@ -1,5 +1,5 @@
 <script>
-AjaxHTMLFetcher.setFetcher('icon_test',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/test/',''),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('icon_test',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/test/',new Object()),function(htmlContent){
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('icon_test')); ?>);
 	window.setContent(htmlContent);

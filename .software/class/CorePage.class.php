@@ -41,6 +41,11 @@
 	* List of headers to send before HTML
 	*/
 	private $headers=array();
+
+	/**
+	 * Configuration parameters of this module
+	 */
+	protected $confParams;
 	/**
 	* Defines the name of the page
 	* Sets JSFilterFlow and CSSFilterFlow with default filterers
@@ -50,6 +55,20 @@
 		$this->name = $name;
 		$this->JSFilterFlow=new JSFilterFlow();
 		$this->CSSFilterFlow=new CSSFilterFlow();
+		$this->configure();
+	}
+	public function configure(){
+		$xml=XMLDocument::parseFromFile($this->getConfigurationFile());
+		$this->loadHeaders($xml);
+		$this->setConfParams(XMLParamsReader::read($xml));
+		if ((string)$xml->silent=="1"){
+			Log::setGlobalLogLevel(Log::$LOG_LEVEL_SILENT);
+		}
+	}
+	public function loadHeaders($xml){
+	    foreach($xml->headers->children() as $header){
+	    	$this->addHeader($header."");
+	    }
 	}
 	/**
 	* Returns the name of the page
@@ -126,18 +145,8 @@
 	* Sends headers
 	*/
 	public function sendHeaders(){
-	    $this->loadHeaders();
 	    foreach($this->headers as $header){
 	        header($header);
-	    }
-	}
-	/**
-	* load Headers from XML file
-	*/
-	public function loadHeaders(){
-	    $xml=XMLDocument::parseFromFile($this->getConfigurationFile());
-	    foreach($xml->headers->children() as $header){
-	    	$this->addHeader($header."");
 	    }
 	}
 	/**
@@ -219,6 +228,21 @@
 	*/
 	public function getXMLModuleFileConfiguration(){
 		return Ressource::getCurrentTemplate()->getFile(new File('xml/page/'.$this->name,'modules.xml',false));
+	}
+	/**
+	* Defines the Configuration Parameters Array
+	* @param array $params the Configuration Parameters Array
+	*/
+	public function setConfParams($params){
+		$this->confParams=$params;
+	}
+	/**
+	* Returns a configuration parameter value according to its key
+	* @return string the configuration parameter value corresponding to the given key
+	* @param string $key the key to the configuration parameter
+	*/
+	public function getConfParam($key){
+	    return $this->confParams[$key];
 	}
 	
 }

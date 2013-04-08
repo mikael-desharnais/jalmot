@@ -97,7 +97,7 @@ class CoreRessource{
 	}
 	/**
 	* Returns the current GET/POST parameters manager Object
-	* @return Parameter  the current GET/POST parameters manager Object
+	* @return Parameters  the current GET/POST parameters manager Object
 	*/
 	public static function getParameters(){
 		return self::$parameters;

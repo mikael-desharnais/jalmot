@@ -2,19 +2,24 @@ jQuery('.model-editor-cancel-button').live('click',function(){
 	jQuery(this).closest('.reload-change-listener').data('object').close();
 });
 jQuery('.model-editor-delete-button').live('click',function(){
-	var parent=this;
-	var url=jQuery(this).closest('.reload-change-listener').data('object').url;
 
-	if (confirm('Etes vous sûr de vouloir supprimer cet élement ?')){
-		jQuery.post(url.address+'delete/',url.params,function(data){
+	if (confirm(Ressource.getLanguage().getTranslation('Are you sure you want to delete this element ?'))){
+		var parent=this;
+		var reloadChangeListener = jQuery(this).closest('.reload-change-listener').data('object');
+		var url=new URL();
+		url.address=reloadChangeListener.url.address;
+		url.params=jQuery.extend({},reloadChangeListener.url.params);
+		url.address += 'delete/'
+		var fetcher=new AjaxHTMLFetcher();
+		fetcher.setURL(url);
+		fetcher.setCallBack(function(data){
 			ReloadManager.propagateChangeEvent(jQuery(parent));
-			if (data!=''){
-				window.alert("Data save delete\n"+data);
-			}else {
-				jQuery(parent).closest('.reload-change-listener').data('object').close();	
+			if (this.status==1){
+				jQuery(parent).closest('.reload-change-listener').data('object').close();
 			}
-			jQuery(parent).closest('.reload-change-listener').data('object').close();
 		});
+		fetcher.fetch();
+		fetcher.integrate(); 
 	}
 });
 
@@ -27,20 +32,23 @@ jQuery('.model-editor-form').live('submit',function(event){
 		return false;
 	}
 	var parent=this;
-	var url=jQuery(this).closest('.reload-change-listener').data('object').url;
-	jQuery.post(url.address+'save/',url.params+'&'+jQuery(this).closest('.window_frame').find(':input').serialize(),function(data){
+	var reloadChangeListener = jQuery(this).closest('.reload-change-listener').data('object');
+	var url=new URL();
+	url.address=reloadChangeListener.url.address;
+	url.params=jQuery.extend({},reloadChangeListener.url.params);
+	url.address += 'save/'
+	var inputs = jQuery(this).closest('.window_frame').find(':input').serializeArray();
+	url.addSerializedArrayParams(inputs);
+	var fetcher=new AjaxHTMLFetcher();
+	fetcher.setURL(url);
+	fetcher.setCallBack(function(data){
 		ReloadManager.propagateChangeEvent(jQuery(parent));
-		if (data!=''){
-			window.alert("Data save failed\n"+data);
-		}else {
-			if (typeof jQuery(parent).closest('.reload-change-listener').data('object') == 'undefined'){
-				console.log(jQuery(parent));
-				window.alert('Could not find reloader');
-			}else {
-				jQuery(parent).closest('.reload-change-listener').data('object').close();
-			}
+		if (this.status==1){
+			jQuery(parent).closest('.reload-change-listener').data('object').close();
 		}
 	});
+	fetcher.fetch();
+	fetcher.integrate(); 
 	
 	return false;
 	

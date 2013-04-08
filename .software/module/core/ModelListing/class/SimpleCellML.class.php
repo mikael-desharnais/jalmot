@@ -17,11 +17,12 @@ class SimpleCellML {
 		return ob_get_clean();
 	}
 	protected function getValue($line){
-		if (!is_object($line)){
-			Log::Error('Trying to acess to key '.$this->key.' on a non object');
+		if (!empty($line)){
+			$getter="get".ucfirst($this->key);
+			return $line->$getter();
+		}else {
+			return '';
 		}
-		$getter="get".ucfirst($this->key);
-		return $line->$getter();
 	}
 	public static function readFromXML($xml){
 	    $classname = $xml->class."";
@@ -46,7 +47,7 @@ class SimpleCellML {
 	    $this->confParams=$confParams;
 	}
 	public function getConfParam($key){
-	    return $this->confParams[$key];
+	    return array_key_exists($key,$this->confParams)?$this->confParams[$key]:"";
 	}
 	public function setInstance($instance){
 		$this->instance=$instance;

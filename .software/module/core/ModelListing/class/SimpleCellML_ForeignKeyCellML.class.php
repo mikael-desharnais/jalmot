@@ -9,7 +9,7 @@ class ForeignKeyCellML extends SimpleCellML {
 		$line=$element->$listName()->getModelDataElement();
 
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
+		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/ForeignKeyCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
 	}
 	

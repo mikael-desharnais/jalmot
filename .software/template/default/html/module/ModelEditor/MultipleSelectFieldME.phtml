@@ -26,11 +26,11 @@ foreach($element['reference'] as $elt){
 </select>
 <?php if ($this->getConfParam('modelListing')!=''){?>
 <script>
-	AjaxHTMLFetcher.setFetcher('list_model_<?php echo $this->getName(); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',''),function(htmlContent){
+	AjaxHTMLFetcher.setFetcher('list_model_<?php echo $this->getName(); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',new Object()),function(htmlContent){
 		var window = new Window();
 		window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('icon_test')); ?>);
 		window.setContent(htmlContent);
-		window.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',''));
+		window.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/<?php echo $this->getConfParam('modelListing'); ?>/',new Object()));
 		window.display();
 	}); 
 </script>

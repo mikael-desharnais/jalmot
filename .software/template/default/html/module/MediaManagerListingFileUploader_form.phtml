@@ -7,9 +7,7 @@
 				if (typeof(jQuery(this).data('object'))=='undefined'){
 					var parent=jQuery(this);
 					jQuery(this).data('object',parent);
-					var explodeParams=parent.closest('.reload-change-listener').data('object').url.params.split('=');
-					var sendParams = { action : 'create_file'};
-					sendParams[explodeParams[0]]= explodeParams[1];
+					var sendParams = jQuery.extend({ action : 'create_file'},parent.closest('.reload-change-listener').data('object').url.params);
 					jQuery(this).html5Uploader({
 						postUrl : 'MediaManager/upload/',
 						params : sendParams,

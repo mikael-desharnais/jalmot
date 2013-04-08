@@ -50,6 +50,7 @@
 		<tab>
 			<class>TabME</class>
 			<title>Base</title>
+			<displayButtons>1</displayButtons>
 			<inputs>
 				<input>
 					<key>name</key>

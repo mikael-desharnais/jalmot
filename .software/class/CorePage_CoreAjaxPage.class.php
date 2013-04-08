@@ -13,8 +13,8 @@
 	* @param string $ajaxTarget the unique name of the page
 	*/
 	public function __construct($ajaxTarget){
-		parent::__construct($ajaxTarget);
 		$this->ajaxTarget=$ajaxTarget;
+		parent::__construct($ajaxTarget);
 	}
 	/**
 	* Generate the output for this page

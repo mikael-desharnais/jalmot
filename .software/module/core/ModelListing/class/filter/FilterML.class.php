@@ -17,8 +17,7 @@ class FilterML {
 	}
 
 	public function getURLParams(){
-		return "id[".$this->field."]=".$this->value;
+		return array("id[".$this->field."]"=>$this->value);
 	}
-	
 	
 }

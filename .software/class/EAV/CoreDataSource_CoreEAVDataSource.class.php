@@ -13,7 +13,7 @@
 		$baseQuery = $query->getModel()->getBaseModel()->getDataSource()->getModelDataQuery($query->getType(),$query->getModel()->getBaseModel());
 		$baseQuery->addConditionContainer($query->getConditionContainer()->convertForQuery($baseQuery));
 		$result = $query->getModel()->getBaseModel()->getDataSource()->execute($baseQuery);
-		$toReturn = new ModelDataCollection();
+		$toReturn = new ModelDataCollection($query->getModel());
 		foreach($result as $element){
 			$eAVModelData = $query->getModel()->getInstance();
 			$eAVModelData->source=$element->source;

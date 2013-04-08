@@ -10,11 +10,12 @@ class MultipleSelectFieldME extends SelectFieldME {
         return $element->$getter();
     }
     public function fetchElementsToSave($dataFetched){
-        if (Ressource::getParameters()->valueExists($this->getName())){
+	    $contentContainer = $this->model_editor->getParameterContainer();
+	    if (array_key_exists($this->key,$contentContainer)){
 	        foreach($dataFetched[$this->getConfParam('relation')] as $element){
 	           $element->delete();
 	        }
-	        $toCreate = Ressource::getParameters()->getValue($this->getName());
+	        $toCreate = $contentContainer[$this->key];
 	        $nameIdForeignKeyInRelation = "set".ucfirst($this->getConfParam('IdForeignKeyInRelation'));
 	        $nameIdCurrentKeyInRelation = "set".ucfirst($this->getConfParam('IdCurrentKeyInRelation'));
 	        $nameLocalKey = "get".ucfirst($this->getConfParam('localKey'));

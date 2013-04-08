@@ -1,5 +1,5 @@
 <?php
-class CoreEAVModelData extends CoreModelData{
+class CoreEAVModelData extends ModelData{
 	
 	protected $baseModelData;
 	protected $eavContent = array();

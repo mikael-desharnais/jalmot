@@ -9,7 +9,7 @@ class LanguageDataFetcher extends SimpleDataFetcher {
 	        $db_lines=$fetchedData['simple']->lstLang()
 	        				->getModelData(true);
 	    }else {
-	    	$db_lines = new ModelDataCollection();
+	    	$db_lines = new ModelDataCollection($model);
 	    }
 	    
 	    $languages=Language::getAvailableLanguages();

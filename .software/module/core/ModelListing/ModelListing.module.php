@@ -1,5 +1,4 @@
 <?php
-
 class ModelListing extends Module{
     
 	protected $descriptor;

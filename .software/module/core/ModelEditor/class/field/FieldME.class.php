@@ -32,9 +32,11 @@ abstract class FieldME {
 	public function getModelEditor(){
 		return $this->model_editor;
 	}
-	
-	public function getName(){
+	public function getKey(){
 		return $this->key;
+	}
+	public function getName(){
+		return $this->model_editor->wrapFieldName($this->key);
 	}
 	public static function readFromXML($model_editor,$xml){
 	    $classname=$xml->class."";

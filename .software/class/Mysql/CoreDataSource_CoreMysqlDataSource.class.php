@@ -38,7 +38,7 @@
          if ($query->getType()==ModelDataQuery::$SELECT_QUERY){
 			$raw_query=$query->getSQL();
          	$resultset=$this->dbConnection->query($raw_query);
-         	$toReturn = new ModelDataCollection();
+         	$toReturn = new ModelDataCollection($query->getModel());
          	while($line=$this->dbConnection->fetchAssoc($resultset)){
          	    $instance=$query->getModel()->getInstance();
          	    $instance->source=ModelData::$SOURCE_FROM_DATASOURCE;
@@ -146,6 +146,9 @@
 			break;
 			case "<=" :
 				return new MysqlLesserThanCondition($args[1],$args[2],true);
+			break;
+			case "<>" :
+				return new MysqlDifferentCondition($args[1],$args[2],true);
 			break;
 			default :
 			    Log::Error(__CLASS__." cant't find operator ".$args[0]);

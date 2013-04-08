@@ -11,7 +11,7 @@
 	<ul class="tabTitleGroup nav nav-pills navbar-inner">
 		<?php $count=0; ?>
 		<?php foreach($this->tabs as $tab){ ?>
-			<li data-tab="<?php echo $count ;?>" class="tabTitle <?php echo ($count==0?"currentTabTitle active":""); $count++; ?>">
+			<li data-tab="<?php echo $count ;?>" class="tabTitle tabTitle<?php echo $count ;?> <?php echo ($count==0?"currentTabTitle active":""); $count++; ?>">
 				<a href="#"><?php echo Ressource::getCurrentLanguage()->getTranslation($tab->getTitle()); ?></a>
 			</li>
 		<?php } ?>
@@ -38,10 +38,12 @@
 						<tfoot>
 							<tr>
 								<td colspan="2" align="center">
-									<input type="button" class="model-editor-cancel-button btn" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Cancel'); ?>">
-									<input type="submit" class="model-editor-save-button btn btn-primary" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Save'); ?>">
-									<?php if ($this->getSource()!=ModelData::$SOURCE_NEW) {?>
-										<input type="button" class="model-editor-delete-button btn btn-warning" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Delete'); ?>">
+									<?php if ($tab->displayButtons()){?>
+										<input type="button" class="model-editor-cancel-button btn" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Cancel'); ?>">
+										<input type="submit" class="model-editor-save-button btn btn-primary" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Save'); ?>">
+										<?php if ($this->getSource()!=ModelData::$SOURCE_NEW) {?>
+											<input type="button" class="model-editor-delete-button btn btn-warning" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Delete'); ?>">
+										<?php }?>
 									<?php }?>
 								</td>
 							</tr>

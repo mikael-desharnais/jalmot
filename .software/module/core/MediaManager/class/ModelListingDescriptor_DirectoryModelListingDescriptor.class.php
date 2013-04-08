@@ -17,8 +17,8 @@ class DirectoryModelListingDescriptor extends ModelListingDescriptor {
 	* If the current directory is not root directory, a ParentDirectory Is added to the list of elements
 	*/
 	public function fetchData(){
-	    $this->list=new ModelDataCollection;
 	    $model=Model::getModel($this->model);
+	    $this->list=new ModelDataCollection($model);
 	    $id_directory=1;
 	    if (Ressource::getParameters()->valueExists('id')){
 	        $id=Ressource::getParameters()->getValue('id');

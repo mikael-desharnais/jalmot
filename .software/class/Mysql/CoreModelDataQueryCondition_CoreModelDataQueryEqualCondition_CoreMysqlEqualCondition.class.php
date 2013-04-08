@@ -9,6 +9,9 @@ class CoreMysqlEqualCondition extends CoreModelDataQueryEqualCondition{
 	* @return string the SQL query for this equal condition
 	*/
 	public function getSQL(){
+		if (is_object($this->val1)&&get_class($this->val1)=='Model'){
+			throw new Exception();
+		}
         $toReturn="";
         $DataQuery=$this->parentConditionContainer->getDataQuery();
         if ($this->val1 instanceof ModelField){

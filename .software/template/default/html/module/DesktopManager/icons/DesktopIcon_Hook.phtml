@@ -1,9 +1,9 @@
 <script>
-AjaxHTMLFetcher.setFetcher('icon_model_hook_<?php echo $this->getConfParam('hook'); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'admin/hook/<?php echo $this->getConfParam('hook'); ?>/',''),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('icon_model_hook_<?php echo $this->getConfParam('hook'); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'admin/hook/<?php echo $this->getConfParam('hook'); ?>/',new Object()),function(htmlContent){
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('Hook-'.$this->getConfParam('hook'))); ?>);
 	window.setContent(htmlContent);
-	window.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'admin/hook/<?php echo $this->getConfParam('hook'); ?>/',''));
+	window.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'admin/hook/<?php echo $this->getConfParam('hook'); ?>/',new Object()));
 	window.display();
 }); </script>
 <div class="icon btn">

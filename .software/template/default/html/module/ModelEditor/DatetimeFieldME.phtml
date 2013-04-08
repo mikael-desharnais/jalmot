@@ -8,7 +8,7 @@
 </td>
 <?php $date = $this->getValue($element) instanceof Date?$this->getValue($element):Date::getNow();  ?>
 <td class="control-group" width="75%">
-	<input type="text" name="<?php echo $this->getName(); ?>" class="span3 datetime" value="<?php echo $date->format('d/m/Y H:i'); ?>" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>">
+	<input type="text" name="<?php echo $this->getName(); ?>" class="span3 datetime" value="<?php echo $date->format('d/m/Y H:i:s'); ?>" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>">
 	<script>
 	jQuery(document).ready(function(){
 		jQuery('.datetime').each(function(){

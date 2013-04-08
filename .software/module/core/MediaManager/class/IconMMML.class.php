@@ -88,15 +88,6 @@ class IconMMML {
 		return $toReturn;
 	}
 
-	protected function getParams($line){
-		$primary_keys=$line->getPrimaryKeys();
-		$toReturn="";
-		foreach($primary_keys as $name=>$value){
-			$toReturn.=($toReturn==""?"":"&")."id[".$name."]=".$value;
-		}
-		return $toReturn;
-	}
-
 	protected function isDirectory($line){
 	    if ($line->getParentModel()->getName()=="MediaDirectory"){
 	        return true;
@@ -115,6 +106,13 @@ class IconMMML {
 	    }else {
 	        return true;
 	    }
+	}
+	public function getParams($line){
+		$toReturn = array();
+		foreach($line->getPrimaryKeys() as $key=>$value){
+			$toReturn['id['.$key.']']=$value;
+		}
+		return $toReturn;
 	}
 }
 

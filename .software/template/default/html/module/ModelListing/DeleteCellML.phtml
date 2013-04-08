@@ -1,6 +1,6 @@
 <?php Ressource::getCurrentLanguage()->init('module/DeleteCellML'); ?>
 <script> 
-AjaxHTMLFetcher.setFetcher('delete_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/delete/','<?php print($this->getParams($line)); ?>'),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('delete_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/delete/',<?php print(json_encode($this->getParams($line))); ?>),function(htmlContent){
 	ReloadManager.propagateChangeEvent(jQuery('#delete_<?php print($this->getId($line)); ?>'));
 }); 
 </script>

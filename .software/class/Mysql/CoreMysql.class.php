@@ -32,6 +32,10 @@
 	     $this->password=$password;
 	     $this->database=$database;
 	     $this->connect();
+	     $this->log = new Log();
+	     $this->log->setLogMode(Log::$LOG_MODE_STD_OUTPUT_AND_FILE);
+	     $this->log->setLogLevel(Log::$LOG_LEVEL_INFO);
+	     $this->log->setLogFile(new File('tmp/log','mysql.'.$this->server.'.'.$this->database,false));
 	}
 	/**
 	* Connects to DB and sets charset to UTF8
@@ -52,8 +56,8 @@
 	* @param string $query the query to execute
 	*/
 	public function query($query){
-	    Log::LogData("Executing Query ".$query, Log::$LOG_LEVEL_INFO);
-		$result= mysqli_query($this->sql_link,$query) or Log::Error(mysqli_error($this->sql_link)." : ".$query);
+	    $this->log->logData("Executing Query ".$query, Log::$LOG_LEVEL_INFO);
+		$result= mysqli_query($this->sql_link,$query) or Log::Error($this->sql_link->error." : ".$query);
 		return $result;
 	}
 	/**

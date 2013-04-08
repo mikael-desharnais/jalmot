@@ -8,7 +8,7 @@ class CoreDateMysqlModelType extends ModelType{
     	if (!is_object($value)){
     		$value = Date::getNow();
     	}
-        return "FROM_UNIXTIME(".$value->getTimeStamp().")";
+        return "CONVERT_TZ(FROM_UNIXTIME(".$value->getTimeStamp()."),@@system_time_zone,'GMT')";
     }
 }
 

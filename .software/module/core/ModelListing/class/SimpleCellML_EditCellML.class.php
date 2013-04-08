@@ -17,12 +17,10 @@ class EditCellML extends SimpleCellML {
 		return $toReturn;
 	}
 	protected function getParams($line){
-		$primary_keys=$line->getPrimaryKeys();
-		$toReturn="";
-		foreach($primary_keys as $name=>$value){
-			$toReturn.=($toReturn==""?"":"&")."id[".$name."]=".$value;
+		$toReturn = array();
+		foreach($line->getPrimaryKeys() as $key=>$value){
+			$toReturn['id['.$key.']']=$value;
 		}
-		$paramsListing = $this->getListing()->getFiltersURLParams();
-		return $toReturn.($paramsListing==""?"":"&").$paramsListing;
+		return array_merge($toReturn,$this->getListing()->getFiltersURLParams());
 	}
 }

@@ -22,6 +22,12 @@ class ModelListingDescriptor {
 		foreach($xml->hooks->children() as $hook){
 		    Hook::initHookFromXML($hook->name."",$hook);
 		}
+		if (!empty($xml->orderBys)){
+			foreach($xml->orderBys->children() as $column){
+				$orderBy = call_user_func(array($column->class.'',"readFromXML"),$column->class.'',$column);
+				$modelListing->addOrderBy($orderBy);
+			}
+		}
 	    $modelListing->setConfParams(XMLParamsReader::read($xml));
 		return $modelListing;
 	}
@@ -34,6 +40,8 @@ class ModelListingDescriptor {
 	protected $title;
 	protected $confParams=array();
 	protected $filters = array();
+	protected $modelOrderBys = array();
+	protected $collectionOrderBys = array();
 	protected $page = 0;
 	protected $pageSize = 10;
 	protected $originalSize = 0;
@@ -77,6 +85,13 @@ class ModelListingDescriptor {
 	public function addColumn($head,$body){
 		$this->columns[]=array('head'=>$head,'body'=>$body);
 	}
+	public function addOrderBy($orderBy){
+		if ($orderBy->getType()==OrderByML::$ModelOrderBy){
+			$this->modelOrderBys[]=$orderBy;
+		}else {
+			$this->collectionOrderBys[]=$orderBy;
+		}
+	}
 	public function toHTML(){
 		ob_start();
 		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/ModelListingDescriptor_".$this->type.".phtml"));
@@ -90,6 +105,9 @@ class ModelListingDescriptor {
 		$query = $model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model);
 		foreach($this->filters as $filter){
 		    $query->addCondition($filter->getModelDataQueryCondition($model));
+		}
+		foreach($this->modelOrderBys as $orderBy){
+			$orderBy->apply($query);
 		}
 		$query->setStartPoint(0+$this->page*$this->pageSize);
 		$query->setSizeLimit($this->pageSize);
@@ -109,9 +127,9 @@ class ModelListingDescriptor {
 	    $this->page = $page;
 	}
 	public function getFiltersURLParams(){
-		$toReturn="";
+		$toReturn=array();
 		foreach($this->filters as $filter){
-			$toReturn.=($toReturn==""?"":"&").$filter->getURLParams();
+			$toReturn = array_merge($toReturn,$filter->getURLParams());
 		}
 		return $toReturn;
 	}

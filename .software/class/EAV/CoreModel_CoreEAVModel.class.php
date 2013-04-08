@@ -23,13 +23,13 @@ class CoreEAVModel extends Model{
         $this->modelDataClass="EAVModelData";
     }
     public function getField($name){
-    	return $this->fieldList[$name];
+    	return $this->fieldList[strtolower($name)];
     }
     public function addField($field){
     	parent::addField($field);
     	$fieldClone = clone $field;
     	$fieldClone->setModel($this);
-    	$this->fieldList[$fieldClone->getName()]=$fieldClone;
+    	$this->fieldList[strtolower($fieldClone->getName())]=$fieldClone;
     }
 	public function setEAVRelationName($eAVRelationName){
 		$this->eAVRelationName = $eAVRelationName;
@@ -42,7 +42,7 @@ class CoreEAVModel extends Model{
 		foreach($this->baseModel->getFields() as $field){
 	    	$fieldClone = clone $field;
 	    	$fieldClone->setModel($this);
-	    	$this->fieldList[$fieldClone->getName()]=$fieldClone;
+	    	$this->fieldList[strtolower($fieldClone->getName())]=$fieldClone;
 		}
 	}
 	public function getBaseModel(){

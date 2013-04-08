@@ -3,60 +3,38 @@
 * A user space manages all the logged users
 */
 class CoreUserSpace{
-	/**
-	* List of all users logged
-	*/
-	private $users=array();
-	/**
-	* The right Manager
-	*/
+	
+	public $slots=array();
+	
 	private $rightManager;
-    /**
-    * Builds a UserSpace
-    */
-    private function UserSpace(){
+    
+    private function __construct(){
         
     }
-    /**
-    * Adds a logged user to the userspace
-    * @param mixed $user Any User object
-    */
-    public function addUser($user){
-        $this->users[$user->getId()]=$user;
+    public static function readFromXML($class,$xml){
+    	$userspace = new $class();
+    	foreach($xml->slots->children() as $slotXML){
+    		$slotClass = $slotXML->class."";
+    		$slot = call_user_func(array($slotClass,"readFromXML"),$slotClass,$slotXML);
+    		$userspace->addSlot($slot);
+    	}
+    	return $userspace;
     }
-    /**
-    * Removes a logged user from the userspace
-    * @param mixed $user Any User object
-    */
-    public function removeUser($user){
-        unset($this->users[$user->getId()]);
-    }
-    /**
-    * Returns the UserSpace to use taking it either from Session or create a new instance
-    * @return UserSpace  the UserSpace to use taking it either from Session or create a new instance
-    */
     public static function getCurrentUserSpace(){
 	    if (!Ressource::getSessionManager()->valueExists("UserSpace")){
-	        Ressource::getSessionManager()->setValue("UserSpace",new UserSpace());
+	    	$xml = XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File('xml','userspace.xml',false)));
+	    	$class = $xml->class."";
+	    	$userspace = call_user_func(array($class,"readFromXML"),$class,$xml);
+	        Ressource::getSessionManager()->setValue("UserSpace",$userspace);
 	    }
         return Ressource::getSessionManager()->getValue("UserSpace");
     }
-	/**
-	* Returns true if one of the users logged has the right given in parameters, false otherwise
-	* @return boolean true if one of the users logged has the right given in parameters, false otherwise
-	* @param String $right the string that describes the right
-	*/
-	public function hasRight($right){
-		$toReturn=false;
-		foreach($this->users as $user){
-			$toReturn=$toReturn||$user->checkRight($right);
-		}
-		return $toReturn;
-	}
-	
-	public function getUsers(){
-		return $this->users;
-	}
+    public function getSlot($slotName){
+    	return $this->slots[$slotName];
+    }
+    public function addSlot($slot){
+    	$this->slots[$slot->getName()]=$slot;
+    }
 }
 
 

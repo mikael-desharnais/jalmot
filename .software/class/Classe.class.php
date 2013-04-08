@@ -72,7 +72,7 @@ class Classe {
 	* @param string $class Name of the missing class
 	*/
 	public static function autoload($class){
-		Log::LogData("Looking for ".$class,Log::$LOG_LEVEL_DEBUG);
+		Log::GlobalLogData("Looking for ".$class,Log::$LOG_LEVEL_DEBUG);
 	    $fileCache=new File(".cache/class","autoLoad.php",false);
 	    @include($fileCache->toURL());
 	    if (!isset($autoloadCache)){

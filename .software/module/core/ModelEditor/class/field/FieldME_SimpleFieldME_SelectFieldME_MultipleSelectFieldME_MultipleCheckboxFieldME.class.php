@@ -10,11 +10,16 @@ class MultipleCheckboxFieldME extends MultipleSelectFieldME {
         return $element->$getter();
     }
     public function fetchElementsToSave($dataFetched){
-        if (Ressource::getParameters()->valueExists($this->getName())){
+    	$contentContainer = $this->model_editor->getParameterContainer();
+		if (Ressource::getParameters()->getValue("action")=='save'){
 	        foreach($dataFetched[$this->getConfParam('relation')] as $element){
 	           $element->delete();
 	        }
-	        $toCreate = Ressource::getParameters()->getValue($this->getName());
+	        if (array_key_exists($this->key, $contentContainer)){
+	        	$toCreate = $contentContainer[$this->key];
+	        }else {
+	        	$toCreate = array();
+	        }
 	        $nameIdForeignKeyInRelation = "set".ucfirst($this->getConfParam('IdForeignKeyInRelation'));
 	        $nameIdCurrentKeyInRelation = "set".ucfirst($this->getConfParam('IdCurrentKeyInRelation'));
 	        $nameLocalKey = "get".ucfirst($this->getConfParam('localKey'));

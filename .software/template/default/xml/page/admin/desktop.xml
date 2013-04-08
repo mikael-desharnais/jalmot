@@ -38,5 +38,11 @@
 				<param name="modelListing" type="simple">TextContent</param>
 			</params>
 		</icon>
+		<icon>
+			<class>DesktopIcon</class>
+			<image>media/image/icon/exit.png</image>
+			<text>Logout</text>
+			<instance>logout</instance>
+		</icon>
 	</icons>
 </desktop>

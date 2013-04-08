@@ -15,7 +15,7 @@ class ModelEditorSwitcherDescriptor {
 		return $modelEditor;
 	}
 	protected $fieldName;
-	protected $modelEditorsChoices;
+	protected $modelEditorsChoices=array();
 	protected $name;
 	protected $source;
 	protected $modelEditorSelected;
@@ -81,7 +81,11 @@ class ModelEditorSwitcherDescriptor {
 			}
 			$element=	$query->getModelDataElement(true);
 			$getterName = "get".ucFirst($this->getFieldName());
-			$modelToUse=$this->modelEditorsChoices[$element->$getterName()];
+			if (array_key_exists($element->$getterName()."",$this->modelEditorsChoices)){
+				$modelToUse=$this->modelEditorsChoices[$element->$getterName()];
+			}else{
+				$modelToUse=$this->modelEditorsChoices['DEFAULT'];
+			}
 		}
 		$xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",$modelToUse.".xml",false)));
 		$this->modelEditor=call_user_func(array($xml->class."","readFromXML"),$modelToUse,$xml);

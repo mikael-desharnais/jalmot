@@ -12,12 +12,15 @@ class CoreMysqlConditionContainer extends CoreModelDataQueryConditionContainer{
 		$conditions=$this->getConditions();
 		$containers=$this->getContainers();
 		foreach($containers as $containerElement){
-			$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ")."(".$containerElement->getSQL().")";
+			$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ").$containerElement->getSQL();
 		}
 		foreach($conditions as $condition){
         	$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ").$condition->getSQL();
 		}
-		return $toReturn;
+		if (count($containers)+count($conditions)==0){
+			$toReturn = "(1=1)";
+		}
+		return "(".$toReturn.")";
 	}
 	/**
 	* returns the proper Mysql separator for this Container (either AND or OR)

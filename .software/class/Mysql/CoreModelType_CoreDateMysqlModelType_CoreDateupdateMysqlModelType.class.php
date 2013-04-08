@@ -1,9 +1,9 @@
 <?php
 
-class CoreDateupdateMysqlModelType extends CoreDateMysqlModelType{
+class CoreDateupdateMysqlModelType extends DateMysqlModelType{
 
     public static function toSQL($value){
-    	return "FROM_UNIXTIME(".Date::getNow()->getTimeStamp().")";
+    	return parent::toSQL(Date::getNow()->getTimeStamp());
 
     }
 }

@@ -2,15 +2,21 @@
 
 class TabME {
     
-	protected $inputs;
+	protected $inputs=array();
 	protected $title;
 	protected $model_editor;
 	protected $class;
+	protected $displayButtons;
 	
-	public function __construct($class,$model_editor,$title){
+	public function displayButtons(){
+		return $this->displayButtons;
+	}
+	
+	public function __construct($class,$model_editor,$title,$displayButtons){
         $this->model_editor=$model_editor;
 		$this->title=$title;
 		$this->class=$class;
+		$this->displayButtons = (bool)$displayButtons;
 	}
 	public function setInstance($instance){
 		$this->instance=$instance;
@@ -33,7 +39,7 @@ class TabME {
 	
 	public static function readFromXML($model_editor,$xml){
 	    $classname=$xml->class."";
-	    $toReturn=new $classname($classname,$model_editor,$xml->title."");
+	    $toReturn=new $classname($classname,$model_editor,$xml->title."",$xml->displayButtons."");
 	    $toReturn->setConfParams(XMLParamsReader::read($xml));
 	    if (!empty($instance)){
 	    	$toReturn->setInstance($xml->instance."");

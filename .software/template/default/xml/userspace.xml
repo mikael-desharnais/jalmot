@@ -1,0 +1,9 @@
+<userspace>
+	<class>userspace</class>
+	<slots>
+		<slot>
+			<class>UserSpaceSlot</class>
+			<name>ADMIN</name>
+		</slot>
+	</slots>
+</userspace>

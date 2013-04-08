@@ -25,10 +25,11 @@ class LanguageFieldME extends SimpleFieldME {
 		return $toReturn;
 	}
 	public function fetchElementsToSave($dataFetched){
-	    if (Ressource::getParameters()->valueExists($this->getName())){
+	    $contentContainer = $this->model_editor->getParameterContainer();
+	    if (array_key_exists($this->key,$contentContainer)){
 		    $line_lang=$dataFetched['lang'];
-		    $values=Ressource::getParameters()->getValue($this->getName());
-		    $function="set".ucfirst($this->getName());
+		    $values=$contentContainer[$this->key];
+		    $function="set".ucfirst($this->key);
 		    foreach($line_lang as $line_element){
 		        $value=array_key_exists($line_element->getIdLang(), $values)?$values[$line_element->getIdLang()]:null;
 		        $line_element->$function($value);
