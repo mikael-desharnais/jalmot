@@ -15,17 +15,15 @@ jQuery(document).ready(function(){
 		jQuery(this).data('mouseenter',false);
 		jQuery('.desktop img').animate({width : '40px'},400);
 	});
-	jQuery('body').mousemove(function(event){
+	jQuery('html').mousemove(function(event){
 		jQuery('.desktop').each(function(){
-			if (jQuery(this).data('mouseenter')){
 				jQuery(this).find('.icon').each(function(){
 					var xDistance = event.pageX-jQuery(this).offset().left-jQuery(this).width()/2;
 					var yDistance = event.pageY-jQuery(this).offset().top-jQuery(this).height()/2;
 					var distance = Math.sqrt(xDistance*xDistance+yDistance*yDistance);
 					var rapport = Math.max(120-distance,0)/120;
 					jQuery(this).find('img').width((40*(1+rapport)));
-				});
-			}
+				}); 
 		});
 	});
 });

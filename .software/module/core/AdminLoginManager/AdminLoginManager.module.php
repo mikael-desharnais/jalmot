@@ -14,7 +14,7 @@ class AdminLoginManager extends Module{
         $this->addToGlobalExecuteStack();
 		$startPageListener=new EventListener($this);
 		$startPageListener->actionPerformed=function ($sourcePage){
-			if (!Ressource::getUserSpace()->hasRight('ACCESS_ADMIN')&&Ressource::getCurrentPage()->getName()!='connection'){
+			if (!Ressource::getUserSpace()->getSlot('ADMIN')->hasRight('ACCESS_ADMIN')&&Ressource::getCurrentPage()->getName()!='connection'){
 				Module::getInstalledModule('ConnectionManager')->displayConnectionForm();
 			}
 		};
@@ -35,7 +35,7 @@ class AdminLoginManager extends Module{
 
 	        if ($users->valid()){
 	            $userAdmin=new AdminUser($users->current());
-	            Ressource::getUserSpace()->addUser($userAdmin);
+	            Ressource::getUserSpace()->getSlot('ADMIN')->addUser($userAdmin);
 				Module::getInstalledModule('ConnectionManager')->returnFromConnectionForm();
 	        }
 	    }
