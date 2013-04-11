@@ -28,6 +28,9 @@ class CoreModelDataCollection implements Iterator {
     public function getContent(){
         return $this->content;
     }
+    public function getSize(){
+    	return count($this->content);
+    }
     public function __construct($model){
     	$this->model = $model;
     }

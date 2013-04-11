@@ -70,6 +70,9 @@ class CoreEAVModelData extends ModelData{
 		}
 		 
 	}
+	public function getSource(){
+		return $this->baseModelData->getSource();
+	}
 	public function getPrimaryKeys(){
 		return $this->baseModelData->getPrimaryKeys();
 	}

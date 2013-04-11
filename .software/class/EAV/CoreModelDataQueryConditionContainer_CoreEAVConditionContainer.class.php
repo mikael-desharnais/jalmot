@@ -3,6 +3,19 @@
 class CoreEAVConditionContainer extends CoreModelDataQueryConditionContainer{
 
 	public function getSQL(){
+		$toReturn="";
+		$conditions=$this->getConditions();
+		$containers=$this->getContainers();
+		foreach($containers as $containerElement){
+			$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ").$containerElement->getSQL();
+		}
+		foreach($conditions as $condition){
+        	$toReturn.=($toReturn==""?"":" ".$this->getSeparator()." ").$condition->getSQL();
+		}
+		if (count($containers)+count($conditions)==0){
+			$toReturn = "(1=1)";
+		}
+		return "(".$toReturn.")";
 	}
 
 	public function getSeparator(){
