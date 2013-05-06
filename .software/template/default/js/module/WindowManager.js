@@ -90,7 +90,6 @@ Window=function(){
 			jQuery('body').trigger('htmlAppending',parent.htmlElement);
 		});
 		fetcher.fetch();
-		fetcher.integrate();
 	};
 	this.close=function(){
 		this.jqueryElement.close();

@@ -48,6 +48,9 @@
 			</head>
 			<body>
 				<class>DeleteCellML</class>
+				<changeTypes>
+					<changeType>model-editor-TextContent</changeType>
+				</changeTypes>
 				<params>
 					<param name="modelEditor" type="simple">TextContent</param>
 				</params>

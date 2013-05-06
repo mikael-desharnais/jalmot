@@ -2,7 +2,8 @@
 
 class DeleteCellML extends SimpleCellML {
     
-    
+	protected $changeTypes = array();
+	
 	public function toHTML($line){
 		ob_start();
 		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/DeleteCellML.phtml"));
@@ -23,5 +24,20 @@ class DeleteCellML extends SimpleCellML {
 			$toReturn['id['.$key.']']=$value;
 		}
 		return array_merge($toReturn,$this->getListing()->getFiltersURLParams());
+	}
+	protected function getChangeTypes(){
+		return $this->changeTypes;
+	}
+	public function addChangeType($changeType){
+		$this->changeTypes[]=$changeType;
+	}
+	public static function readFromXML($xml){
+	    $toReturn = parent::readFromXML($xml);
+	    if (isset($xml->changeTypes)){
+	    	foreach($xml->changeTypes->children() as $changeTypeXML){
+	    		$toReturn->addChangeType($changeTypeXML."");
+	    	}
+	    }
+		return $toReturn;
 	}
 }

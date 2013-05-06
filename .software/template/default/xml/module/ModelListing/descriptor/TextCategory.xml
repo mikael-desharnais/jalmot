@@ -38,6 +38,9 @@
 			</head>
 			<body>
 				<class>DeleteCellML</class>
+				<changeTypes>
+					<changeType>model-editor-TextCategory</changeType>
+				</changeTypes>
 				<params>
 					<param name="modelEditor" type="simple">TextCategory</param>
 				</params>

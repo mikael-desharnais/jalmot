@@ -104,6 +104,7 @@ abstract class CoreModelDataQueryConditionContainer{
 	* @param string $symbol Symbol of the condition to create and Add
 	*/
 	public function addConditionBySymbol($symbol){
+		$array = func_get_args();
 		$this->addCondition(call_user_func(array($this->dataQuery->getModel()->getDataSource(),"getConditionBySymbol"),func_get_args()));
 		return $this;
 	}

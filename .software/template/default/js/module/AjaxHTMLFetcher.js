@@ -16,24 +16,43 @@ function AjaxHTMLFetcher(){
 	this.status;
 	this.message;
 	this.params;
+	this.beforeCall;
+	this.continueCall=true;
+	this.hider = jQuery('.loadHider');
 
+	
 	this.setURL=function(url){
 		this.url=url;
 	};
 	this.setCallBack=function(callback){
 		this.callback=callback;
 	};
+	this.setBeforeCall=function(beforeCall){
+		this.beforeCall=beforeCall;
+	};
 	this.fetch=function(){
 		var parent=this;
-		jQuery.ajaxSetup({'async' : false});
-		jQuery.post(this.url.address,
-					this.url.toQueryString(),
+		if (typeof this.beforeCall != "undefined"){
+			this.beforeCall();
+		}
+		if (!this.continueCall){
+			return;
+		}
+		
+		if (typeof this.hider.data('counter') == 'undefined'){
+			this.hider.data('counter',0);
+		}
+		this.hider.data('counter',this.hider.data('counter')+1);
+		this.hider.addClass('loadHiderVisible');
+
+		jQuery.post(parent.url.address,
+					parent.url.toQueryString(),
 					function(data){
 						var json = null;
 						try {
 							json=jQuery.parseJSON(data);
 						} catch (e) {
-							parent.message = 'Error Parsing XML';
+							parent.message = 'Error Parsing JSON';
 							parent.html = data;
 							parent.status = 0;
 						}
@@ -45,15 +64,23 @@ function AjaxHTMLFetcher(){
 							parent.status=json.status;
 							parent.params=json.params;
 						}
+						parent.integrate();
 					});
+
 	};
 	this.integrate=function(){
-		var parent=this;
-		this.integrateCSS(0,function(){
-			parent.integrateJS(0,function(){
-				parent.integrateHTML();
+		if (this.continueCall){
+			var parent=this;
+			this.integrateCSS(0,function(){
+				parent.integrateJS(0,function(){
+					parent.hider.data('counter',parent.hider.data('counter')-1);
+					if (parent.hider.data('counter')==0){
+						parent.hider.removeClass('loadHiderVisible');
+					}
+					parent.integrateHTML();
+				});
 			});
-		});
+		}
 	};
 	this.integrateCSS=function(counter,callback){
 		var parent=this;
@@ -73,7 +100,7 @@ function AjaxHTMLFetcher(){
 		}
 
 		if (!found){
-			var script=jQuery('<link rel="stylesheet" href="'+this.css[counter]+'" type="text/css">');
+			var script=jQuery('<link rel="stylesheet" href="'+this.css[counter]+'?_='+(Math.random()*10000000000000000)+'" type="text/css">');
 			jQuery('head').append(script);
 			CSSLoadedFiles.push(this.css[counter]);
 		}
@@ -152,7 +179,7 @@ jQuery('.AjaxHTMLFetcher').live('click',function(event){
 	var fetcher=new AjaxHTMLFetcher();
 	fetcher.setURL(AjaxHTMLFetcher.fetchers[jQuery(this).attr('id')].url);
 	fetcher.setCallBack(AjaxHTMLFetcher.fetchers[jQuery(this).attr('id')].callback);
+	fetcher.setBeforeCall(AjaxHTMLFetcher.fetchers[jQuery(this).attr('id')].beforeCall);
 	fetcher.fetch();
-	fetcher.integrate();
 	return false;
 });

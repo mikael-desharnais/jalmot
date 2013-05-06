@@ -66,7 +66,7 @@ date_default_timezone_set("GMT");
          $dateArray = date_parse_from_format($format, $date);
          return new Date($dateArray['year'],$dateArray['month'],$dateArray['day'],$dateArray['hour'],$dateArray['minute'],$dateArray['second']);
      }
-     public function format($format = "d/m/Y H:i"){
+     public function format($format = "d/m/Y H:i:s"){
          return date($format,$this->getTimeStamp());
      }
      public function __toString(){

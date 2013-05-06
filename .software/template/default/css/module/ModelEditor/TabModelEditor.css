@@ -5,6 +5,7 @@
 	float : left;
 }
 .tabs .tab {
+	overflow : auto;
 }
 .tabs .tabGroup .currentTab {
 }

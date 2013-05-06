@@ -1,0 +1,74 @@
+@import url(http://fonts.googleapis.com/css?family=Gabriela);
+
+.clearer {
+	clear : both;
+}
+
+p {
+	margin : 0;
+}
+h1 {
+	margin : 0;
+}
+
+body {
+	margin : 0;
+	background: #f3f3f3;
+	font-family: 'Gabriela', serif;
+	font-size : 14px;
+}
+a,a:hover{
+	text-decoration : none;
+	color : white;
+}
+.header{
+	width : 100%;
+	background-color : #228f00;
+	border-bottom : 2px #1b7200 solid;
+}
+.header a{
+	padding : 10px;
+	display : block;
+	font-size : 25px;
+}
+.global {
+	margin : 0 auto;
+	width : 1024px;
+	background-color : white;
+}
+.global .footer {
+	border-top : 2px #c1c1c1 solid;	
+	height : 120px;
+	background-color : #d1d1d1;
+}
+.global .content {
+	min-height : 800px;
+	padding : 15px;
+}
+.global .content .homepageBlocks{
+	background-color : #deffdd;
+	width : 28%;
+	margin-left : 25px;
+	float : left;
+	padding : 10px;
+}
+.global .content .homepageBlocks legend{
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 2px 4px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+.legend1{
+	background-color : #ffb4ac;
+}
+.legend2{
+	background-color : #ff7b6d;
+}
+.legend3{
+	background-color : #ff5e4d;
+}

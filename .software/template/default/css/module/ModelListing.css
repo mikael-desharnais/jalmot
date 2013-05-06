@@ -1,3 +1,6 @@
 .table td.text-right{
 	text-align : right;
+}
+.table td.text-center,.table th.text-center{
+	text-align : center;
 } 

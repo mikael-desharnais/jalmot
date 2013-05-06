@@ -7,11 +7,15 @@ class TabModelEditorDescriptor extends ModelEditorDescriptor {
 		$modelEditor->setName($name);
 		$modelEditor->setType($xml->type."");
 		$modelEditor->setModel($xml->model."");
+		$modelEditor->setReloadOnSave((bool)$xml->reloadOnSave);
 
 		$title_class=$xml->title->class."";
 		$modelEditor->setTitle(call_user_func(array($title_class,"readFromXML"),$modelEditor,$xml->title));
 
 
+		foreach($xml->changeTypes->children() as $changeTypeXML){
+			$modelEditor->addChangeType($changeTypeXML."");
+		}
 		foreach($xml->tabs->children() as $tab){
 			$tab_class=$tab->class."";
 			$tabElement=call_user_func(array($tab_class,"readFromXML"),$modelEditor,$tab);

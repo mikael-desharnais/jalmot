@@ -62,11 +62,14 @@ class CategoryModelListingDescriptor extends ModelListingDescriptor {
 	    $listName = "lst".ucfirst($this->contentRelation);
 	    $this->list=$this->list->merge($this->currentElement->lstChildren()->getModelData())->merge($this->currentElement->$listName()->getModelData());
 	}
-	public function getCurrentElementParams(){
-		$toReturn = array();
-		foreach($this->currentElement->getPrimaryKeys() as $key=>$value){
-			$toReturn['id['.$key.']']=$value;
-		}
+	public function getCurrentCategoryParams(){
+		$getter = "get".ucfirst($this->getConfParam('localCategoryKey'));
+		$toReturn = array('id'=>array($this->getConfParam('targetCategoryKey')=>$this->currentElement->$getter()));
+		return $toReturn;
+	}
+	public function getCurrentContentParams(){
+		$getter = "get".ucfirst($this->getConfParam('localContentKey'));
+		$toReturn = array('id'=>array($this->getConfParam('targetContentKey')=>$this->currentElement->$getter()));
 		return $toReturn;
 	}
 }

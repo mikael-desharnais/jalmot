@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<params>
-		<param type="simple" name="SMTP_SERVER">192.168.0.13</param>
+		<param type="simple" name="SMTP_SERVER">192.168.0.12</param>
 		<param type="simple" name="SMTP_PORT">25</param>
 		<param type="simple" name="SMTP_USER">user</param>
 		<param type="simple" name="SMTP_PASSWORD">password</param>

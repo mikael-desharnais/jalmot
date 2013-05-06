@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 		var viewPort = element.closest('.tabViewPort');
 		var group = viewPort.find('.tabGroup');
 		element.addClass('currentTab');
-		group.animate({left:(group.offset().left-element.offset().left)+'px'},600,'swing',function(){
+		group.animate({left:(group.offset().left-element.offset().left)+'px'},600,'linear',function(){
 			jQuery(this).closest('.tabManager').trigger('tabChange',jQuery(this));
 		});
 		jQuery(this).closest('.reload-change-listener').data('ReloadManager').url.params['tab']=idTab;
@@ -17,14 +17,9 @@ jQuery(document).ready(function(){
 	});
 	jQuery('body').live('htmlAppending',function(){
 		jQuery('.tabs .tabViewPort:not(.tabViewPortOK)').each(function(){
-			var height=0;
-			jQuery(this).find('.tab').each(function(){
-				height = Math.max(height,jQuery(this).height());
-			});
-			height=height+20;
 			var width = jQuery(this).width();
 			jQuery(this).css('width',width+'px');
-			jQuery(this).css('height',height+'px');
+			jQuery(this).trigger('refreshTabViewPort')
 			jQuery(this).find('.tabGroup').css('width',(width*jQuery('.tab').size())+'px');
 			jQuery(this).find('.tab').css('width',width+'px').css('float','left');
 			jQuery(this).addClass('tabViewPortOK');
@@ -43,4 +38,13 @@ jQuery(document).ready(function(){
 			}
 		});
 	});
+	jQuery('.tabs .tabViewPort').live('refreshTabViewPort',function(){
+		console.log('event');
+		var height=0;
+		jQuery(this).find('.tab').each(function(){
+			height = Math.max(height,jQuery(this).height());
+		});
+		height=height+200;
+		jQuery(this).css('height',height+'px');
+	})
 });

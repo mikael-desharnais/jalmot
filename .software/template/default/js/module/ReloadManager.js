@@ -5,18 +5,16 @@ ReloadManager=function(){
 		}else {
 			var parent=jQuery(source).closest('.reload-change-propagator');
 		}
-		var toReload = parent.data('reload-change-type');
-		jQuery('.reload-on-'+toReload+'-change').each(function(){
-			if (jQuery(this).hasClass('reload-change-listener')){
-				jQuery(this).data('ReloadManager').reload();
-			}else {
-				if (jQuery(this).closest('.reload-change-listener').size()>0){
-					jQuery(this).closest('.reload-change-listener').data('ReloadManager').reload();
-				}
-			}
-			
-		});
+		var toReloads = parent.data('reload-change-types').split(' ');
+		for(var i in toReloads){
+			this.propagateChangeEventByName(toReloads[i]);
+		}
 		
 	};
+	this.propagateChangeEventByName=function(toReload){
+		jQuery.unique(jQuery('.reload-on-'+toReload+'-change').closest('.reload-change-listener')).each(function(){
+			jQuery(this).data('ReloadManager').reload();
+		});
+	}; 
 }
 var ReloadManager = new ReloadManager();

@@ -12,7 +12,6 @@ jQuery(document).ready(function(){
 				window.display();
 			});
 			fetcher.fetch();
-			fetcher.integrate();
 		}
 	});
 	jQuery('#ajaxConnection').live('submit',function(){

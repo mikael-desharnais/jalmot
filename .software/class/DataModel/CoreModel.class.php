@@ -132,7 +132,7 @@ class CoreModel{
     */
     public function includeClass(){
         $file = new File(".cache/class/model","Core".$this->name.'.class.php',false);
-        if (!$file->exists()){
+        if (true || !$file->exists()){
             $code="<?php
 	    	class Core".$this->name." extends ".$this->modelDataClass."{
 	    	";
@@ -158,6 +158,9 @@ class CoreModel{
     */
     public function getField($name){
 		if (!$this->fieldExists($name)){
+			print('<pre>');
+			print($this->name);
+			print_r(array_keys($this->fields));
 			Log::Error('Trying to access to unknown Model Field "'.$this->name.'"."'.strtolower($name).'"');
 		}
         $toReturn= $this->fields[strtolower($name)];

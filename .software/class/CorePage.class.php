@@ -34,6 +34,10 @@
 	*/
 	private $startPageEventListener=array();
 	/**
+	* List of all listeners for End Page Event
+	*/
+	private $endPageEventListener=array();
+	/**
 	* If true, the execution of module goes on
 	*/
 	private $goOnExecuting=true;
@@ -139,7 +143,8 @@
 		$this->sendHeaders();
 		if ($this->goOnExecuting){
 			include(Ressource::getCurrentTemplate()->getURL($templateToLoad));
-		}	
+		}
+		$this->propagateEndPageEvent();
 	}
 	/**
 	* Sends headers
@@ -178,6 +183,22 @@
 	public function propagateStartPageEvent(){
 		for ($x=0;$x<count($this->startPageEventListener)&&$this->goOnExecuting;$x++){
 			$functionToExecute=$this->startPageEventListener[$x]->actionPerformed;
+			$functionToExecute($this);
+		}
+	}
+	/**
+	* Adds a listener for the End Page Event
+	* @param EventListener $listener the listener for the End Page Event
+	*/
+	public function addEndPageEventListener($listener){
+		$this->endPageEventListener[]=$listener;
+	}
+	/**
+	* Triggers the start Page event
+	*/
+	public function propagateEndPageEvent(){
+		for ($x=0;$x<count($this->endPageEventListener);$x++){
+			$functionToExecute=$this->endPageEventListener[$x]->actionPerformed;
 			$functionToExecute($this);
 		}
 	}

@@ -1,0 +1,68 @@
+<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
+<?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor.'.$this->getName()); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ModelListing.js',false)),0); ?>
+<?php $modelEditor =  $this->getConfParam('modelEditor'); ?>
+<?php if (!empty($modelEditor)){?>
+<script> 
+AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $modelEditor ?>/',{source:'create'}),function(htmlContent){
+
+	var window = new Window();
+	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelListing-'.$this->getModel())); ?>);
+	window.setContent(htmlContent);
+	window.setURL(this.url);
+	window.display();
+}); 
+</script>
+<?php }?>
+<div class="well reload-on-model-editor-<?php echo $this->model; ?>-change">
+<?php  if (Hook::hookExists("ModelListing.top")) {?>
+	<?php echo Hook::getHook("ModelListing.top")->toHTML(); ?>
+<?php }  ?>
+<legend><?php echo Ressource::getCurrentLanguage()->getTranslation($this->getTitle()); ?></legend>
+<table class="modelListing table table-striped">
+	<thead>
+		<tr>
+			<?php foreach($this->columns as $column){ ?>
+				<?php echo $column['head']->toHTML(); ?>
+			<?php } ?>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach($this->list as $line){ ?>
+			<tr>
+				<?php foreach($this->columns as $column){ ?>
+					<?php echo $column['body']->toHTML($line); ?>
+				<?php } ?>
+			</tr>
+		<?php } ?>
+	</tbody>
+	<tfoot>
+		<tr class="change-page">
+			<?php
+				$first = true; 
+				$count = 0;
+				foreach($this->columns as $column){ 
+					$count++;
+					if ($count<count($this->columns)) { ?>
+					<td align="right"></td>
+				<?php }else{ ?>
+					<td align="right">
+							<?php 
+							if ($this->originalSize>$this->pageSize){
+								for($x=0;$x<floor(($this->originalSize-1)/$this->pageSize)+1;$x++){
+									if (abs($this->page-$x)<3){
+										?>
+										<a href="#" class="btn <?php if ($x==$this->page){ echo "disabled"; }	?>" data-page="<?php echo $x; ?>"><?php echo $x+1; ?></a>
+										<?php 
+									}
+								}
+							}
+							?>
+					</td>
+				<?php }
+					$first = false;
+				} ?>
+		</tr>
+	</tfoot>
+</table>
+</div>

@@ -2,6 +2,9 @@
 	<class>TabModelEditorDescriptor</class>
 	<type>simple</type>
 	<model>TextContent</model>
+	<changeTypes>
+		<changeType>model-editor-TextContent</changeType>
+	</changeTypes>
 	<title>
 		<class>SimpleTitleME</class>
 		<model>testLang</model>

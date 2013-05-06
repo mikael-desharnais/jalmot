@@ -141,7 +141,6 @@ ModelEditorElementCM=function(title){
 			});
 		}
 		fetcher.fetch();
-		fetcher.integrate();
 	};
 };
 
@@ -172,7 +171,6 @@ SourceParamsModelEditorElementCM=function(title){
 			});
 		}
 		fetcher.fetch();
-		fetcher.integrate();
 	};
 
 	this.toHTML=function(){

@@ -2,6 +2,9 @@
 	<class>ModelEditorDescriptor</class>
 	<type>simple</type>
 	<model>test</model>
+	<changeTypes>
+		<changeType>model-editor-test</changeType>
+	</changeTypes>
 	<title>
 		<class>LanguageTitleME</class>
 		<model>testLang</model>

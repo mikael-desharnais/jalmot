@@ -99,4 +99,7 @@ class ModelEditorSwitcherDescriptor {
 		}
 		return call_user_func_array(array($this->modelEditor,$method),$parameters);
 	}
+	public function reloadOnSave(){
+		return $this->getSource()==ModelData::$SOURCE_NEW?true:$this->modelEditor->reloadOnSave();
+	}
 }

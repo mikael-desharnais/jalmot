@@ -192,6 +192,7 @@ class CoreModelData{
 	    $this->propagateAfterUpdate();
 	    $this->propagateAfterStaticUpdate($this);
 	    $this->chainUpdate();
+	    $this->startChangeLogging();
 	}
 	/**
 	* Prefer the use of the Save Method
@@ -208,6 +209,7 @@ class CoreModelData{
 	    $this->propagateAfterCreate();
 	    $this->propagateAfterStaticCreate($this);
 	    $this->chainCreate();
+	    $this->startChangeLogging();
 	}
 	/**
 	* Triggers the before Save Event
@@ -235,7 +237,9 @@ class CoreModelData{
 	        if ($relation->getType()=='CascadeOnDelete'){
 	            $functionName='lst'.ucfirst($relation->getName());
 	            $queryResult=$this->$functionName()->getModelData();
+	            $counter = 0;
 	            foreach($queryResult as $line){
+	            	$counter++;
 	                $line->delete();
 	            }
 	        }
@@ -492,19 +496,6 @@ class CoreModelData{
 	        $relation_model->delete();
 	    }
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/**
 	 * Adds a listener for the Before Update Event

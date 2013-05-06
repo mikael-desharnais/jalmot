@@ -1,6 +1,6 @@
 <?php Ressource::getCurrentLanguage()->init('module/ModelEditorDescriptor.'.$this->getName()); ?>
 <?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
-<form class="well reload-change-propagator model-editor-form field-validator-target" data-field-validator="<?php echo $this->getName() ?>" data-reload-change-type="model-editor-<?php echo $this->model; ?>">
+<form class="well reload-change-propagator model-editor-form field-validator-target" data-field-validator="<?php echo $this->getName() ?>" data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>">
 <?php  if (Hook::hookExists("ModelEditor.form")) {?>
 	<?php echo Hook::getHook("ModelEditor.form")->toHTML(); ?>
 <?php }  ?>

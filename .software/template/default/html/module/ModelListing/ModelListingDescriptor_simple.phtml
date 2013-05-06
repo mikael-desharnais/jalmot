@@ -15,15 +15,20 @@ AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.g
 </script>
 <?php }?>
 <div class="well reload-on-model-editor-<?php echo $this->model; ?>-change">
+<?php  if (Hook::hookExists("ModelListing.top")) {?>
+	<?php echo Hook::getHook("ModelListing.top")->toHTML(); ?>
+<?php }  ?>
 <legend><?php echo Ressource::getCurrentLanguage()->getTranslation($this->getTitle()); ?></legend>
 <table class="modelListing table table-striped">
-	<thead>
-		<tr>
-			<?php foreach($this->columns as $column){ ?>
-				<?php echo $column['head']->toHTML(); ?>
-			<?php } ?>
-		</tr>
-	</thead>
+	<?php if ($this->originalSize>0){?>
+		<thead>
+			<tr>
+				<?php foreach($this->columns as $column){ ?>
+					<?php echo $column['head']->toHTML(); ?>
+				<?php } ?>
+			</tr>
+		</thead>
+	<?php }?>
 	<tbody>
 		<?php foreach($this->list as $line){ ?>
 			<tr>
@@ -53,7 +58,7 @@ AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.g
 				<?php }else{ ?>
 					<td align="right">
 							<?php 
-							if ($this->originalSize>$this->pageSize){
+							if ($this->originalSize>0&&$this->pageSize>0&&$this->originalSize>$this->pageSize){
 								for($x=0;$x<floor(($this->originalSize-1)/$this->pageSize)+1;$x++){
 									if (abs($this->page-$x)<3){
 										?>

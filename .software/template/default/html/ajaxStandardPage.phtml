@@ -9,7 +9,7 @@ try{
 	while (@ob_get_clean());
 	Ressource::getCurrentPage()->setAjaxContent('status',0);
 	Ressource::getCurrentPage()->setAjaxContent('message',$ex->getMessage());
-	Ressource::getCurrentPage()->setAjaxContent('html',print_r($ex->getTrace(),true));
+	Ressource::getCurrentPage()->setAjaxContent('html',substr(print_r($ex->getTrace(),true),0,500000));
 }
 
 $css=array();

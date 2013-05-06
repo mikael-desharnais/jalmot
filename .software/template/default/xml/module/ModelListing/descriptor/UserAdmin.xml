@@ -58,6 +58,9 @@
 			</head>
 			<body>
 				<class>DeleteCellML</class>
+				<changeTypes>
+					<changeType>model-editor-UserAdmin</changeType>
+				</changeTypes>
 				<params>
 					<param name="modelEditor" type="simple">UserAdmin</param>
 				</params>

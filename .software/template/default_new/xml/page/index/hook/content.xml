@@ -1,0 +1,30 @@
+<hook>
+	<name>index.content</name>
+	<modules>
+		<module>
+			<name>StaticContentDisplayer</name>
+			<instance>normal</instance>
+		</module>
+		<module>
+			<name>TextContentDisplayer</name>
+			<instance>homepage</instance>
+			<params>
+				<param type="simple" name="id">11</param>
+			</params>
+		</module>
+		<module>
+			<name>TextContentDisplayer</name>
+			<instance>homepage</instance>
+			<params>
+				<param type="simple" name="id">12</param>
+			</params>
+		</module>
+		<module>
+			<name>TextContentDisplayer</name>
+			<instance>homepage</instance>
+			<params>
+				<param type="simple" name="id">13</param>
+			</params>
+		</module>
+	</modules>
+</hook>

@@ -7,6 +7,7 @@ class ModelEditorDescriptor {
 		$modelEditor->setName($name);
 		$modelEditor->setType($xml->type."");
 		$modelEditor->setModel($xml->model."");
+		$modelEditor->setReloadOnSave((bool)$xml->reloadOnSave);
 
 		$title_class=$xml->title->class."";
 		$modelEditor->setTitle(call_user_func(array($title_class,"readFromXML"),$modelEditor,$xml->title));
@@ -16,9 +17,13 @@ class ModelEditorDescriptor {
 			$element=call_user_func(array($input_class,"readFromXML"),$modelEditor,$input);
 			$modelEditor->addInput($element);
 		}
+		foreach($xml->changeTypes->children() as $changeTypeXML){
+		    $modelEditor->addChangeType($changeTypeXML."");
+		}
 		foreach($xml->hooks->children() as $hook){
 		    Hook::initHookFromXML($hook->name."",$hook);
 		}
+		
 		foreach($xml->data_fetchers->children() as $dataFetcher){
 		    $classname=$dataFetcher->class."";
 			$element=call_user_func(array($classname,"readFromXML"),$modelEditor,$dataFetcher);
@@ -34,8 +39,10 @@ class ModelEditorDescriptor {
 	protected $id;
 	protected $source;
 	protected $name;
+	protected $reloadOnSave;
 	protected $dataFetchers=array();
 	protected $fetchedData=array();
+	protected $changeTypes = array();
 
 	public function __construct(){
 	}
@@ -77,6 +84,10 @@ class ModelEditorDescriptor {
 	    }else {
 			return $this->id;
 	    }
+	}
+
+	public function getFiltersURLParams(){
+		return array('id'=>$this->id);
 	}
 	public function setId($id){
 		$this->id=is_array($id)?$id:array();
@@ -138,5 +149,17 @@ class ModelEditorDescriptor {
 	}
 	public function getParameterContainer(){
 		return is_array(Ressource::getParameters()->getValue('ModelEditor'))?Ressource::getParameters()->getValue('ModelEditor'):array();
+	}
+	public function reloadOnSave(){
+		return $this->reloadOnSave;
+	}
+	public function setReloadOnSave($reloadOnSave){
+		$this->reloadOnSave = $reloadOnSave;
+	}
+	protected function getChangeTypes(){
+		return $this->changeTypes;
+	}
+	public function addChangeType($changeType){
+		$this->changeTypes[]=$changeType;
 	}
 }

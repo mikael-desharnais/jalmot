@@ -20,6 +20,10 @@ class SimpleDataFetcher {
 	    $model=Model::getModel($this->model_editor->getModel());
 	    if ($modelEditorDescriptor->getSource()==ModelData::$SOURCE_NEW){
 	        $element=$model->getInstance();
+	        foreach($modelEditorDescriptor->getId() as $key_element=>$value_element){
+	        	$setter = "set".ucfirst($key_element);
+	        	$element->$setter($value_element);
+	        }
 	    }else {
 	        $query=$model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model);
 	        foreach($modelEditorDescriptor->getId() as $key_element=>$value_element){

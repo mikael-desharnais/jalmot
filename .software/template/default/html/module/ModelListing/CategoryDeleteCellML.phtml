@@ -6,12 +6,15 @@
 } ?>
 <?php if (!isset($line->editable) || $line->editable){?>
 <script> 
-AjaxHTMLFetcher.setFetcher('delete_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $modelEditor; ?>/delete/',<?php print(json_encode($this->getParams($line))); ?>),function(htmlContent){
+var fetcher = AjaxHTMLFetcher.setFetcher('delete_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $modelEditor; ?>/delete/',<?php print(json_encode($this->getParams($line))); ?>),function(htmlContent){
 	ReloadManager.propagateChangeEvent(jQuery('#delete_<?php print($this->getId($line)); ?>'));
 }); 
+fetcher.beforeCall=function(){
+	this.continueCall=confirm('Êtes vous sûr de vouloir supprimer cet élement ?');
+};
 </script>
 <td>
-	<a href="#"  class="AjaxHTMLFetcher btn btn-inverse reload-change-propagator btn-mini" data-reload-change-type="model-editor-<?php echo $this->getListing()->getModel(); ?>" id="delete_<?php print($this->getId($line)); ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('Delete') ?></a>
+	<a href="#"  class="AjaxHTMLFetcher btn btn-inverse reload-change-propagator btn-mini" data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>" id="delete_<?php print($this->getId($line)); ?>"><?php echo Ressource::getCurrentLanguage()->getTranslation('Delete') ?></a>
 </td>
 <?php } else {?>
 <td></td>

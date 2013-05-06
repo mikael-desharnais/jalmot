@@ -2,6 +2,9 @@
 	<class>ModelEditorDescriptor</class>
 	<type>simple</type>
 	<model>TextCategory</model>
+	<changeTypes>
+		<changeType>model-editor-TextCategory</changeType>
+	</changeTypes>
 	<title>
 		<class>LanguageTitleME</class>
 		<model>testLang</model>

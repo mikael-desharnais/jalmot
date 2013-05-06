@@ -19,31 +19,39 @@ class ModelEditor extends Module{
 		    $classname=$xml->class."";
 			$this->setDescriptor(call_user_func(array($classname,"readFromXML"),Ressource::getParameters()->getValue("descriptor"),$xml));
 		}
-		if (!(Ressource::getParameters()->valueExists("source"))){
-			$this->descriptor->setSource(ModelData::$SOURCE_FROM_DATASOURCE);
-		}else {
+		if ((Ressource::getParameters()->valueExists("source")&&Ressource::getParameters()->getValue("source")=='create')){
 		    $this->descriptor->setSource(ModelData::$SOURCE_NEW);
+		}else {
+			$this->descriptor->setSource(ModelData::$SOURCE_FROM_DATASOURCE);
 		}
-		if ($this->descriptor->getSource()==ModelData::$SOURCE_FROM_DATASOURCE){
-			$this->descriptor->setId(Ressource::getParameters()->getValue('id'));
-		}
+		$this->descriptor->setId(Ressource::getParameters()->getValue('id'));
 		$this->descriptor->fetchData();
+		Ressource::getCurrentLanguage()->init('module/alertWindow');
 		if (Ressource::getParameters()->valueExists("action")&&Ressource::getParameters()->getValue("action")=="save"){
 		    if (!$this->propagateBeforeSave()){
 				return;		    
 		    }
 			$this->descriptor->save();
 			Ressource::getCurrentPage()->stopExecution();
-			print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
+			if ($this->descriptor->reloadOnSave()){
+				$fetchedData = $this->descriptor->getFetchedData();
+				
+				print(json_encode(array('status'=>313,'html'=>Ressource::getCurrentLanguage()->getTranslation('Save operation Success'),'params'=>array('id'=>$fetchedData['simple']->getPrimaryKeys(),'source'=>'db'),'css'=>array(),'js'=>array())));
+			}else {
+				print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
+			}
 			$this->propagateAfterSave();
 		}else if (Ressource::getParameters()->valueExists("action")&&Ressource::getParameters()->getValue("action")=="delete"){
 		    $this->descriptor->delete();
 			Ressource::getCurrentPage()->stopExecution();
-			print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
+			print(json_encode(array('status'=>311,'html'=>Ressource::getCurrentLanguage()->getTranslation('Delete operation Success'),'css'=>array(),'js'=>array())));
 		}
 	}
 	public function setDescriptor($descriptor){
 		$this->descriptor=$descriptor;
+	}
+	public function getDescriptor(){
+		return $this->descriptor;
 	}
 	public function addBeforeSaveListener($listener){
 	    if (!in_array($listener,$this->beforeSaveListenerList)){

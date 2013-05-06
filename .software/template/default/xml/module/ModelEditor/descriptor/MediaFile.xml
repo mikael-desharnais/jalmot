@@ -2,6 +2,9 @@
 	<class>ModelEditorDescriptor</class>
 	<type>simple</type>
 	<model>MediaFile</model>
+	<changeTypes>
+		<changeType>model-editor-MediaFile</changeType>
+	</changeTypes>
 	<title>
 		<class>SimpleTitleME</class>
 		<field>name</field>

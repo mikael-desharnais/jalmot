@@ -9,9 +9,13 @@ class ParametersHiddenFieldME extends SimpleFieldME {
             $element = $value;
         }else {
             $element_array=Ressource::getParameters()->getValue("id");
-            $element = $element_array[$this->getConfParam('paramKey')];
-            if (empty($element)){
-                $element = $this->getConfParam('defaultValue');
+            if (array_key_exists($this->getConfParam('paramKey'),$element_array)){
+	            $element = $element_array[$this->getConfParam('paramKey')];
+	            if (empty($element)){
+	                $element = $this->getConfParam('defaultValue');
+	            }
+            }else {
+            	$element = $this->getConfParam('defaultValue');
             }
         }
         include(Ressource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor",$this->class.".phtml",false))->toURL());

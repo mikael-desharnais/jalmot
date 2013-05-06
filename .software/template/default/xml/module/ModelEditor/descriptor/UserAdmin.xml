@@ -2,6 +2,9 @@
 	<class>ModelEditorDescriptor</class>
 	<type>simple</type>
 	<model>UserAdmin</model>
+	<changeTypes>
+		<changeType>model-editor-UserAdmin</changeType>
+	</changeTypes>
 	<title>
 		<class>SimpleTitleME</class>
 		<model>UserAdmin</model>

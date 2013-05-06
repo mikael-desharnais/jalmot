@@ -68,6 +68,9 @@
 			</head>
 			<body>
 				<class>DeleteCellML</class>
+				<changeTypes>
+					<changeType>model-editor-test</changeType>
+				</changeTypes>
 				<params>
 					<param name="modelEditor" type="simple">test3</param>
 				</params>

@@ -137,6 +137,10 @@
 		fwrite($fh, $toWrite);
 		fclose($fh);
 	}
+	
+	public function read(){
+		return file_get_contents($this->directory.'/'.$this->file);
+	}
 	/**
 	* Writes data to the current File
 	* @param string $toWrite the data to write to file
