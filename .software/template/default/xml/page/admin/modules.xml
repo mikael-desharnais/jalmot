@@ -1,5 +1,10 @@
 <modules>
 	<module>
+		<instancename>AjaxConnectionManager</instancename>
+		<class>AjaxConnectionManager</class>
+		<params></params>
+	</module>
+	<module>
 		<instancename>AdminLoginManager</instancename>
 		<class>AdminLoginManager</class>
 		<params></params>

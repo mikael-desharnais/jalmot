@@ -44,7 +44,6 @@ jQuery('.model-editor-form').live('submit',function(event){
 		ReloadManager.propagateChangeEvent(jQuery(parent));
 		if (this.status==1||this.status==311){
 			jQuery(parent).closest('.reload-change-listener').data('object').close();
-			console.log(jQuery(parent).closest('.reload-change-listener').data('object'));
 		}
 		if(this.status==303||this.status==313) {
 			var oldParams = jQuery(parent).closest('.reload-change-listener').data('object').url.params;

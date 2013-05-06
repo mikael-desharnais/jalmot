@@ -18,6 +18,7 @@ Window = function(){
 	
 	jQuery(window).resize(function(){
 		parent.wrapper.outerHeight(jQuery(window).height());
+		parent.wrapper.outerWidth(jQuery(window).width()-80);
 	});
 
 	this.closeButton.click(function(){
@@ -44,6 +45,7 @@ Window = function(){
 		this.wrapper.css('zIndex',Window.currentZIndex++);
 		this.wrapper.outerHeight(jQuery(window).height()+'px');
 		jQuery('.windowHeight').outerHeight(jQuery(window).height()+'px');
+		this.wrapper.outerWidth(jQuery(window).width()-80);
 		this.wrapper.append(this.html);
 		parent.url.scrollTop=0;
 		this.wrapper.scroll(function(){
@@ -80,3 +82,16 @@ Window = function(){
 	}
 }
 Window.currentZIndex = 5;
+
+WebFontConfig = {
+	    google: { families: [ 'ABeeZee::latin' ] }
+	  };
+(function() {
+  var wf = document.createElement('script');
+  wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+  wf.type = 'text/javascript';
+  wf.async = 'true';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(wf, s);
+})();

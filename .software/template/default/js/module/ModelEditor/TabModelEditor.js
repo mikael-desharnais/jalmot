@@ -39,7 +39,6 @@ jQuery(document).ready(function(){
 		});
 	});
 	jQuery('.tabs .tabViewPort').live('refreshTabViewPort',function(){
-		console.log('event');
 		var height=0;
 		jQuery(this).find('.tab').each(function(){
 			height = Math.max(height,jQuery(this).height());

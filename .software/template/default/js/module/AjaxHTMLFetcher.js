@@ -74,8 +74,9 @@ function AjaxHTMLFetcher(){
 			this.integrateCSS(0,function(){
 				parent.integrateJS(0,function(){
 					parent.hider.data('counter',parent.hider.data('counter')-1);
-					if (parent.hider.data('counter')==0){
+					if (parent.hider.data('counter')<=0){
 						parent.hider.removeClass('loadHiderVisible');
+						parent.hider.data('counter',0);
 					}
 					parent.integrateHTML();
 				});
