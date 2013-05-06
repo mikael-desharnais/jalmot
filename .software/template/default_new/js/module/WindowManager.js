@@ -84,7 +84,7 @@ Window = function(){
 Window.currentZIndex = 5;
 
 WebFontConfig = {
-	    google: { families: [ 'ABeeZee::latin' ] }
+	    google: { families: [ 'Montaga::latin' ] }
 	  };
 (function() {
   var wf = document.createElement('script');
