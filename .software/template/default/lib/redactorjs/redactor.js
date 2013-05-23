@@ -293,7 +293,7 @@ var RTOOLBAR = {};
 		setDoc: function(html)
 		{
 			var frameHtml = '<!DOCTYPE html>\n';
-			frameHtml += '<html><head><link media="all" type="text/css" href="' + this.opts.css + '" rel="stylesheet"></head>';
+			//frameHtml += '<html><head><link media="all" type="text/css" href="' + this.opts.css + '" rel="stylesheet"></head>';
 			frameHtml += '<body><div id="page" contenteditable="true">';
 			frameHtml += html;
 			frameHtml += '</div></body></html>';
@@ -343,7 +343,8 @@ var RTOOLBAR = {};
 			this.$box.after(this.$el);
 			this.$box.remove();
 			this.$el.val(html).show();
-			
+			delete this.hdlHideDropDown;
+			delete this.hdlShowDropDown;
 			this.dropdowns.forEach(function(dropdown, i)
 			{
 				dropdown.remove();

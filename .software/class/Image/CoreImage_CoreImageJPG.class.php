@@ -6,7 +6,7 @@
 * TODO : TO remove from COre
 * 
 */
-class CoreImageJPG{
+class CoreImageJPG extends Image{
 	/**
 	* TODO : TO remove from COre
 	*/
@@ -22,11 +22,7 @@ class CoreImageJPG{
 	public function __construct($file){
 		$this->file=$file;
 	}
-	/**
-	* TODO : REmake it : not proper
-	* 
-	*/
-	public static function writeToFile($image,$file){
+	public function writeRawImageToFile($image,$file){
 		@mkdir($file->getDirectory(),0777,true);
 		imagejpeg($image,$file->toURL());
 	}
@@ -37,14 +33,14 @@ class CoreImageJPG{
 	public function getExif(){
 		return exif_read_data($this->file->toURL(), 0, true);
 	}
-	/**
-	* TODO : TO remove from COre
-	*/
+	public function getImageContent(){
+		return imagecreatefromjpeg($this->file->toURL());
+	}
 	public function getThumb($max_width,$max_height){
 		$src_width=0;
 		$src_height=0;
 		$stringImage=@exif_thumbnail($this->file->toURL(),$src_width,$src_height);
-		if (!empty($stringImage)){
+		if (!empty($stringImage)&&$src_width>=$max_width&&$src_height>=$max_height){
 			$baseImage=imagecreatefromstring($stringImage);
 		}
 		else {
@@ -68,7 +64,7 @@ class CoreImageJPG{
 		}
 		$exif=@$this->getExif();
 		
-		if ($exif!==false){
+		if ($exif!==false&&array_key_exists("Orientation", $exif["IFD0"])){
 			$orientation = $exif["IFD0"]["Orientation"];
 		}else {
 			$orientation=1;

@@ -7,6 +7,11 @@
      * The MySQL connection objet
      */
      private $dbConnection;
+     
+     public function getDBConnection(){
+     	return $this->dbConnection;
+     }
+     
      /**
      * Calls its parent with its name
      * loads configuration parameters from  XML File : xml/dataSource/[DATASOURCE_NAME].xml
@@ -150,6 +155,9 @@
 			case "<>" :
 				return new MysqlDifferentCondition($args[1],$args[2],true);
 			break;
+			case "LIKE" :
+				return new MysqlLikeCondition($args[1],$args[2]);
+				break;
 			default :
 			    Log::Error(__CLASS__." cant't find operator ".$args[0]);
 			break;

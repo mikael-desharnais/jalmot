@@ -16,7 +16,7 @@ class CoreMysqlBetweenCondition extends CoreModelDataQueryBetweenCondition{
         }elseif ($this->compared instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->compared)." ";
         }else {
-            $toReturn.=" '".$this->compared."' ";
+            $toReturn.=" ".StringMysqlModelType::toSQL($this->compared)." ";
         }
         $toReturn.=" BETWEEN ";
         if ($this->val1 instanceof ModelField){
@@ -32,7 +32,7 @@ class CoreMysqlBetweenCondition extends CoreModelDataQueryBetweenCondition{
         }elseif ($this->val2 instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->val2)." ";
         }else {
-            $toReturn.=" '".$this->val2."' ";
+            $toReturn.=" ".StringMysqlModelType::toSQL($this->val2)." ";
         }
         return $toReturn;
     }

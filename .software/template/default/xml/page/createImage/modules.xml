@@ -1,0 +1,12 @@
+<modules>
+	<module>
+		<instancename>ImageMediaFileCacheCreator</instancename>
+		<class>ImageMediaFileCacheCreator</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>ImageMediaFileManager</instancename>
+		<class>ImageMediaFileManager</class>
+		<params></params>
+	</module>
+</modules>

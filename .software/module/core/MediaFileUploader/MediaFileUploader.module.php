@@ -23,7 +23,7 @@ class MediaFileUploader extends Module{
 				$this->setFilename($_FILES['uploadedFile']['name']);
 				$this->setTempFilename('tmp/upload/'.$time.'/'.$_FILES['uploadedFile']['name']);
 		    }
-		} else {
+		}/* else {
 		    // If the browser does not support sendAsBinary ()
 		    if(isset($_GET['base64'])) {
 		        $content = base64_decode(file_get_contents('php://input'));
@@ -41,7 +41,7 @@ class MediaFileUploader extends Module{
 					$this->setTempFilename('tmp/upload/'.$time.'/'.$headers['uploadedFile']);
 			    }
 		    }
-		}
+		}*/
 	}
 	/**
 	* True if the current file was uploaded

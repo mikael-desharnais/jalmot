@@ -44,6 +44,7 @@ function AjaxHTMLFetcher(){
 		}
 		this.hider.data('counter',this.hider.data('counter')+1);
 		this.hider.addClass('loadHiderVisible');
+		console.log("plus : "+parent.hider.data('counter'));
 
 		jQuery.post(parent.url.address,
 					parent.url.toQueryString(),
@@ -74,9 +75,9 @@ function AjaxHTMLFetcher(){
 			this.integrateCSS(0,function(){
 				parent.integrateJS(0,function(){
 					parent.hider.data('counter',parent.hider.data('counter')-1);
-					if (parent.hider.data('counter')<=0){
+					console.log("minus : "+parent.hider.data('counter'));
+					if (parent.hider.data('counter')==0){
 						parent.hider.removeClass('loadHiderVisible');
-						parent.hider.data('counter',0);
 					}
 					parent.integrateHTML();
 				});

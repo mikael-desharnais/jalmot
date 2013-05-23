@@ -1,0 +1,5 @@
+<hook>
+	<name>MediaFileUpload.body</name>
+	<modules>
+	</modules>
+</hook>

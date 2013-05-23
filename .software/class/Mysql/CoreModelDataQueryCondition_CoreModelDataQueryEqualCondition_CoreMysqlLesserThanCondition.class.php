@@ -25,17 +25,17 @@ class CoreMysqlLesserThanCondition extends CoreModelDataQueryEqualCondition{
         }elseif ($this->val1 instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->val1)." ";
         }else {
-            $toReturn.=" '".$this->val1."' ";
+            $toReturn.=" ".StringMysqlModelType::toSQL($this->val1)." ";
         }
         $toReturn.=" <".($this->orEqual?"=":"")." ";
         if ($this->val2 instanceof ModelField){
-            $toReturn.=" ".$this->val2->getName()." ";
+            $toReturn.=" ".$DataQuery->getModel()->getDataSource()->getDbFieldName($DataQuery->getModel()->getName(),$this->val2->getName())." ";
         }elseif ($this->val2 instanceof Date) {
             $toReturn.=" ".DateMysqlModelType::toSQL($this->val2)." ";
         }elseif (is_numeric($this->val2)) {
             $toReturn.=" ".$this->val2." ";
         }else {
-            $toReturn.=" '".$this->val2."' ";
+            $toReturn.=" ".StringMysqlModelType::toSQL($this->val2)." ";
         }
         return $toReturn;
     }

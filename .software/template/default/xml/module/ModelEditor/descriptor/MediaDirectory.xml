@@ -28,7 +28,7 @@
 			<class>SimpleFieldME</class>
 		</input>
 		<input>
-			<key>idParentMediaDirectory</key>
+			<key>idMediaDirectoryParent</key>
 			<title></title>
 			<class>ParametersHiddenFieldME</class>
 			<params>

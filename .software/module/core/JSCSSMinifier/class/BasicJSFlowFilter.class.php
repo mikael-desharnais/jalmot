@@ -17,7 +17,9 @@ class BasicJSFlowFilter extends JSFilterFlow {
             }
         }
         $fileToUse = new File(".cache/template/".Ressource::getCurrentTemplate()->getName()."/JSCSSMinifier/js","js-".md5($file_key).".js",false);
-        @mkdir($fileToUse->getDirectory());
+        if (!file_exists($fileToUse->getDirectory())){
+        	@mkdir($fileToUse->getDirectory());
+        }
         if (Ressource::getConfiguration()->getValue('cacheJS')==0||!$fileToUse->exists()){
             $filecontent = "";
             foreach($JSArray as $file_array){

@@ -8,7 +8,7 @@
 	<?php echo Hook::getHook("ModelEditor.form")->toHTML(); ?>
 <?php }  ?>
 <div class="tabs">
-	<ul class="tabTitleGroup nav nav-pills navbar-inner">
+	<ul class="tabTitleGroup nav nav-tabs">
 		<?php $count=0; ?>
 		<?php foreach($this->tabs as $tab){ ?>
 			<li data-tab="<?php echo $count ;?>" class="tabTitle tabTitle<?php echo $count ;?> <?php echo ($count==0?"currentTabTitle active":""); $count++; ?>">

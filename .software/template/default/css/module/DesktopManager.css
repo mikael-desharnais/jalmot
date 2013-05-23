@@ -1,27 +1,92 @@
 .desktop {
-	position : relative;
-	width : 100%;
+	width : 75px;
 	height : 100%;
-	background : #DDDDFF;	
+	background: #575757;
+	float : left;
+	position : relative;
+	z-index : 3000;
 }
 html body{
 	background : #EEEEEE;
 }
+.desktop .icon a{
+	display : block;
+}
 .desktop .icon {
-	width : 100px;
-	padding : 15px;
+	padding : 5px;
 	margin : 10px;
+	margin-top : 5px;
+	margin-bottom : 5px;
 }
 .desktop .icon .image {
-	height : 100px;
 	width : 100%;
 	text-align : center;
+}
+.desktop .icon .image img {
+	width : 40px;
 }
 .desktop .icon .title {
-	width : 100%;
-	overflow : hidden;
-	text-align : center;
-	font-size : 11px;
-	padding : 5px;
-	height : 40px;
+	display : none;
 }
+.frame {
+	display : none;
+	position : relative;
+}
+.frameElement {
+	position : absolute;
+	overflow : auto;
+	height : 100%;
+	width : 100%;
+}
+.frame1{
+	backround-color : red;
+}
+.frame2{
+	backround-color : blue;
+}
+.frame3{
+	backround-color : pink;
+}
+.frame4{
+	backround-color : orange;
+}
+.windowManagerMode2 .frame1,.windowManagerMode2 .frame2{
+	width : 50%;
+	float : left;
+	height : 100%;
+}
+.windowManagerMode3 .frame1,.windowManagerMode3 .frame2{
+	width : 50%;
+	float : left;
+	height : 50%;
+}
+.windowManagerMode3 .frame3{
+	width : 100%;
+	float : left;
+	height : 50%;
+}
+.windowManagerMode4 .frame1,.windowManagerMode4 .frame2,.windowManagerMode4 .frame3{
+	width : 33%;
+	float : left;
+	height : 100%;
+}
+.windowManagerMode5 .frame1,.windowManagerMode5 .frame2,.windowManagerMode5 .frame3,.windowManagerMode5 .frame4{
+	width : 50%;
+	float : left;
+	height : 50%;
+}
+div.activeFrame {
+	display : block;
+}
+.well{
+	height : 100%;
+}
+.windowManager .close{
+	width : 22px;
+	height : 22px;
+	position : absolute;
+	right : 15px;
+	top : 15px;
+	background : url('../../media/image/share/close.png') no-repeat;
+}
+

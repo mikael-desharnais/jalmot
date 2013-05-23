@@ -1,15 +1,11 @@
 <?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ConnectionBox.js',false)),2); ?>
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','lightbox.js',false)),1); ?>
+<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','font.js',false)),1); ?>
 <?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
 <?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ConnectionBox.css',false)),0); ?>
 <?php  Ressource::getCurrentLanguage()->init('module/ConnectionBox'); ?>
 
-<div class="blackAlphaDiv " id="blackAlphaDiv">&nbsp;
-
-</div>
-	<div class="contentBlackAlphaDiv" id="contentBlackAlphaDiv">
-		<div class="connectionDiv well" id="connectionDiv">
-			<div class="closeButton"><a href="#" id="closeLogin" class="icon-remove"></a></div>
+	<div class="container">
+		<div id="connectionDiv">
 				<form action="" style="margin : 0px;" method="post">
 					<h2 class="connectionTopDiv"><?php echo Ressource::getCurrentLanguage()->getTranslation("Connection") ?></h2>
 					<div class="connectionTitreDiv"> <?php echo Ressource::getCurrentLanguage()->getTranslation("username") ?> : </div><div class="connectionInputDiv"><input type="text" name="userInput" class="connectionInput"></div>

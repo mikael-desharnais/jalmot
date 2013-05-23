@@ -1,0 +1,37 @@
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','FileUploadME.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('lib/jQueryFileUpload/css','jquery.fileupload-ui.css',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/jQueryFileUpload/js','jquery.fileupload.js',false)),2); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/jQueryFileUpload/js','jquery.ui.widget.js',false)),3); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/jQueryFileUpload/js','jquery.iframe-transport.js',false)),3); ?>
+<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','FileUploadME.js',false)),4); ?>
+
+<tr>
+	<td colspan="2" height="200">
+		<label><?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?></label>
+		<div class="fileUploadContainer">
+			<div class="fileUploadList">
+				<?php
+					if (!empty($this->currentFile)){ 
+						$wrapper = new MediaFileWrapper($this->currentFile);
+						if (Image::isImage($wrapper->getFile())){
+							$mediaImage=Module::getInstalledModule('ImageMediaFileManager')->getFileById($this->currentFile->getIdMediaFile());
+							$icon = $mediaImage->getURLForSize(100,100,$this->currentFile->getName());
+						}else {
+							$icon = Ressource::getCurrentTemplate()->getFile(new File('media/image/module/mediaManager','icon-default.png',true),true)->toFullURL();
+						}?>
+						<div class="fileUploadElement fileUploadElementToCreate" data-text="<?php echo $this->currentFile->getName(); ?>" data-id="<?php echo $this->currentFile->getidMediaFile(); ?>" data-icon="<?php echo $icon; ?>">
+							
+						</div>
+					<?php }?>
+				<br class="clearer">
+			</div>
+			<span class="btn btn-success fileinput-button">
+		        <i class="icon-plus icon-white"></i>
+		        <span><?php echo Ressource::getCurrentLanguage()->getTranslation('Import file')?></span>
+		        <input class="fileupload" type="file" name="uploadedFile" data-inputFieldName="<?php echo $this->getName(); ?>">
+		    </span>
+	    </div>
+	</td>	
+</tr>
+

@@ -11,19 +11,19 @@ class JSCSSPreLoader extends Module{
 	    $file=Template::getCurrentTemplate()->getFile(new File('xml/module/JSCSSPreLoader',Ressource::getCurrentPage()->getName().'.xml',false));
 	    $xml = XMLDocument::parseFromFile($file);
 	    foreach($xml->js->children() as $xmlJSFile){
-	    	$this->js[]=Ressource::getCurrentTemplate()->getFile(new File($xmlJSFile->directory,$xmlJSFile->name,false));
+	    	$this->js[]=array('file'=>Ressource::getCurrentTemplate()->getFile(new File($xmlJSFile->directory,$xmlJSFile->name,false)),'order'=>(int)$xmlJSFile->order);
 	    }
 	    foreach($xml->css->children() as $xmlCSSFile){
-	    	$this->css[]=Ressource::getCurrentTemplate()->getFile(new File($xmlCSSFile->directory,$xmlCSSFile->name,false));
+	    	$this->css[]=array('file'=>Ressource::getCurrentTemplate()->getFile(new File($xmlCSSFile->directory,$xmlCSSFile->name,false)),'order'=>(int)$xmlCSSFile->order);
 	    }
 	}
 	public function execute(){
 	    parent::execute();
 	    foreach($this->js as $jsFile){
-	        Ressource::getCurrentPage()->addJS($jsFile, 13);
+	        Ressource::getCurrentPage()->addJS($jsFile['file'], $jsFile['order']);
 	    }
 	    foreach($this->css as $cssFile){
-	        Ressource::getCurrentPage()->addCSS($cssFile, 13);
+	        Ressource::getCurrentPage()->addCSS($cssFile['file'], $cssFile['order']);
 	    }
 	}
 	

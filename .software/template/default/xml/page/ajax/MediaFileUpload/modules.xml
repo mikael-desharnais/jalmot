@@ -14,4 +14,9 @@
 		<class>MediaManagerFileUploader</class>
 		<params></params>
 	</module>
+	<module>
+		<instancename>ImageMediaFileManager</instancename>
+		<class>ImageMediaFileManager</class>
+		<params></params>
+	</module>
 </modules>

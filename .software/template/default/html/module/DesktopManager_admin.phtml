@@ -2,7 +2,7 @@
 <?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
 <?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','DesktopManager.css',false)),0); ?>
 <?php  Ressource::getCurrentLanguage()->init('module/DesktopManager'); ?>
-<div class="desktop hero-unit">
+<div class="desktop">
 <?php foreach($this->icons as $icon){ ?>
 	<?php echo $icon->toHTML(); ?>
 <?php } ?>

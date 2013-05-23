@@ -140,7 +140,9 @@ class CoreModel{
 	    	    $code.=$field->getCode();
 	    	}
 	    	$code.="\n}";
-	    	@mkdir($file->getDirectory(),0777,true);
+	    	if (!file_exists($file->getDirectory())){
+	    		@mkdir($file->getDirectory(),0777,true);
+	    	}
 	    	$file->write($code);
         }
         include_once($file->toURL());

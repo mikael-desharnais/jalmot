@@ -6,14 +6,18 @@
  * @version 1.0
  * @package CoreClass
  */
-class CoreImage{
+abstract class CoreImage{
 	 /**
      * Does nothing
      */
 	public function __construct(){
 		
 	}
-	
+
+	public abstract function writeRawImageToFile($image,$file);
+	public abstract function getImageContent();
+	public abstract function getThumb($max_width,$max_height);
+	public abstract function getMimeType();
 	/**
     * Returns true if the file is an  image (which type is known)
 	* @param $file	 	File to test

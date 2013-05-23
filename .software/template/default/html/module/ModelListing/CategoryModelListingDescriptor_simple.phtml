@@ -70,7 +70,7 @@ AjaxHTMLFetcher.setFetcher('new_<?php echo $this->contentRelation; ?>',new URL(R
 					<td align="right"></td>
 				<?php }else{ ?>
 					<td align="right">
-							<?php 
+							<?php
 							if ($this->originalSize>0&&$this->pageSize>0&&$this->originalSize>$this->pageSize){
 								for($x=0;$x<floor(($this->originalSize-1)/$this->pageSize)+1;$x++){ 
 								?>

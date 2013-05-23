@@ -90,7 +90,9 @@ class Classe {
 	        	$url=$file->toURL();
 	        	include_once($url);
 	        	$autoloadCache[$class]=$url;
-	        	@mkdir($fileCache,0777,true);
+	        	if (!file_exists($fileCache->getDirectory())){
+	        		@mkdir($fileCache->getDirectory(),0777,true);
+	        	}
 	        	$fileCache->write('<?php $autoloadCache='.var_export($autoloadCache,true).';');
 	        }catch (Exception $exc){
 	        	try{

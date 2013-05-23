@@ -302,12 +302,9 @@ class CoreModule{
 	* executes the module : First executes modules registered to execute before the module, then executes the module and then executes modules registered to execute after the module
 	*/
 	public final function execution(){
-		if ($this->executed){
-			Log::Warning('A module should not be executed Twice !!!!');
-		}
 		Log::GlobalLogData('Module '.$this->getName().' Start Execution',Log::$LOG_LEVEL_INFO);
 		$this->propagateBeforeExecute();
-		$this->execute();
+		call_user_func_array(array($this,"execute"), func_get_args());
 		$this->propagateAfterExecute();
 		Log::GlobalLogData('Module '.$this->getName().' End Execution',Log::$LOG_LEVEL_INFO);
 		$this->executed=true;
@@ -320,7 +317,7 @@ class CoreModule{
 	/**
 	* Core execution of the module (does nothing, is to be overriden if need be)
 	*/
-	public function execute(){
+	protected function execute(){
 	}
 	/**
 	* Returns Htaccess  Content for this module
