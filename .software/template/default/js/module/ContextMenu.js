@@ -1,23 +1,4 @@
-jQuery(document).ready(function(){
-	jQuery('.context-menu-actionner').live('contextmenu',function(event){
-		if (event.which==3){
-			event.preventDefault();
-			if (jQuery(this).data('context-menu')!='NoContextMenu'){
-				ContextMenu.setCurrentContextMenu(ContextMenu.getContextMenu(jQuery(this).data('context-menu')));
-				ContextMenu.getCurrentContextMenu().setCurrentActionner(jQuery(this));
-				ContextMenu.getCurrentContextMenu().display(event.pageX,event.pageY);
-			}
-			return false;
-		}
-	});
-	jQuery('body').mousedown(function(){
-		var date = new Date();
-		if (typeof(ContextMenu.getCurrentContextMenu())!='undefined'){
-			ContextMenu.getCurrentContextMenu().remove();
-		}
-	});
-});
-
+console.log('zozo');
 ContextMenu=function(){
 	
 };
@@ -206,3 +187,22 @@ SourceParamsModelEditorElementCM.readFromJSON=function(descriptor,json){
 	element.mode = json.mode;
 	return element;
 }
+jQuery(document).ready(function(){
+	jQuery('.context-menu-actionner').live('contextmenu',function(event){
+		if (event.which==3){
+			event.preventDefault();
+			if (jQuery(this).data('context-menu')!='NoContextMenu'){
+				ContextMenu.setCurrentContextMenu(ContextMenu.getContextMenu(jQuery(this).data('context-menu')));
+				ContextMenu.getCurrentContextMenu().setCurrentActionner(jQuery(this));
+				ContextMenu.getCurrentContextMenu().display(event.pageX,event.pageY);
+			}
+			return false;
+		}
+	});
+	jQuery('body').mousedown(function(){
+		var date = new Date();
+		if (typeof(ContextMenu.getCurrentContextMenu())!='undefined'){
+			ContextMenu.getCurrentContextMenu().remove();
+		}
+	});
+});

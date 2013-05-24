@@ -4,7 +4,7 @@
 
 <?php Ressource::getCurrentLanguage()->init('module/ModelListingDescriptor'); ?>
 <script> 
-AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/',{ model : '<?php echo $this->model; ?>',source :'create'),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/',{ model : '<?php echo $this->model; ?>',source :'create'}),function(htmlContent){
 
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelListing-'.$this->getModel())); ?>);

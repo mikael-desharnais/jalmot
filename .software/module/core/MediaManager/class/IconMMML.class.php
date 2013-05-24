@@ -21,6 +21,8 @@ class IconMMML {
 	* True if the File behind the icon is editable
 	*/
 	protected $editable=true;
+	
+	protected $changeTypes=array();
     /**
     * Initialises the Key
     */
@@ -50,9 +52,20 @@ class IconMMML {
 	* @param SimpleXMLElement $xml The XML element describing the IconMMML to create
 	*/
 	public static function readFromXML($xml){
-	    $cellDescriptor=new self($xml->key."");
+	    $cellDescriptor=new self((string)$xml->key);
 	    $cellDescriptor->setConfParams(XMLParamsReader::read($xml));
+	    if (isset($xml->changeTypes)){
+	    	foreach($xml->changeTypes->children() as $changeTypeXML){
+	    		$cellDescriptor->addChangeType($changeTypeXML."");
+	    	}
+	    }
 		return $cellDescriptor;
+	}
+	public function addChangeType($changeType){
+		$this->changeTypes[]=$changeType;
+	}
+	public function getChangeTypes(){
+		return $this->changeTypes;
 	}
 	/**
 	* TODO : override a Cell
