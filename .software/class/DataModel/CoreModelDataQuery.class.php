@@ -135,7 +135,9 @@ abstract class CoreModelDataQuery{
     */
     public function getModelData($useCache=false){
 		if ($useCache&&$this->getModel()->getDataSource()->isDataModelCached($this->getUUID())){
-			return $this->getModel()->getDataSource()->getCachedDataModel($this->getUUID());
+			$toReturn = $this->getModel()->getDataSource()->getCachedDataModel($this->getUUID());
+			$toReturn->rewind();
+			return $toReturn;
 		}else {
     		$array= $this->getModel()->getDataSource()->execute($this);
 			if ($useCache){

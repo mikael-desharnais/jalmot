@@ -235,6 +235,7 @@ class CoreModelData{
 	    $relations=$this->getParentModel()->getRelations();
 	    foreach($relations as $relation){
 	        if ($relation->getType()=='CascadeOnDelete'){
+	    		Log::GlobalLogData("Cascade On delete from model ".$this->getParentModel()->getName()." along relation ".$relation->getName(), Log::$LOG_LEVEL_INFO);
 	            $functionName='lst'.ucfirst($relation->getName());
 	            $queryResult=$this->$functionName()->getModelData();
 	            $counter = 0;

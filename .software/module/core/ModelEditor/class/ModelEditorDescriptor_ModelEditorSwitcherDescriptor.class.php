@@ -84,6 +84,7 @@ class ModelEditorSwitcherDescriptor {
 			if (array_key_exists($element->$getterName()."",$this->modelEditorsChoices)){
 				$modelToUse=$this->modelEditorsChoices[$element->$getterName()];
 			}else{
+				Log::GlobalLogData("Could not find Model Editor ".$this->getModel()." for element ".$this->getFieldName()." with value ".$element->$getterName(), Log::$LOG_LEVEL_INFO);
 				$modelToUse=$this->modelEditorsChoices['DEFAULT'];
 			}
 		}

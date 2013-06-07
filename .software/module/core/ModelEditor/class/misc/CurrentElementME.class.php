@@ -21,7 +21,7 @@ class CurrentElementME {
 			$elementLangQuery = $element->lstLang();
 			$elementLang = $elementLangQuery->addConditionBySymbol('=',$elementLangQuery->getModel()->getField('idLang'), Ressource::getCurrentLanguage()->getId())->getModelDataElement();
 			$getter = "get".ucfirst($this->key);
-			return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), $elementLang->$getter(),$element);
+			return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), (!empty($elementLang)?$elementLang->$getter():""),$element);
 		}
 	}
 }

@@ -169,7 +169,6 @@ function URL(address,params){
 		
 	}
 	this.toQueryString=function(){
-		console.log(this.params);
 		return jQuery.param(this.params);
 	}
 };
