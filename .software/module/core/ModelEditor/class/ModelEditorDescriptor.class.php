@@ -15,8 +15,23 @@ class ModelEditorDescriptor {
 		foreach($xml->inputs->children() as $input){
 			$input_class=$input->class."";
 			$element=call_user_func(array($input_class,"readFromXML"),$modelEditor,$input);
+			if (empty($element)){
+				throw new Exception('Could not create element '.$input_class);
+			}
 			$modelEditor->addInput($element);
 		}
+		
+		if (isset($xml->buttons)){
+			foreach($xml->buttons->children() as $button){
+				$method = "setDisplay".strtoupper((string)$button)."Button";
+				$modelEditor->$method(true);
+			}
+		}else {
+			$modelEditor->setDisplaySaveButton(true);
+			$modelEditor->setDisplayCancelButton(true);
+			$modelEditor->setDisplayDeleteButton(true);
+		}
+		
 		foreach($xml->changeTypes->children() as $changeTypeXML){
 		    $modelEditor->addChangeType($changeTypeXML."");
 		}
@@ -44,7 +59,20 @@ class ModelEditorDescriptor {
 	protected $fetchedData=array();
 	protected $changeTypes = array();
 
+	protected $displaySaveButton = false;
+	protected $displayCancelButton = false;
+	protected $displayDeleteButton = false;
+
 	public function __construct(){
+	}
+	public function setDisplaySaveButton($displaySaveButton){
+		$this->displaySaveButton=$displaySaveButton;
+	}
+	public function setDisplayCancelButton($displayCancelButton){
+		$this->displayCancelButton=$displayCancelButton;
+	}
+	public function setDisplayDeleteButton($displayDeleteButton){
+		$this->displayDeleteButton=$displayDeleteButton;
 	}
 	public function setSource($source){
 	    $this->source=$source;

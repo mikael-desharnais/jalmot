@@ -3,13 +3,14 @@
 <td>
 	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
 </td>
-<td  class="LanguageFieldME-container" width="75%">
+<td width="75%">
 	<div  class="LanguageFieldME-container control-group">
 		<?php $languages=Language::getAvailableLanguages() ; ?>
 		<?php foreach($languages as $language){ ?>
-			<input type="text" class="LanguageFieldME LanguageFieldME-lng<?php echo $language->getId(); ?>" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" value="<?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?>" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>">
+			<div class="LanguageFieldME-wrapper  LanguageFieldME-lng<?php echo $language->getId(); ?> <?php if ($language->getId()==Ressource::getCurrentLanguage()->getId()) { ?> LanguageFieldME-default <?php  }?>" data-idLang="<?php echo $language->getId(); ?>">
+				<input type="text" class="LanguageFieldME" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" value="<?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?>" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>">
+			</div>
 		<?php } ?>
-	<br/><br/>
 	</div>
 </td>	
 </tr>

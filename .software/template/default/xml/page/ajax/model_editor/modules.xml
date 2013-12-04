@@ -53,5 +53,15 @@
 		<class>ImageMediaFileManager</class>
 		<params></params>
 	</module>
+	<module>
+		<instancename>ModelEditorLanguageFieldTranslator</instancename>
+		<class>ModelEditorLanguageFieldTranslator</class>
+		<params></params>
+	</module>
+	<module>
+		<instancename>HTTP</instancename>
+		<class>HTTP</class>
+		<params></params>
+	</module>
 	
 </modules>

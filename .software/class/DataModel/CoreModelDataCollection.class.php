@@ -3,8 +3,13 @@
 class CoreModelDataCollection implements Iterator {
     private $content = array();
     private $position =0;
+    private $model;
     public function current(){
-        return $this->content[$this->position];
+    	if (array_key_exists($this->position, $this->content)){
+        	return $this->content[$this->position];
+    	}else {
+    		return null;
+    	}
     }
     public function key (){
         return $this->position;
@@ -33,6 +38,9 @@ class CoreModelDataCollection implements Iterator {
     }
     public function __construct($model){
     	$this->model = $model;
+	}
+    public function getModel(){
+    	return $this->model;
     }
 	public function __call($name,$arguments){
 	    $action=substr($name,0,3);

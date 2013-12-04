@@ -1,0 +1,7 @@
+<modules>
+	<module>
+		<instancename>TextTranslator</instancename>
+		<class>TextTranslator</class>
+		<params></params>
+	</module>
+</modules>

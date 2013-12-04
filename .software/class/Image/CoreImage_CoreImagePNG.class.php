@@ -17,11 +17,16 @@ class CoreImagePNG extends Image{
 		$this->file=$file;
 	}
 	public function writeRawImageToFile($image,$file){
-		@mkdir($file->getDirectory(),0777,true);
+		if (!file_exists($file->getDirectory())){
+			mkdir($file->getDirectory(),0777,true);
+		}
 		imagepng($image,$file->toURL());
 	}
 	public function getImageContent(){
-		return imagecreatefrompng($this->file->toURL());
+		$toReturn = imagecreatefrompng($this->file->toURL());
+		imageAlphaBlending($toReturn, true);
+		imageSaveAlpha($toReturn, true);
+		return $toReturn;
 	}
 	public function getThumb($max_width,$max_height){
 		$src_width=0;
@@ -45,6 +50,10 @@ class CoreImagePNG extends Image{
 			$dest_width=$max_height*$src_ratio;
 		}
 		$dest_image = imagecreatetruecolor($dest_width,$dest_height);
+		imagealphablending($dest_image, false);
+		imagesavealpha($dest_image, true);
+		$transparent = imagecolorallocatealpha($dest_image, 255, 255, 255, 127);
+ 		imagefilledrectangle($dest_image, 0, 0, $dest_width, $dest_height, $transparent);
 		imagecopyresampled($dest_image, $baseImage, 0, 0, 0, 0, $dest_width, $dest_height, $src_width, $src_height);
 		return $dest_image;
 	}

@@ -7,6 +7,7 @@
      * The MySQL connection objet
      */
      private $dbConnection;
+     private $delayedInsert;
      
      public function getDBConnection(){
      	return $this->dbConnection;
@@ -21,8 +22,8 @@
      public function __construct($name){
          parent::__construct($name);
          $xml=XMLDocument::parseFromFile(new File("xml/dataSource",$name.".xml",false));
+         $this->delayedInsert = (isset($xml->delayedInsert)&&(string)$xml->delayedInsert=="true"?true:false);
          $this->dbConnection=new Mysql($xml->server."",$xml->database."",$xml->username."",$xml->password."");
-         $this->loadDbToModelData();
      }
      /**
      * Returns a new Instance of MysqlDataQuery with proper type and Model.
@@ -108,7 +109,7 @@
      */
      public function create($element){
 		$model=$element->getParentModel();
-         $query="INSERT INTO ".$this->getTableName($model->getName())." (";
+         $query="INSERT ".($this->delayedInsert?"DELAYED":"")." INTO ".$this->getTableName($model->getName())." (";
          $fields="";
          $values="";
          foreach($model->getFields() as $field){
@@ -158,6 +159,15 @@
 			case "LIKE" :
 				return new MysqlLikeCondition($args[1],$args[2]);
 				break;
+			case "IN" :
+				return new MysqlInCondition($args[1],$args[2]);
+				break;
+			case "NOT_NULL" :
+				return new MysqlNotNullCondition($args[1]);
+				break;
+			case "NULL" :
+				return new MysqlNotNullCondition($args[1]);
+				break;
 			default :
 			    Log::Error(__CLASS__." cant't find operator ".$args[0]);
 			break;
@@ -187,23 +197,20 @@
 	/**
 	* Load the data to translate names between Mysql And Models
 	*/
-	private function loadDbToModelData(){	    
-	    $directory = glob ( "xml/dataSource/".$this->getName()."/*.xml" );
-	    foreach($directory as $file){
-		    $fileObject=File::createFromURL($file);
-		    $xml=XMLDocument::parseFromFile(File::createFromURL($file));
-		    if ($xml->name.".".$fileObject->getExtension()!=$fileObject->getFile()){
-		    	Log::Error("Error : the name of the DataSource File must be identical to that of the Model : ".$fileObject->getFile());
-		    }
-		    $this->modelNames[$xml->dbname.""]=$xml->name."";
-		    $this->modelFieldNames[$xml->dbname.""]=array();
-		    $this->dbTableNames[$xml->name.""]=$xml->dbname."";
-		    $this->dbFieldNames[$xml->name.""]=array();
-		    foreach($xml->fields->children() as $field){
-		        $this->dbFieldNames[$xml->name.""][$field->name.""]=$field->dbname."";
-		        $this->modelFieldNames[$xml->dbname.""][$field->dbname.""]=$field->name."";
-				$this->params[$xml->name.""][$field->name.""]=XMLParamsReader::read($field);
-		    }
+	private function loadDbToModelDataFile($modelName){
+	    $fileObject=new File("xml/dataSource/".$this->getName(),$modelName.".xml",false);
+	    $xml=XMLDocument::parseFromFile($fileObject);
+	    if ($xml->name.".".$fileObject->getExtension()!=$fileObject->getFile()){
+	    	Log::Error("Error : the name of the DataSource File must be identical to that of the Model : ".$fileObject->getFile());
+	    }
+	    $this->modelNames[$xml->dbname.""]=$xml->name."";
+	    $this->modelFieldNames[$xml->dbname.""]=array();
+	    $this->dbTableNames[$xml->name.""]=$xml->dbname."";
+	    $this->dbFieldNames[$xml->name.""]=array();
+	    foreach($xml->fields->children() as $field){
+	        $this->dbFieldNames[$xml->name.""][$field->name.""]=$field->dbname."";
+	        $this->modelFieldNames[$xml->dbname.""][$field->dbname.""]=$field->name."";
+			$this->params[$xml->name.""][$field->name.""]=XMLParamsReader::read($field);
 	    }
 	}
 	/**
@@ -212,6 +219,9 @@
 	* @param string $modelName Model Name to translate
 	*/
 	public function getTableName($modelName){
+		if (!array_key_exists($modelName,$this->dbTableNames)){
+			$this->loadDbToModelDataFile($modelName);
+		}
 	    return $this->dbTableNames[$modelName];
 	}
 	/**

@@ -46,6 +46,10 @@
 					<name>LanguageChooser</name>
 					<instance>normal</instance>
 				</module>
+				<module>
+					<name>ModelEditorLanguageFieldTranslator</name>
+					<instance>normal</instance>
+				</module>
 			</modules>
 		</hook>
 	</hooks>

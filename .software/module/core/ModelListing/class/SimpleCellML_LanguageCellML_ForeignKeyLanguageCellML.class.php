@@ -6,9 +6,10 @@ class ForeignKeyLanguageCellML extends LanguageCellML {
 	
 	public function toHTML($element){
 		$listName = "lst".ucfirst($this->relation);
-		$line_query=$element->$listName()->getModelDataElement()->lstLang();
-		$line = $line_query->addConditionBySymbol('=',$line_query->getModel()->getField('idLang'), Ressource::getCurrentLanguage()->getId())
-							->getModelDataElement();
+		$lineElement=$element->$listName()->getModelDataElement();
+		if (!empty($lineElement)){
+			$line = ModelLangRelation::getModelDataElement($lineElement,$this->getKey());
+		}
 		ob_start();
 		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/ForeignKeyCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
@@ -19,6 +20,10 @@ class ForeignKeyLanguageCellML extends LanguageCellML {
 		$cellDescriptor = parent::readFromXML($xml);
 	    $cellDescriptor->setRelation($xml->relation."");
 	    $cellDescriptor->setConfParams(XMLParamsReader::read($xml));
+	    $instance = $xml->instance."";
+	    if (!empty($instance)){
+	    	$cellDescriptor->setInstance($xml->instance."");
+	    }
 	    return $cellDescriptor;
 	}
 	public function setRelation($relation){

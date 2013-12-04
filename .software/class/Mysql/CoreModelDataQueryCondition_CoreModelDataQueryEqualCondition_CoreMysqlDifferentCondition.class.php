@@ -3,7 +3,7 @@
 * The equal condition object adapted to Mysql
 * @see ModelDataQueryEqualCondition
 */
-class CoreMysqlDifferentCondition extends CoreModelDataQueryEqualCondition{
+class CoreMysqlDifferentCondition extends ModelDataQueryEqualCondition{
 	/**
 	* Returns the SQL query for this equal condition
 	* @return string the SQL query for this equal condition

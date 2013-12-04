@@ -116,8 +116,6 @@ abstract class CoreModelDataQuery{
 		$this->sizeLimit = $sizeLimit;
 		return $this;
 	}
-	
-	
     /**
     * Adds a condition container to this query
     * @return ModelDataQuery this

@@ -3,6 +3,7 @@
 * Used to load XML documents and eventually cache them
 */
 class CoreXMLDocument{
+
 	/**
 	* Load and returns a XML document and eventually cache them
 	* @return SimpleXMLElement the XML document required
@@ -16,6 +17,3 @@ class CoreXMLDocument{
 		}
 	}
 }
-
-
-?>

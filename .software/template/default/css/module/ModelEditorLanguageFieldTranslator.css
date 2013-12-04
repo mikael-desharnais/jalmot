@@ -1,0 +1,9 @@
+.translateButton{
+	background : url('../../media/image/module/ModelEditorLanguageFieldTranslator/translate.png') no-repeat;
+	width : 25px;
+	height : 25px;	
+	display : block;
+	position : absolute;
+	right : -25px;
+	top : 0px;
+}

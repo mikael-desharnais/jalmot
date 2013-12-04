@@ -17,7 +17,9 @@
 	<div  class="LanguageFieldME-container">
 		<?php $languages=Language::getAvailableLanguages() ; ?>
 		<?php foreach($languages as $language){ ?>
-			<textarea class="LanguageFieldME HTMLLanguageFieldME TextareaLanguageFieldME HTMLLanguageFieldMEToWYSIWYG LanguageFieldME-lng<?php echo $language->getId(); ?> <?php echo $this->getConfParam('class') ?>" data-idLang="<?php echo $language->getId(); ?>" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>"><?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?></textarea>
+			<div class="LanguageFieldME-wrapper TextareaLanguageFieldME-wrapper  LanguageFieldME-lng<?php echo $language->getId(); ?> <?php echo $this->getConfParam('class') ?> <?php if ($language->getId()==Ressource::getCurrentLanguage()->getId()) { echo "LanguageFieldME-default"; }?>" data-idLang="<?php echo $language->getId(); ?>">
+				<textarea class="LanguageFieldME HTMLLanguageFieldME TextareaLanguageFieldME HTMLLanguageFieldMEToWYSIWYG" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>"><?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?></textarea>
+			</div>
 		<?php } ?>
 	</div>
 </td>	

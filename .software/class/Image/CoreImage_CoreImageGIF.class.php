@@ -17,7 +17,9 @@ class CoreImageGIF extends Image{
 		$this->file=$file;
 	}
 	public function writeRawImageToFile($image,$file){
-		@mkdir($file->getDirectory(),0777,true);
+		if (!file_exists($file->getDirectory())){
+			mkdir($file->getDirectory(),0777,true);
+		}
 		imagegif($image,$file->toURL());
 	}
 	public function getImageContent(){

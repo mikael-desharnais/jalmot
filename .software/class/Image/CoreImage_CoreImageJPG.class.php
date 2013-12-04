@@ -23,7 +23,12 @@ class CoreImageJPG extends Image{
 		$this->file=$file;
 	}
 	public function writeRawImageToFile($image,$file){
-		@mkdir($file->getDirectory(),0777,true);
+		if (empty($image)){
+			return;
+		}
+		if (!file_exists($file->getDirectory())){
+			mkdir($file->getDirectory(),0777,true);
+		}
 		imagejpeg($image,$file->toURL());
 	}
 	/**
@@ -31,15 +36,24 @@ class CoreImageJPG extends Image{
 	* 
 	*/
 	public function getExif(){
-		return exif_read_data($this->file->toURL(), 0, true);
+		if (function_exists('exif_thumbnail')){
+			return exif_read_data($this->file->toURL(), 0, true);
+		}else {
+			return array();
+		}
 	}
 	public function getImageContent(){
 		return imagecreatefromjpeg($this->file->toURL());
 	}
 	public function getThumb($max_width,$max_height){
+		if (!$this->file->exists()){
+			return;
+		}
 		$src_width=0;
 		$src_height=0;
-		$stringImage=@exif_thumbnail($this->file->toURL(),$src_width,$src_height);
+		if (function_exists('exif_thumbnail')){
+			$stringImage=@exif_thumbnail($this->file->toURL(),$src_width,$src_height);
+		}
 		if (!empty($stringImage)&&$src_width>=$max_width&&$src_height>=$max_height){
 			$baseImage=imagecreatefromstring($stringImage);
 		}
@@ -64,7 +78,7 @@ class CoreImageJPG extends Image{
 		}
 		$exif=@$this->getExif();
 		
-		if ($exif!==false&&array_key_exists("Orientation", $exif["IFD0"])){
+		if ($exif!==false&&array_key_exists("IFD0", $exif)&&array_key_exists("Orientation", $exif["IFD0"])){
 			$orientation = $exif["IFD0"]["Orientation"];
 		}else {
 			$orientation=1;

@@ -19,6 +19,8 @@
 	* The extension of the file
 	*/
 	private $extension=null;
+	
+	private $appendFileHandler;
 	/**
 	* Initialises the directory name, filename, and isFolder
 	* @param string $folder The directory name
@@ -146,9 +148,11 @@
 	* @param string $toWrite the data to write to file
 	*/
 	public function append($toWrite){
-		$fh = fopen($this->directory.'/'.$this->file, 'a+');
-		fwrite($fh, $toWrite);
-		fclose($fh);
+		if (empty($this->appendFileHandler)){
+			$this->appendFileHandler = fopen($this->directory.'/'.$this->file, 'a+');
+			flock($this->appendFileHandler, LOCK_UN);
+		}
+		fwrite($this->appendFileHandler, $toWrite);
 	}
 	/**
 	* Appends a string to the end of the directory

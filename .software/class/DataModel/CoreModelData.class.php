@@ -243,6 +243,15 @@ class CoreModelData{
 	            	$counter++;
 	                $line->delete();
 	            }
+	        }elseif ($relation->getType()=='Nullify'){
+	    		Log::GlobalLogData("Nullify from model ".$this->getParentModel()->getName()." along relation ".$relation->getName(), Log::$LOG_LEVEL_INFO);
+	        	$functionName='lst'.ucfirst($relation->getName());
+	        	$queryResult=$this->$functionName()->getModelData();
+	        	$setter = "set".ucfirst($relation->getDestination()->getName());
+	        	foreach($queryResult as $line){
+	        		$line->$setter(null);
+	        		$line->save();
+	        	}
 	        }
 	    }
 	    $this->getParentModel()->getDataSource()->delete($this);

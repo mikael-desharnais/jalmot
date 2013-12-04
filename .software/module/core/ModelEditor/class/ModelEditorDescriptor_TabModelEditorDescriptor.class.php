@@ -27,6 +27,17 @@ class TabModelEditorDescriptor extends ModelEditorDescriptor {
 				$modelEditor->addInput($element);
 			}
 		}
+		
+		if (isset($xml->buttons)){
+			foreach($xml->buttons->children() as $button){
+				$method = "setDisplay".strtoupper((string)$button)."Button";
+				$modelEditor->$method(true);
+			}
+		}else {
+			$modelEditor->setDisplaySaveButton(true);
+			$modelEditor->setDisplayCancelButton(true);
+			$modelEditor->setDisplayDeleteButton(true);
+		}
 		foreach($xml->hooks->children() as $hook){
 		    Hook::initHookFromXML($hook->name."",$hook);
 		}

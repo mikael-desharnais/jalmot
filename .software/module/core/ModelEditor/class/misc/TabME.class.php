@@ -6,10 +6,23 @@ class TabME {
 	protected $title;
 	protected $model_editor;
 	protected $class;
-	protected $displayButtons;
+	protected $displayButtons=true;
+	
+	public $displaySaveButton = false;
+	public $displayCancelButton = false;
+	public $displayDeleteButton = false;
 	
 	public function displayButtons(){
 		return $this->displayButtons;
+	}
+	public function setDisplaySaveButton($displaySaveButton){
+		$this->displaySaveButton=$displaySaveButton;
+	}
+	public function setDisplayCancelButton($displayCancelButton){
+		$this->displayCancelButton=$displayCancelButton;
+	}
+	public function setDisplayDeleteButton($displayDeleteButton){
+		$this->displayDeleteButton=$displayDeleteButton;
 	}
 	
 	public function __construct($class,$model_editor,$title,$displayButtons){
@@ -44,6 +57,16 @@ class TabME {
 	    if (!empty($instance)){
 	    	$toReturn->setInstance($xml->instance."");
 	    }
+		if (isset($xml->buttons)){
+			foreach($xml->buttons->children() as $button){
+				$method = "setDisplay".ucfirst((string)$button)."Button";
+				$toReturn->$method(true);
+			}
+		}else {
+			$toReturn->setDisplaySaveButton(true);
+			$toReturn->setDisplayCancelButton(true);
+			$toReturn->setDisplayDeleteButton(true);
+		}
 		return $toReturn;
 	}
 	public function getConfParams(){

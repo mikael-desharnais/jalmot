@@ -163,7 +163,8 @@ class CoreModel{
 			print('<pre>');
 			print($this->name);
 			print_r(array_keys($this->fields));
-			Log::Error('Trying to access to unknown Model Field "'.$this->name.'"."'.strtolower($name).'"');
+			$exception = new Exception();
+			Log::Error('Trying to access to unknown Model Field "'.$this->name.'"."'.strtolower($name).'" '.print_r($exception->getTrace(),true));
 		}
         $toReturn= $this->fields[strtolower($name)];
         return $toReturn;

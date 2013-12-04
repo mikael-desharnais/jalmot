@@ -6,7 +6,7 @@ class CoreDatecreateMysqlModelType extends DateMysqlModelType{
     	if($value == ''){
     		return parent::toSQL(Date::getNow()->getTimeStamp());
     	}else{
-    		return parent::toSQL($value->getTimeStamp());
+    		return parent::toSQL($value);
     	}
     }
 }

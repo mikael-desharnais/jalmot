@@ -81,7 +81,12 @@ class ModelEditorSwitcherDescriptor {
 			}
 			$element=	$query->getModelDataElement(true);
 			$getterName = "get".ucFirst($this->getFieldName());
-			if (array_key_exists($element->$getterName()."",$this->modelEditorsChoices)){
+			$value = $element->$getterName()."";
+			if ($element->getParentModel()->getField($this->getFieldName())->getType()=="boolean"){
+				$value = ($value?"1":"0");
+			}
+		
+			if (!empty($element)&&array_key_exists($value."",$this->modelEditorsChoices)){
 				$modelToUse=$this->modelEditorsChoices[$element->$getterName()];
 			}else{
 				Log::GlobalLogData("Could not find Model Editor ".$this->getModel()." for element ".$this->getFieldName()." with value ".$element->$getterName(), Log::$LOG_LEVEL_INFO);

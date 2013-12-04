@@ -6,6 +6,10 @@
 * 
 */
 class Classe {
+	
+	private static $autoLoadCache;
+	private static $autoLoadCacheLoaded;
+	
 	/**
 	* Parses recursively a directory and returns all the classes that can be loaded
 	* @return array array of all the classes that can be loaded
@@ -74,32 +78,52 @@ class Classe {
 	public static function autoload($class){
 		Log::GlobalLogData("Looking for ".$class,Log::$LOG_LEVEL_DEBUG);
 	    $fileCache=new File(".cache/class","autoLoad.php",false);
-	    @include($fileCache->toURL());
-	    if (!isset($autoloadCache)){
-	        $autoloadCache=array();
-	    }
-	    if (array_key_exists($class,$autoloadCache)){
-	    	if (file_exists($autoloadCache[$class])){
-	    		include_once($autoloadCache[$class]);
+	    $fileCacheChanged=false;
+	    if (!self::$autoLoadCacheLoaded){
+	    	if ($fileCache->exists()){
+	    		include($fileCache->toURL());
+	    	}
+	    	if (!isset(self::$autoLoadCache)||!is_array(self::$autoLoadCache)){
+	    		self::$autoLoadCache = array();
 	    	}else {
-	    		unset($autoloadCache[$class]);
+	    		self::$autoLoadCache = self::$autoLoadCache;
+	    	}
+	    }
+	    
+	    if (!isset(self::$autoLoadCache)){
+	        self::$autoLoadCache=array();
+	    }
+	    if (array_key_exists($class,self::$autoLoadCache)){
+	    	if (self::$autoLoadCache[$class]=='model'){
+	        	Model::getModel($class)->includeClass();
+	    	}else{
+		    	if (file_exists(self::$autoLoadCache[$class])){
+		    		include_once(self::$autoLoadCache[$class]);
+		    	}else {
+		    		unset(self::$autoLoadCache[$class]);
+		    	}
 	    	}
 	    }else {
 	        try {
 	        	$file = File::findFile("module",$class.".class.php");
 	        	$url=$file->toURL();
 	        	include_once($url);
-	        	$autoloadCache[$class]=$url;
-	        	if (!file_exists($fileCache->getDirectory())){
-	        		@mkdir($fileCache->getDirectory(),0777,true);
-	        	}
-	        	$fileCache->write('<?php $autoloadCache='.var_export($autoloadCache,true).';');
+	        	self::$autoLoadCache[$class]=$url;
+	        	$fileCacheChanged=true;
 	        }catch (Exception $exc){
 	        	try{
 	        		Model::getModel($class)->includeClass();
+	        		self::$autoLoadCache[$class]='model';
+	        		$fileCacheChanged=true;
 	        	}catch (Exception $exc){
 	        	}
 	        }
+	    }
+	    if ($fileCacheChanged){
+	    	if (!file_exists($fileCache->getDirectory())){
+	    		@mkdir($fileCache->getDirectory(),0777,true);
+	    	}
+	    	$fileCache->write('<?php self::$autoLoadCache='.var_export(self::$autoLoadCache,true).';');
 	    }
 	}
 }

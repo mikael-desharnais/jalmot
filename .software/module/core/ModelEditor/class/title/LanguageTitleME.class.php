@@ -11,11 +11,22 @@ class LanguageTitleME {
 	public function toHTML($dataFetched){
 	    $hasTitle=false;
 	    if ($this->model_editor->getSource()!=ModelData::$SOURCE_NEW){
+	    	$found=false;
+	    	$getter = "get".$this->title_field;
+	    	$notEmptyElement=null;
 	        foreach($dataFetched['lang'] as $lang){
 	            if ($lang->getIdLang()==Ressource::getCurrentLanguage()->getId()){
 	                $element=$lang;
+	                $found=true;
 	                $hasTitle=true;
 	            }
+	            if ($lang->$getter()!=""&&empty($notEmptyElement)){
+	            	$notEmptyElement=$lang;
+	            }
+	        }
+	        if (!$found&&!empty($notEmptyElement)){
+	        	$element = $notEmptyElement;
+	                $hasTitle=true;
 	        }
 	    }
 		ob_start();

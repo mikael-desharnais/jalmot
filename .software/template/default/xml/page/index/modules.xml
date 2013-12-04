@@ -29,4 +29,9 @@
 		<class>StaticContentDisplayer</class>
 		<params></params>
 	</module>
+	<module>
+		<instancename>JobDevel</instancename>
+		<class>JobDevel</class>
+		<params></params>
+	</module>
 </modules>

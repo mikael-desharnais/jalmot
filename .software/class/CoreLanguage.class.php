@@ -113,7 +113,7 @@
 		*/
 		public static function getLanguageById($id){
 		    if (!array_key_exists($id,self::$languages)){
-		        self::$languages[$id]=new Language($id);
+		        throw new Exception('Could not find language : '.$id);
 		    }
 		    return self::$languages[$id];
 		}
@@ -123,6 +123,7 @@
 					return $language;
 				}
 			}
+			throw new Exception('Could not find language : '.$name);
 		}
 		/**
 		* Adds a Language to used ones

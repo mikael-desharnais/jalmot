@@ -11,7 +11,7 @@ class MultipleSelectFieldME extends SelectFieldME {
     }
     public function fetchElementsToSave($dataFetched){
 	    $contentContainer = $this->model_editor->getParameterContainer();
-	    if (array_key_exists($this->key,$contentContainer)){
+		if (Ressource::getParameters()->getValue("action")=='save'){
 	        foreach($dataFetched[$this->getConfParam('relation')] as $element){
 	           $element->delete();
 	        }

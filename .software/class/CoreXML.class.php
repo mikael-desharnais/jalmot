@@ -1,6 +1,7 @@
 <?php
 /**
  * Array2XML: A class to convert array in PHP to XML
+ * WARNING : This class does not work mixed content
  * It also takes into account attributes names unlike SimpleXML in PHP
  * It returns the XML in form of DOMDocument class for further manipulation.
  * It throws exception if the tag name or attribute name has illegal chars.
@@ -32,7 +33,7 @@ class CoreXML {
  
     private static $xml = null;
 	private static $encoding = 'UTF-8';
- 
+	
     /**
      * Initialize the root XML node [optional]
      * @param $version
@@ -45,6 +46,49 @@ class CoreXML {
 		self::$encoding = $encoding;
     }
  
+    public static function toArray($xml){
+    	$document = dom_import_simplexml($xml);
+    	return XML::toArrayChild($document);
+    }
+    private static function toArrayChild(DomElement $childElement){
+    	$toReturn = array();
+    	$useAtValue = false;
+    	$value="";
+    	$foundValue=false;
+    	if ($childElement->hasAttributes()){
+    		$useAtValue=true;
+    		$toReturn['@attributes']=array();
+    		foreach($childElement->attributes as $key=>$element){
+    			$toReturn['@attributes'][$element->name]=$element->value;
+    		}
+    	}
+    	foreach($childElement->childNodes as $child){
+    		if (get_class($child)=="DOMElement"){
+    			if (array_key_exists($child->tagName, $toReturn)){
+    				if (!is_array($toReturn[$child->tagName])||!array_key_exists(0,$toReturn[$child->tagName])){
+    					$toReturn[$child->tagName]=array($toReturn[$child->tagName]);
+    				}
+    				$toReturn[$child->tagName][]=XML::toArrayChild($child);
+    			}else {
+    				$toReturn[$child->tagName]=XML::toArrayChild($child);
+    			}
+    		}
+    		if (get_class($child)=="DOMText"){
+    			$foundValue=true;
+    			$value.=(string)$child->nodeValue;
+    		}
+    	}
+    	if ($foundValue||count($toReturn)==($childElement->hasAttributes()?1:0)){
+    		if (count($toReturn)<($childElement->hasAttributes()?2:1)){
+    			$toReturn['@value']=$value;
+    		}elseif (count($toReturn)==0) {
+    			$toReturn=$value;
+    		}
+    	}
+    	return $toReturn;
+    }
+    
+    
     /**
      * Convert an Array to XML
      * @param string $node_name - name of the root node to be converted

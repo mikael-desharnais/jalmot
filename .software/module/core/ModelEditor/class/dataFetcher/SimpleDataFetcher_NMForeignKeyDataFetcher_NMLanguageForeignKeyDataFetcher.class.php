@@ -10,10 +10,16 @@ class NMLanguageForeignKeyDataFetcher extends NMForeignKeyDataFetcher {
 	        $db_lines=$fetchedData['simple']->$methodName()
 	        				->getModelData(true);
 	    }
-	    $model = Model::getModel($this->getConfParam('reference'));
-	   $reference = $model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
-	   						->addConditionBySymbol('=',$model->getField('idLang'), Ressource::getCurrentLanguage()->getId())
-	   						->getModelData();
+	    $model = Model::getModel($this->getConfParam('reference'))->getRelation('lang')->getDestination()->getModel();
+	    if ($this->getConfParam('dataMode')!='adapted'){
+	   		$model = Model::getModel($this->getConfParam('reference'))->getRelation('lang')->getDestination()->getModel();
+	    	$reference = $model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
+	    	->addConditionBySymbol('=',$model->getField('idLang'), Ressource::getCurrentLanguage()->getId())
+	    	->getModelData();
+	    }else {
+	    	$model = Model::getModel($this->getConfParam('reference'));
+	   		$reference = ModelLangRelation::getModelData($model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)->getModelData(),$this->getConfParam("adaptedModeKey"));
+	    }
 	   return array($this->getConfParam('relation')=>$db_lines,$this->getConfParam('reference')=>$reference);
 	}
 }

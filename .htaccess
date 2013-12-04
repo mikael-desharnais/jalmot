@@ -19,5 +19,7 @@ RewriteRule	^model_editor/(.*)/delete/$										.software/index.php?page=model_
 
 RewriteRule	^connection/[(.*)/(.*)]|connection/()(.*)|connection/$			.software/index.php?page=connection 															[L,QSA]
 
-RewriteRule	MediaManager/download/([0-9]*)$									.software/index.php?page=MediaFileDownload&&id=$1												[L,QSA]
-RewriteRule	admin/logout/$													.software/index.php?page=adminLogout															[L,QSA]
+RewriteRule	^MediaManager/download/([0-9]*)$									.software/index.php?page=MediaFileDownload&&id=$1												[L,QSA]
+RewriteRule	^admin/logout/$													.software/index.php?page=adminLogout															[L,QSA]
+
+RewriteRule ^translate/([0-9]*)/([0-9]*)/$									.software/index.php?page=textTranslator&&pageMode=ajax&sourceLanguage=$1&targetLanguage=$2		[L,QSA]

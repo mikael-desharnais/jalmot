@@ -1,20 +1,20 @@
 <?php
 
-class MailBuilder{
+class BasicMailBuilder{
 	protected $mailSender;
 	
-	protected $name;
+	protected $content;
 	protected $title;
 	protected $receiver;
 	protected $sender;
 	protected $replyTo;
 	protected $subject;
+	protected $confParams;
 	
 
 	function __construct(){
 		
 	}
-	
 	public function getSubject() {
 		return $this->subject;
 	}
@@ -24,8 +24,8 @@ class MailBuilder{
 	public function getMailSender() {
 		return $this->mailSender;
 	}
-	public function getName() {
-		return $this->name;
+	public function getContent() {
+		return $this->content;
 	}
 	public function getReceiver() {
 		return $this->receiver;
@@ -39,9 +39,6 @@ class MailBuilder{
 	public function setMailSender($mailSender) {
 		$this->mailSender = $mailSender;
 	}
-	public function setName($name) {
-		$this->name = $name;
-	}
 	public function setReceiver($receiver) {
 		$this->receiver = $receiver;
 	}
@@ -53,6 +50,20 @@ class MailBuilder{
 	}
 	public function send(){
 		$this->mailSender->sendMail($this);
+	}
+	public function addContent($content){
+		$this->content.=$content;
+	}
+	public function setContent($content){
+		$this->content=$content;
+	}
+	
+	public function setConfParam($key,$value){
+		$this->confParams[$key]=$value;
+	}
+	
+	public function getConfParam($key){
+	    return $this->confParams[$key];
 	}
 
 }

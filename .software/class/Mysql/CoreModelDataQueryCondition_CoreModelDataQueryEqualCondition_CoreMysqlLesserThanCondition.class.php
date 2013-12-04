@@ -3,7 +3,7 @@
 * The lesser than condition object adapted to Mysql
 * @see ModelDataQueryCondition
 */
-class CoreMysqlLesserThanCondition extends CoreModelDataQueryEqualCondition{
+class CoreMysqlLesserThanCondition extends ModelDataQueryEqualCondition{
 
 	protected $orEqual = false;
 	

@@ -18,8 +18,7 @@ class CurrentElementME {
 		if ($element->getSource()==ModelData::$SOURCE_NEW){
 			return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), Ressource::getCurrentLanguage()->getTranslation("New element"),$element);
 		}else {
-			$elementLangQuery = $element->lstLang();
-			$elementLang = $elementLangQuery->addConditionBySymbol('=',$elementLangQuery->getModel()->getField('idLang'), Ressource::getCurrentLanguage()->getId())->getModelDataElement();
+			$elementLang = ModelLangRelation::getModelDataElement($element,$this->key);;
 			$getter = "get".ucfirst($this->key);
 			return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), (!empty($elementLang)?$elementLang->$getter():""),$element);
 		}

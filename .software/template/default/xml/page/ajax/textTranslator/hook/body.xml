@@ -1,0 +1,9 @@
+<hook>
+	<name>textTranslator.body</name>
+	<modules>
+		<module>
+			<name>TextTranslator</name>
+			<instance>body</instance>
+		</module>
+	</modules>
+</hook>

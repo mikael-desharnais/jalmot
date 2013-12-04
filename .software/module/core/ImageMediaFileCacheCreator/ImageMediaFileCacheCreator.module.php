@@ -19,7 +19,7 @@ class ImageMediaFileCacheCreator extends Module{
     		$image = Image::getImage($imageMediaFile->getFile());
     		if (Ressource::getParameters()->valueExists("width")&&Ressource::getParameters()->valueExists("height")){
     			$thumb=$image->getThumb(Ressource::getParameters()->getValue("width"),Ressource::getParameters()->getValue("height"));
-    			$fileName=$idMediaFile.'-'.Ressource::getParameters()->valueExists("width").'x'.Ressource::getParameters()->getValue("height").'.'.$file->getExtension();
+    			$fileName=$idMediaFile.'-'.Ressource::getParameters()->getValue("width").'x'.Ressource::getParameters()->getValue("height").'.'.$file->getExtension();
     		}else {
     			$thumb=$image->getImageContent();
     			$fileName=$idMediaFile.'.'.$file->getExtension();
@@ -29,11 +29,12 @@ class ImageMediaFileCacheCreator extends Module{
     		Ressource::getCurrentPage()->stopExecution();
     		Ressource::getCurrentPage()->addHeader('Content-type: '.$imageMediaFile->getMimeType());
     		Ressource::getCurrentPage()->sendHeaders();
-    		readfile($fileToWrite->toURL());
+    		if ($fileToWrite->exists()){
+    			readfile($fileToWrite->toURL());
+    			Ressource::getCurrentPage()->stopExecution();
+    		}
     	}
        
     }
     
 }
-
-
