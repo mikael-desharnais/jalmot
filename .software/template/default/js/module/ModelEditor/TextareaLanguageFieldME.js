@@ -2,14 +2,11 @@ jQuery(document).ready(function(){
 	jQuery('body').live('htmlAppending',function(event,htmlContent){
 		jQuery(htmlContent).find('.HTMLLanguageFieldMEToWYSIWYG').each(function(){
 			var parent=this;
-			var element = jQuery(this).redactor({ 
-				buildCallBack : function(){
-									jQuery(element.data('redactor').$box).addClass(jQuery(parent).attr('class'));
-								},
-				path: Resource.getConfiguration().getValue('domainName')+'/'+Resource.getConfiguration().getValue('TemplateDirectory')+'lib/redactorjs/' ,
-				lang: 'fr'});
+			var element = jQuery(this).sceditor({
+				plugins: "xhtml",
+				emoticonsEnabled : false
+				});
 			var redactor=element.data('redactor');
-			redactor.start();
 		});
 	});
 	jQuery('body').live('closeWindow',function(event,htmlContent){

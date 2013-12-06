@@ -30,8 +30,8 @@
 		<params></params>
 	</module>
 	<module>
-		<instancename>JobDevel</instancename>
-		<class>JobDevel</class>
+		<instancename>Bootstrap</instancename>
+		<class>Bootstrap</class>
 		<params></params>
 	</module>
 </modules>
