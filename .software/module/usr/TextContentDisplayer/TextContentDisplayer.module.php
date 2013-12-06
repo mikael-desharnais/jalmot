@@ -14,7 +14,7 @@ class TextContentDisplayer extends Module{
         $this->importClasses();
     }
     public function getCacheValues(){
-        return array('id'=>$this->htmlProducer->getConfParam('id'));
+        return array('id'=>$this->htmlProducer->getConfParam('id'),'instance'=>$this->htmlProducer->getInstance());
     }
     public function toHTML($currentHook, $instance){
         
@@ -26,7 +26,7 @@ class TextContentDisplayer extends Module{
         if (!empty($this->textContent)){
 	        $this->textContentLang=$this->textContent
 	        		->lstLang()
-					->addConditionBySymbol('=',$textContentLangModel->getField('idLang'), Ressource::getCurrentLanguage()->getId())
+					->addConditionBySymbol('=',$textContentLangModel->getField('idLang'), Resource::getCurrentLanguage()->getId())
 					->getModelDataElement();
         }
         return parent::toHTML($currentHook, $instance);

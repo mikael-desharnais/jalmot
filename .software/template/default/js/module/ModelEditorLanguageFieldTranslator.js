@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
 		var targetLanguage = targetField.data('idlang');
 
 		var fetcher=new AjaxHTMLFetcher();
-		fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+'translate/'+sourceLanguage+'/'+targetLanguage+'/',{'text':text}));
+		fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'translate/'+sourceLanguage+'/'+targetLanguage+'/',{'text':text}));
 		fetcher.setCallBack(function(htmlCont){
 			targetField.find(':input.LanguageFieldME').val(htmlCont);
 			targetField.find(':input.LanguageFieldME').change();

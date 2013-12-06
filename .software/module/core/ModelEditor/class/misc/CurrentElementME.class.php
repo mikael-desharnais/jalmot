@@ -16,11 +16,11 @@ class CurrentElementME {
 	public function getElement($parentElement){
 		$element = $parentElement;
 		if ($element->getSource()==ModelData::$SOURCE_NEW){
-			return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), Ressource::getCurrentLanguage()->getTranslation("New element"),$element);
+			return new ElementBreadCrumbME(Resource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), Resource::getCurrentLanguage()->getTranslation("New element"),$element);
 		}else {
 			$elementLang = ModelLangRelation::getModelDataElement($element,$this->key);;
 			$getter = "get".ucfirst($this->key);
-			return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), (!empty($elementLang)?$elementLang->$getter():""),$element);
+			return new ElementBreadCrumbME(Resource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), (!empty($elementLang)?$elementLang->$getter():""),$element);
 		}
 	}
 }

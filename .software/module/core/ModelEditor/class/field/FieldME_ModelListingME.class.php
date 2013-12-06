@@ -20,7 +20,7 @@ class ModelListingME extends FieldME {
 	}
 	
 	public function getUsefullData($dataFetched){
-	    $xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelListing/descriptor",$this->getConfParam('modelListing').".xml",false)));
+	    $xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml/module/ModelListing/descriptor",$this->getConfParam('modelListing').".xml",false)));
 	    $element = call_user_func(array($xml->class."","readFromXML"),$this->getConfParam('modelListing'),$xml);
 	    $element->addFilter(new FilterML('=',$this->referenceKey,$this->getValue($dataFetched['simple'])));
 	    $element->fetchData();

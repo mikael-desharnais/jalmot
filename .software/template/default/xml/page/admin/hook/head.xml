@@ -2,7 +2,7 @@
 	<name>admin.head</name>
 	<modules>
 		<module>
-			<name>JSRessource</name>
+			<name>JSResource</name>
 			<instance>normal</instance>
 		</module>
 		<module>

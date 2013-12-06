@@ -11,11 +11,11 @@ class PageMailBuilder extends BasicMailBuilder{
 		$this->name = $name;
 	}
 	public function send(){
-		$formerCurrentPage = Ressource::getCurrentPage();
+		$formerCurrentPage = Resource::getCurrentPage();
 		$mailPage = new MailPage($this->getName());
-		Ressource::setCurrentPage($mailPage);
+		Resource::setCurrentPage($mailPage);
 		$body = $mailPage->toHTML();
-		Ressource::setCurrentPage($formerCurrentPage);
+		Resource::setCurrentPage($formerCurrentPage);
 		$this->setConfParam("MAIL_CONTENT_TYPE",$mailPage->getConfParam("MAIL_CONTENT_TYPE"));
 		$this->setConfParam("MAIL_CONTENT_CHARSET",$mailPage->getConfParam("MAIL_CONTENT_CHARSET"));
 		$this->setContent($body);

@@ -19,8 +19,8 @@ class LangRelationME {
 		$lister = "lst".ucfirst($this->name);
 		$element = $parentElement->$lister()->getModelDataElement();
 		$elementLangQuery = $element->lstLang();
-		$elementLang = $elementLangQuery->addConditionBySymbol('=',$elementLangQuery->getModel()->getField('idLang'), Ressource::getCurrentLanguage()->getId())->getModelDataElement();
+		$elementLang = $elementLangQuery->addConditionBySymbol('=',$elementLangQuery->getModel()->getField('idLang'), Resource::getCurrentLanguage()->getId())->getModelDataElement();
 		$getter = "get".ucfirst($this->key);
-		return new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), $elementLang->$getter(),$element);
+		return new ElementBreadCrumbME(Resource::getCurrentLanguage()->getTranslation($element->getParentModel()->getName()." in breadcrumb"), $elementLang->$getter(),$element);
 	}
 }

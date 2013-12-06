@@ -23,7 +23,7 @@ class CategoryModelListingDescriptor extends ModelListingDescriptor {
 	*/
 	public function toHTML(){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/CategoryModelListingDescriptor_".$this->type.".phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/CategoryModelListingDescriptor_".$this->type.".phtml"));
 		return ob_get_clean();
 	}
 
@@ -41,8 +41,8 @@ class CategoryModelListingDescriptor extends ModelListingDescriptor {
 	    $model=Model::getModel($this->model);
 	    $this->list=new ModelDataCollection($model);
 	    $id_directory=1;
-	    if (Ressource::getParameters()->valueExists('id')){
-	        $id=Ressource::getParameters()->getValue('id');
+	    if (Resource::getParameters()->valueExists('id')){
+	        $id=Resource::getParameters()->getValue('id');
 	        if (array_key_exists($this->linkingField,$id)){
 	            $id_directory=$id[$this->linkingField];
 	        }

@@ -59,11 +59,11 @@ class ModelListingSwitcherDescriptor {
 		$modelToUse=$this->modelListingsChoices['DEFAULT'];
 
 		foreach($this->modelListingsChoices as $right => $modelAssoc){
-			if(Ressource::getUserSpace()->getCurrentUserSpace()->hasRight($right)){
+			if(Resource::getUserSpace()->getCurrentUserSpace()->hasRight($right)){
 				$modelToUse=$modelAssoc;
 			}
 		}
-		$xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelListing/descriptor",$modelToUse.".xml",false)));
+		$xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml/module/ModelListing/descriptor",$modelToUse.".xml",false)));
 		$this->modelListing=call_user_func(array($xml->class."","readFromXML"),$modelToUse,$xml);
 		$this->modelListingSelected=true;
 	}

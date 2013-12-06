@@ -5,7 +5,7 @@ class CategoryLanguageCellML extends LanguageCellML{
 	public function toHTML($element){
 		$line=ModelLangRelation::getModelDataElement($element,$this->getKey());
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/CategoryCellML.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/CategoryCellML.phtml"));
 		return ob_get_clean();
 	}
 	

@@ -13,12 +13,12 @@ class AdminLogoutManager extends Module{
 	*/
 	public function execute(){
 	    parent::execute();
-	    $users = Ressource::getUserSpace()->getSlot('ADMIN')->getUsers();
+	    $users = Resource::getUserSpace()->getSlot('ADMIN')->getUsers();
 	    foreach($users as $user){
-	    	Ressource::getUserSpace()->getSlot('ADMIN')->removeUser($user);
+	    	Resource::getUserSpace()->getSlot('ADMIN')->removeUser($user);
 	    }
 	    Page::headerRedirection(File::createFromURL("..")->toURL());
-	    Ressource::getCurrentPage()->stopExecution();
+	    Resource::getCurrentPage()->stopExecution();
 	}
 	
 }

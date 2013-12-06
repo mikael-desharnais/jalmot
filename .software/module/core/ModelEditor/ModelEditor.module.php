@@ -15,36 +15,36 @@ class ModelEditor extends Module{
 	public function execute(){
 		parent::execute();
 		if ($this->getConfParam('mode')==self::$MODE_GET_MODEL_EDITOR_FILE_FROM_PARAMETERS){
-		    $xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",Ressource::getParameters()->getValue("descriptor").".xml",false)));
+		    $xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",Resource::getParameters()->getValue("descriptor").".xml",false)));
 		    $classname=$xml->class."";
-			$this->setDescriptor(call_user_func(array($classname,"readFromXML"),Ressource::getParameters()->getValue("descriptor"),$xml));
+			$this->setDescriptor(call_user_func(array($classname,"readFromXML"),Resource::getParameters()->getValue("descriptor"),$xml));
 		}
-		if ((Ressource::getParameters()->valueExists("source")&&Ressource::getParameters()->getValue("source")=='create')){
+		if ((Resource::getParameters()->valueExists("source")&&Resource::getParameters()->getValue("source")=='create')){
 		    $this->descriptor->setSource(ModelData::$SOURCE_NEW);
 		}else {
 			$this->descriptor->setSource(ModelData::$SOURCE_FROM_DATASOURCE);
 		}
-		$this->descriptor->setId(Ressource::getParameters()->getValue('id'));
+		$this->descriptor->setId(Resource::getParameters()->getValue('id'));
 		$this->descriptor->fetchData();
-		Ressource::getCurrentLanguage()->init('module/alertWindow');
-		if (Ressource::getParameters()->valueExists("action")&&Ressource::getParameters()->getValue("action")=="save"){
+		Resource::getCurrentLanguage()->init('module/alertWindow');
+		if (Resource::getParameters()->valueExists("action")&&Resource::getParameters()->getValue("action")=="save"){
 		    if (!$this->propagateBeforeSave()){
 				return;		    
 		    }
 			$this->descriptor->save();
-			Ressource::getCurrentPage()->stopExecution();
+			Resource::getCurrentPage()->stopExecution();
 			if ($this->descriptor->reloadOnSave()){
 				$fetchedData = $this->descriptor->getFetchedData();
 				
-				print(json_encode(array('status'=>313,'html'=>Ressource::getCurrentLanguage()->getTranslation('Save operation Success'),'params'=>array('id'=>$fetchedData['simple']->getPrimaryKeys(),'source'=>'db'),'css'=>array(),'js'=>array())));
+				print(json_encode(array('status'=>313,'html'=>Resource::getCurrentLanguage()->getTranslation('Save operation Success'),'params'=>array('id'=>$fetchedData['simple']->getPrimaryKeys(),'source'=>'db'),'css'=>array(),'js'=>array())));
 			}else {
 				print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
 			}
 			$this->propagateAfterSave();
-		}else if (Ressource::getParameters()->valueExists("action")&&Ressource::getParameters()->getValue("action")=="delete"){
+		}else if (Resource::getParameters()->valueExists("action")&&Resource::getParameters()->getValue("action")=="delete"){
 		    $this->descriptor->delete();
-			Ressource::getCurrentPage()->stopExecution();
-			print(json_encode(array('status'=>311,'html'=>Ressource::getCurrentLanguage()->getTranslation('Delete operation Success'),'css'=>array(),'js'=>array())));
+			Resource::getCurrentPage()->stopExecution();
+			print(json_encode(array('status'=>311,'html'=>Resource::getCurrentLanguage()->getTranslation('Delete operation Success'),'css'=>array(),'js'=>array())));
 		}
 	}
 	public function setDescriptor($descriptor){

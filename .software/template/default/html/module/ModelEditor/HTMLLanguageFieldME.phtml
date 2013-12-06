@@ -1,15 +1,15 @@
-<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs','redactor.js',false)),2); ?>
-<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/langs','fr.js',false)),2); ?>
-<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/toolbars','default.js',false)),2); ?>
-<?php   Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','TextareaLanguageFieldME.js',false)),3); ?>
-<?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('lib/redactorjs/css','redactor.css',false)),2); ?>
-<?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','LanguageFieldME.css',false)),0); ?>
-<?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','TextareaLanguageFieldME.css',false)),0); ?>
-<?php   Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','HTMLLanguageFieldME.css',false)),0); ?>
+<?php   Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php   Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('lib/redactorjs','redactor.js',false)),2); ?>
+<?php   Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('lib/redactorjs/langs','fr.js',false)),2); ?>
+<?php   Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('lib/redactorjs/toolbars','default.js',false)),2); ?>
+<?php   Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','TextareaLanguageFieldME.js',false)),3); ?>
+<?php   Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('lib/redactorjs/css','redactor.css',false)),2); ?>
+<?php   Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','LanguageFieldME.css',false)),0); ?>
+<?php   Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','TextareaLanguageFieldME.css',false)),0); ?>
+<?php   Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','HTMLLanguageFieldME.css',false)),0); ?>
 <tr>
 <td colspan="2">
-	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+	<?php echo Resource::getCurrentLanguage()->getTranslation($this->title); ?>
 </td>
 </tr>
 <tr>
@@ -17,8 +17,8 @@
 	<div  class="LanguageFieldME-container">
 		<?php $languages=Language::getAvailableLanguages() ; ?>
 		<?php foreach($languages as $language){ ?>
-			<div class="LanguageFieldME-wrapper TextareaLanguageFieldME-wrapper  LanguageFieldME-lng<?php echo $language->getId(); ?> <?php echo $this->getConfParam('class') ?> <?php if ($language->getId()==Ressource::getCurrentLanguage()->getId()) { echo "LanguageFieldME-default"; }?>" data-idLang="<?php echo $language->getId(); ?>">
-				<textarea class="LanguageFieldME HTMLLanguageFieldME TextareaLanguageFieldME HTMLLanguageFieldMEToWYSIWYG" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>"><?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?></textarea>
+			<div class="LanguageFieldME-wrapper TextareaLanguageFieldME-wrapper  LanguageFieldME-lng<?php echo $language->getId(); ?> <?php echo $this->getConfParam('class') ?> <?php if ($language->getId()==Resource::getCurrentLanguage()->getId()) { echo "LanguageFieldME-default"; }?>" data-idLang="<?php echo $language->getId(); ?>">
+				<textarea class="LanguageFieldME HTMLLanguageFieldME TextareaLanguageFieldME HTMLLanguageFieldMEToWYSIWYG" name="<?php echo $this->getName(); ?>[<?php echo $language->getId() ?>]" data-field-name="<?php echo htmlentities(Resource::getCurrentLanguage()->getTranslation($this->title)); ?>"><?php echo htmlentities($this->getValueLang($element,$language->getId()),ENT_COMPAT,"UTF-8"); ?></textarea>
 			</div>
 		<?php } ?>
 	</div>

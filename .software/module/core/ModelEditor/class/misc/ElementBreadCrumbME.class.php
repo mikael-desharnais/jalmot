@@ -21,7 +21,7 @@ class ElementBreadCrumbME {
 	}
 	public function toHTML(){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelEditor/ElementBreadCrumbTitleME.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelEditor/ElementBreadCrumbTitleME.phtml"));
 		return ob_get_clean();
 	}
 }

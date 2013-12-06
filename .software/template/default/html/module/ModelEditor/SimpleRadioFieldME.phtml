@@ -1,12 +1,12 @@
 <tr>
 <td>
-	<?php echo Ressource::getCurrentLanguage()->getTranslation($this->title); ?>
+	<?php echo Resource::getCurrentLanguage()->getTranslation($this->title); ?>
 </td>
 <td  class="LanguageFieldME-container" width="75%">
 	<div  class="LanguageFieldME-container control-group">
 		<?php $elements=$this->getConfParam("elements"); ?>
 		<?php foreach($elements as $key=>$elementForm){ ?>
-			<input type="radio" class="option1" value="<?php echo $key; ?>" class="" name="<?php echo $this->getName(); ?>" <?php echo $key==$this->getValue($element)?"checked":""; ?> data-field-name="<?php echo htmlentities(Ressource::getCurrentLanguage()->getTranslation($this->title)); ?>"> <?php echo $elementForm; ?><br>
+			<input type="radio" class="option1" value="<?php echo $key; ?>" class="" name="<?php echo $this->getName(); ?>" <?php echo $key==$this->getValue($element)?"checked":""; ?> data-field-name="<?php echo htmlentities(Resource::getCurrentLanguage()->getTranslation($this->title)); ?>"> <?php echo $elementForm; ?><br>
 		<?php } ?>
 	</div>
 </td>	

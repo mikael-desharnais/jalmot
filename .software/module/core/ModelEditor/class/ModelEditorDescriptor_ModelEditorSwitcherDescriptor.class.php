@@ -93,7 +93,7 @@ class ModelEditorSwitcherDescriptor {
 				$modelToUse=$this->modelEditorsChoices['DEFAULT'];
 			}
 		}
-		$xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",$modelToUse.".xml",false)));
+		$xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",$modelToUse.".xml",false)));
 		$this->modelEditor=call_user_func(array($xml->class."","readFromXML"),$modelToUse,$xml);
 		$this->modelEditor->setSource($this->getSource());
 		$this->modelEditor->setId($this->getId());

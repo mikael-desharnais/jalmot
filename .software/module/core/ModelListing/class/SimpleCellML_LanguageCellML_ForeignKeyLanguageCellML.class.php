@@ -11,7 +11,7 @@ class ForeignKeyLanguageCellML extends LanguageCellML {
 			$line = ModelLangRelation::getModelDataElement($lineElement,$this->getKey());
 		}
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/ForeignKeyCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/ForeignKeyCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
 	}
 	

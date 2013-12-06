@@ -5,7 +5,7 @@ class SendMailModule extends Module{
 	protected $log;
 	public function init(){
 		parent::init();
-		$xml = XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/SendMail","configuration.xml",false)));
+		$xml = XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml/module/SendMail","configuration.xml",false)));
 		$this->setConfParams(XMLParamsReader::read($xml));
 		$this->importClasses();
 		$this->log = new Log();

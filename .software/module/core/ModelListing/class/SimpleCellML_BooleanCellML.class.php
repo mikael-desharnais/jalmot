@@ -8,9 +8,9 @@ class BooleanCellML extends  SimpleCellML {
 	protected function getValue($line){
 		$value = parent::getValue($line);
 		if ($value){
-			return Ressource::getCurrentLanguage()->getTranslation($this->trueText);
+			return Resource::getCurrentLanguage()->getTranslation($this->trueText);
 		}else {
-			return Ressource::getCurrentLanguage()->getTranslation($this->falseText);
+			return Resource::getCurrentLanguage()->getTranslation($this->falseText);
 		}
 	}
 	public static function readFromXML($xml){

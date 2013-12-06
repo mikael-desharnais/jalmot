@@ -6,7 +6,7 @@ jQuery(document).ready(function(){
 				buildCallBack : function(){
 									jQuery(element.data('redactor').$box).addClass(jQuery(parent).attr('class'));
 								},
-				path: Ressource.getConfiguration().getValue('domainName')+'/'+Ressource.getConfiguration().getValue('TemplateDirectory')+'lib/redactorjs/' ,
+				path: Resource.getConfiguration().getValue('domainName')+'/'+Resource.getConfiguration().getValue('TemplateDirectory')+'lib/redactorjs/' ,
 				lang: 'fr'});
 			var redactor=element.data('redactor');
 			redactor.start();

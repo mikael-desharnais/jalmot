@@ -7,7 +7,7 @@ class LanguageForeignKeyDataFetcher extends SimpleDataFetcher {
 	   if ($this->getConfParam('dataMode')!='adapted'){
 	  		$model_lang = Model::getModel($this->getConfParam('reference'))->getRelation('lang')->getDestination()->getModel();
 		   	$reference = $model_lang->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model_lang)
-	   											->addConditionBySymbol('=',$model_lang->getField('idLang'), Ressource::getCurrentLanguage()->getId())
+	   											->addConditionBySymbol('=',$model_lang->getField('idLang'), Resource::getCurrentLanguage()->getId())
 	   											->getModelData(true);
 	   }else {
 		   	$model =  Model::getModel($this->getConfParam('reference'));

@@ -10,7 +10,7 @@
     <?php $class = "AjaxHTMLFetcher  icn-media-manager-file context-menu-actionner reload-change-propagator"; ?>
 <?php } ?>
 <script> 
-AjaxHTMLFetcher.setFetcher('edit_media_file_<?php print($this->getId($line)); ?>',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_editor/MediaFile/',<?php print(json_encode($this->getParams($line))); ?>),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('edit_media_file_<?php print($this->getId($line)); ?>',new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/MediaFile/',<?php print(json_encode($this->getParams($line))); ?>),function(htmlContent){
 
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelEditor-MediaFile')); ?>);
@@ -22,9 +22,9 @@ AjaxHTMLFetcher.setFetcher('edit_media_file_<?php print($this->getId($line)); ?>
 <div class="icon btn draggableInField" data-draggable-id="<?php echo $this->getId($line); ?>" data-draggable-type="<?php echo $line->getParentModel()->getName(); ?>">
 	<a href="#" class=" <?php echo $class ?>"  <?php if ($isDirectory&&$this->isEditable($line)){ ?> data-context-menu="MediaManagerDirectoryEdit" <?php } elseif($isDirectory) { ?>  data-context-menu="NoContextMenu"  <?php } else { ?> data-context-menu="MediaManagerFileEdit"<?php }?> <?php if ($isDirectory) { ?>  id="change_<?php print($this->getId($line)); ?>" <?php } else { ?> id="edit_media_file_<?php print($this->getId($line)); ?>" <?php }?> data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>" data-url-params="<?php print(htmlentities(json_encode($this->getParams($line)))); ?>">
 		<div class="image">
-			<?php $file= Ressource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-".$icon.".png",false),true);?>
+			<?php $file= Resource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-".$icon.".png",false),true);?>
 			<?php if (!$file->exists()){ ?>
-				<?php $file=Ressource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-default.png",false));?>
+				<?php $file=Resource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-default.png",false));?>
 			<?php } ?>
 			<img src="<?php echo $file->toFullURL(); ?>">
 		</div>

@@ -50,7 +50,7 @@
 			$loadedTranslations = array();
 			if (!in_array($this->name.'/'.$file,$this->loadedFiles)){
 			    Log::GlobalLogData("Load language/".$this->name.'/'.$file.".lng.xml",Log::$LOG_LEVEL_INFO);
-				$xml_file=Ressource::getCurrentTemplate()->getFile(new File("language/".$this->name,$file.".lng.xml",false));
+				$xml_file=Resource::getCurrentTemplate()->getFile(new File("language/".$this->name,$file.".lng.xml",false));
 				if (!empty($xml_file)){
 					$xml = XMLDocument::parseFromFile($xml_file);
 					$translationList=$xml->translation;
@@ -75,7 +75,7 @@
 				return $this->translations[$id];
 			}
 			else {
-				if (Ressource::getConfiguration()->getValue('debugMode')>=1){
+				if (Resource::getConfiguration()->getValue('debugMode')>=1){
 					Log::Warning("[Missing Translation : ".$id."]");
 					return "[Missing Translation : ".$id."]";
 				}
@@ -152,7 +152,7 @@
 		* loads all languages described in XML File : xml/language.xml
 		*/
 		public static function loadAll(){
-			$xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml","language.xml",false)));
+			$xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml","language.xml",false)));
 			foreach($xml as $lng){
 				if (isset($lng->default)){
 					self::setDefaultLanguageId($lng->id."");

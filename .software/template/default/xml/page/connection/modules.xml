@@ -10,8 +10,8 @@
 		<params></params>
 	</module>
 	<module>
-		<instancename>JSRessource</instancename>
-		<class>JSRessource</class>
+		<instancename>JSResource</instancename>
+		<class>JSResource</class>
 		<params></params>
 	</module>
 	<module>

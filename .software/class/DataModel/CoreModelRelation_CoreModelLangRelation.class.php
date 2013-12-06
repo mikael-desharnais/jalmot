@@ -37,8 +37,8 @@ class CoreModelLangRelation extends ModelRelation{
 	public static function analyseLangData($modelData,$langArray,$fieldName,$appendLang){
 		$getter = "get".$fieldName;
 		$setter = "set".$fieldName;
-		if (array_key_exists(Ressource::getCurrentLanguage()->getId(),$langArray)&&$langArray[Ressource::getCurrentLanguage()->getId()]->$getter()!=""){
-			return $langArray[Ressource::getCurrentLanguage()->getId()];
+		if (array_key_exists(Resource::getCurrentLanguage()->getId(),$langArray)&&$langArray[Resource::getCurrentLanguage()->getId()]->$getter()!=""){
+			return $langArray[Resource::getCurrentLanguage()->getId()];
 		}elseif(array_key_exists(Language::$defaultLanguageId, $langArray)&&$langArray[Language::$defaultLanguageId]->$getter()!=""){
 			$language = Language::getLanguageById(Language::$defaultLanguageId);
 			if ($appendLang){

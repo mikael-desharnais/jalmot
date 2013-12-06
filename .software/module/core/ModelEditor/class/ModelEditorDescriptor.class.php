@@ -150,7 +150,7 @@ class ModelEditorDescriptor {
 	}
 	public function toHTML(){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor","ModelEditorDescriptor_".$this->type.".phtml",false))->toURL());
+		include(Resource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor","ModelEditorDescriptor_".$this->type.".phtml",false))->toURL());
 		return ob_get_clean();
 	}
 	public function fetchData(){
@@ -176,7 +176,7 @@ class ModelEditorDescriptor {
 		return 'ModelEditor['.$name.']';
 	}
 	public function getParameterContainer(){
-		return is_array(Ressource::getParameters()->getValue('ModelEditor'))?Ressource::getParameters()->getValue('ModelEditor'):array();
+		return is_array(Resource::getParameters()->getValue('ModelEditor'))?Resource::getParameters()->getValue('ModelEditor'):array();
 	}
 	public function reloadOnSave(){
 		return $this->reloadOnSave;

@@ -45,7 +45,7 @@ class ModelEditorME extends SimpleFieldME {
 	}
 	public function createInnerModelEditor($dataFetched){
 		if (empty($this->innerModelEditor)){
-		    $xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",$this->getConfParam('modelEditor').".xml",false)));
+		    $xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File("xml/module/ModelEditor/descriptor",$this->getConfParam('modelEditor').".xml",false)));
 		    $this->innerModelEditor = call_user_func(array($xml->class."","readFromXML"),$this->getConfParam('modelEditor'),$xml);
 		    $parent = $dataFetched['simple']; 
 		    $list = $dataFetched[$this->getConfParam('listReference')];

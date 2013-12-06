@@ -1,8 +1,8 @@
-<?php Ressource::getCurrentLanguage()->init('module/ModelEditorDescriptor.'.$this->getName()); ?>
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','TabModelEditor.css',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php  Ressource::getCurrentPage()->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','TabModelEditor.js',false)),1); ?>
+<?php Resource::getCurrentLanguage()->init('module/ModelEditor/instance/'.$this->getName()); ?>
+<?php  Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
+<?php  Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module/ModelEditor','TabModelEditor.css',false)),0); ?>
+<?php  Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  Resource::getCurrentPage()->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module/ModelEditor','TabModelEditor.js',false)),1); ?>
 <form class="well reload-change-propagator model-editor-form field-validator-target" data-field-validator="<?php echo $this->getName() ?>" data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>">
 <?php  if (Hook::hookExists("ModelEditor.form")) {?>
 	<?php echo Hook::getHook("ModelEditor.form")->toHTML(); ?>
@@ -12,7 +12,7 @@
 		<?php $count=0; ?>
 		<?php foreach($this->tabs as $tab){ ?>
 			<li data-tab="<?php echo $count ;?>" class="tabTitle tabTitle<?php echo $count ;?> <?php echo ($count==0?"currentTabTitle active":""); $count++; ?>">
-				<a href="#"><?php echo Ressource::getCurrentLanguage()->getTranslation($tab->getTitle()); ?></a>
+				<a href="#"><?php echo Resource::getCurrentLanguage()->getTranslation($tab->getTitle()); ?></a>
 			</li>
 		<?php } ?>
 		<br class="clearer">
@@ -39,10 +39,10 @@
 							<tr>
 								<td colspan="2" align="center">
 									<?php if ($tab->displayButtons()){?>
-										<input type="button" class="model-editor-cancel-button btn" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Cancel'); ?>">
-										<input type="submit" class="model-editor-save-button btn btn-primary" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Save'); ?>">
+										<input type="button" class="model-editor-cancel-button btn" value="<?php echo Resource::getCurrentLanguage()->getTranslation('Cancel'); ?>">
+										<input type="submit" class="model-editor-save-button btn btn-primary" value="<?php echo Resource::getCurrentLanguage()->getTranslation('Save'); ?>">
 										<?php if ($this->getSource()!=ModelData::$SOURCE_NEW) {?>
-											<input type="button" class="model-editor-delete-button btn btn-warning" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Delete'); ?>">
+											<input type="button" class="model-editor-delete-button btn btn-warning" value="<?php echo Resource::getCurrentLanguage()->getTranslation('Delete'); ?>">
 										<?php }?>
 									<?php }?>
 								</td>

@@ -68,9 +68,9 @@ class DesktopIcon {
 	*/
 	public function toHTML(){
 		ob_start();
-		$file=Ressource::getCurrentTemplate()->getURL("html/module/DesktopManager/icons/DesktopIcon_".$this->instance.".phtml",true);
+		$file=Resource::getCurrentTemplate()->getURL("html/module/DesktopManager/icons/DesktopIcon_".$this->instance.".phtml",true);
 		if (empty($file)){
-			$file=Ressource::getCurrentTemplate()->getURL("html/module/DesktopManager/icons/DesktopIcon_standard.phtml");
+			$file=Resource::getCurrentTemplate()->getURL("html/module/DesktopManager/icons/DesktopIcon_standard.phtml");
 		}
 		include($file);
 		return ob_get_clean();

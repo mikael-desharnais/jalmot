@@ -11,8 +11,8 @@ class StaticBreadCrumbTitleME extends BreadCrumbTitleME {
 	}
 	public function loadData(){
 		$fetchedData = $this->model_editor->getFetchedData();
-		$title = Ressource::getCurrentLanguage()->getTranslation($fetchedData['simple']->getSource()==ModelData::$SOURCE_NEW?$this->createTitle:$this->updateTitle);
-		$parentElement = new ElementBreadCrumbME(Ressource::getCurrentLanguage()->getTranslation($this->model_editor->getModel()." in breadcrumb"),$title,$fetchedData['simple']);
+		$title = Resource::getCurrentLanguage()->getTranslation($fetchedData['simple']->getSource()==ModelData::$SOURCE_NEW?$this->createTitle:$this->updateTitle);
+		$parentElement = new ElementBreadCrumbME(Resource::getCurrentLanguage()->getTranslation($this->model_editor->getModel()." in breadcrumb"),$title,$fetchedData['simple']);
 		$this->parentElements[] = $parentElement;
 		$this->loadRelations($parentElement->getModelData());
 	}

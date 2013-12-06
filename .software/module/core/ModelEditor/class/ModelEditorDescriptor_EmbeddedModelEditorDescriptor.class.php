@@ -17,7 +17,7 @@ class EmbeddedModelEditorDescriptor extends ModelEditorDescriptor {
 	}
 	public function toHTML(){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor","EmbeddedModelEditorDescriptor_".$this->type.".phtml",false))->toURL());
+		include(Resource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor","EmbeddedModelEditorDescriptor_".$this->type.".phtml",false))->toURL());
 		return ob_get_clean();
 	}
 }

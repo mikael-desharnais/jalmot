@@ -5,19 +5,19 @@ include("class/Classe.class.php");
  Classe::IncludeAll();
  
 
- Ressource::setSessionManager(SessionManager::getCurrentSessionManager());
- Ressource::setConfiguration(Configuration::getCurrentConfiguration());
- Ressource::setParameters(Parameters::getCurrentParameters());
- Ressource::setCurrentTemplate(Template::getCurrentTemplate());
- Ressource::setCurrentLanguage(Language::getCurrentLanguage());
- Ressource::setCurrentPage(Page::getCurrentPage());
- Ressource::setUserSpace(UserSpace::getCurrentUserSpace());
+ Resource::setSessionManager(SessionManager::getCurrentSessionManager());
+ Resource::setConfiguration(Configuration::getCurrentConfiguration());
+ Resource::setParameters(Parameters::getCurrentParameters());
+ Resource::setCurrentTemplate(Template::getCurrentTemplate());
+ Resource::setCurrentLanguage(Language::getCurrentLanguage());
+ Resource::setCurrentPage(Page::getCurrentPage());
+ Resource::setUserSpace(UserSpace::getCurrentUserSpace());
 
  Log::GlobalLogData("Before Module",Log::$LOG_LEVEL_INFO);
  Module::loadAll();
  Log::GlobalLogData("Before HTML",Log::$LOG_LEVEL_INFO);
  
- Ressource::getCurrentPage()->toHTML();
+ Resource::getCurrentPage()->toHTML();
 
  Log::GlobalLogData("End HTML",Log::$LOG_LEVEL_INFO);
  

@@ -12,7 +12,7 @@ class Browser{
 	private $cookieDirectory;
 	private $cookieFile;
 	private $url;
-	private $currentCurlRessource;
+	private $currentCurlResource;
 	
 	public $followLocation=true;
 	
@@ -26,41 +26,41 @@ class Browser{
 			mkdir($this->cookieDirectory,0777,true);
 		}
 		$this->cookieFile = 'cookie';
-		$this->currentCurlRessource = curl_init();
-		curl_setopt($this->currentCurlRessource, CURLOPT_HEADER, false);
-		curl_setopt($this->currentCurlRessource, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($this->currentCurlRessource, CURLOPT_SSLVERSION,3);
-		curl_setopt($this->currentCurlRessource, CURLOPT_SSL_VERIFYPEER, FALSE);
-		curl_setopt($this->currentCurlRessource, CURLOPT_SSL_VERIFYHOST, 2);
-		curl_setopt($this->currentCurlRessource, CURLOPT_ENCODING, 1);
-		curl_setopt($this->currentCurlRessource, CURLOPT_MAXREDIRS, 10 );
-		curl_setopt($this->currentCurlRessource, CURLOPT_AUTOREFERER, true );
-		curl_setopt($this->currentCurlRessource, CURLINFO_HEADER_OUT, TRUE);
+		$this->currentCurlResource = curl_init();
+		curl_setopt($this->currentCurlResource, CURLOPT_HEADER, false);
+		curl_setopt($this->currentCurlResource, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($this->currentCurlResource, CURLOPT_SSLVERSION,3);
+		curl_setopt($this->currentCurlResource, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($this->currentCurlResource, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($this->currentCurlResource, CURLOPT_ENCODING, 1);
+		curl_setopt($this->currentCurlResource, CURLOPT_MAXREDIRS, 10 );
+		curl_setopt($this->currentCurlResource, CURLOPT_AUTOREFERER, true );
+		curl_setopt($this->currentCurlResource, CURLINFO_HEADER_OUT, TRUE);
 	}
 	public function openURL($method,$url,$parameters=array(),$header=array(),$referer=""){
-		curl_setopt($this->currentCurlRessource, CURLOPT_URL, $url);
-		curl_setopt($this->currentCurlRessource, CURLOPT_USERAGENT, $this->userAgent);
-		curl_setopt($this->currentCurlRessource, CURLOPT_FOLLOWLOCATION, $this->followLocation );
-		curl_setopt($this->currentCurlRessource, CURLOPT_TIMEOUT, $this->timeout);
+		curl_setopt($this->currentCurlResource, CURLOPT_URL, $url);
+		curl_setopt($this->currentCurlResource, CURLOPT_USERAGENT, $this->userAgent);
+		curl_setopt($this->currentCurlResource, CURLOPT_FOLLOWLOCATION, $this->followLocation );
+		curl_setopt($this->currentCurlResource, CURLOPT_TIMEOUT, $this->timeout);
 		
-		curl_setopt($this->currentCurlRessource, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($this->currentCurlResource, CURLOPT_HTTPHEADER, $header);
 
-		curl_setopt($this->currentCurlRessource, CURLOPT_HTTPGET, false);
-		curl_setopt($this->currentCurlRessource, CURLOPT_POST, false);
+		curl_setopt($this->currentCurlResource, CURLOPT_HTTPGET, false);
+		curl_setopt($this->currentCurlResource, CURLOPT_POST, false);
 		if ($method==self::$POST){
-			curl_setopt($this->currentCurlRessource, CURLOPT_POST, true);
+			curl_setopt($this->currentCurlResource, CURLOPT_POST, true);
 		}elseif ($method==self::$GET){
-			curl_setopt($this->currentCurlRessource, CURLOPT_HTTPGET, true);
+			curl_setopt($this->currentCurlResource, CURLOPT_HTTPGET, true);
 		}elseif ($method==self::$PUT){
-			curl_setopt($this->currentCurlRessource, CURLOPT_CUSTOMREQUEST, "PUT");
+			curl_setopt($this->currentCurlResource, CURLOPT_CUSTOMREQUEST, "PUT");
 		}
 		// Setting cookies
-		curl_setopt($this->currentCurlRessource, CURLOPT_COOKIEFILE, $this->cookieDirectory.$this->cookieFile);
-		curl_setopt($this->currentCurlRessource, CURLOPT_COOKIEJAR, $this->cookieDirectory.$this->cookieFile);
+		curl_setopt($this->currentCurlResource, CURLOPT_COOKIEFILE, $this->cookieDirectory.$this->cookieFile);
+		curl_setopt($this->currentCurlResource, CURLOPT_COOKIEJAR, $this->cookieDirectory.$this->cookieFile);
 		
 		
 		if(!empty($referer)){
-			curl_setopt($this->currentCurlRessource, CURLOPT_REFERER, $referer);
+			curl_setopt($this->currentCurlResource, CURLOPT_REFERER, $referer);
 		}
 		
 		if (is_array($parameters)){
@@ -70,23 +70,23 @@ class Browser{
 		}
 		if ($method!=self::$GET){
 			if($this->charset == "utf8"){
-				curl_setopt($this->currentCurlRessource, CURLOPT_POSTFIELDS, utf8_encode($stringParameters));
+				curl_setopt($this->currentCurlResource, CURLOPT_POSTFIELDS, utf8_encode($stringParameters));
 			}
 			else{
-				curl_setopt($this->currentCurlRessource, CURLOPT_POSTFIELDS, $stringParameters);
+				curl_setopt($this->currentCurlResource, CURLOPT_POSTFIELDS, $stringParameters);
 			}
 		}
-		$response = curl_exec($this->currentCurlRessource);
+		$response = curl_exec($this->currentCurlResource);
 		
-		$status = curl_getinfo($this->currentCurlRessource, CURLINFO_HTTP_CODE)."";
-		$browserResponse = new BrowserQueryResult($this,$this->currentCurlRessource,$response,$status,curl_getinfo($this->currentCurlRessource)); 
+		$status = curl_getinfo($this->currentCurlResource, CURLINFO_HTTP_CODE)."";
+		$browserResponse = new BrowserQueryResult($this,$this->currentCurlResource,$response,$status,curl_getinfo($this->currentCurlResource)); 
 		if ($status[0]!='2'&&$status[0]!='3'){
 			throw new HTTPException($browserResponse,'Error trying to fetch '.$url.', status : '.$status);
 		}
 		return $browserResponse;
 	}
 	public function __destruct(){
-		@curl_close($this->currentCurlRessource);
+		@curl_close($this->currentCurlResource);
 		if (file_exists($this->cookieDirectory.$this->cookieFile)){
 			@unlink($this->cookieDirectory.$this->cookieFile);
 		}

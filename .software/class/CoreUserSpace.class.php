@@ -21,13 +21,13 @@ class CoreUserSpace{
     	return $userspace;
     }
     public static function getCurrentUserSpace(){
-	    if (!Ressource::getSessionManager()->valueExists("UserSpace")){
-	    	$xml = XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File('xml','userspace.xml',false)));
+	    if (!Resource::getSessionManager()->valueExists("UserSpace")){
+	    	$xml = XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File('xml','userspace.xml',false)));
 	    	$class = $xml->class."";
 	    	$userspace = call_user_func(array($class,"readFromXML"),$class,$xml);
-	        Ressource::getSessionManager()->setValue("UserSpace",$userspace);
+	        Resource::getSessionManager()->setValue("UserSpace",$userspace);
 	    }
-        return Ressource::getSessionManager()->getValue("UserSpace");
+        return Resource::getSessionManager()->getValue("UserSpace");
     }
     public function getSlot($slotName){
     	return $this->slots[$slotName];

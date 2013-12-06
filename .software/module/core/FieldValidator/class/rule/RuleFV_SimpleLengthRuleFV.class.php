@@ -11,7 +11,7 @@ class SimpleLengthRuleFV extends RuleFV {
     * @return boolean true if the Parameters length is between minLength and maxLength, false otherwise
     */
     public function isValid(){
-        $value=Ressource::getParameters()->getValue($this->target);
+        $value=Resource::getParameters()->getValue($this->target);
         $maxLength=$this->getConfParam('maxLength');
         $minLength=$this->getConfParam('minLength');
         return ((empty($maxLength)||strlen($value)<=$maxLength)&&(empty($minLength)||strlen($value)>=$minLength));

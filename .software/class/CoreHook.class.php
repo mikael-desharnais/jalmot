@@ -47,7 +47,7 @@
 		*/
 		public static function hookExists($name){
 		    if (!array_key_exists($name,self::$hooklist)){
-		        if (Ressource::getCurrentPage()->getHookDescriptionFile(self::getHookFileName($name),true)->exists()){
+		        if (Resource::getCurrentPage()->getHookDescriptionFile(self::getHookFileName($name),true)->exists()){
 		            return true;
 		        }
 		        return false;
@@ -91,7 +91,7 @@
 		* @param string  $name hook name
 		*/
 		public static function initHook($name){
-			$xml_url=Ressource::getCurrentPage()->getHookDescriptionFile(self::getHookFileName($name));
+			$xml_url=Resource::getCurrentPage()->getHookDescriptionFile(self::getHookFileName($name));
 			$xml = XMLDocument::parseFromFile($xml_url);
 			self::initHookFromXML($name,$xml);
 		}

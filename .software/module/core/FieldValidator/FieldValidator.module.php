@@ -32,7 +32,7 @@ class FieldValidator extends Module{
 	*/
 	public function getDescriptor($name){
 	    if (!array_key_exists($name,$this->descriptors)){
-	    	$xml_url=Ressource::getCurrentTemplate()->getFile(new File('xml/module/FieldValidator/descriptor/',$name.".xml",false));
+	    	$xml_url=Resource::getCurrentTemplate()->getFile(new File('xml/module/FieldValidator/descriptor/',$name.".xml",false));
 	    	$xml = XMLDocument::parseFromFile($xml_url);
 	    	$this->addDescriptor(call_user_func(array($xml->class."","readFromXML"),$xml));
 	    }

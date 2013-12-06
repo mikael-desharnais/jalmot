@@ -1,8 +1,8 @@
 <?php
 /**
-* The Static Ressource object for all the things you may need
+* The Static Resource object for all the things you may need
 */
-class CoreRessource{
+class CoreResource{
 	/**
 	* The current page Object
 	*/

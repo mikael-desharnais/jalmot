@@ -1,12 +1,12 @@
-<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ColumnStructure.css',false)),0); ?>
+<?php  $this->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','ColumnStructure.css',false)),0); ?>
 <div class="header">
 	<a href="">JALMOT</a>
 </div>
 <div class="global">
 	<div class="content">
-		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.content')->toHTML(); ?>
+		<?php echo Hook::getHook(Resource::getCurrentPage()->getName().'.content')->toHTML(); ?>
 	</div>
 	<div class="footer">
-		<?php echo Hook::getHook(Ressource::getCurrentPage()->getName().'.footer')->toHTML(); ?>
+		<?php echo Hook::getHook(Resource::getCurrentPage()->getName().'.footer')->toHTML(); ?>
 	</div>
 </div>

@@ -11,7 +11,7 @@ class MultipleCheckboxFieldME extends MultipleSelectFieldME {
     }
     public function fetchElementsToSave($dataFetched){
     	$contentContainer = $this->model_editor->getParameterContainer();
-		if (Ressource::getParameters()->getValue("action")=='save'){
+		if (Resource::getParameters()->getValue("action")=='save'){
 	        foreach($dataFetched[$this->getConfParam('relation')] as $element){
 	           $element->delete();
 	        }

@@ -9,7 +9,7 @@ class FileUploadME extends FieldME {
 		}
 		$relationName = "lst" . ucfirst ( $this->relation );
 		$this->currentFile = $dataFetched ['simple']->$relationName ()->getModelDataElement ( true );
-		if ($dataFetched ['simple']->getSource () == ModelData::$SOURCE_FROM_DATASOURCE && (Ressource::getParameters ()->getValue ( "action" ) == 'save')) {
+		if ($dataFetched ['simple']->getSource () == ModelData::$SOURCE_FROM_DATASOURCE && (Resource::getParameters ()->getValue ( "action" ) == 'save')) {
 			if (isset($idFile)&&!empty($this->currentFile)&&$this->currentFile->getIdMediaFile()==$idFile){
 				return;
 			}

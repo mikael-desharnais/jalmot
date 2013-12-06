@@ -15,7 +15,7 @@ class LanguageTitleME {
 	    	$getter = "get".$this->title_field;
 	    	$notEmptyElement=null;
 	        foreach($dataFetched['lang'] as $lang){
-	            if ($lang->getIdLang()==Ressource::getCurrentLanguage()->getId()){
+	            if ($lang->getIdLang()==Resource::getCurrentLanguage()->getId()){
 	                $element=$lang;
 	                $found=true;
 	                $hasTitle=true;
@@ -30,7 +30,7 @@ class LanguageTitleME {
 	        }
 	    }
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelEditor/LanguageTitleME.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelEditor/LanguageTitleME.phtml"));
 		return ob_get_clean();
 	}
 	public static function readFromXML($model_editor,$xml){

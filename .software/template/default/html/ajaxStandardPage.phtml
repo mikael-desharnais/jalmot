@@ -1,15 +1,15 @@
 <?php 
 ob_start();
 try{
-	include(Ressource::getCurrentTemplate()->getURL("html/ajax/".$this->ajaxTarget.".phtml")); 
+	include(Resource::getCurrentTemplate()->getURL("html/ajax/".$this->ajaxTarget.".phtml")); 
 	$bodyCore = ob_get_clean();
-	Ressource::getCurrentPage()->setAjaxContent('html',$bodyCore);
-	Ressource::getCurrentPage()->setAjaxContent('status',1);
+	Resource::getCurrentPage()->setAjaxContent('html',$bodyCore);
+	Resource::getCurrentPage()->setAjaxContent('status',1);
 }catch (Exception $ex){
 	while (@ob_get_clean());
-	Ressource::getCurrentPage()->setAjaxContent('status',0);
-	Ressource::getCurrentPage()->setAjaxContent('message',$ex->getMessage());
-	Ressource::getCurrentPage()->setAjaxContent('html',substr(print_r($ex->getTrace(),true),0,500000));
+	Resource::getCurrentPage()->setAjaxContent('status',0);
+	Resource::getCurrentPage()->setAjaxContent('message',$ex->getMessage());
+	Resource::getCurrentPage()->setAjaxContent('html',substr(print_r($ex->getTrace(),true),0,500000));
 }
 
 $css=array();
@@ -30,14 +30,14 @@ foreach($newJSListe as $arrayOfFiles){
 	}
 }
 
-Ressource::getCurrentPage()->setAjaxContent('css',$css);
-Ressource::getCurrentPage()->setAjaxContent('js',$js);
-echo json_encode(Ressource::getCurrentPage()->getAjaxContent());
+Resource::getCurrentPage()->setAjaxContent('css',$css);
+Resource::getCurrentPage()->setAjaxContent('js',$js);
+echo json_encode(Resource::getCurrentPage()->getAjaxContent());
 /*
 ?>
 <html>
 <head>
-<title><?php echo Ressource::getCurrentPage()->getTitle() ?></title>
+<title><?php echo Resource::getCurrentPage()->getTitle() ?></title>
 		<?php $newCSSListe = $this->CSSFilterFlow->filterAndCompress($this->cssListe); ?>
 		<?php 	foreach($newCSSListe as $arrayOfFiles){ ?>
 		<?php 		for ($x=0;$x<count($arrayOfFiles);$x++){  ?>

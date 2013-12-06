@@ -1,2 +1,2 @@
-<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/','admin.css',false)),0); ?>
-<?php echo Hook::getHook('admin_hook.'.Ressource::getParameters()->getValue('hook'))->toHTML(); ?>
+<?php  $this->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/','admin.css',false)),0); ?>
+<?php echo Hook::getHook('admin_hook.'.Resource::getParameters()->getValue('hook'))->toHTML(); ?>

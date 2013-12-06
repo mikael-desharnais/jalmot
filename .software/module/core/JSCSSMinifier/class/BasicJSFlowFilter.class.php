@@ -16,11 +16,11 @@ class BasicJSFlowFilter extends JSFilterFlow {
             	$file_key.=$file->toURL().'-'.filemtime($file->toURL()).'-';
             }
         }
-        $fileToUse = new File(".cache/template/".Ressource::getCurrentTemplate()->getName()."/JSCSSMinifier/js","js-".md5($file_key).".js",false);
+        $fileToUse = new File(".cache/template/".Resource::getCurrentTemplate()->getName()."/JSCSSMinifier/js","js-".md5($file_key).".js",false);
         if (!file_exists($fileToUse->getDirectory())){
         	@mkdir($fileToUse->getDirectory());
         }
-        if (Ressource::getConfiguration()->getValue('cacheJS')==0||!$fileToUse->exists()){
+        if (Resource::getConfiguration()->getValue('cacheJS')==0||!$fileToUse->exists()){
             $filecontent = "";
             foreach($JSArray as $file_array){
                 foreach($file_array as $file){

@@ -3,7 +3,7 @@ jQuery('.model-editor-cancel-button').live('click',function(){
 });
 jQuery('.model-editor-delete-button').live('click',function(){
 
-	if (confirm(Ressource.getLanguage().getTranslation('Are you sure you want to delete this element ?'))){
+	if (confirm(Resource.getLanguage().getTranslation('Are you sure you want to delete this element ?'))){
 		var parent=this;
 		var reloadChangeListener = jQuery(this).closest('.reload-change-listener').data('object');
 		var url=new URL();

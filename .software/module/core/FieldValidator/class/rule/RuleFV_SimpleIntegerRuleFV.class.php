@@ -18,7 +18,7 @@ class SimpleIntegerRuleFV extends RuleFV {
 	* @return boolean true if the parameters which is targeted is an integer, false otherwise
 	*/
 	public function isValid(){
-	    $value=Ressource::getParameters()->getValue($this->target);
+	    $value=Resource::getParameters()->getValue($this->target);
 	    return preg_match('/^[0-9]*$/',$value);
 	}
 	

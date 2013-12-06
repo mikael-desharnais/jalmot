@@ -1,16 +1,16 @@
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ConnectionBox.js',false)),2); ?>
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','font.js',false)),1); ?>
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ConnectionBox.css',false)),0); ?>
-<?php  Ressource::getCurrentLanguage()->init('module/ConnectionBox'); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module','ConnectionBox.js',false)),2); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js','font.js',false)),1); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  $this->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','ConnectionBox.css',false)),0); ?>
+<?php  Resource::getCurrentLanguage()->init('module/ConnectionBox'); ?>
 
 	<div class="container">
 		<div id="connectionDiv">
 				<form action="" style="margin : 0px;" method="post">
-					<h2 class="connectionTopDiv"><?php echo Ressource::getCurrentLanguage()->getTranslation("Connection") ?></h2>
-					<div class="connectionTitreDiv"> <?php echo Ressource::getCurrentLanguage()->getTranslation("username") ?> : </div><div class="connectionInputDiv"><input type="text" name="userInput" class="connectionInput"></div>
-					<div class="connectionTitreDiv"> <?php echo Ressource::getCurrentLanguage()->getTranslation("password") ?>: </div><div class="connectionInputDiv"><input type="password" name="passwordInput" class="connectionInput"></div>
-					<div class="connectionTopDiv"><input type="submit" value="<?php echo Ressource::getCurrentLanguage()->getTranslation("Login") ?>" class="btn btn-primary connectionInput" id="connectionSubmit"></div><br class="clearer"/>
+					<h2 class="connectionTopDiv"><?php echo Resource::getCurrentLanguage()->getTranslation("Connection") ?></h2>
+					<div class="connectionTitreDiv"> <?php echo Resource::getCurrentLanguage()->getTranslation("username") ?> : </div><div class="connectionInputDiv"><input type="text" name="userInput" class="connectionInput"></div>
+					<div class="connectionTitreDiv"> <?php echo Resource::getCurrentLanguage()->getTranslation("password") ?>: </div><div class="connectionInputDiv"><input type="password" name="passwordInput" class="connectionInput"></div>
+					<div class="connectionTopDiv"><input type="submit" value="<?php echo Resource::getCurrentLanguage()->getTranslation("Login") ?>" class="btn btn-primary connectionInput" id="connectionSubmit"></div><br class="clearer"/>
 				</form>
 			</div>
 		</div>

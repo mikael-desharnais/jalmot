@@ -17,7 +17,7 @@ class SimpleTitleME {
 	        $hasTitle=true;
 	    }
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelEditor/SimpleTitleME.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelEditor/SimpleTitleME.phtml"));
 		return ob_get_clean();
 	}
 	public static function readFromXML($model_editor,$xml){

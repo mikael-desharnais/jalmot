@@ -142,7 +142,7 @@
 		$this->propagateStartPageEvent();
 		$this->sendHeaders();
 		if ($this->goOnExecuting){
-			include(Ressource::getCurrentTemplate()->getURL($templateToLoad));
+			include(Resource::getCurrentTemplate()->getURL($templateToLoad));
 		}
 		$this->propagateEndPageEvent();
 	}
@@ -166,7 +166,7 @@
 	* @return File the File used for Configuration
 	*/
 	public function getConfigurationFile(){
-		return Ressource::getCurrentTemplate()->getFile(new File("xml/page/".$this->name,"configuration.xml",false));
+		return Resource::getCurrentTemplate()->getFile(new File("xml/page/".$this->name,"configuration.xml",false));
 	}
 	/**
 	* Returns the File used for Hook description
@@ -175,7 +175,7 @@
 	* @param boolean $silent=false false if no error should be triggered on file not found
 	*/
 	public function getHookDescriptionFile($name,$silent=false){
-		return Ressource::getCurrentTemplate()->getFile(new File("xml/page/".$this->name."/hook",$name.".xml",$silent));
+		return Resource::getCurrentTemplate()->getFile(new File("xml/page/".$this->name."/hook",$name.".xml",$silent));
 	}
 	/**
 	* Triggers the start Page event
@@ -233,11 +233,11 @@
 	* @return Page the current page
 	*/
 	public static function getCurrentPage(){
-	    $currentPage=Ressource::getParameters()->getValue('page');
+	    $currentPage=Resource::getParameters()->getValue('page');
 	    if (empty($currentPage)){
 	        $currentPage='index';
 	    }
-	    if (Ressource::getParameters()->getValue('pageMode')=='ajax'){
+	    if (Resource::getParameters()->getValue('pageMode')=='ajax'){
 	    	return new AjaxPage($currentPage);
 	    }else {
 	        return new Page($currentPage);
@@ -248,7 +248,7 @@
 	* @return Fome  the XML File used to described installed modules for this page
 	*/
 	public function getXMLModuleFileConfiguration(){
-		return Ressource::getCurrentTemplate()->getFile(new File('xml/page/'.$this->name,'modules.xml',false));
+		return Resource::getCurrentTemplate()->getFile(new File('xml/page/'.$this->name,'modules.xml',false));
 	}
 	/**
 	* Defines the Configuration Parameters Array

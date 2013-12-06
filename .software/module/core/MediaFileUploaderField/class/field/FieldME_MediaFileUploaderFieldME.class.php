@@ -26,13 +26,13 @@ class MediaFileUploaderFieldME extends FieldME {
 	* @param mixed $dataFetched the data fetched for this descriptor
 	*/
 	public function fetchElementsToSave($dataFetched){
-	    if (Ressource::getParameters()->valueExists($this->getName())){
-	        $fileInfos=Ressource::getParameters()->getValue($this->getName());
+	    if (Resource::getParameters()->valueExists($this->getName())){
+	        $fileInfos=Resource::getParameters()->getValue($this->getName());
 	        if (!empty($fileInfos['tempFilename'])){
 			    $eventListener=new EventListener($this);
 			    $functionEventListener=function ($target,$listener){
 			        $fileWrapper = new MediaFileWrapper($target);
-			        $fileInfos = Ressource::getParameters()->getValue($listener->getName());
+			        $fileInfos = Resource::getParameters()->getValue($listener->getName());
 			        $fileWrapper->copyFromTempFile($fileInfos['tempFilename']);
 			    };
 			    
@@ -53,7 +53,7 @@ class MediaFileUploaderFieldME extends FieldME {
 	public function toHTML($dataFetched){
 	    $element=$this->getUsefullData($dataFetched);
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getFile(new File("html/module/MediaFileUploader",$this->class.".phtml",false))->toURL());
+		include(Resource::getCurrentTemplate()->getFile(new File("html/module/MediaFileUploader",$this->class.".phtml",false))->toURL());
 		return ob_get_clean();
 	}
 }

@@ -35,14 +35,14 @@
 	* @return File the XML File used to described installed modules for this page
 	*/
 	public function getXMLModuleFileConfiguration(){
-		return Ressource::getCurrentTemplate()->getFile(new File('xml/page/ajax/'.$this->ajaxTarget,'modules.xml',false));
+		return Resource::getCurrentTemplate()->getFile(new File('xml/page/ajax/'.$this->ajaxTarget,'modules.xml',false));
 	}
 	/**
 	* Returns the File used for Configuration
 	* @return File the File used for Configuration
 	*/
 	public function getConfigurationFile(){
-		return Ressource::getCurrentTemplate()->getFile(new File("xml/page/ajax/".$this->ajaxTarget,"configuration.xml",false));
+		return Resource::getCurrentTemplate()->getFile(new File("xml/page/ajax/".$this->ajaxTarget,"configuration.xml",false));
 	}
 	/**
 	* Returns the File used for Hook description
@@ -51,7 +51,7 @@
 	* @param boolean $silent=false false if no error should be triggered on file not found
 	*/
 	public function getHookDescriptionFile($name,$silent=false){
-		return Ressource::getCurrentTemplate()->getFile(new File("xml/page/ajax/".$this->ajaxTarget."/hook",$name.".xml",false),$silent);
+		return Resource::getCurrentTemplate()->getFile(new File("xml/page/ajax/".$this->ajaxTarget."/hook",$name.".xml",false),$silent);
 	}
 	/**
 	* Defines a value for the JSON ajax content

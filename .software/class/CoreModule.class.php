@@ -45,12 +45,12 @@ class CoreModule{
 	* Loading means Including files, creating an instance, init all modules and execute the basic execution stack
 	*/
 	public static function loadAll(){
-		$xml=XMLDocument::parseFromFile(Ressource::getCurrentTemplate()->getFile(new File('xml','modules.xml',false)));
+		$xml=XMLDocument::parseFromFile(Resource::getCurrentTemplate()->getFile(new File('xml','modules.xml',false)));
 		foreach($xml as $xmlModule){
 			$object=self::loadModule($xmlModule->instancename."",$xmlModule->class."");
 			$object->setConfParams(XMLParamsReader::read($xmlModule));
 		}
-		$xml=XMLDocument::parseFromFile(Ressource::getCurrentPage()->getXMLModuleFileConfiguration());
+		$xml=XMLDocument::parseFromFile(Resource::getCurrentPage()->getXMLModuleFileConfiguration());
 		foreach($xml as $xmlModule){
 			$object=self::loadModule($xmlModule->instancename."",$xmlModule->class."");
 			$object->setConfParams(XMLParamsReader::read($xmlModule));
@@ -204,7 +204,7 @@ class CoreModule{
 	*/
 	public function toHTML($currentHook,$instance){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getFile($this->getTemplateFile($instance))->toURL());
+		include(Resource::getCurrentTemplate()->getFile($this->getTemplateFile($instance))->toURL());
 		return ob_get_clean();
 	}
 	/**
@@ -232,7 +232,7 @@ class CoreModule{
 	* @param File $baseFile the directory containing the HTML cache files for this module
 	*/
 	public static function getCacheDirectory($class){
-	    return new File (".cache/template/".Ressource::getCurrentTemplate()->getName(),$class,true);
+	    return new File (".cache/template/".Resource::getCurrentTemplate()->getName(),$class,true);
 	}
 	/**
 	* Returns the values to take into account for cache management
@@ -251,7 +251,7 @@ class CoreModule{
 	public function toHTMLCache($currentHook,$instance){
 	    ob_start();
 	    $baseFile = $this->getTemplateFile($instance);
-	    if (Ressource::getConfiguration()->getValue('cacheActive')==1&&$this->usesCache){
+	    if (Resource::getConfiguration()->getValue('cacheActive')==1&&$this->usesCache){
 	        $fileToUse=$this->getCacheFile($baseFile);
 	        if (!$fileToUse->exists()){
 	            $this->cacheCreateMode=true;
@@ -278,7 +278,7 @@ class CoreModule{
 	    if ($this->cacheCreateMode){
 	        print('<?php $this->addJS(new File(\''.$file->getDirectory().'\',\''.$file->getFile().'\',\''.var_export($file->isFolder(),true).'\'),'.var_export($silent,true).'); ?>');
 	    }
-	    Ressource::getCurrentPage()->addJS($file,$silent);
+	    Resource::getCurrentPage()->addJS($file,$silent);
 	}
 	/**
 	* Adds CSS File to the current page. Should be used instead of direct call to the page.
@@ -289,7 +289,7 @@ class CoreModule{
 		if ($this->cacheCreateMode){
 	        print('<?php $this->addCSS(new File(\''.$file->getDirectory().'\',\''.$file->getFile().'\',\''.var_export($file->isFolder(),true).'\'),'.var_export($silent,true).'); ?>');
 	    }
-	    Ressource::getCurrentPage()->addCSS($file,$silent);
+	    Resource::getCurrentPage()->addCSS($file,$silent);
 	}
 	/**
 	* Defined the current HTML producer
@@ -339,7 +339,7 @@ class CoreModule{
 	*/
 	public function setInstalled($installed){
 		if ($installed){
-			Log::GlobalLogData("Module ".$this->name." is installed for page ".Ressource::getCurrentPage()->getName(),Log::$LOG_LEVEL_INFO);
+			Log::GlobalLogData("Module ".$this->name." is installed for page ".Resource::getCurrentPage()->getName(),Log::$LOG_LEVEL_INFO);
 		}
 		$this->installed=$installed;
 	}

@@ -84,7 +84,7 @@ class CoreTemplate{
 	* @return Template The current template
 	*/
 	public static function getCurrentTemplate(){
-	    return self::getTemplate(Ressource::getConfiguration()->getValue('DefaultTemplate'));
+	    return self::getTemplate(Resource::getConfiguration()->getValue('DefaultTemplate'));
 	}
 	/**
 	* Returns the template with the given name

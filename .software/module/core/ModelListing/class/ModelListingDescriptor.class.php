@@ -94,7 +94,7 @@ class ModelListingDescriptor {
 	}
 	public function toHTML(){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/ModelListingDescriptor_".$this->type.".phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/ModelListingDescriptor_".$this->type.".phtml"));
 		return ob_get_clean();
 	}
 	public function addFilter($filter){

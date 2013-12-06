@@ -7,7 +7,7 @@ function MediaFileIcon(fileName){
 	this.status;
 	this.htmlElement = jQuery('<div class="fileUploadElement"><input type="hidden" class="idMediaFileContainer" name="'+fileName+'"><div class="content"></div></div>');
 	this.progressBar = jQuery('<div class="progress"><div class="bar"></div>');
-	this.deleteButton =  jQuery('<center><button class="btn btn-warning" type="button">'+Ressource.getLanguage().getTranslation('Delete')+'</button></center>');
+	this.deleteButton =  jQuery('<center><button class="btn btn-warning" type="button">'+Resource.getLanguage().getTranslation('Delete')+'</button></center>');
 	this.htmlElement.append(this.progressBar);
 	this.htmlElement.append(this.deleteButton);
 	var parent = this;

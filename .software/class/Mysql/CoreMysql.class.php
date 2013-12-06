@@ -52,7 +52,7 @@
 	}
 	/**
 	* Executes a query and returns its result
-	* @return ressource The resultset correspoding to the query result
+	* @return Resource The resultset correspoding to the query result
 	* @param string $query the query to execute
 	*/
 	public function query($query){
@@ -62,7 +62,7 @@
 	}
 	/**
 	* Fetches a row as an object from a Mysql resultset
-	* @return ressource The resultset to read
+	* @return Resource The resultset to read
 	* @param object $resultset the object for the row
 	*/
 	public function fetchObject($resultset){
@@ -70,7 +70,7 @@
 	}
 	/**
 	* Fetches a row as an associative array from a Mysql resultset
-	* @return ressource The resultset to read
+	* @return Resource The resultset to read
 	* @param object $resultset the object for the row
 	*/
 	public function fetchAssoc($resultset){
@@ -85,8 +85,8 @@
 		return mysqli_multi_query($this->sql_link,$query);
 	}
 	/**
-	* Returns the link ressource to DB
-	* @return mysqli the link ressource to DB
+	* Returns the link Resource to DB
+	* @return mysqli the link Resource to DB
 	*/
 	public function getLink(){
 		return $this->sql_link;

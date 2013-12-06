@@ -10,7 +10,7 @@ class StaticTitleME {
     }
 	public function toHTML($dataFetched){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelEditor/StaticTitleME.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelEditor/StaticTitleME.phtml"));
 		return ob_get_clean();
 	}
 	public static function readFromXML($model_editor,$xml){

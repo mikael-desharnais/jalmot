@@ -8,7 +8,7 @@ class SimpleHeadCellML {
 	}
 	public function toHTML(){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleHeadCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/SimpleHeadCellML".(empty($this->instance)?"":"_".$this->instance).".phtml"));
 		return ob_get_clean();
 	}
 	public static function readFromXML($xml){

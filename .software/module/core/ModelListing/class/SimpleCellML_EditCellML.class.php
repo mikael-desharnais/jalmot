@@ -4,7 +4,7 @@ class EditCellML extends SimpleCellML {
     
 	public function toHTML($line){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/EditCellML.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/EditCellML.phtml"));
 		return ob_get_clean();
 	}
 

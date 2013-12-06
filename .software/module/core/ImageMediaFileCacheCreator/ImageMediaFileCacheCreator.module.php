@@ -13,25 +13,25 @@ class ImageMediaFileCacheCreator extends Module{
     public function execute(){
         $file = File::createFromURL($_SERVER['REQUEST_URI']);
         $directory = File::createFromURL($file->getDirectory());
-    	if (Ressource::getParameters()->valueExists("idMediaFile")){
-    		$idMediaFile = Ressource::getParameters()->getValue("idMediaFile");
+    	if (Resource::getParameters()->valueExists("idMediaFile")){
+    		$idMediaFile = Resource::getParameters()->getValue("idMediaFile");
     		$imageMediaFile = Module::getInstalledModule('ImageMediaFileManager')->getFileById($idMediaFile);
     		$image = Image::getImage($imageMediaFile->getFile());
-    		if (Ressource::getParameters()->valueExists("width")&&Ressource::getParameters()->valueExists("height")){
-    			$thumb=$image->getThumb(Ressource::getParameters()->getValue("width"),Ressource::getParameters()->getValue("height"));
-    			$fileName=$idMediaFile.'-'.Ressource::getParameters()->getValue("width").'x'.Ressource::getParameters()->getValue("height").'.'.$file->getExtension();
+    		if (Resource::getParameters()->valueExists("width")&&Resource::getParameters()->valueExists("height")){
+    			$thumb=$image->getThumb(Resource::getParameters()->getValue("width"),Resource::getParameters()->getValue("height"));
+    			$fileName=$idMediaFile.'-'.Resource::getParameters()->getValue("width").'x'.Resource::getParameters()->getValue("height").'.'.$file->getExtension();
     		}else {
     			$thumb=$image->getImageContent();
     			$fileName=$idMediaFile.'.'.$file->getExtension();
     		}
     		$fileToWrite = new File('.cache/template/'.$directory->getFile().'/media',$fileName,false);
     		$image->writeRawImageToFile($thumb,$fileToWrite);
-    		Ressource::getCurrentPage()->stopExecution();
-    		Ressource::getCurrentPage()->addHeader('Content-type: '.$imageMediaFile->getMimeType());
-    		Ressource::getCurrentPage()->sendHeaders();
+    		Resource::getCurrentPage()->stopExecution();
+    		Resource::getCurrentPage()->addHeader('Content-type: '.$imageMediaFile->getMimeType());
+    		Resource::getCurrentPage()->sendHeaders();
     		if ($fileToWrite->exists()){
     			readfile($fileToWrite->toURL());
-    			Ressource::getCurrentPage()->stopExecution();
+    			Resource::getCurrentPage()->stopExecution();
     		}
     	}
        

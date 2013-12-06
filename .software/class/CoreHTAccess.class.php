@@ -20,7 +20,7 @@ class CoreHTAccess{
 		$fileContent="RewriteEngine On\n".
 					  "RewriteCond 	%{ENV:REDIRECT_STATUS} 	200\n".
 					  "RewriteRule 	.* 						- 							[L]\n\n".
-					  "RewriteBase							/".Ressource::getConfiguration()->getValue("aliasName")."/\n";
+					  "RewriteBase							/".Resource::getConfiguration()->getValue("aliasName")."/\n";
 					  
 		ksort(self::$HTAccessElementList);
 		foreach(self::$HTAccessElementList as $array){
@@ -28,7 +28,7 @@ class CoreHTAccess{
 				$fileContent.=$htaccess->getHtaccess()."\n";
 			}
 		}
-		$file=new File(Ressource::getConfiguration()->getValue('baseDirectory'),".htaccess",false);
+		$file=new File(Resource::getConfiguration()->getValue('baseDirectory'),".htaccess",false);
 		$file->write($fileContent);
 	}
 	/**

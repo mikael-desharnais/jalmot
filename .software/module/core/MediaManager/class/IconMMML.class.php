@@ -36,7 +36,7 @@ class IconMMML {
 	*/
 	public function toHTML($line){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/MediaManager/IconMMML.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/MediaManager/IconMMML.phtml"));
 		return ob_get_clean();
 	}
 	/**

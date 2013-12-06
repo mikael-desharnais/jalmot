@@ -1,6 +1,6 @@
 <?php 
 ob_start();
-include(Ressource::getCurrentTemplate()->getURL("html/".$this->name.".phtml")); 
+include(Resource::getCurrentTemplate()->getURL("html/".$this->name.".phtml")); 
 $bodyCore = ob_get_clean();
 
 ob_start();
@@ -11,7 +11,7 @@ $headCore = ob_get_clean();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 	<head>
-		<title><?php echo Ressource::getCurrentPage()->getTitle() ?></title>
+		<title><?php echo Resource::getCurrentPage()->getTitle() ?></title>
 		<meta http-equiv="X-UA-Compatible" content="IE=8" />
 		<?php $newCSSListe = $this->CSSFilterFlow->filterAndCompress($this->cssListe); ?>
 		<?php 	foreach($newCSSListe as $arrayOfFiles){ ?>

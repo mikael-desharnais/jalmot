@@ -18,11 +18,11 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
             	$file_key.=$file->toURL().'-'.filemtime($file->toURL()).'-';
             }
         }
-        $fileToUse = new File(".cache/template/".Ressource::getCurrentTemplate()->getName()."/JSCSSMinifier/css","css-".md5($file_key).".css",false);
+        $fileToUse = new File(".cache/template/".Resource::getCurrentTemplate()->getName()."/JSCSSMinifier/css","css-".md5($file_key).".css",false);
         if (!file_exists($fileToUse->getDirectory())){
         	@mkdir($fileToUse->getDirectory(),0777,true);
         }
-        if (Ressource::getConfiguration()->getValue('cacheCSS')==0||!$fileToUse->exists()){
+        if (Resource::getConfiguration()->getValue('cacheCSS')==0||!$fileToUse->exists()){
             $filecontent = "";
             foreach($CSSArray as $file_array){
                 foreach($file_array as $file){
@@ -58,7 +58,7 @@ class BasicCSSFlowFilter extends CSSFilterFlow {
         }else {
         	$file = File::createFromURL($baseDirectory.'/'.$match[2].$match[3]);
         }
-        $template_file=Ressource::getCurrentTemplate()->getFile($file);
+        $template_file=Resource::getCurrentTemplate()->getFile($file);
         if ($match[2]=='"'||$match[2]=="'"){
             return $match[1].$match[2].'../../../../../'.$template_file->toURL();
         }else {

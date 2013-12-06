@@ -10,7 +10,7 @@ class SimpleValueSwitcherFV extends SwitcherFV {
     * @return boolean  true if the cases corresponding to the value are valid, false otherwise
     */
     public function isValid(){
-        $value=Ressource::getParameters()->getValue($this->target);
+        $value=Resource::getParameters()->getValue($this->target);
         $toReturn=true;
         foreach($this->cases as $case){
             if ($case->correponds($value)){

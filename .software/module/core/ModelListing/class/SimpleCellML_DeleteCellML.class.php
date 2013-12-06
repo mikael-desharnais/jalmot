@@ -6,7 +6,7 @@ class DeleteCellML extends SimpleCellML {
 	
 	public function toHTML($line){
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelListing/DeleteCellML.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelListing/DeleteCellML.phtml"));
 		return ob_get_clean();
 	}
 

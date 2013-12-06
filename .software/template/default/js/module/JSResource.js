@@ -1,4 +1,4 @@
-Ressource=function(){
+Resource=function(){
 	this.configuration;
 	this.language;
 	this.getConfiguration=function(){

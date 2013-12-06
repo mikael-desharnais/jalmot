@@ -1,0 +1,15 @@
+<?php $loadedTranslations = Resource::getCurrentLanguage()->init('module/JSResource');?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module','JSResource.js',false)),2); ?>
+<script>
+var Resource=new Resource();
+Resource.setConfiguration(new Configuration());
+Resource.getConfiguration().setValue('AliasName','<?php echo Resource::getConfiguration()->getValue('AliasName'); ?>');
+Resource.getConfiguration().setValue('TemplateDirectory','<?php echo Resource::getCurrentTemplate()->getFile(new File('','',true))->toFullURL(); ?>');
+Resource.getConfiguration().setValue('domainName','<?php echo Resource::getConfiguration()->getValue('domainName'); ?>');
+
+
+Resource.setLanguage(new Language(<?php echo Resource::getCurrentLanguage()->getId() ?>,'<?php echo Resource::getCurrentLanguage()->getName() ?>'));
+<?php foreach($loadedTranslations as $key=>$loadedTranslation){ ?>
+	Resource.getLanguage().setTranslation('<?php echo $key?>',<?php echo $loadedTranslation; ?>);
+<?php } ?>
+</script>

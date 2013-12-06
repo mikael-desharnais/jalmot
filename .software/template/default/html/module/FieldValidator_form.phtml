@@ -1,4 +1,4 @@
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','FieldValidator.js',false)),0); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module','FieldValidator.js',false)),0); ?>
 <script>
 var json = <?php echo json_encode($this->getDescriptor($this->getConfParam('validator'))); ?>;
 try {

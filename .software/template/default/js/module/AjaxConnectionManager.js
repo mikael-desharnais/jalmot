@@ -3,7 +3,7 @@ jQuery(document).ready(function(){
 		if (sourceHtmlFetcher.status==301){
 			sourceHtmlFetcher.status=404;
 			var fetcher=new AjaxHTMLFetcher();
-			fetcher.setURL(new URL(Ressource.getConfiguration().getValue('AliasName')+sourceHtmlFetcher.html,typeof sourceHtmlFetcher.params == "undefined"?new Object():sourceHtmlFetcher.params));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+sourceHtmlFetcher.html,typeof sourceHtmlFetcher.params == "undefined"?new Object():sourceHtmlFetcher.params));
 			fetcher.setCallBack(function(htmlCont){
 				var window = new Window();
 				window.setConfiguration(this.windowConfiguration);

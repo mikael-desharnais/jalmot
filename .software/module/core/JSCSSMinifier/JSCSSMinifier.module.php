@@ -15,7 +15,7 @@ class JSCSSMinifier extends Module{
 	        $sourcePage->setCSSFilterFlow(Module::getInstalledModule('JSCSSMinifier')->getCSSFlowFilter());
 	        $sourcePage->setJSFilterFlow(Module::getInstalledModule('JSCSSMinifier')->getJSFlowFilter());
 	    };
-	    Ressource::getCurrentPage()->addStartPageEventListener($startPageListener);
+	    Resource::getCurrentPage()->addStartPageEventListener($startPageListener);
 	}
 	/**
 	* Returns an instance of BasicCSSFlowFilter

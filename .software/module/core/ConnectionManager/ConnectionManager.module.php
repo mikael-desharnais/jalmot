@@ -14,7 +14,7 @@ class ConnectionManager extends Module{
 	*/
 	public function returnFromConnectionForm(){
 	    Page::headerRedirection(File::createFromURL("..")->toURL());
-		Ressource::getCurrentPage()->stopExecution();
+		Resource::getCurrentPage()->stopExecution();
 	}
 	/**
 	* Returns the HTACCESS for this module

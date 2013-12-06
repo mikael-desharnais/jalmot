@@ -26,7 +26,7 @@ abstract class FieldME {
 	public function toHTML($dataFetched){
 	    $element=$this->getUsefullData($dataFetched);
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor",$this->class.(empty($this->instance)?"":"_".$this->instance).".phtml",false))->toURL());
+		include(Resource::getCurrentTemplate()->getFile(new File("html/module/ModelEditor",$this->class.(empty($this->instance)?"":"_".$this->instance).".phtml",false))->toURL());
 		return ob_get_clean();
 	}
 	public function getModelEditor(){

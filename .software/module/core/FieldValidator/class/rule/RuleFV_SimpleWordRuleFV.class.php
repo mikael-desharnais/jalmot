@@ -8,7 +8,7 @@ class SimpleWordRuleFV extends RuleFV {
     * @return boolean  true if the Parameter contains only letters, false otherwise
     */
     public function isValid(){
-        $value=Ressource::getParameters()->getValue($this->target);
+        $value=Resource::getParameters()->getValue($this->target);
         return preg_match('/^[a-zA-Z ]*$/',$value);
     }
 }

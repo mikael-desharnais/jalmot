@@ -12,7 +12,7 @@ class DirectoryUploadME extends FieldME {
     	}
     	$relationName = "lst".ucfirst($this->relation);
 	    $directory = $dataFetched['simple']->$relationName()->getModelDataElement(true);
-    	if ( $dataFetched['simple']->getSource()==ModelData::$SOURCE_FROM_DATASOURCE&&(Ressource::getParameters()->getValue("action")=='save')){
+    	if ( $dataFetched['simple']->getSource()==ModelData::$SOURCE_FROM_DATASOURCE&&(Resource::getParameters()->getValue("action")=='save')){
 	    	if (empty($directory)){
 	    		$directory = Model::getModel('MediaDirectory')->getInstance();
 	    		$directory->setIdMediaDirectoryParent($this->getConfParam('idMediaDirectoryParent'));

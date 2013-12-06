@@ -1,5 +1,5 @@
-<?php Ressource::getCurrentLanguage()->init('module/ModelEditorDescriptor.'.$this->getName()); ?>
-<?php  Ressource::getCurrentPage()->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
+<?php Resource::getCurrentLanguage()->init('module/ModelEditor/instance/'.$this->getName()); ?>
+<?php  Resource::getCurrentPage()->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','ModelEditor.css',false)),0); ?>
 <form class="well reload-change-propagator model-editor-form field-validator-target" data-field-validator="<?php echo $this->getName() ?>" data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>">
 <?php  if (Hook::hookExists("ModelEditor.form")) {?>
 	<?php echo Hook::getHook("ModelEditor.form")->toHTML(); ?>
@@ -18,10 +18,10 @@
 	<tfoot>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="button" class="model-editor-cancel-button btn" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Cancel'); ?>">
-				<input type="submit" class="model-editor-save-button btn btn-primary" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Save'); ?>">
+				<input type="button" class="model-editor-cancel-button btn" value="<?php echo Resource::getCurrentLanguage()->getTranslation('Cancel'); ?>">
+				<input type="submit" class="model-editor-save-button btn btn-primary" value="<?php echo Resource::getCurrentLanguage()->getTranslation('Save'); ?>">
 				<?php if ($this->getSource()!=ModelData::$SOURCE_NEW) {?>
-					<input type="button" class="model-editor-delete-button btn btn-warning" value="<?php echo Ressource::getCurrentLanguage()->getTranslation('Delete'); ?>">
+					<input type="button" class="model-editor-delete-button btn btn-warning" value="<?php echo Resource::getCurrentLanguage()->getTranslation('Delete'); ?>">
 				<?php }?>
 			</td>
 		</tr>

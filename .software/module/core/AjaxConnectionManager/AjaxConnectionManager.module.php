@@ -7,7 +7,7 @@ class AjaxConnectionManager extends Module{
 	* Changes the current page to the connection page
 	*/
 	public function displayConnectionForm(){
-		Ressource::getCurrentPage()->stopExecution();
+		Resource::getCurrentPage()->stopExecution();
 		print(json_encode(array('status'=>301,'html'=>'ajax/connection/','css'=>array(),'js'=>array())));
 	}
 	/**

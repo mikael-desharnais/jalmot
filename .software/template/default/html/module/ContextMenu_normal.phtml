@@ -1,5 +1,5 @@
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','ContextMenu.js',false)),2); ?>
-<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','ContextMenu.css',false)),2); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module','ContextMenu.js',false)),2); ?>
+<?php  $this->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','ContextMenu.css',false)),2); ?>
 <script>
 <?php foreach($this->htmlProducer->getConfParam('descriptors') as $descriptor){ ?>
 	ContextMenu.addContextMenu(ContextMenu.readFromJSON(<?php echo json_encode($this->getElementDescriptor($descriptor)); ?>));

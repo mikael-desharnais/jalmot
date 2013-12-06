@@ -1,5 +1,5 @@
 <script>
-AjaxHTMLFetcher.setFetcher('icon_test',new URL(Ressource.getConfiguration().getValue('AliasName')+'model_listing/test/',new Object()),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('icon_test',new URL(Resource.getConfiguration().getValue('AliasName')+'model_listing/test/',new Object()),function(htmlContent){
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('icon_test')); ?>);
 	window.setContent(htmlContent);
@@ -9,7 +9,7 @@ AjaxHTMLFetcher.setFetcher('icon_test',new URL(Ressource.getConfiguration().getV
 <div class="icon btn">
 	<a href="#" class="AjaxHTMLFetcher" id="icon_test">
 		<div class="image">
-			<img src="<?php echo Ressource::getCurrentTemplate()->getFile(File::createFromURL($this->image),true)->toFullURL(); ?>">
+			<img src="<?php echo Resource::getCurrentTemplate()->getFile(File::createFromURL($this->image),true)->toFullURL(); ?>">
 		</div>
 		<div class="title">
 			<?php echo$this->text ?>

@@ -12,7 +12,7 @@ abstract class BreadCrumbTitleME {
 	public function toHTML($dataFetched){
 		$this->loadData();
 		ob_start();
-		include(Ressource::getCurrentTemplate()->getURL("html/module/ModelEditor/BreadCrumbTitleME.phtml"));
+		include(Resource::getCurrentTemplate()->getURL("html/module/ModelEditor/BreadCrumbTitleME.phtml"));
 		return ob_get_clean();
 	}
 	public function addRelation($relation){

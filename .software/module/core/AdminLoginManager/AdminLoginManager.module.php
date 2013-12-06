@@ -14,11 +14,11 @@ class AdminLoginManager extends Module{
         $this->addToGlobalExecuteStack();
 		$startPageListener=new EventListener($this);
 		$startPageListener->actionPerformed=function ($sourcePage){
-			if (!Ressource::getUserSpace()->getSlot('ADMIN')->hasRight('ACCESS_ADMIN')&&Ressource::getCurrentPage()->getName()!='connection'){
+			if (!Resource::getUserSpace()->getSlot('ADMIN')->hasRight('ACCESS_ADMIN')&&Resource::getCurrentPage()->getName()!='connection'){
 				Module::getInstalledModule('ConnectionManager')->displayConnectionForm();
 			}
 		};
-		Ressource::getCurrentPage()->addStartPageEventListener($startPageListener);
+		Resource::getCurrentPage()->addStartPageEventListener($startPageListener);
 	}
 	/**
 	* If Parameters contain userInput and passwordInput, creates a query to find the corresponding user
@@ -26,16 +26,16 @@ class AdminLoginManager extends Module{
 	*/
 	public function execute(){
 	    parent::execute();
-	    if (Ressource::getParameters()->valueExists("userInput")&&Ressource::getParameters()->valueExists("passwordInput")){
+	    if (Resource::getParameters()->valueExists("userInput")&&Resource::getParameters()->valueExists("passwordInput")){
 	        $userModel=Model::getModel('UserAdmin');
 	        $users=$userModel->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$userModel)
-	        										->addConditionBySymbol('=',$userModel->getField('username'), Ressource::getParameters()->getValue("userInput"))
-	        										->addConditionBySymbol('=',$userModel->getField('password'), $userModel->getField('password')->getEncryptedValue(Ressource::getParameters()->getValue("passwordInput"))->getValue())
+	        										->addConditionBySymbol('=',$userModel->getField('username'), Resource::getParameters()->getValue("userInput"))
+	        										->addConditionBySymbol('=',$userModel->getField('password'), $userModel->getField('password')->getEncryptedValue(Resource::getParameters()->getValue("passwordInput"))->getValue())
 	        										->getModelData();
 
 	        if ($users->valid()){
 	            $userAdmin=new AdminUser($users->current());
-	            Ressource::getUserSpace()->getSlot('ADMIN')->addUser($userAdmin);
+	            Resource::getUserSpace()->getSlot('ADMIN')->addUser($userAdmin);
 				Module::getInstalledModule('ConnectionManager')->returnFromConnectionForm();
 	        }
 	    }

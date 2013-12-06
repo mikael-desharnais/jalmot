@@ -1,10 +1,10 @@
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
-<?php  $this->addCSS(Ressource::getCurrentTemplate()->getFile(new File('css/module','LanguageChooser.css',false)),0); ?>
-<?php  $this->addJS(Ressource::getCurrentTemplate()->getFile(new File('js/module','LanguageChooser.js',false)),2); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js','jquery.js',false)),0); ?>
+<?php  $this->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','LanguageChooser.css',false)),0); ?>
+<?php  $this->addJS(Resource::getCurrentTemplate()->getFile(new File('js/module','LanguageChooser.js',false)),2); ?>
 <div class="LanguageFieldME-languageChooser-container">
 	<?php $languages=Language::getAvailableLanguages() ; ?>
 	<?php foreach($languages as $language){ ?>
-		<a href="<?php echo $language->getId(); ?>" class="LanguageFieldME-languageChooser <?php echo (Ressource::getCurrentLanguage()->getId()==$language->getId()?"LanguageFieldME-default":"") ?>"><img src="<?php echo Ressource::getCurrentTemplate()->getFile(new File("media/image/share",String::strtolower($language->getName()).".jpg",0))->toFullURL(); ?>"></a>
+		<a href="<?php echo $language->getId(); ?>" class="LanguageFieldME-languageChooser <?php echo (Resource::getCurrentLanguage()->getId()==$language->getId()?"LanguageFieldME-default":"") ?>"><img src="<?php echo Resource::getCurrentTemplate()->getFile(new File("media/image/share",String::strtolower($language->getName()).".jpg",0))->toFullURL(); ?>"></a>
 	<?php } ?>
 </div>
 <script>

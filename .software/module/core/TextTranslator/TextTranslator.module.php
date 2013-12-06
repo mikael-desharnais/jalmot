@@ -11,9 +11,9 @@ class TextTranslator extends Module{
 		parent::execute();
 		$translationManager = new GoogleTranslationManager();
 		$translationBuilder=$translationManager->getTranslationBuilder();
-		$translationBuilder->setText(Ressource::getParameters()->getValue('text'));
-		$translationBuilder->setSourceLanguage(Language::getLanguageById(Ressource::getParameters()->getValue('sourceLanguage'))->getName());
-		$translationBuilder->setTargetLanguage(Language::getLanguageById(Ressource::getParameters()->getValue('targetLanguage'))->getName());
+		$translationBuilder->setText(Resource::getParameters()->getValue('text'));
+		$translationBuilder->setSourceLanguage(Language::getLanguageById(Resource::getParameters()->getValue('sourceLanguage'))->getName());
+		$translationBuilder->setTargetLanguage(Language::getLanguageById(Resource::getParameters()->getValue('targetLanguage'))->getName());
 		$this->translation = $translationBuilder->getTranslation();
 	}
 }

@@ -14,7 +14,7 @@ class NMLanguageForeignKeyDataFetcher extends NMForeignKeyDataFetcher {
 	    if ($this->getConfParam('dataMode')!='adapted'){
 	   		$model = Model::getModel($this->getConfParam('reference'))->getRelation('lang')->getDestination()->getModel();
 	    	$reference = $model->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$model)
-	    	->addConditionBySymbol('=',$model->getField('idLang'), Ressource::getCurrentLanguage()->getId())
+	    	->addConditionBySymbol('=',$model->getField('idLang'), Resource::getCurrentLanguage()->getId())
 	    	->getModelData();
 	    }else {
 	    	$model = Model::getModel($this->getConfParam('reference'));
