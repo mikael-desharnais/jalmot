@@ -16,6 +16,12 @@ Window = function(){
 	this.lockScroll=false;
 	this.interval;
 	
+	this.status=false;
+	this.requireReload=false;
+	this.zIndex = Window.currentZIndex++;
+
+	Window.instances.push(this);
+	
 	jQuery(window).resize(function(){
 		parent.wrapper.outerHeight(jQuery(window).height());
 		parent.wrapper.outerWidth(jQuery(window).width()-80);
@@ -28,7 +34,11 @@ Window = function(){
 		parent.reload();
 	});
 	this.close = function(){
+		Window.instances.splice(Window.instances.indexOf(this), 1);
+		delete Window.instances[this.zIndex];
 		this.wrapper.remove();
+		delete this;
+		Window.activateWindow();
 	};
 	
 	this.setConfiguration = function(config){
@@ -39,6 +49,14 @@ Window = function(){
 	}
 	this.setURL = function(url){
 		this.url = url;
+	}	
+	this.setActive = function(status){
+		this.status = status;
+		console.log(this.status);
+		console.log(this.requireReload);
+		if (this.status&&this.requireReload){
+			this.internalReload();
+		}
 	}
 	this.display = function(){
 		var parent = this;
@@ -60,7 +78,15 @@ Window = function(){
 		jQuery('body').trigger('htmlAppending',this.html);
 	}
 	this.reload=function(){
+		if (this.status){
+			this.internalReload();
+		}else {
+			this.requireReload = true;
+		}
+	};
+	this.internalReload=function(){		
 		var parent=this;
+		console.log("reload "+Window.instances.length);
 		parent.lockScroll=true;
 		var fetcher=new AjaxHTMLFetcher();
 		fetcher.setURL(this.url);
@@ -71,6 +97,8 @@ Window = function(){
 			parent.lockScroll=false;
 		});
 		fetcher.fetch();
+		fetcher.integrate();
+		this.requireReload=false;
 	};
 	this.setScroll=function(){
 		this.wrapper.scrollTop(this.url.scrollTop);
@@ -79,5 +107,25 @@ Window = function(){
 		}
 		
 	}
+
+	Window.setActiveWindow(this);
 }
+Window.instances = new Array();
 Window.currentZIndex = 5;
+Window.activeWindow = null;
+Window.activateWindow=function(){
+	if (Window.instances.length==0){
+		Window.setActiveWindow(null);
+	}else {
+		Window.setActiveWindow(Window.instances[Window.instances.length-1]);
+	}
+}
+Window.setActiveWindow=function(windowToSet){
+	if (Window.activeWindow!=null){
+		Window.activeWindow.setActive(false);
+	}
+	Window.activeWindow = windowToSet;
+	if (windowToSet!=null){
+		windowToSet.setActive(true);
+	}
+}
