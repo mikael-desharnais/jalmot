@@ -14,7 +14,7 @@ class TextContentDisplayer extends Module{
         $this->importClasses();
     }
     public function getCacheValues(){
-        return array('id'=>$this->htmlProducer->getConfParam('id'),'instance'=>$this->htmlProducer->getInstance());
+        return array('id'=>$this->htmlProducer->getConfParam('id'),'instance'=>$this->htmlProducer->getInstance(),"lang"=>Resource::getCurrentLanguage()->getId());
     }
     public function toHTML($currentHook, $instance){
         

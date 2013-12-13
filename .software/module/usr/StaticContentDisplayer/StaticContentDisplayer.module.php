@@ -10,7 +10,7 @@ class StaticContentDisplayer extends Module{
         $this->importClasses();
     }
     public function getCacheValues(){
-        return array('instance'=>$this->htmlProducer->getInstance());
+        return array('instance'=>$this->htmlProducer->getInstance(),"lang"=>Resource::getCurrentLanguage()->getId());
     }
 
 }
