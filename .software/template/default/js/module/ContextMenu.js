@@ -1,4 +1,3 @@
-console.log('zozo');
 ContextMenu=function(){
 	
 };
@@ -132,11 +131,11 @@ SourceParamsModelEditorElementCM=function(title){
 		var parent = this;
 		var fetcher=new AjaxHTMLFetcher();
 		if (this.mode=="edit"){
-			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',jQuery.parseJSON(this.descriptor.actionner.data('url-params'))));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data('url-params')));
 		}else if (this.mode=="create") {
-			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',jQuery.extend({source:create},this.descriptor.actionner.closest('.window_panel').data('object').url.params)));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',jQuery.extend({source:'create'},this.descriptor.actionner.data('url-params'))));
 		}else {
-			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',jQuery.parseJSON(this.descriptor.actionner.data('url-params'))));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data('url-params')));
 		}
 		if (this.mode=="delete"){
 			fetcher.setCallBack(function(htmlCont){

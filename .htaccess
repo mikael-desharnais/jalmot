@@ -19,7 +19,15 @@ RewriteRule	^model_editor/(.*)/delete/$										.software/index.php?page=model_
 
 RewriteRule	^connection/[(.*)/(.*)]|connection/()(.*)|connection/$			.software/index.php?page=connection 															[L,QSA]
 
-RewriteRule	^MediaManager/download/([0-9]*)$									.software/index.php?page=MediaFileDownload&&id=$1												[L,QSA]
+RewriteRule	^MediaManager/download/([0-9]+)$								.software/index.php?page=MediaFileDownload&&id=$1												[L,QSA]
 RewriteRule	^admin/logout/$													.software/index.php?page=adminLogout															[L,QSA]
+RewriteRule	^media/([^/]*)/([0-9]*)-([0-9]*)x([0-9]*)-([^\.]*)*\.([^\.]*)$	.software/.cache/template/$1/media/$2-$3x$4.$6													[QSA]
+RewriteRule	^media/([^/]*)/([0-9]*)-([^\.]*)*\.([^\.]*)$					.software/.cache/template/$1/media/$2.$4														[QSA]
 
 RewriteRule ^translate/([0-9]*)/([0-9]*)/$									.software/index.php?page=textTranslator&&pageMode=ajax&sourceLanguage=$1&targetLanguage=$2		[L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule	^.software/.cache/template/([^/]*)/media/([0-9]*)-([0-9]*)x([0-9]*)\.([^\./]*)	.software/index.php?page=createImage&idMediaFile=$2&width=$3&height=$4			[L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule	^.software/.cache/template/([^/]*)/media/([0-9]*)\.([^\./]*)	.software/index.php?page=createImage&idMediaFile=$2												[L,QSA]

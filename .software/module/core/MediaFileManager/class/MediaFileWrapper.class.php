@@ -32,6 +32,9 @@ class MediaFileWrapper {
     public function getFileURL(){
         return $this->getFile()->toURL();
     }
+    public function getDownloadURL(){
+    	return Resource::getConfiguration()->getValue("AliasName")."/MediaManager/download/".$this->data->getIdMediaFile();
+    }
     /**
      * Returns File object corresponding the DataModel Wrapped
      * @return File the File object corresponding the DataModel Wrapped

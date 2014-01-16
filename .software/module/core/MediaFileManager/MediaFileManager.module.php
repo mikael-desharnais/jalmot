@@ -19,9 +19,9 @@ class MediaFileManager extends Module{
 	    $mediaFileModel=Model::getModel('MediaFile');
 	    $file=$mediaFileModel->getDataSource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$mediaFileModel)
 				    ->addConditionBySymbol('=',$mediaFileModel->getField('idMediaFile'),(int)$id)
-				    ->getModelData();
-	    if (count($file)>0){
-	        return new MediaFileWrapper($file->current);
+				    ->getModelDataElement();
+	    if (!empty($file)){
+	        return new MediaFileWrapper($file);
 	    }else {
 	        throw new Exception("Unkown File");
 	    }

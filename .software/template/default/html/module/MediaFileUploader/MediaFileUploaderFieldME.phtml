@@ -4,7 +4,7 @@
 <tr>
 <td colspan="2">
 	<div class="file-uploader">
-		<div class="download"><a href="MediaManager/download/<?php echo $element->getIdMediaFile(); ?>"><img src="<?php echo Resource::getCurrentTemplate()->getFile(new File("media/image/module/FileUploader","download.png",false))->toFullURL(); ?>"></a></div>
+		<div class="download"><a href="<?php echo $this->getURL($element); ?>"><img src="<?php echo Resource::getCurrentTemplate()->getFile(new File("media/image/module/FileUploader","download.png",false))->toFullURL(); ?>"></a></div>
 		<input type="hidden" name="<?php echo $this->getName(); ?>[tempFilename]" class="tempFilename"/>
 		<input type="text" name="<?php echo $this->getName(); ?>[filename]" class="filename" readonly value="<?php echo $this->getValue($element); ?>"/>
 	</div>

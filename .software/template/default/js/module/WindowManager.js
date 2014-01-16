@@ -52,8 +52,8 @@ Window = function(){
 	}	
 	this.setActive = function(status){
 		this.status = status;
-		console.log(this.status);
-		console.log(this.requireReload);
+		//console.log(this.status);
+		//console.log(this.requireReload);
 		if (this.status&&this.requireReload){
 			this.internalReload();
 		}
@@ -86,7 +86,6 @@ Window = function(){
 	};
 	this.internalReload=function(){		
 		var parent=this;
-		console.log("reload "+Window.instances.length);
 		parent.lockScroll=true;
 		var fetcher=new AjaxHTMLFetcher();
 		fetcher.setURL(this.url);
@@ -97,7 +96,6 @@ Window = function(){
 			parent.lockScroll=false;
 		});
 		fetcher.fetch();
-		fetcher.integrate();
 		this.requireReload=false;
 	};
 	this.setScroll=function(){

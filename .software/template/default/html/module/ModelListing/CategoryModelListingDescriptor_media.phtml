@@ -4,7 +4,7 @@
 
 <?php Resource::getCurrentLanguage()->init('module/ModelListing/ModelListing'); ?>
 <script> 
-AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditor'); ?>/',{ model : '<?php echo $this->model; ?>',source :'create'}),function(htmlContent){
+AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/<?php echo $this->getConfParam('modelEditorCategory'); ?>/',{ model : '<?php echo $this->model; ?>',source :'create'}),function(htmlContent){
 
 	var window = new Window();
 	window.setConfiguration(<?php echo json_encode(Module::getInstalledModule('WindowManager')->getWindowConfiguration('EditModelListing-'.$this->getModel())); ?>);
@@ -13,7 +13,7 @@ AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Resource.ge
 	window.display();
 }); 
 </script>
-<div class="well reload-on-model-editor-<?php echo $this->model; ?>-change reload-on-model-editor-MediaFile-change context-menu-actionner files-uploader" data-context-menu="MediaManagerCreate">
+<div class="well reload-on-model-editor-<?php echo $this->model; ?>-change reload-on-model-editor-MediaFile-change context-menu-actionner files-uploader" data-context-menu="MediaManagerCreate" data-url-params="<?php print(htmlentities(json_encode($this->getCurrentCategoryParams()))); ?>">
 <?php  if (Hook::hookExists("ModelEditor.form")) {?>
 	<?php echo Hook::getHook("ModelEditor.form")->toHTML(); ?>
 <?php }  ?>

@@ -49,6 +49,11 @@
 		<params></params>
 	</module>
 	<module>
+		<instancename>MediaFileManager</instancename>
+		<class>MediaFileManager</class>
+		<params></params>
+	</module>
+	<module>
 		<instancename>ImageMediaFileManager</instancename>
 		<class>ImageMediaFileManager</class>
 		<params></params>
