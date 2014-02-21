@@ -8,12 +8,16 @@ class ImageURLME extends FieldME {
 	    return $dataFetched['simple'];
 	}
 	public function getURL($element){
-		$fileWrapper = Module::getInstalledModule("MediaFileManager")->getFileById($element->getIdMediaFile());
-		if (Image::isImage($fileWrapper->getFile())){
-			$imageFileWrapper = Module::getInstalledModule("ImageMediaFileManager")->getFileById($element->getIdMediaFile());
-			return $imageFileWrapper->getURLForSize('[width]','[height]',$element->getName());
-		}else {
-			return $fileWrapper->getDownloadURL();
+		try {
+			$fileWrapper = Module::getInstalledModule("MediaFileManager")->getFileById($element->getIdMediaFile());
+			if (Image::isImage($fileWrapper->getFile())){
+				$imageFileWrapper = Module::getInstalledModule("ImageMediaFileManager")->getFileById($element->getIdMediaFile());
+				return $imageFileWrapper->getURLForSize('[width]','[height]',$element->getName());
+			}else {
+				return $fileWrapper->getDownloadURL();
+			}
+		}catch (Exception $ex){
+			return "";
 		}
 	}
 }

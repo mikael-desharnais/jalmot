@@ -7,6 +7,7 @@
 			<model>MediaFile</model>
 			<modelEditor>MediaFile</modelEditor>
 			<mode>create</mode>
+			<dataField>url-content-params</dataField>
 		</element>
 		<element>
 			<title>Create Directory</title>
@@ -14,6 +15,7 @@
 			<model>MediaDirectory</model>
 			<modelEditor>MediaDirectory</modelEditor>
 			<mode>create</mode>
+			<dataField>url-category-params</dataField>
 		</element>
 	</elements>
 </contextmenu>

@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v8.71 
-MySQL - 5.5.16-log : Database - jalmot
+SQLyog Enterprise v10.5 
+MySQL - 5.5.24-log : Database - jalmot
 *********************************************************************
 */
 
@@ -14,27 +14,22 @@ MySQL - 5.5.16-log : Database - jalmot
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `media_directory` */
 
+DROP TABLE IF EXISTS `media_directory`;
+
 CREATE TABLE `media_directory` (
   `id_media_directory` int(11) NOT NULL AUTO_INCREMENT,
-  `id_parent_media_directory` int(11) DEFAULT NULL,
+  `id_media_directory_parent` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   UNIQUE KEY `id_media_directory` (`id_media_directory`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `media_directory` */
 
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (1,0,'>');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (2,1,'Photos');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (3,1,'PDF');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (4,1,'DOC');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (5,1,'Infos');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (6,2,'JPG');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (7,2,'BMP');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (8,2,'GIF');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (9,3,'Doc techniques');
-insert  into `media_directory`(`id_media_directory`,`id_parent_media_directory`,`name`) values (10,3,'Fiche produits');
+insert  into `media_directory`(`id_media_directory`,`id_media_directory_parent`,`name`) values (1,0,'>'),(2,1,'Photos'),(3,1,'PDF'),(4,1,'DOC'),(5,1,'Infos'),(6,2,'JPG'),(7,2,'BMP'),(8,2,'GIF'),(9,3,'Doc techniques'),(10,3,'Fiche produits');
 
 /*Table structure for table `media_file` */
+
+DROP TABLE IF EXISTS `media_file`;
 
 CREATE TABLE `media_file` (
   `id_media_file` int(11) NOT NULL AUTO_INCREMENT,
@@ -46,13 +41,11 @@ CREATE TABLE `media_file` (
 
 /*Data for the table `media_file` */
 
-insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (1,6,'P1130211.JPG','Mon image avec un ');
-insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (2,6,'image2.jpg','the JPG');
-insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (51,6,'dsc03048.jpg','dsc03048.jpg');
-insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (52,6,'P1100587.JPG','P1100587.JPG');
-insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (53,6,'produit1.jpg','produit1.jpg');
+insert  into `media_file`(`id_media_file`,`id_media_directory`,`file`,`name`) values (1,6,'P1130211.JPG','Mon image avec'),(2,6,'image2.jpg','the JPG'),(51,6,'dsc03048.jpg','dsc03048.jpg'),(52,6,'P1100587.JPG','P1100587.JPG'),(53,6,'produit1.jpg','produit1.jpg');
 
 /*Table structure for table `test` */
+
+DROP TABLE IF EXISTS `test`;
 
 CREATE TABLE `test` (
   `id_test` int(11) NOT NULL AUTO_INCREMENT,
@@ -68,6 +61,8 @@ insert  into `test`(`id_test`,`valeur1`,`valeur2`,`code`) values (4,1,0,'Ce te')
 
 /*Table structure for table `test_lang` */
 
+DROP TABLE IF EXISTS `test_lang`;
+
 CREATE TABLE `test_lang` (
   `id_test` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
@@ -79,23 +74,22 @@ CREATE TABLE `test_lang` (
 
 /*Data for the table `test_lang` */
 
-insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,1,'Nom du test','<p>Description en français<br>\r\n</p>\r\n','');
-insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,2,'','<p>Description in English<br>\r\n</p>\r\n','');
-insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,3,'','','');
+insert  into `test_lang`(`id_test`,`id_lang`,`name`,`description`,`short_description`) values (4,1,'Nom du test','<p>Description en français<br>\r\n</p>\r\n',''),(4,2,'','<p>Description in English<br>\r\n</p>\r\n',''),(4,3,'','','');
 
 /*Table structure for table `text_category` */
+
+DROP TABLE IF EXISTS `text_category`;
 
 CREATE TABLE `text_category` (
   `id_text_category` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_text_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `text_category` */
 
-insert  into `text_category`(`id_text_category`) values (1);
-insert  into `text_category`(`id_text_category`) values (2);
-
 /*Table structure for table `text_category_lang` */
+
+DROP TABLE IF EXISTS `text_category_lang`;
 
 CREATE TABLE `text_category_lang` (
   `id_text_category` int(11) NOT NULL,
@@ -106,29 +100,22 @@ CREATE TABLE `text_category_lang` (
 
 /*Data for the table `text_category_lang` */
 
-insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (1,1,'Bibi');
-insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (1,2,'');
-insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (1,3,'');
-insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (2,1,'Information');
-insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (2,2,'');
-insert  into `text_category_lang`(`id_text_category`,`id_lang`,`title`) values (2,3,'');
-
 /*Table structure for table `text_content` */
+
+DROP TABLE IF EXISTS `text_content`;
 
 CREATE TABLE `text_content` (
   `id_text_content` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `id_text_category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_text_content`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `text_content` */
 
-insert  into `text_content`(`id_text_content`,`name`,`id_text_category`) values (1,'Texte du footer',2);
-insert  into `text_content`(`id_text_content`,`name`,`id_text_category`) values (2,'Texte de la page d\'accueil',1);
-insert  into `text_content`(`id_text_content`,`name`,`id_text_category`) values (10,'Précisions',1);
+insert  into `text_content`(`id_text_content`) values (11),(12);
 
 /*Table structure for table `text_content_lang` */
+
+DROP TABLE IF EXISTS `text_content_lang`;
 
 CREATE TABLE `text_content_lang` (
   `id_text_content` int(11) NOT NULL,
@@ -140,17 +127,11 @@ CREATE TABLE `text_content_lang` (
 
 /*Data for the table `text_content_lang` */
 
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,1,'Texte du footer','<p>Propulsé par JalmotPHP<br>\r\n</p>\r\n');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,2,'','');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (1,3,'','');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (2,1,'Bienvenue','<p>JalmotPHP est un framework simple et puissant.</p>\r\n<p>Ceci est un test de cache<br>\r\n\r\n</p>\r\n');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (2,2,'','');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (2,3,'','');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (10,1,'Dudulle','<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and \r\ntypesetting industry. Lorem Ipsum has been the industry\'s standard dummy\r\n text ever since the 1500s, when an unknown printer took a galley of \r\ntype and scrambled it to make a type specimen book. It has survived not \r\nonly five centuries, but also the leap into electronic typesetting, \r\nremaining essentially unchanged. It was popularised in the 1960s with \r\nthe release of Letraset sheets containing Lorem Ipsum passages, and more\r\n recently with desktop publishing software like Aldus PageMaker \r\nincluding versions of Lorem Ipsum.<span id=\"pastemarkerend\">&nbsp;</span></p>\r\n');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (10,2,'','');
-insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (10,3,'','');
+insert  into `text_content_lang`(`id_text_content`,`id_lang`,`title`,`description`) values (11,1,'Lorem ipsum dolor sit amet','<p>Le <strong>Lorem Ipsum</strong> est simplement du faux texte employé \r\ndans la composition et la mise en page avant impression. Le Lorem Ipsum \r\nest le faux texte standard de l\'imprimerie depuis les années 1500, quand\r\n un peintre anonyme assembla ensemble des morceaux de texte pour \r\nréaliser un livre spécimen de polices de texte. Il n\'a pas fait que \r\nsurvivre cinq siècles, mais s\'est aussi adapté à la bureautique \r\ninformatique, sans que son contenu n\'en soit modifié. Il a été \r\npopularisé dans les années 1960 grâce à la vente de feuilles Letraset \r\ncontenant des passages du Lorem Ipsum, et, plus récemment, par son \r\ninclusion dans des applications de mise en page de texte, comme Aldus \r\nPageMaker.<span id=\"pastemarkerend\">&nbsp;</span></p>\r\n'),(11,2,'',''),(11,3,'',''),(12,1,'pariatur. Excepteur','<p>On sait depuis longtemps que travailler avec du texte lisible et \r\ncontenant du sens est source de distractions, et empêche de se \r\nconcentrer sur la mise en page elle-même. L\'avantage du Lorem Ipsum sur \r\nun texte générique comme \'Du texte. Du texte. Du texte.\' est qu\'il \r\npossède une distribution de lettres plus ou moins normale, et en tout \r\ncas comparable avec celle du français standard. De nombreuses suites \r\nlogicielles de mise en page ou éditeurs de sites Web ont fait du Lorem \r\nIpsum leur faux texte par défaut, et une recherche pour \'Lorem Ipsum\' \r\nvous conduira vers de nombreux sites qui n\'en sont encore qu\'à leur \r\nphase de construction. Plusieurs versions sont apparues avec le temps, \r\nparfois par accident, souvent intentionnellement (histoire d\'y rajouter \r\nde petits clins d\'oeil, voire des phrases embarassantes).<span id=\"pastemarkerend\">&nbsp;</span></p>\r\n'),(12,2,'',''),(12,3,'','');
 
 /*Table structure for table `text_content_media_file` */
+
+DROP TABLE IF EXISTS `text_content_media_file`;
 
 CREATE TABLE `text_content_media_file` (
   `id_text_content` int(11) NOT NULL,
@@ -160,12 +141,9 @@ CREATE TABLE `text_content_media_file` (
 
 /*Data for the table `text_content_media_file` */
 
-insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (2,1);
-insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (2,53);
-insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (10,51);
-insert  into `text_content_media_file`(`id_text_content`,`id_media_file`) values (10,53);
-
 /*Table structure for table `user_admin` */
+
+DROP TABLE IF EXISTS `user_admin`;
 
 CREATE TABLE `user_admin` (
   `id_user_admin` int(11) NOT NULL AUTO_INCREMENT,

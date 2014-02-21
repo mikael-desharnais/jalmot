@@ -13,7 +13,7 @@ AjaxHTMLFetcher.setFetcher('new_<?php echo $this->model; ?>',new URL(Resource.ge
 	window.display();
 }); 
 </script>
-<div class="well reload-on-model-editor-<?php echo $this->model; ?>-change reload-on-model-editor-MediaFile-change context-menu-actionner files-uploader" data-context-menu="MediaManagerCreate" data-url-params="<?php print(htmlentities(json_encode($this->getCurrentCategoryParams()))); ?>">
+<div class="well reload-on-model-editor-<?php echo $this->model; ?>-change reload-on-model-editor-MediaFile-change context-menu-actionner files-uploader" data-context-menu="MediaManagerCreate" data-url-category-params="<?php print(htmlentities(json_encode($this->getCurrentCategoryParams()))); ?>" data-url-content-params="<?php print(htmlentities(json_encode($this->getCurrentContentParams()))); ?>">
 <?php  if (Hook::hookExists("ModelEditor.form")) {?>
 	<?php echo Hook::getHook("ModelEditor.form")->toHTML(); ?>
 <?php }  ?>

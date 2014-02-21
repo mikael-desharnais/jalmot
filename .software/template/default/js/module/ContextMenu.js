@@ -16,6 +16,7 @@ ContextMenu.getContextMenu=function(contextMenuName){
 	return ContextMenu.contextMenus[contextMenuName];
 }
 ContextMenu.readFromJSON=function(json){
+	console.log(json);
 	var classname=json.class;
 	var contextMenuDescriptor = new window[classname](json.name);
 	contextMenuDescriptor.confParams=json.confParams;
@@ -126,16 +127,16 @@ ModelEditorElementCM=function(title){
 
 SourceParamsModelEditorElementCM=function(title){
 	ModelEditorElementCM.call(this,title);
-	
+	this.dataField = "";
 	this.clicked=function(){
 		var parent = this;
 		var fetcher=new AjaxHTMLFetcher();
 		if (this.mode=="edit"){
-			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data('url-params')));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',this.descriptor.actionner.data(this.dataField)));
 		}else if (this.mode=="create") {
-			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',jQuery.extend({source:'create'},this.descriptor.actionner.data('url-params'))));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/',jQuery.extend({source:'create'},this.descriptor.actionner.data(this.dataField))));
 		}else {
-			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data('url-params')));
+			fetcher.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'model_editor/'+this.modelEditor+'/delete/',this.descriptor.actionner.data(this.dataField)));
 		}
 		if (this.mode=="delete"){
 			fetcher.setCallBack(function(htmlCont){
@@ -182,6 +183,7 @@ SourceParamsModelEditorElementCM.readFromJSON=function(descriptor,json){
 	element.descriptor = descriptor;
 	element.confParams=json.confParams;
 	element.model = json.model;
+	element.dataField = json.dataField;
 	element.modelEditor = json.modelEditor;
 	element.mode = json.mode;
 	return element;

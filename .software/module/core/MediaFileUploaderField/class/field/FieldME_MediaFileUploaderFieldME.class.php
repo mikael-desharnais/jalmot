@@ -57,8 +57,12 @@ class MediaFileUploaderFieldME extends FieldME {
 		return ob_get_clean();
 	}
 	public function getURL($element){
-		$wrapper = Module::getInstalledModule("MediaFileManager")->getFileById($element->getIdMediaFile());
-		return $wrapper->getDownloadURL();
+		try {
+			$wrapper = Module::getInstalledModule("MediaFileManager")->getFileById($element->getIdMediaFile());
+			return $wrapper->getDownloadURL();
+		}catch (Exception $ex){
+			return "";
+		}
 	}
 }
 
