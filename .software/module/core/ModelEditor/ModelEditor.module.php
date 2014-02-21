@@ -41,10 +41,12 @@ class ModelEditor extends Module{
 				print(json_encode(array('status'=>1,'html'=>'','css'=>array(),'js'=>array())));
 			}
 			$this->propagateAfterSave();
+			die();
 		}else if (Resource::getParameters()->valueExists("action")&&Resource::getParameters()->getValue("action")=="delete"){
 		    $this->descriptor->delete();
 			Resource::getCurrentPage()->stopExecution();
 			print(json_encode(array('status'=>311,'html'=>Resource::getCurrentLanguage()->getTranslation('Delete operation Success'),'css'=>array(),'js'=>array())));
+			die();
 		}
 	}
 	public function setDescriptor($descriptor){

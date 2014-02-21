@@ -22,12 +22,12 @@ class TextContentDisplayer extends Module{
         $textContentLangModel=Model::getModel('TextContentLang');
         $this->textContent=$textContentModel->getDatasource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$textContentModel)
         	->addConditionBySymbol('=',$textContentModel->getField('idTextContent'), $this->htmlProducer->getConfParam('id'))
-        	->getModelDataElement();
+        	->getModelDataElement(true);
         if (!empty($this->textContent)){
 	        $this->textContentLang=$this->textContent
 	        		->lstLang()
 					->addConditionBySymbol('=',$textContentLangModel->getField('idLang'), Resource::getCurrentLanguage()->getId())
-					->getModelDataElement();
+					->getModelDataElement(true);
         }
         return parent::toHTML($currentHook, $instance);
     }

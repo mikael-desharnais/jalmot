@@ -65,7 +65,6 @@ class CoreTemplate{
 				$toInclude=$this->parent->getFile($file,$silent);	
 			}
 			if (empty($toInclude)&&!$silent){
-				print('<pre>');
 				//debug_print_backtrace();
 				$message = "template/".$this->name."/".$file->toURL()." Introuvable dans le système de template";
 				Log::Error($message);

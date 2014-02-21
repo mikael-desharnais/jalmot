@@ -1,6 +1,6 @@
 <?php
 
-class TextContentDisplayerFromParams extends Module{
+class TextContentPageTitleFromParams extends Module{
     
     protected $textContent;
     protected $textContentLang;
@@ -14,7 +14,7 @@ class TextContentDisplayerFromParams extends Module{
         $this->importClasses();
     }
     public function getCacheValues(){
-        return array('id'=>Resource::getParameters()->getValue('id'),'instance'=>$this->htmlProducer->getInstance(),"lang"=>Resource::getCurrentLanguage()->getId());
+        return array('id'=>$this->htmlProducer->getConfParam('id'),'instance'=>$this->htmlProducer->getInstance(),"lang"=>Resource::getCurrentLanguage()->getId());
     }
     public function toHTML($currentHook, $instance){
         

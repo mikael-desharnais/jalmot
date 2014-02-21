@@ -28,7 +28,13 @@
 		</hook>
 	</hooks>
 	<params>
-		<param name="modelEditor" type="simple">MediaDirectory</param>
+		<param name="modelEditorCategory" type="simple">MediaDirectory</param>
+		<param name="localCategoryKey" type="simple">idMediaDirectory</param>
+		<param name="targetCategoryKey" type="simple">idMediaDirectoryParent</param>
+		<param name="modelContent" type="simple">MediaFile</param>
+		<param name="modelEditorContent" type="simple">MediaFile</param>
+		<param name="localContentKey" type="simple">idMediaDirectory</param>
+		<param name="targetContentKey" type="simple">idMediaDirectory</param> 
 	</params>
 	<columns>
 		<column>

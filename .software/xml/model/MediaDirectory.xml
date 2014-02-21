@@ -8,7 +8,7 @@
 			<type>integer</type>
 		</field>
 		<field>
-			<name>idParentMediaDirectory</name>
+			<name>idMediaDirectoryParent</name>
 			<type>integer</type>
 		</field>
 		<field>
@@ -28,7 +28,7 @@
 		</relation>
 		<relation>
 			<name>parent</name>
-			<source>idParentMediaDirectory</source>
+			<source>idMediaDirectoryParent</source>
 			<destination>
 				<model>MediaDirectory</model>
 				<field>idMediaDirectory</field>
@@ -40,7 +40,7 @@
 			<type>CascadeOnDelete</type>
 			<destination>
 				<model>MediaDirectory</model>
-				<field>idParentMediaDirectory</field>
+				<field>idMediaDirectoryParent</field>
 			</destination>
 		</relation>
 	</relations>

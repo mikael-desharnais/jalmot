@@ -1,6 +1,6 @@
 <?php
 
-class TextContentDisplayerFromParams extends Module{
+class TextContentPageTitle extends Module{
     
     protected $textContent;
     protected $textContentLang;
@@ -14,14 +14,14 @@ class TextContentDisplayerFromParams extends Module{
         $this->importClasses();
     }
     public function getCacheValues(){
-        return array('id'=>Resource::getParameters()->getValue('id'),'instance'=>$this->htmlProducer->getInstance(),"lang"=>Resource::getCurrentLanguage()->getId());
+        return array('id'=>$this->htmlProducer->getConfParam('id'),'instance'=>$this->htmlProducer->getInstance(),"lang"=>Resource::getCurrentLanguage()->getId());
     }
     public function toHTML($currentHook, $instance){
         
         $textContentModel=Model::getModel('TextContent');
         $textContentLangModel=Model::getModel('TextContentLang');
         $this->textContent=$textContentModel->getDatasource()->getModelDataQuery(ModelDataQuery::$SELECT_QUERY,$textContentModel)
-        	->addConditionBySymbol('=',$textContentModel->getField('idTextContent'), Resource::getParameters()->getValue('id'))
+        	->addConditionBySymbol('=',$textContentModel->getField('idTextContent'), $this->htmlProducer->getConfParam('id'))
         	->getModelDataElement(true);
         if (!empty($this->textContent)){
 	        $this->textContentLang=$this->textContent

@@ -10,8 +10,8 @@
 			</params>
 		</field>
 		<field>
-			<name>idParentMediaDirectory</name>
-			<dbname>id_parent_media_directory</dbname>
+			<name>idMediaDirectoryParent</name>
+			<dbname>id_media_directory_parent</dbname>
 		</field>
 		<field>
 			<name>name</name>

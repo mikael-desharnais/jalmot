@@ -28,6 +28,10 @@
 			<class>SimpleFieldME</class>
 		</input>
 		<input>
+			<title>File url</title>
+			<class>ImageURLME</class>
+		</input>
+		<input>
 			<key>file</key>
 			<title>File</title>
 			<class>MediaFileUploaderFieldME</class>
