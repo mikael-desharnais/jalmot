@@ -16,7 +16,6 @@ ContextMenu.getContextMenu=function(contextMenuName){
 	return ContextMenu.contextMenus[contextMenuName];
 }
 ContextMenu.readFromJSON=function(json){
-	console.log(json);
 	var classname=json.class;
 	var contextMenuDescriptor = new window[classname](json.name);
 	contextMenuDescriptor.confParams=json.confParams;

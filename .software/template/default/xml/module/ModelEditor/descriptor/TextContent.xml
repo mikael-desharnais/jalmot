@@ -6,9 +6,9 @@
 		<changeType>model-editor-TextContent</changeType>
 	</changeTypes>
 	<title>
-		<class>SimpleTitleME</class>
+		<class>LanguageTitleME</class>
 		<model>testLang</model>
-		<field>name</field>
+		<field>title</field>
 	</title>
 	<data_fetchers>
 		<data_fetcher>
@@ -16,19 +16,6 @@
 		</data_fetcher>
 		<data_fetcher>
 			<class>LanguageDataFetcher</class>
-		</data_fetcher>
-		<data_fetcher>
-			<class>LanguageForeignKeyDataFetcher</class>
-			<params>
-				<param name="reference" type="simple">TextCategory</param>
-			</params>
-		</data_fetcher>
-		<data_fetcher>
-			<class>NMForeignKeyDataFetcher</class>
-			<params>
-				<param name="relation" type="simple">mediaFileNM</param>
-				<param name="reference" type="simple">MediaFile</param>
-			</params>
 		</data_fetcher> 
 	</data_fetchers>
 	<hooks>
@@ -60,59 +47,15 @@
 			<displayButtons>1</displayButtons>
 			<inputs>
 				<input>
-					<key>name</key>
-					<title>Name</title>
-					<class>SimpleFieldME</class>
-				</input>
-				<input>
 					<key>title</key>
 					<title>Title</title>
 					<class>LanguageFieldME</class>
-				</input>
-				<input>
-					<key>idTextCategory</key>
-					<title>Category</title>
-					<class>SelectFieldME</class>
-					<params>
-						<param name="localKey" type="simple">idTextContent</param>
-						<param name="listReference" type="simple">TextCategory</param>
-						<param name="nameKey" type="simple">title</param>
-						<param name="modelListing" type="simple">TextCategory</param>
-					</params>
-				</input>
-				<input>
-					<key>idMediaFile</key>
-					<title>Images</title>
-					<class>DragAndDropMultipleFieldME</class>
-					<params>
-						<param name="relation" type="simple">mediaFileNM</param>
-						<param name="localKey" type="simple">idTextContent</param>
-						<param name="listReference" type="simple">MediaFile</param>
-						<param name="IdForeignKeyInRelation" type="simple">idMediaFile</param>
-						<param name="IdCurrentKeyInRelation" type="simple">idTextContent</param>
-						<param name="nameKey" type="simple">name</param>
-					</params>
 				</input>
 				<input>
 					<key>description</key>
 					<model>testLang</model>
 					<title>Description</title>
 					<class>HTMLLanguageFieldME</class>
-				</input>
-			</inputs>
-		</tab>
-		<tab>
-			<class>TabME</class>
-			<title>Categories</title>
-			<inputs>
-				<input>
-					<localKey>idTextCategory</localKey>
-					<referenceKey>idTextCategory</referenceKey>
-					<title>SubElements</title>
-					<class>ModelListingME</class>
-					<params>
-						<param name="modelListing" type="simple">TextCategory</param>
-					</params>
 				</input>
 			</inputs>
 		</tab>

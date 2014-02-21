@@ -11,16 +11,6 @@
 	<columns>
 		<column>
 			<head>
-				<title>Name</title>
-				<class>SimpleHeadCellML</class>
-			</head>
-			<body>
-				<key>name</key>
-				<class>SimpleCellML</class>
-			</body>
-		</column>
-		<column>
-			<head>
 				<title>Title</title>
 				<class>SimpleHeadCellML</class>
 			</head>
