@@ -20,7 +20,7 @@ AjaxHTMLFetcher.setFetcher('edit_media_file_<?php print($this->getId($line)); ?>
 }); 
 </script>
 <div class="icon btn draggableInField" data-draggable-id="<?php echo $this->getId($line); ?>" data-draggable-type="<?php echo $line->getParentModel()->getName(); ?>">
-	<a href="#" class=" <?php echo $class ?>"  <?php if ($isDirectory&&$this->isEditable($line)){ ?> data-context-menu="MediaManagerDirectoryEdit" <?php } elseif($isDirectory) { ?>  data-context-menu="NoContextMenu"  <?php } else { ?> data-context-menu="MediaManagerFileEdit"<?php }?> <?php if ($isDirectory) { ?>  id="change_<?php print($this->getId($line)); ?>" <?php } else { ?> id="edit_media_file_<?php print($this->getId($line)); ?>" <?php }?> data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>" data-url-params="<?php print(htmlentities(json_encode($this->getParams($line)))); ?>">
+	<a href="#" class=" <?php echo $class ?>"  <?php if ($isDirectory&&$this->isEditable($line)){ ?> data-context-menu="MediaManagerDirectoryEdit" <?php } elseif($isDirectory) { ?>  data-context-menu="NoContextMenu"  <?php } else { ?> data-context-menu="MediaManagerFileEdit"<?php }?> <?php if ($isDirectory) { ?>  id="change_<?php print($this->getId($line)); ?>" data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>" <?php } else { ?> id="edit_media_file_<?php print($this->getId($line)); ?>" <?php }?> data-reload-change-types="<?php echo implode($this->getChangeTypes()," "); ?>" data-url-params="<?php print(htmlentities(json_encode($this->getParams($line)))); ?>">
 		<div class="image">
 			<?php $file= Resource::getCurrentTemplate()->getFile(new File("media/image/module/mediaManager","icon-".$icon.".png",false),true);?>
 			<?php if (!$file->exists()){ ?>

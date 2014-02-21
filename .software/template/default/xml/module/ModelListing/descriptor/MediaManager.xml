@@ -46,6 +46,10 @@
 				<params>
 					<param name="modelEditor" type="simple">Media</param>
 				</params>
+				<changeTypes>
+					<changeType>model-editor-MediaDirectory</changeType>
+					<changeType>model-editor-MediaFile</changeType>
+				</changeTypes>
 			</body>
 		</column>
 	</columns>
