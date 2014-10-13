@@ -15,19 +15,13 @@
 }
 .closeButton {
 	position : absolute;
-	width : 35px;
-	height : 35px;
 	right : 10px;
 	top : 10px;
-	background : url('../../media/image/share/close.png') no-repeat;
 }
 .updateButton {
 	position : absolute;
-	width : 35px;
-	height : 35px;
 	right : 50px;
 	top : 10px;
-	background : url('../../media/image/share/reload.png') no-repeat;
 }
 .windowContent {
 	position : absolute;

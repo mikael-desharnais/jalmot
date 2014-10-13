@@ -6,14 +6,8 @@ AjaxHTMLFetcher.setFetcher('icon_model_hook_<?php echo $this->getConfParam('hook
 	window.setURL(new URL(Resource.getConfiguration().getValue('AliasName')+'admin/hook/<?php echo $this->getConfParam('hook'); ?>/',new Object()));
 	window.display();
 }); </script>
-<div class="icon btn">
+<div class="icon">
 	<a href="#" class="AjaxHTMLFetcher" id="icon_model_hook_<?php echo $this->getConfParam('hook'); ?>">
-		<div class="image">
-			<img src="<?php echo Resource::getCurrentTemplate()->getFile(File::createFromURL($this->image),true)->toFullURL(); ?>">
-		</div>
-		<div class="title">
-			<?php echo Resource::getCurrentLanguage()->getTranslation($this->text); ?>
-		</div>
+			<i class="icon-white icon-<?php echo $this->getConfParam('icon'); ?>"></i><?php echo Resource::getCurrentLanguage()->getTranslation($this->text); ?>
 	</a>
 </div>
-

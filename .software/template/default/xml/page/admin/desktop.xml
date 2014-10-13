@@ -2,37 +2,39 @@
 	<icons>
 		<icon>
 			<class>DesktopIcon</class>
-			<image>media/image/icon/user.png</image>
 			<text>User Management</text>
 			<instance>ModelListing</instance>
 			<params>
+				<param name="icon" type="simple">user</param>
 				<param name="modelListing" type="simple">UserAdmin</param>
 				<param name="modelEditor" type="simple">UserAdmin</param>
 			</params>
 		</icon>
 		<icon>
 			<class>DesktopIcon</class>
-			<image>media/image/icon/media.png</image>
 			<text>Media Management</text>
 			<instance>ModelListing</instance>
 			<params>
+				<param name="icon" type="simple">picture</param>
 				<param name="modelListing" type="simple">MediaManager</param>
 			</params>
 		</icon>
 		<icon>
 			<class>DesktopIcon</class>
-			<image>media/image/icon/cms.png</image>
 			<text>CMS</text>
 			<instance>ModelListing</instance>
 			<params>
+				<param name="icon" type="simple">pencil</param>
 				<param name="modelListing" type="simple">TextContent</param>
 			</params>
 		</icon>
 		<icon>
 			<class>DesktopIcon</class>
-			<image>media/image/icon/exit.png</image>
 			<text>Logout</text>
 			<instance>logout</instance>
+			<params>
+				<param name="icon" type="simple">off</param>
+			</params>
 		</icon>
 	</icons>
 </desktop>

@@ -1,10 +1,5 @@
-<div class="icon btn">
+<div class="icon">
 	<a href="logout/">
-		<div class="image">
-			<img src="<?php echo Resource::getCurrentTemplate()->getFile(File::createFromURL($this->image),true)->toFullURL(); ?>">
-		</div>
-		<div class="title">
-			<?php echo$this->text ?>
-		</div>
+		<i class="icon-white icon-<?php echo $this->getConfParam('icon'); ?>"></i><?php echo Resource::getCurrentLanguage()->getTranslation($this->text); ?>
 	</a>
 </div>

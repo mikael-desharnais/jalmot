@@ -3,8 +3,8 @@
 <?php  $this->addCSS(Resource::getCurrentTemplate()->getFile(new File('css/module','DesktopManager.css',false)),0); ?>
 <?php  Resource::getCurrentLanguage()->init('module/DesktopManager'); ?>
 <div class="desktop">
+		<h1><?php echo Resource::getCurrentLanguage()->getTranslation("Administration"); ?></h1>
 <?php foreach($this->icons as $icon){ ?>
 	<?php echo $icon->toHTML(); ?>
 <?php } ?>
 </div>
-

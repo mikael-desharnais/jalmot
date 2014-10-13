@@ -1,6 +1,8 @@
 <translations>
+	<translation><id>Administration</id><value>Administration</value></translation>
 	<translation><id>User Management</id><value>Gestion des utilisateurs</value></translation>
 	<translation><id>Media Management</id><value>Gestion des fichiers</value></translation>
-	<translation><id>CMS</id><value>Gestion du contenu rédactionnel</value></translation>
+	<translation><id>CMS</id><value>Contenu rédactionnel</value></translation>
 	<translation><id>CMS Category</id><value>Gestion des catégories CMS</value></translation>
+	<translation><id>Logout</id><value>Déconnection</value></translation>
 </translations>

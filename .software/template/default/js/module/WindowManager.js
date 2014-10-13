@@ -7,21 +7,21 @@ Window = function(){
 	this.url;
 	this.wrapper = jQuery('<div class="windowPanel"></div>');
 	this.html = jQuery('<div class="windowContent window_frame"></div>');
-	this.closeButton = jQuery('<a href="#" class="closeButton"></a>');
-	this.reloadButton = jQuery('<a href="#" class="updateButton"></a>');
+	this.closeButton = jQuery('<a href="#" class="closeButton icon-remove"></a>');
+	this.reloadButton = jQuery('<a href="#" class="updateButton icon-repeat"></a>');
 	this.html.data('object',this);
 	this.html.data('ReloadManager',this);
 	this.html.addClass('reload-change-listener');
 	var parent = this;
 	this.lockScroll=false;
 	this.interval;
-	
+
 	this.status=false;
 	this.requireReload=false;
 	this.zIndex = Window.currentZIndex++;
 
 	Window.instances.push(this);
-	
+
 	jQuery(window).resize(function(){
 		parent.wrapper.outerHeight(jQuery(window).height());
 		parent.wrapper.outerWidth(jQuery(window).width()-80);
@@ -40,7 +40,7 @@ Window = function(){
 		delete this;
 		Window.activateWindow();
 	};
-	
+
 	this.setConfiguration = function(config){
 		this.config = config;
 	}
@@ -49,7 +49,7 @@ Window = function(){
 	}
 	this.setURL = function(url){
 		this.url = url;
-	}	
+	}
 	this.setActive = function(status){
 		this.status = status;
 		//console.log(this.status);
@@ -63,7 +63,7 @@ Window = function(){
 		this.wrapper.css('zIndex',Window.currentZIndex++);
 		this.wrapper.outerHeight(jQuery(window).height()+'px');
 		jQuery('.windowHeight').outerHeight(jQuery(window).height()+'px');
-		this.wrapper.outerWidth(jQuery(window).width()-80);
+		this.wrapper.outerWidth(jQuery(window).width()-290);
 		this.wrapper.append(this.html);
 		parent.url.scrollTop=0;
 		this.wrapper.scroll(function(){
@@ -84,7 +84,7 @@ Window = function(){
 			this.requireReload = true;
 		}
 	};
-	this.internalReload=function(){		
+	this.internalReload=function(){
 		var parent=this;
 		parent.lockScroll=true;
 		var fetcher=new AjaxHTMLFetcher();
@@ -103,7 +103,7 @@ Window = function(){
 		if (this.url.scrollTop==this.wrapper.scrollTop()){
 			clearInterval(this.interval);
 		}
-		
+
 	}
 
 	Window.setActiveWindow(this);

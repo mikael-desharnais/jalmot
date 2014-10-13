@@ -1,32 +1,38 @@
 .desktop {
-	width : 75px;
+	width : 290px;
 	height : 100%;
 	background: #575757;
 	float : left;
 	position : relative;
 	z-index : 3000;
 }
+.desktop h1{
+	color : white;
+	font-family: "Gruppo";
+}
 html body{
 	background : #EEEEEE;
 }
-.desktop .icon a{
-	display : block;
-}
 .desktop .icon {
-	padding : 5px;
-	margin : 10px;
-	margin-top : 5px;
-	margin-bottom : 5px;
+	width : 250px;
+	font-family: "Gruppo";
+	border-top : 1px solid #6f6f6f;
+	margin-left : 10px;
 }
-.desktop .icon .image {
-	width : 100%;
-	text-align : center;
+.desktop .icon a {
+		color : white;
+		padding-top : 5px;
+		padding-bottom : 5px;
+		display : block;
+		font-size : 15px;
+		padding-left : 10px;
 }
-.desktop .icon .image img {
-	width : 40px;
+.desktop .icon a:hover {
+	background-color :  #6f6f6f;
 }
-.desktop .icon .title {
-	display : none;
+.desktop .icon i {
+		padding : 5px;
+		margin-right : 10px;
 }
 .frame {
 	display : none;
@@ -89,4 +95,3 @@ div.activeFrame {
 	top : 15px;
 	background : url('../../media/image/share/close.png') no-repeat;
 }
-
