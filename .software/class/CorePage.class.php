@@ -219,8 +219,10 @@
 	* Sends header to redirect
 	* @param string $pageName page name to redirect
 	*/
-	public static function headerRedirection($pageName){
-		header('Location: '.$pageName);
+	public static function headerRedirection($pageName,$permanent = false){
+		if ($permanent){
+			header('Status: 301 Moved Permanently', false, 301);
+		}
 	}
 	/**
 	* Sends header to refresh the page

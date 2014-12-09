@@ -20,6 +20,20 @@ class CoreString{
 		return strtolower($string);
 	}
 
+	public static function shorten($string,$length,$textAppend){
+		if (mb_strlen($string)<$length){
+			return $string;
+		}
+		$words = explode(" ",$string);
+		$toReturn = "";
+		foreach($words as $word){
+			$toReturn.=($toReturn==""?"":" ").$word;
+			if (mb_strlen($toReturn)>$length){
+				break;
+			}
+		}
+		return $toReturn.$textAppend;
+ 	}
 	public static function getUniqId(){
 		return str_replace('.','',uniqid("",true));
 	}

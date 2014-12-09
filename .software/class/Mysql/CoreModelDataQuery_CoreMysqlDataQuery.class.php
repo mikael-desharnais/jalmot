@@ -37,10 +37,10 @@ class CoreMysqlDataQuery extends ModelDataQuery{
 			    $query.=" ORDER BY ";
 			    $first = true;
 			    foreach($this->orderBy as $orderBy){
-			        $query.=$orderBy->toSQL($this);
 			        if (!$first){
 			            $query.=',';
 			        }
+			        $query.=$orderBy->toSQL($this);
 			        $first = false;
 			    }
 			}
