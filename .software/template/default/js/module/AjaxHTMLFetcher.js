@@ -7,6 +7,13 @@ AjaxHTMLFetcher.setFetcher=function(id,url,callback){
 	AjaxHTMLFetcher.fetchers[id].callback=callback;
 	return AjaxHTMLFetcher.fetchers[id];
 };
+AjaxHTMLFetcher.getFetcher=function(id){
+	var fetcher=new AjaxHTMLFetcher();
+	fetcher.setURL(AjaxHTMLFetcher.fetchers[id].url);
+	fetcher.setCallBack(AjaxHTMLFetcher.fetchers[id].callback);
+	fetcher.setBeforeCall(AjaxHTMLFetcher.fetchers[id].beforeCall);
+	return fetcher;
+}
 function AjaxHTMLFetcher(){
 	this.html;
 	this.css=new Array();
@@ -176,10 +183,6 @@ function URL(address,params){
 
 jQuery('.AjaxHTMLFetcher').live('click',function(event){
 	event.preventDefault();
-	var fetcher=new AjaxHTMLFetcher();
-	fetcher.setURL(AjaxHTMLFetcher.fetchers[jQuery(this).attr('id')].url);
-	fetcher.setCallBack(AjaxHTMLFetcher.fetchers[jQuery(this).attr('id')].callback);
-	fetcher.setBeforeCall(AjaxHTMLFetcher.fetchers[jQuery(this).attr('id')].beforeCall);
-	fetcher.fetch();
+	AjaxHTMLFetcher.getFetcher(jQuery(this).attr('id')).fetch();
 	return false;
 });

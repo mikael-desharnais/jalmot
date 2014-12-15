@@ -7,7 +7,7 @@ class ConnectionManager extends Module{
 	* Changes the current page to the connection page
 	*/
 	public function displayConnectionForm(){
-		Page::headerRedirection(($_SERVER['REQUEST_URI'][strlen($_SERVER['REQUEST_URI'])-1]=="/"?$_SERVER['REQUEST_URI']."connection/":dirname($_SERVER['REQUEST_URI'])."/connection/".filename($_SERVER['REQUEST_URI'])));
+		Page::headerRedirection(($_SERVER['REQUEST_URI'][strlen($_SERVER['REQUEST_URI'])-1]=="/"?$_SERVER['REQUEST_URI']."connection/":dirname($_SERVER['REQUEST_URI'])."/connection/".basename($_SERVER['REQUEST_URI'])));
 	}
 	/**
 	* Returns to the page that required the connection

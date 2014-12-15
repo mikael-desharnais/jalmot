@@ -1,9 +1,8 @@
 .desktop {
 	width : 290px;
-	height : 100%;
+	height : 100vh;
 	background: #575757;
-	float : left;
-	position : relative;
+	position : absolute;
 	z-index : 3000;
 }
 .desktop h1{
@@ -43,43 +42,6 @@ html body{
 	overflow : auto;
 	height : 100%;
 	width : 100%;
-}
-.frame1{
-	backround-color : red;
-}
-.frame2{
-	backround-color : blue;
-}
-.frame3{
-	backround-color : pink;
-}
-.frame4{
-	backround-color : orange;
-}
-.windowManagerMode2 .frame1,.windowManagerMode2 .frame2{
-	width : 50%;
-	float : left;
-	height : 100%;
-}
-.windowManagerMode3 .frame1,.windowManagerMode3 .frame2{
-	width : 50%;
-	float : left;
-	height : 50%;
-}
-.windowManagerMode3 .frame3{
-	width : 100%;
-	float : left;
-	height : 50%;
-}
-.windowManagerMode4 .frame1,.windowManagerMode4 .frame2,.windowManagerMode4 .frame3{
-	width : 33%;
-	float : left;
-	height : 100%;
-}
-.windowManagerMode5 .frame1,.windowManagerMode5 .frame2,.windowManagerMode5 .frame3,.windowManagerMode5 .frame4{
-	width : 50%;
-	float : left;
-	height : 50%;
 }
 div.activeFrame {
 	display : block;

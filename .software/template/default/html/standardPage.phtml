@@ -15,13 +15,13 @@ $headCore = ob_get_clean();
 		<?php $newCSSListe = $this->CSSFilterFlow->filterAndCompress($this->cssListe); ?>
 		<?php 	foreach($newCSSListe as $arrayOfFiles){ ?>
 		<?php 		foreach($arrayOfFiles as $file){  ?>
-		<?php 			echo '<link rel="stylesheet" href="'.$file->toFullURL().'" type="text/css">'; ?>
+		<?php 			echo '<link rel="stylesheet" href="'.$file->toFullURL().'" type="text/css"/>'."\n"; ?>
 		<?php 		} ?>
 		<?php 	} ?>
 		<?php 		$newJSListe = $this->JSFilterFlow->filterAndCompress($this->jsListe); ?>
 		<?php 		foreach($newJSListe as $arrayOfFiles){ ?>
 		<?php 			foreach($arrayOfFiles as $file){ ?>
-		<?php 				echo '<script src="'.$file->toFullURL().'" language="javascript"></script>'; ?>
+		<?php 				echo '<script src="'.$file->toFullURL().'" language="javascript"></script>'."\n"; ?>
 		<?php 			} ?>
 		<?php 		} ?>
 		<script>

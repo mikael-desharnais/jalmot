@@ -22,10 +22,6 @@ Window = function(){
 
 	Window.instances.push(this);
 
-	jQuery(window).resize(function(){
-		parent.wrapper.outerHeight(jQuery(window).height());
-		parent.wrapper.outerWidth(jQuery(window).width()-80);
-	});
 
 	this.closeButton.click(function(){
 		parent.close();
@@ -63,7 +59,6 @@ Window = function(){
 		this.wrapper.css('zIndex',Window.currentZIndex++);
 		this.wrapper.outerHeight(jQuery(window).height()+'px');
 		jQuery('.windowHeight').outerHeight(jQuery(window).height()+'px');
-		this.wrapper.outerWidth(jQuery(window).width()-290);
 		this.wrapper.append(this.html);
 		parent.url.scrollTop=0;
 		this.wrapper.scroll(function(){
@@ -74,6 +69,7 @@ Window = function(){
 		this.wrapper.append(this.closeButton);
 		this.wrapper.append(this.reloadButton);
 		jQuery('.windowContainer').append(this.wrapper);
+		jQuery('.windowPanel').css('width',jQuery(window).width()+'px');
 		this.html.append(this.content);
 		jQuery('body').trigger('htmlAppending',this.html);
 	}

@@ -1,7 +1,9 @@
 <?php
 
 class MultipleSelectFieldME extends SelectFieldME {
-    
+	public function getName(){
+		return $this->model_editor->wrapFieldName($this->getConfParam('fieldKey'));
+	}
     public function getUsefullData($dataFetched){
         return array("data"=>$dataFetched[$this->getConfParam('relation')],"reference"=>$dataFetched[$this->getConfParam('listReference')]);
     }
@@ -15,7 +17,7 @@ class MultipleSelectFieldME extends SelectFieldME {
 	        foreach($dataFetched[$this->getConfParam('relation')] as $element){
 	           $element->delete();
 	        }
-	        $toCreate = $contentContainer[$this->key];
+	        $toCreate = array_key_exists($this->getConfParam('fieldKey'),$contentContainer)?$contentContainer[$this->getConfParam('fieldKey')]:array();
 	        $nameIdForeignKeyInRelation = "set".ucfirst($this->getConfParam('IdForeignKeyInRelation'));
 	        $nameIdCurrentKeyInRelation = "set".ucfirst($this->getConfParam('IdCurrentKeyInRelation'));
 	        $nameLocalKey = "get".ucfirst($this->getConfParam('localKey'));

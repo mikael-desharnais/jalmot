@@ -43,6 +43,9 @@ class Classe {
 	public static function includeClasses($classes){
 	    $filenameToInclude=array_keys($classes);
 	    sort ( $filenameToInclude );
+	     if (!file_exists('.cache/class')){
+ 	    	mkdir(".cache/class",0777,true);
+ 	    }
 	    foreach($filenameToInclude as $fullclassname){
 	        include_once($classes[$fullclassname]);
 	        if (substr ( $fullclassname, 0, 4 ) == "Core") {
